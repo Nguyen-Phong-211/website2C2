@@ -15,15 +15,15 @@ class LoginController
         $result = $this->loginModel->loginUser($email, $password);
 
         if ($result) {
-            session_start();
+
             $_SESSION['email'] = $result['email'];
             $_SESSION['role'] = $result['role'];
-            $_SESSION['login'] = 1;
+            // $_SESSION['login'] = 1;
 
             $_SESSION['success_message'] = "Đăng nhập thành công!";
 
             sleep(5);
-            header("Location: index.php?page=home&redirect=true");
+            header("Location: index.php?page=home");
             
             exit;
         } else {
