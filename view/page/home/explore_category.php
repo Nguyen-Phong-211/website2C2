@@ -25,20 +25,20 @@
 
                 <div class="category-carousel swiper">
                     <div class="swiper-wrapper">
-                        <?php 
-                            include_once('controller/Category/CategoryController.php');
-                            $getCategory = new CategoryController();
-                            $datas = $getCategory->getCategoryList();
+                        <?php
+                        include_once('controller/Category/CategoryController.php');
+                        $getCategory = new CategoryController();
+                        $datas = $getCategory->getCategoryList();
 
-                            foreach($datas as $data){
-                                echo '
-                                    <a href="index.php?page=category&id='. $data['category_id'] .'"
-                                        class="nav-link swiper-slide text-center">
-                                        <img src="asset/image/category/'. $data['image'] .'" height="120" width="120" class="rounded" alt="'. $data['category_name'] .'">
-                                        <h4 class="fs-6 mt-3 fw-normal category-title">'. $data['category_name'] .'</h4>
-                                    </a>
+                        foreach ($datas as $data) {
+                            echo '
+                                <a href="index.php?page=category&idc=' . $data['category_id'] . '"
+                                    class="nav-link swiper-slide text-center">
+                                    <img src="asset/image/category/' . $data['image'] . '" height="120" width="120" class="rounded" alt="' . $data['category_name'] . '">
+                                    <h4 class="fs-6 mt-3 fw-normal category-title">' . $data['category_name'] . '</h4>
+                                </a>
                                 ';
-                            }
+                        }
                         ?>
                     </div>
                 </div>

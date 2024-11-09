@@ -17,7 +17,7 @@
                 foreach ($categories as $category) {
                     echo '
                     <li class="nav-item border-dashed active">
-                        <a href="index.php?page=home&id='. $category['category_id'] .'"
+                        <a href="index.php?page=category&idc='. $category['category_id'] .'"
                             class="nav-link d-flex align-items-center gap-3 text-dark p-2">
                             <svg width="24" height="24" viewBox="0 0 24 24">
                                 <use xlink:href="#fruits"></use>

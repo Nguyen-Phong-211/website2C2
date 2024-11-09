@@ -10,9 +10,9 @@ class CategoryItem extends ConnectDatabase
         $this->conn = $this->getConnection();
     }
     //get all product in category
-    public function getAllProductByCategory($categoryId)
+    public function getAllListCategoryItemByCategory($categoryId)
     {
-        $query = "SELECT * FROM products WHERE category_id = '$categoryId'";
+        $query = "SELECT * FROM category_items WHERE category_id = '$categoryId'";
         $result = $this->conn->query($query);
         if ($result === false) {
             die("Query failed: " . $this->conn->error);

@@ -55,10 +55,10 @@
         <div class="col-lg-4">
             <ul class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
                 <li class="nav-item active">
-                    <a href="index.php?page=home" class="nav-link">Trang chủ</a>
+                    <a href="index.php?page=home" class="nav-link btn-link">Trang chủ</a>
                 </li>
                 <li class="nav-item active">
-                    <a href="index.php?page=contact" class="nav-link">Liên hệ</a>
+                    <a href="index.php?page=contact" class="nav-link btn-link">Liên hệ</a>
                 </li>
                 <li class="nav-item active btn btn-outline-primary fw-bold">
                     <a href="index.php?page=registrationProduct" class="nav-link">

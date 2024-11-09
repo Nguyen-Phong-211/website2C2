@@ -31,12 +31,12 @@
                             <div class="col">
                                 <div class="product-item">
                                     <figure>
-                                        <a href="#" title="'. $data['product_name'] .'">
+                                        <a href="index.php?page=detailProduct&id='. $data['product_id'] .'" title="'. $data['product_name'] .'">
                                             <img src="asset/image/product/'. $data['image_name'] .'" alt="'. $data['image_name'] .'" class="tab-image">
                                         </a>
                                     </figure>
                                     <div class="d-flex flex-column text-center">
-                                        <h3 class="fs-6 fw-normal">'. $data['product_name'] .'</h3>
+                                        <a class="fs-6 fw-normal text-truncate text-decoration-none" href="index.php?page=detailProduct&id='. $data['product_id'] .'">'. $data['product_name'] .'</a>
                                         <div>
                                             <span class="rating">';
                                             if($data['rating_star'] >= 4.6 && $data['rating_star'] <= 5){
@@ -168,7 +168,7 @@
                                         </div>
                                         <div class="d-flex justify-content-center align-items-center gap-2">
                                             
-                                            <span class="text-dark fw-semibold">'. number_format($data['price'], 0, ',', '.') .'</span>
+                                            <span class="text-dark fw-semibold">'. number_format($data['price'], 0, ',', '.') .' đồng</span>
 
                                             <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">
                                                 10% OFF

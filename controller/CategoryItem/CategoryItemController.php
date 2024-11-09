@@ -9,9 +9,9 @@ class CategoryItemController
         $this->categoryItem = new CategoryItem();
     }
     //get all product in category
-    public function getAllProductByCategory($categoryId)
+    public function getAllListCategoryItemByCategoryController($categoryId)
     {
-        $result = $this->categoryItem->getAllProductByCategory($categoryId);
+        $result = $this->categoryItem->getAllListCategoryItemByCategory($categoryId);
 
         if (!$result) {
             die("Failed to retrieve product list: " . $this->categoryItem->getConnection()->error);
