@@ -22,7 +22,7 @@ class LoginController
 
             $_SESSION['success_message'] = "Đăng nhập thành công!";
 
-            sleep(5);
+            sleep(4);
             header("Location: index.php?page=home");
             
             exit;

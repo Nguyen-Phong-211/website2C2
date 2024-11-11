@@ -134,6 +134,7 @@
                                     else{
                                         echo $loginController->getUserNameController($fullname);
                                     }
+
                                 ?>">
                                 <img src="asset/image/user/img-default.png" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">
                                 <a class="dropdown-item m-0 p-0 text-black text-truncate dropdown-menu-name-user-item" href="#" title="">

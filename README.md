@@ -72,19 +72,25 @@ GRANT SELECT, INSERT, DELETE ON projectfinal.whistlists TO 'buyer'@'localhost';
 
 <!-- Tự động thêm dữ liệu cột email và number_phone từ bảng signup -> user -->
 
-DELIMITER //
+CREATE TRIGGER `before_signup_insert` BEFORE INSERT ON `signup`
+ FOR EACH ROW BEGIN
+    DECLARE new_user_id INT;
 
-CREATE TRIGGER after_signup_insert
-AFTER INSERT ON signup
-FOR EACH ROW
-BEGIN
-    INSERT INTO users (user_id, user_name, number_phone, email)
-    VALUES (NEW.user_id, NEW.username, NEW.number_phone, NEW.email);
-END;
+    -- Kiểm tra xem user_name và email đã tồn tại trong bảng users chưa
+    IF NOT EXISTS (SELECT 1 FROM users WHERE user_name = NEW.user_name AND email = NEW.email) THEN
+        -- Chèn dữ liệu vào bảng users mà không có user_id
+        INSERT INTO users (user_name, number_phone, email)
+        VALUES (NEW.user_name, NEW.number_phone, NEW.email);
 
-//
+        -- Lấy user_id tự động tăng từ bảng users
+        SET new_user_id = LAST_INSERT_ID();
 
-DELIMITER ;
-
-
+        -- Gán user_id vào NEW.user_id (cột user_id trong bảng signup)
+        SET NEW.user_id = new_user_id;
+    ELSE
+        -- Nếu người dùng đã tồn tại, chỉ lấy user_id từ bảng users
+        SET new_user_id = (SELECT user_id FROM users WHERE user_name = NEW.user_name AND email = NEW.email);
+        SET NEW.user_id = new_user_id;
+    END IF;
+END
 
