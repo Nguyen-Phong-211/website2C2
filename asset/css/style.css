@@ -761,4 +761,29 @@ a.btn-link.text-light:after {
   width: 100px;
   height: 100px;
 }
+/* dropdown menu user */
+#dropdown-user:hover #dropdown-menu-user {
+  display: block;
+}
+#dropdown-menu-user {
+  display: none;
+  position: absolute;
+}
+#dropdown-user #dropdown-menu-user {
+  width: 210px; 
+}
+#dropdown-user .dropdown-item {
+  padding: 10px 20px; 
+  width: 100%;
+  background-color: white; 
+
+}
+#dropdown-user .dropdown-item:hover {
+  background-color: #f0f0f0; 
+}
+#dropdown-user .dropdown-menu-name-user-item:hover {
+  background-color: transparent; 
+  cursor: default; 
+}
 /* Notification don't have product/notification */
+

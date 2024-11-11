@@ -47,7 +47,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 mb-3">Đăng ký</button>
+                <button type="submit" class="btn btn-primary w-100 mb-3" id="btnSignup">Đăng ký</button>
                 <div class="d-flex align-items-center mb-3">
                     <hr class="flex-grow-1">
                     <span class="mx-2">hoặc</span>
@@ -57,64 +57,9 @@
                     <img src="asset/image/logo/logo-google.png" /> Đăng nhập bằng Google
                 </button>
             </form>
-            <script>
-                // Kiểm tra họ tên và tự động viết hoa chữ cái đầu mỗi từ
-                // Kiểm tra họ tên và tự động viết hoa chữ cái đầu mỗi từ
-                document.getElementById('fullName').addEventListener('input', function() {
-                    const fullNameInput = this;
-
-                    // Viết hoa chữ cái đầu của mỗi từ sau khoảng trắng
-                    fullNameInput.value = fullNameInput.value
-                        .toLowerCase() // Đưa tất cả về chữ thường trước
-                        .replace(/\b\w/g, char => char.toUpperCase()); // Viết hoa chữ cái đầu mỗi từ
-
-                    // Kiểm tra nếu họ tên để trống
-                    document.getElementById('fullNameError').textContent = fullNameInput.value.trim() ? "" : "Họ tên không được để trống";
-                });
-
-                // Kiểm tra email
-                document.getElementById('email').addEventListener('input', function() {
-                    const email = this.value.trim();
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    document.getElementById('emailError').textContent = emailRegex.test(email) ? "" : "Email không hợp lệ";
-                });
-
-                // Kiểm tra số điện thoại
-                document.getElementById('phone').addEventListener('input', function() {
-                    const phone = this.value.trim();
-                    const phoneRegex = /^\d{10}$/;
-                    document.getElementById('phoneError').textContent = phoneRegex.test(phone) ? "" : "Số điện thoại phải là 10 chữ số";
-                });
-
-                // Kiểm tra mật khẩu và hiển thị độ mạnh của mật khẩu
-                document.getElementById('password').addEventListener('input', function() {
-                    const password = this.value.trim();
-                    const passwordStrengthElement = document.getElementById('passwordStrength');
-
-                    if (password.length < 5) {
-                        passwordStrengthElement.textContent = 'Mật khẩu yếu';
-                        passwordStrengthElement.style.color = 'red';
-                    } else if (password.length < 8) {
-                        passwordStrengthElement.textContent = 'Mật khẩu trung bình';
-                        passwordStrengthElement.style.color = 'orange';
-                    } else if (password.length < 12) {
-                        passwordStrengthElement.textContent = 'Mật khẩu mạnh';
-                        passwordStrengthElement.style.color = 'green';
-                    } else {
-                        passwordStrengthElement.textContent = 'Mật khẩu rất mạnh';
-                        passwordStrengthElement.style.color = 'darkgreen';
-                    }
-                });
-
-                // Kiểm tra nhập lại mật khẩu
-                document.getElementById('confirmPassword').addEventListener('input', function() {
-                    const confirmPassword = this.value.trim();
-                    const password = document.getElementById('password').value.trim();
-                    document.getElementById('confirmPasswordError').textContent = (confirmPassword === password) ? "" : "Mật khẩu không khớp";
-                });
-            </script>
-
-
+            <?php 
+                include_once('script.php');
+            ?>
         </div>
     </div>
     <script src="vendor/js/bootstrap.bundle.min.js"></script>
