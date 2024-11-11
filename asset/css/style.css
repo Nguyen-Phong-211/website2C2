@@ -761,30 +761,4 @@ a.btn-link.text-light:after {
   width: 100px;
   height: 100px;
 }
-/* home dropdown menu user */
-#dropdown-user:hover #dropdown-menu-user {
-  display: block;
-}
-
-#dropdown-user:hover #dropdown-menu-user {
-  display: block;
-  width: 200px;
-}
-
-#dropdown-menu-user {
-  min-width: 150px;
-  transition: width 0.3s ease;
-}
-
-.dropdown-item {
-  padding: 10px 20px;
-}
-
-.dropdown-menu-user-item:hover {
-  background-color: #e7e7e7;
-}
-
-.dropdown-menu-user-item.m-0.p-0:hover {
-  background-color: transparent;
-}
 /* Notification don't have product/notification */
