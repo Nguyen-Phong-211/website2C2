@@ -71,7 +71,7 @@
 
                             foreach($datas as $data){
                                 echo '<li class="menu-item">
-                                        <a href="index.php?page=category&id='. $data['category_id'] .'" class="nav-link btn-link">'. $data['category_name'] .'</a>
+                                        <a href="index.php?page=category&idc='. $data['category_id'] .'" class="nav-link btn-link">'. $data['category_name'] .'</a>
                                     </li>';
                             }
                         ?>
@@ -81,7 +81,7 @@
             <div class="col-md-2 col-sm-6">
                 <div class="footer-menu">
                     <h5 class="widget-title">Sản phẩm</h5>
-                    <ul class="menu-list list-unstyled text-black">
+                    <ul class="menu-list list-unstyled text-black text-truncate">
                             <?php 
                                 include_once('controller/Product/ProductController.php');
                                 $productController = new ProductController();
@@ -89,7 +89,7 @@
 
                                 foreach($datas as $data){
                                     echo '<li class="menu-item">
-                                                <a href="index.php?page=product&id='. $data['product_id'] .'" class="nav-link text-truncate btn-link">'. $data['product_name'] .'</a>
+                                                <a href="index.php?page=product&idp='. $data['product_id'] .'" class="nav-link text-truncate btn-link">'. $data['product_name'] .'</a>
                                             </li>';
                                 }
                             ?>

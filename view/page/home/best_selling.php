@@ -31,12 +31,12 @@
                             <div class="col">
                                 <div class="product-item">
                                     <figure>
-                                        <a href="index.php?page=detailProduct&id='. $data['product_id'] .'" title="'. $data['product_name'] .'">
-                                            <img src="asset/image/product/'. $data['image_name'] .'" alt="'. $data['image_name'] .'" class="tab-image">
+                                        <a href="index.php?page=detailProduct&idp='. $data['product_id'] .'" title="'. $data['product_name'] .'">
+                                            <img src="asset/image/product/'. $data['image_name'] .'" alt="'. $data['image_name'] .'" class="tab-image img-fluid">
                                         </a>
                                     </figure>
                                     <div class="d-flex flex-column text-center">
-                                        <a class="fs-6 fw-normal text-truncate text-decoration-none" href="index.php?page=detailProduct&id='. $data['product_id'] .'">'. $data['product_name'] .'</a>
+                                        <a class="fs-6 fw-normal text-truncate text-decoration-none" href="index.php?page=detailProduct&idp='. $data['product_id'] .'">'. $data['product_name'] .'</a>
                                         <div>
                                             <span class="rating">';
                                             if($data['rating_star'] >= 4.6 && $data['rating_star'] <= 5){
@@ -196,6 +196,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             ';
                         }
                     ?>
