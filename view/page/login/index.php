@@ -73,13 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnLogin'])) {
                     <hr class="flex-grow-1">
                 </div>
 
-                <button type="button" class="btn btn-outline-secondary w-100">
+                <a href="" class="btn btn-outline-secondary w-100">
                     <img src="asset/image/logo/logo-google.png" /> Đăng nhập bằng Google
-                </button>
-
+                </a>
             </form>
         </div>
     </div>
+    
+
 
 
     <script src="vendor/js/bootstrap.bundle.min.js"></script>

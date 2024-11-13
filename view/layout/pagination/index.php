@@ -54,17 +54,15 @@
                     }
                 ?>
             </li>
-            <li class="breadcrumb-item">
-                <?php 
-                    if($_REQUEST['page'] == 'detailProduct'){
-                        $idp = $_REQUEST['idp'];
-                        include_once('controller/Product/ProductController.php');
-                        $productController = new ProductController();
+            <?php 
+                if($_REQUEST['page'] == 'detailProduct'){
+                    $idp = $_REQUEST['idp'];
+                    include_once('controller/Product/ProductController.php');
+                    $productController = new ProductController();
 
-                        echo $productController->getNameProductByIdController($idp);
-                    }
-                ?>
-            </li>
+                    echo '<li class="breadcrumb-item">'. $productController->getNameProductByIdController($idp). '</li>';
+                }
+            ?>
         </ol>
     </nav>
 </section>

@@ -14,7 +14,7 @@
 
     <!-- Svg -->
     <?php
-    include_once('view/layout/body/svg.php');
+    // include_once('view/layout/body/svg.php');
     ?>
 
     <div class="preloader-wrapper">

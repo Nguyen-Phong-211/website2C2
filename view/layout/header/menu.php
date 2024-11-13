@@ -85,7 +85,7 @@
                         </svg>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
                             <?php 
-                                if(!$_SESSION['success_message']){
+                                if(!isset($_SESSION['success_message'])){
                                     echo 0;
                                 }
                                 else{
@@ -103,7 +103,7 @@
                     <div class="dropdown" id="dropdown-user">
                         <a href="#" class="account-icon p-2 mx-1" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php 
-                                if(!$_SESSION['success_message']){
+                                if(!isset($_SESSION['success_message'])){
                                     
                                     echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-exclamation" viewBox="0 0 16 16">
                                             <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
@@ -126,7 +126,7 @@
                                     include_once('controller/Login/LoginController.php');
                                     $loginController = new LoginController();
 
-                                    $fullname = $_SESSION['email'];
+                                    $fullname = isset($_SESSION['email']);
 
                                     if(!$fullname){
                                         echo 'Người dùng chưa các định';
@@ -142,7 +142,7 @@
                                         include_once('controller/Login/LoginController.php');
                                         $loginController = new LoginController();
 
-                                        $fullname = $_SESSION['email'];
+                                        $fullname = isset($_SESSION['success_message']);
 
                                         if(!$fullname){
                                             echo 'Người dùng chưa các định';
@@ -152,9 +152,19 @@
                                         }
                                    ?>
                                 </a>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6bb252" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                                </svg>
+                                
+                                <?php 
+                                if(!isset($_SESSION['success_message'])){
+                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+                                        </svg>';
+                                }
+                                else{
+                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6bb252" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                        </svg>';
+                                }
+                                ?>
                             </li>
                             <li>
                                 <a class="dropdown-item text-black dropdown-menu-user-item" href="index.php?page=puchaseOrder">
@@ -207,13 +217,20 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.php?page=logout" class="text-black fw-bold dropdown-item border-top border-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#6bb252" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
-                                        <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
-                                    </svg>
-                                    &nbsp;Đăng xuất
-                                </a>
+                                <?php 
+                                if(!isset($_SESSION['success_message'])){
+                                    echo '';
+                                }else{
+                                    echo '<a href="index.php?page=logout" class="text-black fw-bold dropdown-item border-top border-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#6bb252" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
+                                                <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+                                            </svg>
+                                            &nbsp;Đăng xuất
+                                        </a>';
+                                }
+                                ?>
+                                
                             </li>
                         </ul>
                     </div>
@@ -261,7 +278,7 @@
 
                 <li>
                     <?php 
-                        if(!$_SESSION['success_message']){
+                        if(!isset($_SESSION['success_message'])){
                             echo '<a href="index.php?page=login" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Đăng nhập">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
