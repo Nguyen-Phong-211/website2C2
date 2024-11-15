@@ -110,9 +110,9 @@
                             $reviewController = new ReviewController();
 
                             $idp = $_REQUEST['idp'];
-                            $result = $reviewController->getReviewByProductIdController($idp);
+                            $resultData = $reviewController->getReviewByProductIdController($idp);
 
-                            foreach ($datas as $data) {
+                            foreach ($resultData as $data) {
                                 if ($data['rating_star'] >= 4.6 && $data['rating_star'] <= 5) {
                                     echo '5
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
