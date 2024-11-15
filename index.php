@@ -29,8 +29,8 @@
     <?php
     session_start();
     error_reporting(0);
-    // error_reporting(E_ALL);  
-    // ini_set('display_errors', 1);  
+    error_reporting(E_ALL);  
+    ini_set('display_errors', 1);  
 
 
     if (isset($_GET['page'])){
@@ -46,13 +46,10 @@
             include_once('view/page/'.$page.'/'.$filename);
             $fileFound = true; 
             break; 
+        }else{
+            include_once('view/page/404/index.php');
         }
     }
-
-    if (!$fileFound) {
-        include_once('view/page/404/index.php');
-    }
-
     ?>
 </body>
 
