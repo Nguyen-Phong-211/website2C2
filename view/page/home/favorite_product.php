@@ -531,10 +531,10 @@
                                                 class="form-control border-dark-subtle input-number quantity"
                                                 value="1"></div>
                                         <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
+                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart">
+                                                <svg
                                                     width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
+                                                    <use xlink:href="#cart"></use>
                                                 </svg> Add to
                                                 Cart</a></div>
                                         <div class="col-2"><a href="#"
