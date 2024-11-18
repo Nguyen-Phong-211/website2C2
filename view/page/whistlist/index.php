@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +16,6 @@
 
 <body>
 
-    <!-- Svg -->
-    <?php
-    // include_once('view/layout/body/svg.php');
-    ?>
 
     <div class="preloader-wrapper">
         <div class="preloader">
@@ -31,6 +31,11 @@
             include_once('view/layout/header/menu.php');
         ?>
     </header>
+
+    <?php 
+    include_once('view/layout/slider/slider.php');
+    ?>
+
 
     <?php
         include_once('view/layout/pagination/index.php');

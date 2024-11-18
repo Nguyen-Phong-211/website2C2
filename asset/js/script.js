@@ -53,36 +53,36 @@ document.addEventListener("DOMContentLoaded", function() {
 // });
 
 // Display form by category
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('category').addEventListener('change', function() {
-        var electronicsFields = document.getElementById('electronicsFields');
-        var bookFields = document.getElementById('bookFields');
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.getElementById('category').addEventListener('change', function() {
+//         var electronicsFields = document.getElementById('electronicsFields');
+//         var bookFields = document.getElementById('bookFields');
         
-        if (this.value === 'do-dien-tu') {
-            electronicsFields.style.display = 'block';
-            bookFields.style.display = 'none';
-        } else if (this.value === 'sach') {
-            electronicsFields.style.display = 'none';
-            bookFields.style.display = 'block';
-        } else {
-            electronicsFields.style.display = 'none';
-            bookFields.style.display = 'none';
-        }
-    });
-});
-// page puchaseOrder, set tab
+//         if (this.value === 'do-dien-tu') {
+//             electronicsFields.style.display = 'block';
+//             bookFields.style.display = 'none';
+//         } else if (this.value === 'sach') {
+//             electronicsFields.style.display = 'none';
+//             bookFields.style.display = 'block';
+//         } else {
+//             electronicsFields.style.display = 'none';
+//             bookFields.style.display = 'none';
+//         }
+//     });
+// });
+// // page puchaseOrder, set tab
 
-// Page Setting
-document.getElementById('imageUpload').addEventListener('change', function(event) {
-    const previewContainer = document.getElementById('imagePreview');
-    previewContainer.innerHTML = ''; // Xóa hình ảnh cũ
-    Array.from(event.target.files).forEach(file => {
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file); // Tạo URL cho hình ảnh
-        img.classList.add('preview-item'); // Thêm lớp cho hình ảnh
-        img.style.width = '100px'; // Đặt chiều rộng cho hình ảnh
-        img.style.height = 'auto'; // Giữ tỷ lệ cho hình ảnh
-        img.style.marginRight = '10px'; // Khoảng cách giữa các hình ảnh
-        previewContainer.appendChild(img); // Thêm hình ảnh vào container
-    });
-});
+// // Page Setting
+// document.getElementById('imageUpload').addEventListener('change', function(event) {
+//     const previewContainer = document.getElementById('imagePreview');
+//     previewContainer.innerHTML = ''; // Xóa hình ảnh cũ
+//     Array.from(event.target.files).forEach(file => {
+//         const img = document.createElement('img');
+//         img.src = URL.createObjectURL(file); // Tạo URL cho hình ảnh
+//         img.classList.add('preview-item'); // Thêm lớp cho hình ảnh
+//         img.style.width = '100px'; // Đặt chiều rộng cho hình ảnh
+//         img.style.height = 'auto'; // Giữ tỷ lệ cho hình ảnh
+//         img.style.marginRight = '10px'; // Khoảng cách giữa các hình ảnh
+//         previewContainer.appendChild(img); // Thêm hình ảnh vào container
+//     });
+// });

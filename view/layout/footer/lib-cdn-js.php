@@ -7,7 +7,7 @@
     crossorigin="anonymous"></script>
 <script src="vendor/js/plugins.js"></script>
 <script src="vendor/js/script.js"></script>
-<script src="asset/js/script.js?j=1"></script>
+<script src="asset/js/script.js?j=2"></script>
 <!-- Tooltip -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 

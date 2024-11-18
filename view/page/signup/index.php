@@ -90,9 +90,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST['btnSignup'])) {
                     <hr class="flex-grow-1">
                 </div>
 
-                <button type="button" class="btn btn-outline-secondary w-100">
-                    <img src="asset/image/logo/logo-google.png" /> Đăng nhập bằng Google
-                </button>
+                <a href="
+                    <?php 
+                        include_once('controller/Login/GoogleLoginController.php');
+                        $googleLogin = new GoogleLoginController();
+                        $authUrl = $googleLogin->getAuthUrl();
+                        if (!empty($authUrl)) {
+                            echo htmlspecialchars($authUrl); 
+                        } else {
+                            echo '#';
+                        }
+                    ?>
+                    " class="btn btn-outline-secondary w-100">
+                        <img src="asset/image/logo/logo-google.png" /> Đăng ký bằng Google
+                </a>
 
             </form>
 

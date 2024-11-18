@@ -49,4 +49,16 @@ class User extends ConnectDatabase
         }
         return $result;
     }
+    //get user by email
+    public function getUserByEmail($email){
+
+        $query = "SELECT * FROM users WHERE email = '$email'";
+
+        $result = $this->conn->query($query);
+        
+        if ($result === false) {
+            die("Query failed: " . $this->conn->error);
+        }
+        return $result;
+    }
 }

@@ -1,3 +1,4 @@
+
 <?php
 
 include_once('controller/Login/LoginController.php');
@@ -58,13 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnLogin'])) {
                     <input type="password" class="form-control border-color" id="password" name="password" placeholder="Nhập mật khẩu">
                 </div>
 
-                <div class="mb-3 d-flex align-items-center">
-                    <input type="checkbox" class="form-check-input me-2 text-black border-color" id="confirmPassword" checked>
-                    <label for="confirmPassword" class="form-check-label text-black">
-                        Ghi nhớ đăng nhập
-                    </label>
-                </div>
-
                 <button type="submit" class="btn btn-primary w-100 mb-3" name="btnLogin">Đăng nhập</button>
 
                 <div class="d-flex align-items-center mb-3">
@@ -72,10 +66,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnLogin'])) {
                     <span class="mx-2">hoặc</span>
                     <hr class="flex-grow-1">
                 </div>
-
-                <a href="" class="btn btn-outline-secondary w-100">
+                
+                <a href="
+                <?php 
+                    include_once('controller/Login/GoogleLoginController.php');
+                    $googleLogin = new GoogleLoginController();
+                    $authUrl = $googleLogin->getAuthUrl();
+                    if (!empty($authUrl)) {
+                        echo htmlspecialchars($authUrl); 
+                    } else {
+                        echo '#';
+                    }
+                ?>
+                " class="btn btn-outline-secondary w-100">
                     <img src="asset/image/logo/logo-google.png" /> Đăng nhập bằng Google
                 </a>
+
+                
             </form>
         </div>
     </div>

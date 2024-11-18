@@ -1,17 +1,29 @@
+<?php
+    include_once('controller/Login/GoogleLoginController.php');
+    $googleLogin = new GoogleLoginController();
+    if ($googleLogin->handleCallBack() == true) {
+        echo '<script>
+                    alert("Đăng nhập thành công!");
+                    setTimeout(function() {
+                        window.location.href = "http://localhost/php/projectfinal";
+                    }, 0);
+                </script>';
+    }
+?>
+
 <div class="container-fluid">
     <div class="row py-3 border-bottom">
         <div
             class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
             <div class="d-flex align-items-center my-3 my-sm-0">
                 <a href="index.php?page=home">
-                    <img src="asset/image/logo/logo-website.png" alt="logo" class="img-fluid"
-                        style="width: 60; height: 60px;">
+                    <img src="asset/image/logo/logo-website.png" alt="logo" class="img-fluid" style="width: 60; height: 60px;">
                 </a>
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" title="Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </button>
 
@@ -22,14 +34,14 @@
                 <div class="col-md-4 d-none d-md-block">
                     <select class="form-select border-0 bg-transparent">
                         <option>Danh mục</option>
-                        <?php 
-                            include_once('controller/Category/CategoryController.php');
-                            $getCategory = new CategoryController();
-                            $datas = $getCategory->getCategoryList();
-                            
-                            foreach ($datas as $data){
-                                echo '<option value="'.$data['category_id'].'">'.$data['category_name'].'</option>';
-                            }
+                        <?php
+                        include_once('controller/Category/CategoryController.php');
+                        $getCategory = new CategoryController();
+                        $datas = $getCategory->getCategoryList();
+
+                        foreach ($datas as $data) {
+                            echo '<option value="' . $data['category_id'] . '">' . $data['category_name'] . '</option>';
+                        }
                         ?>
                     </select>
                 </div>
@@ -62,13 +74,9 @@
                 </li>
                 <li class="nav-item active btn btn-outline-primary fw-bold">
                     <a href="index.php?page=registrationProduct" class="nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                            fill="currentColor" class="bi bi-card-list"
-                            viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
-                            <path
-                                d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
                         </svg> &nbsp;
                         Đăng tin
                     </a>
@@ -84,19 +92,19 @@
                             <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
                         </svg>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
-                            <?php 
-                                if(isset($_SESSION['success_message'])){
-                                    include_once('controller/Notification/NotificationController.php');
-                                    $notification = new Notification();
-                                    $userId = isset($_SESSION['user_id']);
-                                    if($userId){
-                                        echo $notification->countNotificationByUserId($userId);
-                                    }
-                                }else{
-                                    echo 0;
+                            <?php
+                            if (isset($_SESSION['success_message'])) {
+                                include_once('controller/Notification/NotificationController.php');
+                                $notification = new Notification();
+                                $userId = isset($_SESSION['success_message']);
+                                if ($userId) {
+                                    echo $notification->countNotificationByUserId($userId);
                                 }
+                            } else {
+                                echo 0;
+                            }
                             ?>
-                            
+
                             <span class="visually-hidden">unread messages</span>
                         </span>
                     </a>
@@ -104,59 +112,86 @@
                 <li>
                     <div class="dropdown" id="dropdown-user">
                         <a href="#" class="account-icon p-2 mx-1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?php 
-                                if(!isset($_SESSION['success_message'])){
-                                    
-                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-exclamation" viewBox="0 0 16 16">
+                            <?php
+                            if (!isset($_SESSION['success_message'])) {
+
+                                echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-exclamation" viewBox="0 0 16 16">
                                             <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
                                             <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 0 1 0V11a.5.5 0 0 0-.5-.5m0 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
                                         </svg>';
-                                }
-                                else {
-                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                            } else {
+                                echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
                                             <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
                                             <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
                                         </svg>';
-                                }
+                            }
                             ?>
                         </a>
 
                         <ul class="dropdown-menu" id="dropdown-menu-user">
 
                             <li class="d-flex align-items-center p-2" data-bs-toggle="tooltip" data-bs-placement="top" title="
-                            <?php
-                            include_once('controller/Login/LoginController.php');
-                            $loginController = new LoginController();
+                                <?php
+                                include_once('controller/Login/LoginController.php');
+                                $loginController = new LoginController();
 
-                            if (!isset($_SESSION['email'])) {
-                                echo 'Người dùng chưa đăng nhập';
-                            } else {
-                                $fullname = $_SESSION['email'];
-                                echo $loginController->getUserNameController($fullname);
-                            }
-                            ?>">
-                                <img src="asset/image/user/img-default.png" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">
-                                <a class="dropdown-item m-0 p-0 text-black text-truncate dropdown-menu-name-user-item" href="#" title="">
-                                    <?php 
-                                       include_once('controller/Login/LoginController.php');
-                                       $loginController = new LoginController();
-           
-                                       if (!isset($_SESSION['email'])) {
-                                           echo 'Người dùng chưa đăng nhập';
-                                       } else {
-                                           $fullname = $_SESSION['email'];
-                                           echo $loginController->getUserNameController($fullname);
-                                       }
-                                   ?>
-                                </a>
+                                if(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
+
+                                    $fullname = $_SESSION['email'];
+                                    echo $loginController->getUserNameController($fullname);
+
+                                }elseif(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
+
+                                    $emailUserLoginGoogle = $_SESSION['emailUserLoginGoogle'];
+                                    echo $loginController->getUserNameController($emailUserLoginGoogle);
+
+                                }else{
+                                    echo 'Người dùng chưa đăng nhập';
+                                }
+
+                                ?>">
                                 
                                 <?php 
-                                if(!isset($_SESSION['success_message'])){
+                                if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
+                                    include_once('controller/User/UserController.php');
+                                    $userController = new UserController();
+
+                                    $dataUsersLogin = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
+                                    foreach($dataUsersLogin as $dataUserLogin){
+                                        echo '<img src="asset/image/user/'. $dataUserLogin['image'] .'" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">';
+                                    }
+                                }else{
+                                    echo '<img src="asset/image/user/img-default.png" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">';
+                                }
+                                ?>
+
+                                <a class="dropdown-item m-0 p-0 text-black text-truncate dropdown-menu-name-user-item" href="#" title="">
+                                    <?php
+                                    include_once('controller/Login/LoginController.php');
+                                    $loginController = new LoginController();
+
+                                    if(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
+
+                                        $fullname = $_SESSION['email'];
+                                        echo $loginController->getUserNameController($fullname);
+
+                                    }elseif(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
+
+                                        $emailUserLoginGoogle = $_SESSION['emailUserLoginGoogle'];
+                                        echo $loginController->getUserNameController($emailUserLoginGoogle);
+                                        
+                                    }else{
+                                        echo 'Người dùng chưa đăng nhập';
+                                    }
+                                    ?>
+                                </a>
+
+                                <?php
+                                if (!isset($_SESSION['success_message'])) {
                                     echo '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
                                         </svg>';
-                                }
-                                else{
+                                } else {
                                     echo '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6bb252" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                                         </svg>';
@@ -214,10 +249,10 @@
                                 </a>
                             </li>
                             <li>
-                                <?php 
-                                if(!isset($_SESSION['success_message'])){
+                                <?php
+                                if (!isset($_SESSION['success_message'])) {
                                     echo '';
-                                }else{
+                                } else {
                                     echo '<a href="index.php?page=logout" class="text-black fw-bold dropdown-item border-top border-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#6bb252" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
@@ -227,70 +262,67 @@
                                         </a>';
                                 }
                                 ?>
-                                
+
                             </li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <a href="index.php?page=whistlist" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Sản phẩm yêu thích của bạn">
-                        <?php  
-                            include_once('controller/Whistlist/WhistlistController.php');
-                            $whistlistController = new WhistlistController();
-                            $productCountWhistlist = $whistlistController->countProductInWhistlistController();
-                            
-                            if($productCountWhistlist = 0){
-                                echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-bag-heart" viewBox="0 0 16 16">
+                        <?php
+                        include_once('controller/Whistlist/WhistlistController.php');
+                        $whistlistController = new WhistlistController();
+                        $productCountWhistlist = $whistlistController->countProductInWhistlistController();
+
+                        if ($productCountWhistlist = 0) {
+                            echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-bag-heart" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1M8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                                     </svg>';
-                            }
-                            else {
-                                echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                        } else {
+                            echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
                                         <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                                     </svg>';
-                            }
+                        }
                         ?>
                     </a>
                 </li>
                 <li>
                     <a href="index.php?page=cart" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Giỏ hàng">
-                        <?php  
-                            include_once('controller/Cart/CartController.php');
-                            $cartController = new CartController();
-                            $productCount = $cartController->getProductCount();
-                            
-                            if($countProductInCart = 0){
-                                echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-basket3-fill" viewBox="0 0 16 16">
+                        <?php
+                        include_once('controller/Cart/CartController.php');
+                        $cartController = new CartController();
+                        $productCount = $cartController->getProductCount();
+
+                        if ($countProductInCart = 0) {
+                            echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-basket3-fill" viewBox="0 0 16 16">
                                         <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"/>
                                     </svg>';
-                            }
-                            else {
-                                echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
+                        } else {
+                            echo '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-basket3" viewBox="0 0 16 16">
                                         <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z"/>
                                     </svg>';
-                            }
+                        }
                         ?>
                     </a>
                 </li>
 
                 <li>
-                    <?php 
-                        if(!isset($_SESSION['success_message'])){
-                            echo '<a href="index.php?page=login" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Đăng nhập">
+                    <?php
+                    if (!isset($_SESSION['success_message'])) {
+                        echo '<a href="index.php?page=login" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Đăng nhập">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
                                         <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
                                     </svg>
                                 </a>';
-                        }
-                        else{
-                            echo '<a href="index.php?page=logout" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Đăng xuất">
+                    } else {
+                        echo '<a href="index.php?page=logout" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Đăng xuất">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
                                         <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
                                     </svg>
                                 </a>';
-                        }
+                    }
                     ?>
                 </li>
 

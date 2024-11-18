@@ -45,6 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
     </header>
 
+    <?php 
+    include_once('view/layout/slider/slider.php');
+    ?>
+    
     <?php
     include_once('view/layout/pagination/index.php');
     ?>
@@ -82,28 +86,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col">
+
+
                             <div class="mb-3">
                                 <label for="category" class="form-label">Danh mục cấp 1 <span class="text-danger">*</span></label>
-                                <select class="form-select border-color" id="category" name="category" required onchange="this.form.submit()">
+                                <select class="form-select border-color" id="category" name="category" required onchange="this.form.submit()" onchange="fetchSubcategories(this.value)">
                                     <option value="">Chọn danh mục</option>
-                                    <option value="do-dien-tu" <?php if ($selectedCategory == 'do-dien-tu') echo 'selected'; ?>>Đồ điện tử</option>
-                                    <option value="sach" <?php if ($selectedCategory == 'sach') echo 'selected'; ?>>Sách</option>
+                                    <?php 
+                                    // include_once('controller/Category/CategoryController.php');
+                                    // $categoryController = new CategoryController();
+                                    // $categories = $categoryController->getCategoryList();
+
+                                    // foreach($categories as $category){
+                                    //     echo '<option value="'. $category['category_id'] .'">'. $category['category_name'] .'</option>';
+                                    // }
+                                    ?>
                                 </select>
                             </div>
 
-                            <div class="mb-3" id="subcategoryContainer" style="display: <?php echo $selectedCategory ? 'block' : 'none'; ?>">
+                            <div class="mb-3" id="subcategoryContainer" style="display: none;">
                                 <label for="subcategory" class="form-label">Danh mục cấp 2 <span class="text-danger">*</span></label>
-                                <select class="form-select border-color" id="subcategory" name="subcategory" required onchange="toggleFields()">
+                                <select class="form-select border-color" id="subcategory" name="subcategory" required>
                                     <option value="">Chọn danh mục cấp 2</option>
-                                    <?php if ($selectedCategory == 'do-dien-tu'): ?>
-                                        <option value="smartphone" <?php if ($selectedSubCategory == 'smartphone') echo 'selected'; ?>>Smartphone</option>
-                                        <option value="tablet" <?php if ($selectedSubCategory == 'tablet') echo 'selected'; ?>>Tablet</option>
-                                    <?php elseif ($selectedCategory == 'sach'): ?>
-                                        <option value="fiction" <?php if ($selectedSubCategory == 'fiction') echo 'selected'; ?>>Tiểu thuyết</option>
-                                        <option value="non-fiction" <?php if ($selectedSubCategory == 'non-fiction') echo 'selected'; ?>>Phi hư cấu</option>
-                                    <?php endif; ?>
                                 </select>
                             </div>
+
 
                             <div class="mb-3">
                                 <label class="form-label">Hình ảnh và Video sản phẩm <span class="text-danger">*</span></label>

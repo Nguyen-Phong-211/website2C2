@@ -36,4 +36,13 @@ class UserController
         }
         return $result;
     }
+    //get user by email
+    public function getUserByEmailController($email)
+    {
+        $result = $this->user->getUserByEmail($email);
+        if (!$result) {
+            die("Failed to retrieve product list: " . $this->user->getConnection()->error);
+        }
+        return $result;
+    }
 }

@@ -32,6 +32,10 @@
         ?>
     </header>
 
+    <?php 
+    include_once('view/layout/slider/slider.php');
+    ?>
+
 
     <?php
     include_once('view/layout/pagination/index.php');
