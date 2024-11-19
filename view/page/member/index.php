@@ -58,8 +58,8 @@
 
     
 
-    <section class="container pb-4 my-4 text-black">
-        <div class="container mt-5">
+    <section class="container-fluid pb-4 my-4 text-black">
+        <div class="mt-5">
             <table class="table text-black">
                 <thead>
                     <tr>
@@ -68,7 +68,13 @@
                         <th scope="col">Mã số sinh viên</th>
                         <th scope="col">Họ và tên</th>
                         <th scope="col">Mô tả công việc thực hiện</th>
-                        <th scope="col">Mức độ đánh giá</th>
+
+                        <th scope="col">Giao diện</th>
+                        <th scope="col">Nhập liệu</th>
+                        <th scope="col">Code 1.1</th>
+                        <th scope="col">Code 1.2</th>
+                        <th scope="col">Đánh giá</th>
+                        <th scope="col">Tổng kết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,6 +97,11 @@
                             </ul>
                         </td>
                         <td>100%</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>
@@ -104,7 +115,12 @@
                                 <li>Đặt hàng</li>
                             </ul>
                         </td>
-                        <td>100%</td>
+                        <td>87%</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>
@@ -117,7 +133,12 @@
                                 <li>Huỷ đơn hàng</li>
                             </ul>
                         </td>
-                        <td>100%</td>
+                        <td>60%</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th scope="row">4</th>
@@ -132,7 +153,7 @@
                                 <li>Quản lý sản phẩm bán</li>
                             </ul>
                         </td>
-                        <td>100%</td>
+                        <td>95%</td>
                     </tr>
                     <tr>
                         <th scope="row">5</th>
@@ -160,7 +181,7 @@
                                 <li>Quản lý danh mục sản phẩm</li>
                             </ul>
                         </td>
-                        <td>100%</td>
+                        <td>80%</td>
                     </tr>
                 </tbody>
             </table>
