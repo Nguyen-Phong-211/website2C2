@@ -861,3 +861,32 @@ a.btn-link.text-light:after {
   color: #6bb252;
   font-weight: bold;
 }
+/* button back to top */
+#backToTop {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.9);
+}
+
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+#backToTop:hover {
+  transform: scale(1.1);
+  background-color: #007bff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.button-back-to-top {
+  z-index: 9999;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}

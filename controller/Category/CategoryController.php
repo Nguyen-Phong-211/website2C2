@@ -16,6 +16,15 @@ class CategoryController {
         }
         return $result;
     }
+    //get name category by category_id
+    public function getCategoryNameController($category_id) {
+        $categoryName = $this->category->getCategoryName($category_id);
+    
+        if ($categoryName === null) {
+            return "Category not found";
+        }
+        return $categoryName;
+    }
 
 }
 ?>

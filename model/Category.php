@@ -21,4 +21,29 @@ class Category extends ConnectDatabase
 
         return $result;
     }
+    //get name category by category_id
+    public function getCategoryName($category_id)
+    {
+
+        $query = "SELECT category_name FROM categories WHERE category_id = ?";
+        $stmt = $this->conn->prepare($query);
+    
+        if (!$stmt) {
+            die("Error in preparing statement: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $category_id);
+    
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+    
+        if ($result->num_rows === 0) {
+            return null;
+        }
+
+        $category = $result->fetch_assoc();
+        return $category['category_name'];
+    }
+    
 }

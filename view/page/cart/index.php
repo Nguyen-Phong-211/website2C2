@@ -142,6 +142,9 @@
 
 
 
+    <?php 
+    include_once('view/layout/header/button_backtotop.php');
+    ?>
 
     <?php
     include_once('view/layout/footer/footer.php');

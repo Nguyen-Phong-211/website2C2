@@ -18,7 +18,7 @@
     crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="vendor/css/vendor.css">
-<link rel="stylesheet" type="text/css" href="asset/css/style.css?v=2">
+<link rel="stylesheet" type="text/css" href="asset/css/style.css?v=1">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

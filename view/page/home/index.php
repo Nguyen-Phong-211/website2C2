@@ -8,12 +8,7 @@
     ?>
 </head>
 
-<body>
-
-
-    <?php
-    // include_once('view/layout/body/svg.php');
-    ?>
+<body> 
 
     <div class="preloader-wrapper">
         <div class="preloader">
@@ -220,6 +215,10 @@
             </div>
         </div>
     </section>
+
+    <?php 
+    include_once('view/layout/header/button_backtotop.php');
+    ?>
 
     <?php
     include_once('view/layout/footer/footer.php');

@@ -88,4 +88,31 @@ class Product extends ConnectDatabase
         }
         return $result;
     }
+    //get product by category_id
+    public function getProductByCategory($categoryId)
+    {
+        $query = "
+        SELECT *
+            FROM 
+                products AS p
+            LEFT JOIN 
+                category_items AS ci ON p.category_item_id = ci.category_item_id
+            LEFT JOIN 
+                categories AS c ON c.category_id = ci.category_id
+            LEFT JOIN 
+                images AS i ON p.product_id = i.product_id
+            LEFT JOIN 
+                reviews AS r ON r.product_id = p.product_id
+            WHERE 
+                c.category_id = '$categoryId'
+            GROUP BY 
+                p.product_id, p.product_name, c.category_name, ci.category_item_name;
+        ";
+        $result = $this->conn->query($query);
+
+        if ($result === false) {
+            die("Query failed: " . $this->conn->error);
+        }
+        return $result;
+    }
 }

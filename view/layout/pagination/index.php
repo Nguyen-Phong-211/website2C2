@@ -48,6 +48,9 @@
                         case 'detailProduct':
                             echo 'Chi tiết sản phẩm';
                             break;  
+                        case 'product':
+                            echo '<a href="index.php?page=' . $page . '" class="text-decoration-none"> Sản phẩm </a>';
+                            break; 
                         default:
                             # code...
                             break;
@@ -56,11 +59,22 @@
             </li>
             <?php 
                 if($_REQUEST['page'] == 'detailProduct'){
+
                     $idp = $_REQUEST['idp'];
                     include_once('controller/Product/ProductController.php');
                     $productController = new ProductController();
 
                     echo '<li class="breadcrumb-item">'. $productController->getNameProductByIdController($idp). '</li>';
+
+                }elseif($_REQUEST['page'] == 'product' && isset($_REQUEST['idc'])){
+                    $idc = $_REQUEST['idc'];
+                    include_once('controller/Category/CategoryController.php');
+                    $productController = new CategoryController();
+
+                    $categoryName = $productController->getCategoryNameController($idc);
+                    
+                    echo '<li class="breadcrumb-item">' . htmlspecialchars($categoryName) . '</li>';
+
                 }
             ?>
         </ol>

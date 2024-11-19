@@ -68,4 +68,14 @@ class ProductController
         }
         return $result;
     }
+    //get product by category_id
+    public function getProductByCategoryIdController($categoryId)
+    {
+        $result = $this->product->getProductByCategory($categoryId);
+
+        if (!$result) {
+            die("Failed to retrieve product list: " . $this->product->getConnection()->error);
+        }
+        return $result;
+    }
 }

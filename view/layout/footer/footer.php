@@ -46,16 +46,16 @@
                     <h5 class="widget-title">Về chúng tôi</h5>
                     <ul class="menu-list list-unstyled text-black">
                         <li class="menu-item">
-                            <a href="index.php?page=about_us" class="nav-link btn-link">Giới thiệu</a>
+                            <a href="index.php?page=about_us" class="nav-link btn-link fw-lighter">Giới thiệu</a>
                         </li>
                         <li class="menu-item">
-                            <a href="index.php?page=condition" class="nav-link btn-link">Chính sách bảo mật </a>
+                            <a href="index.php?page=condition" class="nav-link btn-link fw-lighter">Chính sách bảo mật </a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="nav-link btn-link">Hỗ trợ</a>
+                            <a href="#" class="nav-link btn-link fw-lighter">Hỗ trợ</a>
                         </li>
                         <li class="menu-item">
-                            <a href="index.php?page=member" class="nav-link btn-link">Thành viên nhóm</a>
+                            <a href="index.php?page=member" class="nav-link btn-link fw-lighter">Thành viên nhóm</a>
                         </li>
                     </ul>
                 </div>
@@ -71,7 +71,7 @@
 
                             foreach($datas as $data){
                                 echo '<li class="menu-item">
-                                        <a href="index.php?page=category&idc='. $data['category_id'] .'" class="nav-link btn-link">'. $data['category_name'] .'</a>
+                                        <a href="index.php?page=product&idc='. $data['category_id'] .'" class="nav-link btn-link fw-lighter">'. $data['category_name'] .'</a>
                                     </li>';
                             }
                         ?>
@@ -89,7 +89,7 @@
 
                                 foreach($datas as $data){
                                     echo '<li class="menu-item">
-                                                <a href="index.php?page=product&idp='. $data['product_id'] .'" class="nav-link text-truncate btn-link">'. $data['product_name'] .'</a>
+                                                <a href="index.php?page=product&idp='. $data['product_id'] .'" class="fw-lighter nav-link text-truncate btn-link">'. $data['product_name'] .'</a>
                                             </li>';
                                 }
                             ?>

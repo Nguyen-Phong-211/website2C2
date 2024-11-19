@@ -168,9 +168,9 @@
                                         </div>
                                         <div class="d-flex justify-content-center align-items-center gap-2">
                                             
-                                            <span class="text-dark fw-semibold">'. number_format($data['price'], 0, ',', '.') .' đồng</span>
+                                            <span class="text-danger fw-semibold">'. number_format($data['price'], 0, ',', '.') .' đồng</span>
 
-                                            <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">
+                                            <span class="badge rounded fw-bold px-1 fs-7 lh-1 bg-warning text-black ms-2">
                                                 10% OFF
                                             </span>
                                         </div>
