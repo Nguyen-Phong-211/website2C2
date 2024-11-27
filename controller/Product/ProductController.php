@@ -78,4 +78,24 @@ class ProductController
         }
         return $result;
     }
+    //get product hightly appreciated
+    public function getProductHightlyAppreciatedController()
+    {
+        $result = $this->product->getProductHightlyAppreciated();
+
+        if (!$result) {
+            die("Failed to retrieve product list: " . $this->product->getConnection()->error);
+        }
+        return $result;
+    }
+    //get product sell out
+    public function getProductSellOutController()
+    {
+        $result = $this->product->getProductSellOut();
+
+        if (!$result) {
+            die("Failed to retrieve product list: " . $this->product->getConnection()->error);
+        }
+        return $result;
+    }
 }

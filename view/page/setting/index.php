@@ -12,11 +12,6 @@
 
 <body>
 
-    <!-- Svg -->
-    <?php
-    // include_once('view/layout/body/svg.php');
-    ?>
-
     <div class="preloader-wrapper">
         <div class="preloader">
         </div>
@@ -37,7 +32,6 @@
     include_once('view/layout/pagination/index.php');
     ?>
 
-
     <!-- <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
         <div class="text-center border border-3 rounded-circle">
             <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
@@ -48,10 +42,40 @@
     <section class="container pb-4 my-4 text-black">
 
         <div class="profile-header text-center">
-            <img src="asset/image/user/img-default.png" alt="Ảnh đại diện" class="img-fluid mb-3">
-            <h2>Nguyễn Văn A</h2>
-            <p class="text-black">Email: nguyenvana@example.com</p>
-            <p class="text-black">Số điện thoại: 0123456789</p>
+        <?php
+            include_once('controller/User/UserController.php');
+            $userController = new UserController();
+
+            if(isset($_SESSION['email'])){
+                $user = $userController->getUserByEmailController($_SESSION['email']);
+
+                if ($user) {
+                    echo '
+                    <img src="asset/image/user/' . htmlspecialchars($user['image'], ENT_QUOTES, 'UTF-8') . '" alt="Ảnh đại diện" class="img-fluid mb-3">
+                    <h2>' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '</h2>
+                    <p class="text-black">Email: ' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '</p>
+                    <p class="text-black">Số điện thoại: ' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '</p>
+                    ';
+                } else {
+                    echo '<p>Không tìm thấy người dùng.</p>';
+                }
+            }else{
+                $user = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
+
+                if ($user) {
+                    echo '
+                    <img src="asset/image/user/' . htmlspecialchars($user['image'], ENT_QUOTES, 'UTF-8') . '" alt="Ảnh đại diện" class="img-fluid mb-3">
+                    <h2>' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '</h2>
+                    <p class="text-black">Email: ' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '</p>
+                    <p class="text-black">Số điện thoại: ' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '</p>
+                    ';
+                } else {
+                    echo '<p>Không tìm thấy người dùng.</p>';
+                }
+            }
+            
+        ?>
+
         </div>
 
         <div class="container mt-5">
@@ -69,41 +93,108 @@
 
             <div class="tab-content mt-5" id="info">
                 <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: auto;">
-                    <form action="" method="post" class="form p-4 w-100 card">
+                    <form action="index.php?page=authu" method="post" class="form p-4 w-100 card" enctype="multipart/form-data">
                         <h3 class="text-center mb-4">Cập nhật thông tin</h3>
                         <div class="row">
                             <div class="col-lg-7">
-                                <div class="mb-3">
-                                    <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control text-black border-color" id="fullname" placeholder="Nhập họ và tên">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control text-black border-color" id="email" placeholder="Nhập địa chỉ email">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control text-black border-color" id="phone" placeholder="Nhập số điện thoại">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address" class="form-label text-black">Địa chỉ<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control text-black border-color" id="address" placeholder="Nhập địa chỉ">
-                                </div>
+                                <?php
+                                    include_once('controller/User/UserController.php');
+                                    $userController = new UserController();
+
+                                    if(isset($_SESSION['email'])){
+                                        $user = $userController->getUserByEmailController($_SESSION['email']);
+
+                                        if ($user) {
+                                            echo '
+                                                <div class="mb-3">
+                                                    <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
+                                                    <input type="text" name="user_name" value="'. htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="fullname" placeholder="Nhập họ và tên">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
+                                                    <input type="email" name="email" value="'. htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="email" placeholder="Nhập địa chỉ email">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>
+                                                    <input type="text" name="number_phone" value="'. htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="phone" placeholder="Nhập số điện thoại">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label text-black">Địa chỉ<span class="text-danger">*</span></label>';
+                                                    
+                                                    $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
+
+                                                    echo '
+                                                    <input type="text" name="address" value="'. $address .'" class="form-control text-black border-color" id="address" placeholder="Nhập địa chỉ">
+                                                </div>
+                                            ';
+                                        }
+                                    }else{
+                                        $user = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
+
+                                        if ($user) {
+                                            echo '
+                                                <div class="mb-3">
+                                                    <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
+                                                    <input type="text" name="user_name" value="'. htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="fullname" placeholder="Nhập họ và tên">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
+                                                    <input type="email" name="email" value="'. htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="email" placeholder="Nhập địa chỉ email">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>
+                                                    <input type="text" name="number_phone" value="'. htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="phone" placeholder="Nhập số điện thoại">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label text-black">Địa chỉ<span class="text-danger">*</span></label>';
+                                                    
+                                                    $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
+
+                                                    echo '
+                                                    <input type="text" name="address" value="'. $address .'" class="form-control text-black border-color" id="address" placeholder="Nhập địa chỉ">
+                                                </div>
+                                            ';
+                                        }
+                                    }
+                                ?>
                             </div>
+                            
                             <div class="col-lg-5">
                                 <div class="update-avatar">
                                     <label class="form-label text-black">Cập nhật hình đại diện</label>
-                                    <input type="file" class="form-control border-color" name="imageUpload[]" accept="image/*" multiple id="imageUpload">
-                                    <div class="image-preview mt-2" id="imagePreview"></div>
+                                    <input type="file" class="form-control border-color" name="imageUser" accept="image/*" id="imageUploadUser" onchange="previewImagesUser(this)">
+                                    <div class="image-preview mt-2" id="imagePreviewImageUser"></div>
                                 </div>
+
                                 <div class="old-avatar mt-3 mb-2">
                                     <label for="old-avatar" class="form-label text-black">Ảnh đại diện trước đó</label> <br>
-                                    <img src="asset/image/user/img-default.png" alt="Ảnh đại diện" height="170" width="170" class="img-fluid mx-auto d-block"> <!-- Thêm class mx-auto d-block -->
+                                    <?php
+                                        include_once('controller/User/UserController.php');
+                                        $userController = new UserController();
+
+                                        if(isset($_SESSION['email'])){
+                                            $user = $userController->getUserByEmailController($_SESSION['email']);
+
+                                            if ($user) {
+                                                echo '
+                                                <img src="asset/image/user/' . htmlspecialchars($user['image'], ENT_QUOTES, 'UTF-8') . '" alt="Ảnh đại diện" height="170" width="170" class="img-fluid mx-auto d-block"> 
+                                                ';
+                                            }
+                                        }else{
+                                            $user = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
+
+                                            if ($user) {
+                                                echo '
+                                                <img src="asset/image/user/' . htmlspecialchars($user['image'], ENT_QUOTES, 'UTF-8') . '" alt="Ảnh đại diện" height="170" width="170" class="img-fluid mx-auto d-block"> 
+                                                ';
+                                            }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn btn-outline-primary active">Lưu thay đổi</button>
+                            <button type="submit" name="btnUpdateInfoUser" value="btnUpdateInfoUser" class="btn btn-outline-primary active">Lưu thay đổi</button>
                         </div>
                     </form>
                 </section>

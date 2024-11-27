@@ -12,17 +12,12 @@
 
 <body>
 
-    <!-- Svg -->
-    <?php
-    // include_once('view/layout/body/svg.php');
-    ?>
-
     <div class="preloader-wrapper">
         <div class="preloader">
         </div>
     </div>
 
-    <?php 
+    <?php
     include_once('view/layout/slidebar/slidebar.php');
     ?>
 
@@ -98,11 +93,11 @@
             </div>
         </div>
     </section>
-    <?php 
+    <?php
     include_once('view/layout/header/button_backtotop.php');
     ?>
-    
-    <?php 
+
+    <?php
     include_once('script.php');
     ?>
     <?php

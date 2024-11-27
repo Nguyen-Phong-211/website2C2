@@ -1,7 +1,7 @@
 <?php
     include_once('controller/Login/GoogleLoginController.php');
     $googleLogin = new GoogleLoginController();
-    if ($googleLogin->handleCallBack() == true) {
+    if ($googleLogin->handleCallBack() === true) {
         echo '<script>
                     alert("Đăng nhập thành công!");
                     setTimeout(function() {
@@ -140,12 +140,14 @@
                                     $fullname = $_SESSION['email'];
                                     echo $loginController->getUserNameController($fullname);
 
-                                }elseif(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
+                                }
+                                elseif(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
 
                                     $emailUserLoginGoogle = $_SESSION['emailUserLoginGoogle'];
                                     echo $loginController->getUserNameController($emailUserLoginGoogle);
 
-                                }else{
+                                }
+                                else{
                                     echo 'Người dùng chưa đăng nhập';
                                 }
 
@@ -157,9 +159,8 @@
                                     $userController = new UserController();
 
                                     $dataUsersLogin = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
-                                    foreach($dataUsersLogin as $dataUserLogin){
-                                        echo '<img src="asset/image/user/'. $dataUserLogin['image'] .'" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">';
-                                    }
+
+                                    echo '<img src="asset/image/user/'. $dataUsersLogin['image'] .'" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">';
                                 }else{
                                     echo '<img src="asset/image/user/img-default.png" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">';
                                 }
@@ -175,7 +176,8 @@
                                         $fullname = $_SESSION['email'];
                                         echo $loginController->getUserNameController($fullname);
 
-                                    }elseif(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
+                                    }
+                                    elseif(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
 
                                         $emailUserLoginGoogle = $_SESSION['emailUserLoginGoogle'];
                                         echo $loginController->getUserNameController($emailUserLoginGoogle);
@@ -253,13 +255,15 @@
                                 if (!isset($_SESSION['success_message'])) {
                                     echo '';
                                 } else {
-                                    echo '<a href="index.php?page=logout" class="text-black fw-bold dropdown-item border-top border-2">
+                                    echo '
+                                        <a href="index.php?page=logout" class="text-black fw-bold dropdown-item border-top border-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#6bb252" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
                                                 <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
                                             </svg>
                                             &nbsp;Đăng xuất
-                                        </a>';
+                                        </a>
+                                        ';
                                 }
                                 ?>
 

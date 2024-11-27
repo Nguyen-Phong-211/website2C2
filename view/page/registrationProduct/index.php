@@ -25,15 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
-    <!-- Svg -->
-    <?php
-    // include_once('view/layout/body/svg.php');
-    ?>
-
-    <div class="preloader-wrapper">
+    <!-- <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div>
+    </div> -->
 
     <?php
     include_once('view/layout/slidebar/slidebar.php');
@@ -45,10 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
     </header>
 
-    <?php 
+    <?php
     include_once('view/layout/slider/slider.php');
     ?>
-    
+
     <?php
     include_once('view/layout/pagination/index.php');
     ?>
@@ -92,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <label for="category" class="form-label">Danh mục cấp 1 <span class="text-danger">*</span></label>
                                 <select class="form-select border-color" id="category" name="category" required onchange="this.form.submit()" onchange="fetchSubcategories(this.value)">
                                     <option value="">Chọn danh mục</option>
-                                    <?php 
+                                    <?php
                                     // include_once('controller/Category/CategoryController.php');
                                     // $categoryController = new CategoryController();
                                     // $categories = $categoryController->getCategoryList();
@@ -115,20 +110,69 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="mb-3">
                                 <label class="form-label">Hình ảnh và Video sản phẩm <span class="text-danger">*</span></label>
 
-                                <input type="file" class="form-control border-color" name="imageUpload[]" accept="image/*" multiple onchange="previewImages(this)">
+                                <input type="file" class="form-control border-color" name="imageUpload[]" accept="image/*" multiple onchange="previewImagesProduct(this)">
                                 <small class="form-text text-muted">Chọn từ 1 đến 6 hình ảnh.</small>
                                 <div class="image-preview" id="imagePreview"></div>
+
+                                <script>
+                                    function previewImagesProduct(input) {
+                                        const imagePreview = document.getElementById('imagePreview');
+                                        imagePreview.innerHTML = '';
+                                        const files = input.files;
+
+                                        if (files.length > 6) {
+                                            alert('Bạn chỉ có thể chọn tối đa 6 hình ảnh.');
+                                            input.value = '';
+                                            return;
+                                        }
+
+                                        for (let i = 0; i < files.length; i++) {
+                                            const file = files[i];
+
+                                            if (!file.type.startsWith('image/')) {
+                                                alert('Chỉ được phép tải lên tệp hình ảnh.');
+                                                continue;
+                                            }
+
+                                            const reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                const img = document.createElement('img');
+                                                img.src = e.target.result;
+                                                img.classList.add('img-thumbnail', 'me-2');
+                                                img.style.width = '100px';
+                                                img.style.height = 'auto';
+                                                imagePreview.appendChild(img);
+                                            };
+                                            reader.readAsDataURL(file);
+                                        }
+                                    }
+                                </script>
 
                                 <input type="file" class="form-control mt-3 border-color" name="videoUpload" accept="video/*" onchange="previewVideo(this)">
                                 <small class="form-text text-muted">Chọn 1 video.</small>
                                 <div class="video-preview" id="videoPreview"></div>
+
+                                <script>
+                                    function previewVideo(input) {
+                                        const videoPreview = document.getElementById('videoPreview');
+                                        videoPreview.innerHTML = '';
+                                        const file = input.files[0];
+
+                                        if (file) {
+                                            const video = document.createElement('video');
+                                            video.src = URL.createObjectURL(file);
+                                            video.controls = true;
+                                            video.style.width = '300px';
+                                            videoPreview.appendChild(video);
+                                        }
+                                    }
+                                </script>
                             </div>
-
-                            <?php
-                            include_once('script.php');
-                            ?>
-
                         </div>
+
+                        <?php 
+                        include_once('script.php');
+                        ?>
 
                         <div class="col" id="productFields" style="display: 
                             <?php
@@ -229,7 +273,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
 
-    <?php 
+    <?php
     include_once('view/layout/header/button_backtotop.php');
     ?>
 

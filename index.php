@@ -39,7 +39,7 @@
         $page = "home";
     }
 
-    $filenames = ['index.php', 'formProduct.php'];
+    $filenames = ['index.php'];
 
     foreach ($filenames as $filename) {
         if (file_exists('view/page/'.$page.'/'.$filename)) {

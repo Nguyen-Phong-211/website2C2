@@ -12,15 +12,10 @@
 
 <body>
 
-    <!-- Svg -->
-    <?php
-    // include_once('view/layout/body/svg.php');
-    ?>
-
-    <div class="preloader-wrapper">
+    <!-- <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div>
+    </div> -->
 
     <?php 
     include_once('view/layout/slidebar/slidebar.php');
@@ -41,12 +36,12 @@
     include_once('view/layout/pagination/index.php');
     ?>
 
-    <!-- <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
+    <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
         <div class="text-center" id="circle-notification">
             <img src="asset/image/general/list.png" alt="Thông báo" class="img-fluid notification-icon">
             <label class="notification-label">Chưa có thông báo nào</label>
         </div>
-    </section> -->
+    </section>
 
     <style>
         #circle-notification {
@@ -67,11 +62,6 @@
             opacity: 0.6;
         }
     </style>
-
-
-
-
-
     <?php 
     include_once('view/layout/header/button_backtotop.php');
     ?>

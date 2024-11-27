@@ -15,5 +15,5 @@
         });
     }
 
-    setInterval(slideImages, 3000);
+    setInterval(slideImages, 2000);
 </script>

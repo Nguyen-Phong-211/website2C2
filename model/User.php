@@ -36,7 +36,8 @@ class User extends ConnectDatabase
         return $row['count_seller'];
     }
     //get user by product_id
-    public function getUserbyProduct($product_id){
+    public function getUserbyProduct($product_id)
+    {
         $query = "SELECT * 
                     FROM users AS u 
                     JOIN products AS p ON u.user_id = p.user_id 
@@ -49,16 +50,69 @@ class User extends ConnectDatabase
         }
         return $result;
     }
-    //get user by email
-    public function getUserByEmail($email){
-
-        $query = "SELECT * FROM users WHERE email = '$email'";
-
-        $result = $this->conn->query($query);
-        
-        if ($result === false) {
-            die("Query failed: " . $this->conn->error);
+    //get user_id by email
+    public function getUserIdByEmail($email)
+    {
+        $query = "SELECT user_id FROM users WHERE email = ?";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Prepare statement failed: " . $this->conn->error);
         }
-        return $result;
+
+        $stmt->bind_param("s", $email);
+        if (!$stmt->execute()) {
+            die("Execution failed: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        return $row['user_id'] ?? null;
     }
+    //get user by email
+    public function getUserByEmail($email)
+    {
+        $query = "SELECT * FROM users WHERE email = ?";
+        
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Prepare statement failed: " . $this->conn->error);
+        }
+    
+        $stmt->bind_param('s', $email);
+    
+        if (!$stmt->execute()) {
+            die("Execution failed: " . $stmt->error);
+        }
+    
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        
+        return $row;
+    }
+    //update user_name, email, number_phone, address, image
+    public function updateUser($user_id, $user_name, $email, $number_phone, $address, $image)
+    {
+        $query = "UPDATE users 
+                    SET user_name =?, email =?, number_phone =?, address =?, image =?
+                    WHERE user_id =?";
+
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Prepare statement failed: ". $this->conn->error);
+        }
+
+        $stmt->bind_param("sssssi", $user_name, $email, $number_phone, $address, $image, $user_id);
+
+        if (!$stmt->execute()) {
+            die("Execution failed: ". $stmt->error);
+        }
+
+        $stmt->close();
+        return true;
+    }
+    
+
 }

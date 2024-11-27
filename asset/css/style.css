@@ -698,23 +698,7 @@ a.btn-link.text-light:after {
     opacity: 1;
   }
 }
-/* Form contact */
-.text-label-contact {
-  color: #343a40;
-  margin-bottom: 30px;
-}
 
-.contact-form {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.contact-form:hover {
-  transform: scale(1.02);
-}
 
 /* Registration product */
 .image-preview,
@@ -889,4 +873,18 @@ html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+/* Logo brand */
+.card-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.logo-img-brand {
+  width: 130px;
+  height: 50px;
+  object-fit: contain;
 }

@@ -4,6 +4,7 @@ include_once('model/Whistlist.php');
 class WhistlistController
 {
     private $whistlist;
+
     public function __construct()
     {
         $this->whistlist = new Whistlist();
@@ -13,32 +14,50 @@ class WhistlistController
     {
         return $this->whistlist->countProductInWhistlist();
     }
-    //add product in whistlist
-    public function addToWhistlistController($productId)
+    //add product to whistlist
+    public function addToWhistlistController($productId, $userId)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_to_wishlist') {
-    
-            $productId = $_POST['productId'];
+        $exists = $this->whistlist->checkIfExistWhistlist($productId, $userId);
 
-            if (isset($productId) && is_numeric($productId)) {
-        
-                $whistlist = new Whistlist(); 
-                $whistlist->addToWhistlist($productId); 
-
-                header("Location: index.php?page=home");
-            } else {
-                die("Product ID không hợp lệ.");
-            }
+        if ($exists) {
+            return false; 
         }
+
+        $result = $this->whistlist->addToWhistlist($productId, $userId);
+
+        if (!$result) {
+            die("Failed to add product to wishlist: " . $this->whistlist->getConnection()->error);
+        }
+        return $result;
+    }
+
+    //check
+    public function checkIfExistWhistlistController($productId, $userId)
+    {
+
+        $result = $this->whistlist->checkIfExistWhistlist($productId, $userId);
+
+        return $result;
+    }
+    // //get all whistlist by user_id
+    public function getAllWhistlistByUserIdController($userId)
+    {
+        $result = $this->whistlist->getAllWhistlistByUserId($userId);
+
+        if (!$result) {
+            die("Failed to get all product in wishlist: " . $this->whistlist->getConnection()->error);
+        }
+        return $result;
     }
     //remove product from whistlist
-    public function removeFromWhistlistController($productId)
+    public function removeFromWhistlistController($whistlist_id)
     {
-        $this->whistlist->removeFromWhistlist($productId);
-    }
-    //get all product in whistlist
-    public function getAllProductInWhistlistController()
-    {
-        return $this->whistlist->getAllProductInWhistlist();
+        $result = $this->whistlist->removeFromWhistlist($whistlist_id);
+
+        if (!$result) {
+            die("Failed to delete product in wishlist: " . $this->whistlist->getConnection()->error);
+        }
+        return $result;
+
     }
 }

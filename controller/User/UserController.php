@@ -1,6 +1,7 @@
 <?php
 include_once('model/User.php');
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 class UserController
 {
 
@@ -41,8 +42,28 @@ class UserController
     {
         $result = $this->user->getUserByEmail($email);
         if (!$result) {
-            die("Failed to retrieve product list: " . $this->user->getConnection()->error);
+            die("Don't reviece info user: " . $this->user->getConnection()->error);
         }
         return $result;
+    }
+    //get user_id by email
+    public function getUserIdByEmailController($email)
+    {
+        $userId = $this->user->getUserIdByEmail($email);
+        if ($userId === null) {
+            die("No user found with email: $email");
+        }
+        return $userId;
+    }
+    //update user_name, email, number_phone, address, image
+    public function updateUserController($user_id, $user_name, $email, $number_phone, $address, $image)
+    {
+        $result = $this->user->updateUser($user_id, $user_name, $email, $number_phone, $address, $image);
+        if (!$result) {
+            die("Failed to update user: " . $this->user->getConnection()->error);
+        }
+        else{
+            return $result;
+        }
     }
 }
