@@ -1,7 +1,3 @@
-<?php 
-var_dump($_SESSION['date'])
-?>
-
 <!DOCTYPE html>
 <html lang="vi">
 

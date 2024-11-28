@@ -113,6 +113,21 @@ class User extends ConnectDatabase
         $stmt->close();
         return true;
     }
+    //update password by user_id
+    public function updatePassword($user_id, $password)
+    {
+        $query = "UPDATE signup SET password = ? WHERE user_id = ?";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Prepare statement failed: " . $this->conn->error);
+        }
+        $stmt->bind_param("si", $password, $user_id);
+        if (!$stmt->execute()) {
+            die("Execution failed: " . $stmt->error);
+        }
+        $stmt->close();
+        return true;
+    }
     
 
 }

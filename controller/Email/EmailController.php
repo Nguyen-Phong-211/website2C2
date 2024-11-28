@@ -166,4 +166,74 @@ class EmailController
             echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
         }
     }
+    function sendEmailUpdateInfoPasswordSuccess($emailAuthu)
+    {
+        $mail = new PHPMailer(true);
+
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $dateTimeUpdateInfo = date("d/m/Y H:i:s");
+
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'phongnguyen.050503@gmail.com';
+            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->CharSet = 'UTF-8';
+            $mail->Encoding = 'base64';
+
+            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->addAddress($emailAuthu);
+
+            $template = file_get_contents('view/page/email/success_update_password.html');
+            $template = str_replace('{{ dateTimeUpdateInfo }}', $dateTimeUpdateInfo, $template);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Thông báo từ hệ thống';
+            $mail->Body = $template;
+
+            $mail->send();
+
+        } catch (Exception $e) {
+            echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
+        }
+    }
+    function sendEmailUpdatePasswordOtp($emailAuthu)
+    {
+        $otp = rand(100000, 999999);
+        $_SESSION['otp'] = $otp;
+
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'phongnguyen.050503@gmail.com';
+            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->CharSet = 'UTF-8';
+            $mail->Encoding = 'base64';
+
+            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->addAddress($emailAuthu);
+
+            $template = file_get_contents('view/page/email/otp_updatepassword.html');
+            $template = str_replace('{{ otp }}', $_SESSION['otp'], $template);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Thông báo từ hệ thống';
+            $mail->Body = $template;
+
+            $mail->send();
+
+        } catch (Exception $e) {
+            echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
+        }
+    }
 }

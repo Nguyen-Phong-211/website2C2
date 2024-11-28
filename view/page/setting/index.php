@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <?php 
+    <?php
     include_once('view/layout/slidebar/slidebar.php');
     ?>
 
@@ -42,11 +42,11 @@
     <section class="container pb-4 my-4 text-black">
 
         <div class="profile-header text-center">
-        <?php
+            <?php
             include_once('controller/User/UserController.php');
             $userController = new UserController();
 
-            if(isset($_SESSION['email'])){
+            if (isset($_SESSION['email'])) {
                 $user = $userController->getUserByEmailController($_SESSION['email']);
 
                 if ($user) {
@@ -59,7 +59,7 @@
                 } else {
                     echo '<p>Không tìm thấy người dùng.</p>';
                 }
-            }else{
+            } else {
                 $user = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
 
                 if ($user) {
@@ -68,17 +68,17 @@
                     <h2>' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '</h2>
                     <p class="text-black">Email: ' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '</p>
                     ';
-                    if($user['number_phone'] === NULL){
+                    if ($user['number_phone'] === NULL) {
                         echo '<p class="text-black">Số điện thoại: Chưa cập nhật</p>';
-                    }else{
+                    } else {
                         echo '<p class="text-black">Số điện thoại: ' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '</p>';
                     }
                 } else {
                     echo '<p>Không tìm thấy người dùng.</p>';
                 }
             }
-            
-        ?>
+
+            ?>
 
         </div>
 
@@ -102,31 +102,31 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <?php
-                                    include_once('controller/User/UserController.php');
-                                    $userController = new UserController();
+                                include_once('controller/User/UserController.php');
+                                $userController = new UserController();
 
-                                    if(isset($_SESSION['email'])){
-                                        $user = $userController->getUserByEmailController($_SESSION['email']);
+                                if (isset($_SESSION['email'])) {
+                                    $user = $userController->getUserByEmailController($_SESSION['email']);
 
-                                        if ($user) {
-                                            echo '
+                                    if ($user) {
+                                        echo '
                                                 <div class="mb-3">
                                                     <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                                                    <input type="text" name="user_name" value="'. htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
+                                                    <input type="text" name="user_name" value="' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
                                                     <small class="valid-feedback" id="errorFullName"></small>
                                                 </div>
                                                 ';
-                                                if($user['date_of_birth'] != NULL){
-                                                    echo '
+                                        if ($user['date_of_birth'] != NULL) {
+                                            echo '
                                                     <div class="mb-3">
                                                         <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
-                                                        <input type="date" name="date" value="'. htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="dateUpdate">
+                                                        <input type="date" name="date" value="' . htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="dateUpdate">
                                                         <small class="valid-feedback" id="errorDate"></small>
                                                     </div>
                                                     
                                                     ';
-                                                }else{
-                                                    echo '
+                                        } else {
+                                            echo '
                                                     <div class="mb-3">
                                                         <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
                                                         <input type="date" name="date" class="form-control text-black border-color" id="dateUpdate">
@@ -134,79 +134,79 @@
                                                     </div>
                                                     
                                                     ';
-                                                }
-                                            echo '<div class="mb-3">
+                                        }
+                                        echo '<div class="mb-3">
                                                     <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                                                    <input type="email" name="email" value="'. htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
+                                                    <input type="email" name="email" value="' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
                                                     <small class="valid-feedback" id="errorEmail"></small>
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>
-                                                    <input type="text" name="number_phone" value="'. htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">
+                                                    <input type="text" name="number_phone" value="' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">
                                                     <small class="valid-feedback" id="errorPhone"></small>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label text-black">Địa chỉ<span class="text-danger">*</span></label>';
-                                                    
-                                                    $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
 
-                                                    echo '
-                                                    <input type="text" name="address" value="'. $address .'" class="form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
+                                        $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
+
+                                        echo '
+                                                    <input type="text" name="address" value="' . $address . '" class="form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
                                                     <small class="valid-feedback" id="errorAddress"></small>
                                                 </div>
                                             ';
-                                        }
-                                    }else{
-                                        $user = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
+                                    }
+                                } else {
+                                    $user = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
 
-                                        if ($user) {
-                                            echo '
+                                    if ($user) {
+                                        echo '
                                                 <div class="mb-3">
                                                     <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                                                    <input type="text" name="user_name" value="'. htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
+                                                    <input type="text" name="user_name" value="' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
                                                 </div>';
-                                                if($user['date_of_birth'] != NULL){
-                                                    echo '
+                                        if ($user['date_of_birth'] != NULL) {
+                                            echo '
                                                     <div class="mb-3">
                                                         <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
-                                                        <input type="date" name="date" value="'. htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="dateUpdate">
+                                                        <input type="date" name="date" value="' . htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="dateUpdate">
                                                     </div>
                                                     ';
-                                                }else{
-                                                    echo '
+                                        } else {
+                                            echo '
                                                     <div class="mb-3">
                                                         <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
                                                         <input type="date" name="date" class="form-control text-black border-color" id="dateUpdate">
                                                     </div>
                                                     ';
-                                                }
-                                            echo '<div class="mb-3">
+                                        }
+                                        echo '<div class="mb-3">
                                                     <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                                                    <input type="email" name="email" value="'. htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
+                                                    <input type="email" name="email" value="' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>';
-                                                    if($user['number_phone'] === NULL){
-                                                        echo '<input type="text" name="number_phone" value="" class="form-control text-black border-color" id="phone" placeholder="Chưa cập nhật số điện thoại">';
-                                                    }else{
-                                                        echo '<input type="text" name="number_phone" value="'. htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">';
-                                                    }
-                                            echo'</div>
+                                        if ($user['number_phone'] === NULL) {
+                                            echo '<input type="text" name="number_phone" value="" class="form-control text-black border-color" id="phone" placeholder="Chưa cập nhật số điện thoại">';
+                                        } else {
+                                            echo '<input type="text" name="number_phone" value="' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">';
+                                        }
+                                        echo '</div>
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label text-black">Địa chỉ<span class="text-danger">*</span></label>';
-                                                    
-                                                    $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
 
-                                                    echo '
-                                                    <input type="text" name="address" value="'. $address .'" class="form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
+                                        $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
+
+                                        echo '
+                                                    <input type="text" name="address" value="' . $address . '" class="form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
                                                 </div>
                                             ';
-                                        }
                                     }
+                                }
                                 ?>
                             </div>
-                            
+
                             <div class="col-lg-5">
                                 <div class="update-avatar">
                                     <label class="form-label text-black">Cập nhật hình đại diện</label>
@@ -217,26 +217,26 @@
                                 <div class="old-avatar mt-3 mb-2">
                                     <label for="old-avatar" class="form-label text-black">Ảnh đại diện trước đó</label> <br>
                                     <?php
-                                        include_once('controller/User/UserController.php');
-                                        $userController = new UserController();
+                                    include_once('controller/User/UserController.php');
+                                    $userController = new UserController();
 
-                                        if(isset($_SESSION['email'])){
-                                            $user = $userController->getUserByEmailController($_SESSION['email']);
+                                    if (isset($_SESSION['email'])) {
+                                        $user = $userController->getUserByEmailController($_SESSION['email']);
 
-                                            if ($user) {
-                                                echo '
+                                        if ($user) {
+                                            echo '
                                                 <img src="asset/image/user/' . htmlspecialchars($user['image'], ENT_QUOTES, 'UTF-8') . '" alt="Ảnh đại diện" height="170" width="170" class="img-fluid mx-auto d-block"> 
                                                 ';
-                                            }
-                                        }else{
-                                            $user = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
-
-                                            if ($user) {
-                                                echo '
-                                                <img src="asset/image/user/' . htmlspecialchars($user['image'], ENT_QUOTES, 'UTF-8') . '" alt="Ảnh đại diện" height="170" width="170" class="img-fluid mx-auto d-block"> 
-                                                ';
-                                            }
                                         }
+                                    } else {
+                                        $user = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
+
+                                        if ($user) {
+                                            echo '
+                                                <img src="asset/image/user/' . htmlspecialchars($user['image'], ENT_QUOTES, 'UTF-8') . '" alt="Ảnh đại diện" height="170" width="170" class="img-fluid mx-auto d-block"> 
+                                                ';
+                                        }
+                                    }
                                     ?>
                                 </div>
                             </div>
@@ -246,9 +246,8 @@
                         </div>
 
                     </form>
-                    <?php 
-                    if (isset($_REQUEST['btnUpdateInfoUser']) && $_REQUEST['btnUpdateInfoUser'] === "btnUpdateInfoUser")
-                    {
+                    <?php
+                    if (isset($_REQUEST['btnUpdateInfoUser']) && $_REQUEST['btnUpdateInfoUser'] === "btnUpdateInfoUser") {
                         include_once('controller/Email/EmailController.php');
                         $emailController = new EmailController();
 
@@ -263,12 +262,12 @@
                         $_SESSION['addressUserName'] = $_REQUEST['address'];
 
                         $emailController->sendEmailUpdateInfo($emailAuthu, $userNameAuthu);
-                        
+
                         if (isset($_FILES['imageUser']) && $_FILES['imageUser']['error'] == 0) {
 
                             $fileExtension = pathinfo($_FILES['imageUser']['name'], PATHINFO_EXTENSION);
                             $randomFileName = uniqid('user_', true) . '.' . $fileExtension;
-                            if(move_uploaded_file($_FILES['imageUser']['tmp_name'], "asset/image/user/" . $randomFileName)){
+                            if (move_uploaded_file($_FILES['imageUser']['tmp_name'], "asset/image/user/" . $randomFileName)) {
 
                                 $_SESSION['randomFileName'] = $randomFileName;
                                 sleep(2);
@@ -276,7 +275,7 @@
                                     window.location.href = "index.php?page=authu";
                                 </script>';
                             }
-                        }else{
+                        } else {
                             sleep(2);
                             echo '<script>
                                 window.location.href = "index.php?page=authu";
@@ -314,24 +313,60 @@
 
             <div class="tab-content mt-5" id="setting">
                 <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: auto;">
+
                     <form action="" method="post" class="form card p-4 w-100">
                         <h3 class="text-center mb-4">Cập nhật mật khẩu</h3>
                         <div class="mb-3">
-                            <label for="password" class="form-label text-black">Mật khẩu mới</label>
-                            <input type="password" class="form-control border-color text-black" id="password" placeholder="Nhập mật khẩu mới" required>
+                            <label for="password" class="form-label text-black">Mật khẩu mới<span class="text-danger">*</span></label>
+                            <input type="password" name="passwordUpdate" class="form-control border-color text-black" id="passwordUpdate" placeholder="Nhập mật khẩu mới">
                         </div>
                         <div class="mb-3">
-                            <label for="confirmPassword" class="form-label text-black">Xác nhận mật khẩu</label>
-                            <input type="password" class="form-control border-color text-black" id="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                            <label for="confirmPassword" class="form-label text-black">Xác nhận mật khẩu<span class="text-danger">*</span></label>
+                            <input type="password" name="passwordConfirm" class="form-control border-color text-black" id="confirmPasswordUpdate" placeholder="Xác nhận mật khẩu">
                         </div>
-                        <button type="submit" class="btn btn-outline-primary active w-100">Cập nhật mật khẩu</button>
+                        <button type="submit" id="btnUpdatePassword" name="btnUpdatePassword" value="btnUpdatePassword" class="btn btn-outline-primary active w-100">Cập nhật mật khẩu</button>
                     </form>
+
+                    <?php
+                    if(isset($_REQUEST['btnUpdatePassword'])){
+
+                        include_once('controller/Email/EmailController.php');
+                        $emailController = new EmailController();
+
+                        $_SESSION['passwordUpdate'] = $_REQUEST['passwordUpdate'];
+                        $_SESSION['passwordConfirm'] = $_REQUEST['passwordConfirm'];
+
+                        if(!empty($_REQUEST['passwordUpdate']) && !empty($_REQUEST['passwordConfirm']) && $_REQUEST['passwordUpdate'] === $_REQUEST['passwordConfirm'] && strlen($_REQUEST['passwordUpdate']) >= 8 && strlen($_REQUEST['passwordConfirm']) >= 8){
+
+                            if(isset($_SESSION['emailUserLoginGoogle'])){
+                                $emailController->sendEmailUpdatePasswordOtp($_SESSION['emailUserLoginGoogle']);
+
+                                sleep(2);
+                                echo '<script>
+                                    window.location.href = "index.php?page=changePassword";
+                                </script>';
+                            }else{
+                                $emailController->sendEmailUpdatePasswordOtp($_SESSION['email']);
+
+                                sleep(2);
+                                echo '<script>
+                                    window.location.href = "index.php?page=changePassword";
+                                </script>';
+                            }
+                            
+                        }else{
+                            echo '<script>alert("Mật khẩu không hợp lệ")</script>';
+                            
+                        }
+                    }
+                    ?>
+
                 </section>
             </div>
         </div>
     </section>
 
-    <?php 
+    <?php
     include_once('view/layout/header/button_backtotop.php');
     ?>
 

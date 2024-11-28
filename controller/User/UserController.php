@@ -66,4 +66,15 @@ class UserController
             return $result;
         }
     }
+    //update password by user_id
+    public function updatePasswordController($user_id, $password)
+    {
+        $result = $this->user->updatePassword($user_id, md5($password));
+        if (!$result) {
+            die("Failed to update password: " . $this->user->getConnection()->error);
+        }
+        else{
+            return $result;
+        }
+    }
 }
