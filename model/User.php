@@ -93,18 +93,18 @@ class User extends ConnectDatabase
         return $row;
     }
     //update user_name, email, number_phone, address, image
-    public function updateUser($user_id, $user_name, $email, $number_phone, $address, $image)
+    public function updateUser($user_id, $user_name, $email, $number_phone, $address, $image, $date_of_birth)
     {
         $query = "UPDATE users 
-                    SET user_name =?, email =?, number_phone =?, address =?, image =?
-                    WHERE user_id =?";
+                    SET user_name = ?, email = ?, number_phone = ?, address = ?, image = ?, date_of_birth = ?
+                    WHERE user_id = ?";
 
         $stmt = $this->conn->prepare($query);
         if ($stmt === false) {
             die("Prepare statement failed: ". $this->conn->error);
         }
 
-        $stmt->bind_param("sssssi", $user_name, $email, $number_phone, $address, $image, $user_id);
+        $stmt->bind_param("ssssssi", $user_name, $email, $number_phone, $address, $image, $date_of_birth, $user_id);
 
         if (!$stmt->execute()) {
             die("Execution failed: ". $stmt->error);

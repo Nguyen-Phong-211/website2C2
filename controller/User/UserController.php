@@ -56,9 +56,9 @@ class UserController
         return $userId;
     }
     //update user_name, email, number_phone, address, image
-    public function updateUserController($user_id, $user_name, $email, $number_phone, $address, $image)
+    public function updateUserController($user_id, $user_name, $email, $number_phone, $address, $image, $date_of_birth)
     {
-        $result = $this->user->updateUser($user_id, $user_name, $email, $number_phone, $address, $image);
+        $result = $this->user->updateUser($user_id, $user_name, $email, $number_phone, $address, $image, $date_of_birth);
         if (!$result) {
             die("Failed to update user: " . $this->user->getConnection()->error);
         }

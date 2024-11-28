@@ -55,7 +55,6 @@ class GoogleLoginController
                 if ($addUserLogin == true && $updateAvatar == true) {
                     $_SESSION['success_message'] = "Đăng nhập thành công!";
                     $_SESSION['emailUserLoginGoogle'] = $email;
-                    // $_SESSION['email'] = $email;
                     return true;
                 } else {
                     header("Location: index.php?page=login");
@@ -65,7 +64,6 @@ class GoogleLoginController
             }else{
                 $_SESSION['success_message'] = "Đăng nhập thành công!";
                 $_SESSION['emailUserLoginGoogle'] = $email;
-                // $_SESSION['email'] = $email;
                 return true;
             }
         } else {

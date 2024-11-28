@@ -1,23 +1,7 @@
-<?php
-if (isset($_REQUEST['btnUpdateInfoUser']) && $_REQUEST['btnUpdateInfoUser'] === "btnUpdateInfoUser") {
-    include_once('controller/Email/EmailController.php');
-    $emailController = new EmailController();
-
-    $emailAuthu = $_REQUEST['email'];
-    $userNameAuthu = $_REQUEST['user_name'];
-
-    $_SESSION['userName'] = $_REQUEST['user_name'];
-    $_SESSION['nameUserName'] = $_REQUEST['user_name'];
-    $_SESSION['emailUserName'] = $_REQUEST['email'];
-    $_SESSION['numberPhoneUserName'] = $_REQUEST['number_phone'];
-    $_SESSION['addressUserName'] = $_REQUEST['address'];
-    $_SESSION['imageUser'] = $_FILES['imageUser']['name'];
-    $_SESSION['imageUserError'] = $_FILES['imageUser']['error'];
-    $_SESSION['imageUserTmp'] = $_FILES['imageUser']['tmp_name'];
-
-    $emailController->sendEmailUpdateInfo($emailAuthu, $userNameAuthu);
-}
+<?php 
+var_dump($_SESSION['date'])
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -54,7 +38,6 @@ if (isset($_REQUEST['btnUpdateInfoUser']) && $_REQUEST['btnUpdateInfoUser'] === 
                     <input type="submit" value="Xác Nhận" name="btnSubmitOtp" class="btn btn-primary w-100">
                 </form>
                 <?php
-                var_dump($_SESSION);
                 if (isset($_REQUEST['btnSubmitOtp'])) {
 
                     $authuOtp = (int)$_REQUEST['authuOtp'];
@@ -67,45 +50,39 @@ if (isset($_REQUEST['btnUpdateInfoUser']) && $_REQUEST['btnUpdateInfoUser'] === 
 
                         if ($_SESSION['otp'] === $authuOtp) {
 
-                            if (isset($_FILES['imageUser']) && $_FILES['imageUser']['error'] == 0) {
+                            include_once('controller/Email/EmailController.php');
+                            $emailController = new EmailController();
 
-                                $targetDir = "asset/image/user/";
-                                $fileExtension = pathinfo($_FILES['imageUser']['name'], PATHINFO_EXTENSION);
-                                $randomFileName = uniqid('user_', true) . '.' . $fileExtension;
-                                $targetFile = $targetDir . $randomFileName;
+                            if (isset($_SESSION["randomFileName"])) {
 
-                                $updateInfoUser = $userController->updateUserController($user_id, $user_name, $email, $number_phone, $address, $randomFileName);
-
+                                $updateInfoUser = $userController->updateUserController( $user_id,$_SESSION['nameUserName'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], $_SESSION["randomFileName"], $_SESSION['date']);
+                                $_SESSION['email'] = $_SESSION['emailUserName'];
+                                $emailController->sendEmailUpdateInfoImageSuccess($_SESSION['emailUserName'], $_SESSION['nameUserName'], $_SESSION['date'],$_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName']);
+                                echo "
+                                <script>
+                                    alert('Cập nhật thông tin thành công!');
+                                    window.location.href = 'index.php?page=setting'
+                                </script>";
+                                unset($_SESSION["userName"], $_SESSION['nameUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], $_SESSION["randomFileName"], $_SESSION['otp']);
+                            } 
+                            else {
+                                $updateInfoUser = $userController->updateUserController( $user_id,$_SESSION['nameUserName'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], 'img-default.png', $_SESSION['date']);
                                 if ($updateInfoUser) {
-                                    if (move_uploaded_file($_FILES['imageUser']['tmp_name'], $targetFile)) {
-                                        echo "
-                                        <script>
-                                            alert('Upload thành công!');
-                                            window.location.href = 'index.php?page=setting'
-                                        </script>";
-                                        $_SESSION['email'] = $_REQUEST['email'];
-                                    }
-                                } else {
-                                    echo "<script>alert('Upload thất bại!')</script>";
-                                }
-                            } else {
-                                $updateInfoUser = $userController->updateUserController($user_id, $user_name, $email, $number_phone, $address, 'img-default.png');
-
-                                if ($updateInfoUser) {
-                                    $_SESSION['email'] = $_REQUEST['email'];
+                                    $_SESSION['email'] = $_SESSION['emailUserName'];
+                                    $emailController->sendEmailUpdateInfoSuccess($_SESSION['emailUserName'], $_SESSION['nameUserName'], $_SESSION['date'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName']);
                                     echo "
                                     <script>
-                                        alert('Upload thành công!');
-                                        window.location.href = 'index.php?page=setting#'
+                                        alert('Cập nhật thông tin thành công!');
+                                        window.location.href = 'index.php?page=setting'
                                     </script>";
-                                } else {
-                                    echo "<script>alert('Upload thất bại!')</script>";
                                 }
+                                unset( $_SESSION['emailUserName'], $_SESSION["userName"], $_SESSION['nameUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], $_SESSION['otp']);
                             }
                         } else {
                             echo "<script>alert('Mã OTP không hợp lệ hoặc chưa nhập!')</script>";
                         }
-                    }else{
+                    }
+                    else{
                         $user_id = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
 
                         if ($_SESSION['otp'] === $authuOtp) {
@@ -113,48 +90,30 @@ if (isset($_REQUEST['btnUpdateInfoUser']) && $_REQUEST['btnUpdateInfoUser'] === 
                             include_once('controller/Email/EmailController.php');
                             $emailController = new EmailController();
 
-                            //upload infomation user have image
-                            if (isset($_SESSION['imageUser']) && $_SESSION['imageUserError'] == 0) {
+                            if (isset($_SESSION["randomFileName"])) {
 
-                                $targetDir = "asset/image/user/";
-                                $fileExtension = pathinfo($_SESSION['imageUser'], PATHINFO_EXTENSION);
-                                $randomFileName = uniqid('user_', true) . '.' . $fileExtension;
-                                $targetFile = $targetDir . $randomFileName;
-
-                                $updateInfoUser = $userController->updateUserController( $user_id,$_SESSION['nameUserName'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], $randomFileName);
-
-                                if ($updateInfoUser) {
-                                    if (move_uploaded_file($_SESSION["imageUserTmp"], "asset/image/user/". $randomFileName)) {
-
-                                        $_SESSION['emailUserLoginGoogle'] = $_SESSION['emailUserName'];
-                                        $emailController->sendEmailUpdateInfoImageSuccess($_SESSION['emailUserName'], $_SESSION['nameUserName'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], $_SESSION['imageUser']);
-                                        echo "
-                                        <script>
-                                            alert('Cập nhật thông tin thành công!');
-                                            window.location.href = 'index.php?page=setting'
-                                        </script>";
-                                    }
-                                    else {
-                                        echo "<script>alert('Upload thất bại!')</script>";
-
-                                        var_dump($targetDir, $fileExtension, $randomFileName, $targetFile);
-                                        var_dump(move_uploaded_file($_SESSION["imageUserTmp"], "asset/image/user/". $randomFileName));
-                                        var_dump(file_exists($_SESSION["imageUserTmp"]));
-                                    }
-                                }
+                                $updateInfoUser = $userController->updateUserController( $user_id,$_SESSION['nameUserName'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], $_SESSION["randomFileName"], $_SESSION['date']);
+                                $_SESSION['emailUserLoginGoogle'] = $_SESSION['emailUserName'];
+                                $emailController->sendEmailUpdateInfoImageSuccess($_SESSION['emailUserName'], $_SESSION['nameUserName'], $_SESSION['date'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName']);
+                                echo "
+                                <script>
+                                    alert('Cập nhật thông tin thành công!');
+                                    window.location.href = 'index.php?page=setting'
+                                </script>";
+                                unset($_SESSION["userName"], $_SESSION['nameUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], $_SESSION["randomFileName"], $_SESSION['otp']);
                             } 
-                            //upload infomation user not image
                             else {
-                                $updateInfoUser = $userController->updateUserController( $user_id,$_SESSION['nameUserName'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], 'img-default.png');
+                                $updateInfoUser = $userController->updateUserController( $user_id,$_SESSION['nameUserName'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], 'img-default.png', $_SESSION['date']);
                                 if ($updateInfoUser) {
                                     $_SESSION['emailUserLoginGoogle'] = $_SESSION['emailUserName'];
-                                    $emailController->sendEmailUpdateInfoSuccess($_SESSION['emailUserName'], $_SESSION['nameUserName'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName']);
+                                    $emailController->sendEmailUpdateInfoSuccess($_SESSION['emailUserName'], $_SESSION['nameUserName'], $_SESSION['date'], $_SESSION['emailUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName']);
                                     echo "
                                     <script>
                                         alert('Cập nhật thông tin thành công!');
                                         window.location.href = 'index.php?page=setting'
                                     </script>";
                                 }
+                                unset( $_SESSION['emailUserName'], $_SESSION["userName"], $_SESSION['nameUserName'], $_SESSION['numberPhoneUserName'], $_SESSION['addressUserName'], $_SESSION['otp']);
                             }
                         } else {
                             echo "<script>alert('Mã OTP không hợp lệ hoặc chưa nhập!')</script>";

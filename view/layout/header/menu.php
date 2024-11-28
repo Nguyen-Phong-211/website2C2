@@ -10,7 +10,6 @@
                 </script>';
     }
 ?>
-
 <div class="container-fluid">
     <div class="row py-3 border-bottom">
         <div
@@ -154,12 +153,15 @@
                                 ?>">
                                 
                                 <?php 
-                                if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
-                                    include_once('controller/User/UserController.php');
-                                    $userController = new UserController();
+                                include_once('controller/User/UserController.php');
+                                $userController = new UserController();
 
+                                if(isset($_SESSION["emailUserLoginGoogle"]) && isset($_SESSION['success_message'])){
                                     $dataUsersLogin = $userController->getUserByEmailController($_SESSION['emailUserLoginGoogle']);
-
+                                    echo '<img src="asset/image/user/'. $dataUsersLogin['image'] .'" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">';
+                                    
+                                }elseif(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
+                                    $dataUsersLogin = $userController->getUserByEmailController($_SESSION['email']);
                                     echo '<img src="asset/image/user/'. $dataUsersLogin['image'] .'" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">';
                                 }else{
                                     echo '<img src="asset/image/user/img-default.png" alt="Ảnh mặc định" class="img-fluid me-2" style="width: 30px; height: 30px; border-radius: 50%;">';

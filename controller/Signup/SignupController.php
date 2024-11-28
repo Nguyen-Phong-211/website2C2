@@ -26,7 +26,7 @@ class SignupController
 
                 $_SESSION['success_message'] = "Đăng ký thành công!";
 
-                $_SESSION['fullName'] = $_REQUEST['fullname'];
+                $_SESSION['email'] = $email;
 
                 sleep(4);
                 header("Location: index.php?page=home");

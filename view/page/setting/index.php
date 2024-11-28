@@ -67,8 +67,12 @@
                     <img src="asset/image/user/' . htmlspecialchars($user['image'], ENT_QUOTES, 'UTF-8') . '" alt="Ảnh đại diện" class="img-fluid mb-3">
                     <h2>' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '</h2>
                     <p class="text-black">Email: ' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '</p>
-                    <p class="text-black">Số điện thoại: ' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '</p>
                     ';
+                    if($user['number_phone'] === NULL){
+                        echo '<p class="text-black">Số điện thoại: Chưa cập nhật</p>';
+                    }else{
+                        echo '<p class="text-black">Số điện thoại: ' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '</p>';
+                    }
                 } else {
                     echo '<p>Không tìm thấy người dùng.</p>';
                 }
@@ -93,7 +97,7 @@
 
             <div class="tab-content mt-5" id="info">
                 <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: auto;">
-                    <form action="index.php?page=authu" method="post" class="form p-4 w-100 card" enctype="multipart/form-data">
+                    <form action="" method="post" class="form p-4 w-100 card" enctype="multipart/form-data">
                         <h3 class="text-center mb-4">Cập nhật thông tin</h3>
                         <div class="row">
                             <div class="col-lg-7">
@@ -108,15 +112,39 @@
                                             echo '
                                                 <div class="mb-3">
                                                     <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                                                    <input type="text" name="user_name" value="'. htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="fullname" placeholder="Nhập họ và tên">
+                                                    <input type="text" name="user_name" value="'. htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
+                                                    <small class="valid-feedback" id="errorFullName"></small>
                                                 </div>
-                                                <div class="mb-3">
+                                                ';
+                                                if($user['date_of_birth'] != NULL){
+                                                    echo '
+                                                    <div class="mb-3">
+                                                        <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
+                                                        <input type="date" name="date" value="'. htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="dateUpdate">
+                                                        <small class="valid-feedback" id="errorDate"></small>
+                                                    </div>
+                                                    
+                                                    ';
+                                                }else{
+                                                    echo '
+                                                    <div class="mb-3">
+                                                        <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
+                                                        <input type="date" name="date" class="form-control text-black border-color" id="dateUpdate">
+                                                        <small class="valid-feedback" id="errorDate"></small>
+                                                    </div>
+                                                    
+                                                    ';
+                                                }
+                                            echo '<div class="mb-3">
                                                     <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                                                    <input type="email" name="email" value="'. htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="email" placeholder="Nhập địa chỉ email">
+                                                    <input type="email" name="email" value="'. htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
+                                                    <small class="valid-feedback" id="errorEmail"></small>
                                                 </div>
+
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>
-                                                    <input type="text" name="number_phone" value="'. htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="phone" placeholder="Nhập số điện thoại">
+                                                    <input type="text" name="number_phone" value="'. htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">
+                                                    <small class="valid-feedback" id="errorPhone"></small>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label text-black">Địa chỉ<span class="text-danger">*</span></label>';
@@ -124,7 +152,8 @@
                                                     $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
 
                                                     echo '
-                                                    <input type="text" name="address" value="'. $address .'" class="form-control text-black border-color" id="address" placeholder="Nhập địa chỉ">
+                                                    <input type="text" name="address" value="'. $address .'" class="form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
+                                                    <small class="valid-feedback" id="errorAddress"></small>
                                                 </div>
                                             ';
                                         }
@@ -135,23 +164,42 @@
                                             echo '
                                                 <div class="mb-3">
                                                     <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                                                    <input type="text" name="user_name" value="'. htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="fullname" placeholder="Nhập họ và tên">
-                                                </div>
-                                                <div class="mb-3">
+                                                    <input type="text" name="user_name" value="'. htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
+                                                </div>';
+                                                if($user['date_of_birth'] != NULL){
+                                                    echo '
+                                                    <div class="mb-3">
+                                                        <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
+                                                        <input type="date" name="date" value="'. htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="dateUpdate">
+                                                    </div>
+                                                    ';
+                                                }else{
+                                                    echo '
+                                                    <div class="mb-3">
+                                                        <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
+                                                        <input type="date" name="date" class="form-control text-black border-color" id="dateUpdate">
+                                                    </div>
+                                                    ';
+                                                }
+                                            echo '<div class="mb-3">
                                                     <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                                                    <input type="email" name="email" value="'. htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="email" placeholder="Nhập địa chỉ email">
+                                                    <input type="email" name="email" value="'. htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>
-                                                    <input type="text" name="number_phone" value="'. htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="phone" placeholder="Nhập số điện thoại">
-                                                </div>
+                                                    <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>';
+                                                    if($user['number_phone'] === NULL){
+                                                        echo '<input type="text" name="number_phone" value="" class="form-control text-black border-color" id="phone" placeholder="Chưa cập nhật số điện thoại">';
+                                                    }else{
+                                                        echo '<input type="text" name="number_phone" value="'. htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') .'" class="form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">';
+                                                    }
+                                            echo'</div>
                                                 <div class="mb-3">
                                                     <label for="address" class="form-label text-black">Địa chỉ<span class="text-danger">*</span></label>';
                                                     
                                                     $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
 
                                                     echo '
-                                                    <input type="text" name="address" value="'. $address .'" class="form-control text-black border-color" id="address" placeholder="Nhập địa chỉ">
+                                                    <input type="text" name="address" value="'. $address .'" class="form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
                                                 </div>
                                             ';
                                         }
@@ -194,9 +242,48 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" name="btnUpdateInfoUser" value="btnUpdateInfoUser" class="btn btn-outline-primary active">Lưu thay đổi</button>
+                            <button type="submit" name="btnUpdateInfoUser" value="btnUpdateInfoUser" id="btnUpdateInfoUser" class="btn btn-outline-primary active">Lưu thay đổi</button>
                         </div>
+
                     </form>
+                    <?php 
+                    if (isset($_REQUEST['btnUpdateInfoUser']) && $_REQUEST['btnUpdateInfoUser'] === "btnUpdateInfoUser")
+                    {
+                        include_once('controller/Email/EmailController.php');
+                        $emailController = new EmailController();
+
+                        $emailAuthu = $_REQUEST['email'];
+                        $userNameAuthu = $_REQUEST['user_name'];
+
+                        $_SESSION['userName'] = $_REQUEST['user_name'];
+                        $_SESSION['nameUserName'] = $_REQUEST['user_name'];
+                        $_SESSION['date'] = $_REQUEST['date'];
+                        $_SESSION['emailUserName'] = $_REQUEST['email'];
+                        $_SESSION['numberPhoneUserName'] = $_REQUEST['number_phone'];
+                        $_SESSION['addressUserName'] = $_REQUEST['address'];
+
+                        $emailController->sendEmailUpdateInfo($emailAuthu, $userNameAuthu);
+                        
+                        if (isset($_FILES['imageUser']) && $_FILES['imageUser']['error'] == 0) {
+
+                            $fileExtension = pathinfo($_FILES['imageUser']['name'], PATHINFO_EXTENSION);
+                            $randomFileName = uniqid('user_', true) . '.' . $fileExtension;
+                            if(move_uploaded_file($_FILES['imageUser']['tmp_name'], "asset/image/user/" . $randomFileName)){
+
+                                $_SESSION['randomFileName'] = $randomFileName;
+                                sleep(2);
+                                echo '<script>
+                                    window.location.href = "index.php?page=authu";
+                                </script>';
+                            }
+                        }else{
+                            sleep(2);
+                            echo '<script>
+                                window.location.href = "index.php?page=authu";
+                            </script>';
+                        }
+                    }
+                    ?>
                 </section>
             </div>
 

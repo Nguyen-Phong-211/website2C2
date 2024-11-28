@@ -86,7 +86,7 @@ class EmailController
             echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
         }
     }
-    function sendEmailUpdateInfoSuccess($emailAuthu, $userNameUpdate, $emailUpdate, $numberPhoneUpdate, $addressUpdate )
+    function sendEmailUpdateInfoSuccess($emailAuthu, $userNameUpdate, $emailUpdate, $dateOfBirth, $numberPhoneUpdate, $addressUpdate )
     {
         $mail = new PHPMailer(true);
 
@@ -111,6 +111,7 @@ class EmailController
             $template = file_get_contents('view/page/email/success_updateinfo.html');
             $template = str_replace('{{ dateTimeUpdateInfo }}', $dateTimeUpdateInfo, $template);
             $template = str_replace('{{ userNameUpdate }}', $userNameUpdate, $template);
+            $template = str_replace('{{ dateOfBirth }}', $dateOfBirth, $template);
             $template = str_replace('{{ emailUpdate }}', $emailUpdate, $template);
             $template = str_replace('{{ numberPhoneUpdate }}', $numberPhoneUpdate, $template);
             $template = str_replace('{{ addressUpdate }}', $addressUpdate, $template);
@@ -125,7 +126,7 @@ class EmailController
             echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
         }
     }
-    function sendEmailUpdateInfoImageSuccess($emailAuthu, $userNameUpdate, $emailUpdate, $numberPhoneUpdate, $addressUpdate, $imageUpdate )
+    function sendEmailUpdateInfoImageSuccess($emailAuthu, $userNameUpdate, $dateOfBirth, $emailUpdate, $numberPhoneUpdate, $addressUpdate)
     {
         $mail = new PHPMailer(true);
 
@@ -150,10 +151,10 @@ class EmailController
             $template = file_get_contents('view/page/email/success_updateinfo_image.html');
             $template = str_replace('{{ dateTimeUpdateInfo }}', $dateTimeUpdateInfo, $template);
             $template = str_replace('{{ userNameUpdate }}', $userNameUpdate, $template);
+            $template = str_replace('{{ dateOfBirth }}', $dateOfBirth, $template);
             $template = str_replace('{{ emailUpdate }}', $emailUpdate, $template);
             $template = str_replace('{{ numberPhoneUpdate }}', $numberPhoneUpdate, $template);
             $template = str_replace('{{ addressUpdate }}', $addressUpdate, $template);
-            $template = str_replace('{{ imageUpdate }}', $imageUpdate, $template);
 
             $mail->isHTML(true);
             $mail->Subject = 'Thông báo từ hệ thống';
