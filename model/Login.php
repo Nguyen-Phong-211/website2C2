@@ -18,7 +18,7 @@ class Login extends ConnectDatabase
         $stmt = $this->conn->prepare("SELECT s.email, s.password FROM signup AS s
                                                 JOIN users AS u ON s.user_id = u.user_id
                                                 JOIN roles AS r ON u.role_id = r.role_id
-                                            WHERE s.email = ? AND s.password = ?");
+                                            WHERE s.email = ? AND s.password = ? AND (r.role_id = u.role_id OR r.role_id = u.role_seller_id)");
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -33,7 +33,8 @@ class Login extends ConnectDatabase
     public function getUserName($email){
         $stmt = $this->conn->prepare("SELECT s.email, s.user_name FROM signup AS s
                                                 JOIN users AS u ON s.user_id = u.user_id
-                                            WHERE s.email =?");
+                                                JOIN roles AS r ON u.role_id = r.role_id
+                                            WHERE s.email = ? AND (r.role_id = u.role_id OR r.role_id = u.role_seller_id)");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();

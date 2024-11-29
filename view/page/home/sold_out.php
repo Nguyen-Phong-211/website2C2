@@ -204,16 +204,31 @@
                                                     </svg> Thêm vào giỏ hàng
                                                 </a>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-3">';
+                                            if($productSellOut['wstatus'] === NULL){
+                                                echo '
                                                 <form action="index.php?page=whistlist" method="post">
-                                                    <input type="hidden" name="productId" value="'. $productSellOut['product_id'] .'"> 
+                                                    <input type="hidden" name="productId" value="' . $productSellOut['product_id'] . '"> 
                                                     <button type="submit" name="action" value="add_to_wishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                                                             <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
                                                         </svg>
                                                     </button>
                                                 </form>
-                                            </div>
+                                                ';
+                                            }else{
+                                                echo '
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="whistlistId" value="'. $productSellOut['whistlist_id'] .'">
+                                                    <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                                ';
+                                            }    
+                            echo '          </div>
                                         </div>
                                     </div>
                                 </div>
@@ -221,535 +236,63 @@
                             ';
                         }
                     ?>
-
-                        
-
-                        <!-- <div class="product-item swiper-slide">
-                            <figure>
-                                <a href="index.html" title="Product Title">
-                                    <img src="images/product-thumb-1.png"
-                                        alt="Product Thumbnail" class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">Whole Wheat Sandwich Bread</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(222)</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>$24.00</del>
-                                    <span class="text-dark fw-semibold">$18.00</span>
-                                    <span
-                                        class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                        OFF</span>
-                                </div>
-                                <div class="button-area p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col-3"><input type="number" name="quantity"
-                                                class="form-control border-dark-subtle input-number quantity"
-                                                value="1"></div>
-                                        <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
-                                                </svg> Add to
-                                                Cart</a></div>
-                                        <div class="col-2"><a href="#"
-                                                class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#heart"></use>
-                                                </svg></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-item swiper-slide">
-                            <figure>
-                                <a href="index.html" title="Product Title">
-                                    <img src="images/product-thumb-21.png"
-                                        alt="Product Thumbnail" class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">Sunstar Fresh Melon Juice</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(222)</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>$24.00</del>
-                                    <span class="text-dark fw-semibold">$18.00</span>
-                                    <span
-                                        class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                        OFF</span>
-                                </div>
-                                <div class="button-area p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col-3"><input type="number" name="quantity"
-                                                class="form-control border-dark-subtle input-number quantity"
-                                                value="1"></div>
-                                        <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
-                                                </svg> Add to
-                                                Cart</a></div>
-                                        <div class="col-2"><a href="#"
-                                                class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#heart"></use>
-                                                </svg></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-item swiper-slide">
-                            <figure>
-                                <a href="index.html" title="Product Title">
-                                    <img src="images/product-thumb-22.png"
-                                        alt="Product Thumbnail" class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">Gourmet Dark Chocolate</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(222)</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>$24.00</del>
-                                    <span class="text-dark fw-semibold">$18.00</span>
-                                    <span
-                                        class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                        OFF</span>
-                                </div>
-                                <div class="button-area p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col-3"><input type="number" name="quantity"
-                                                class="form-control border-dark-subtle input-number quantity"
-                                                value="1"></div>
-                                        <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
-                                                </svg> Add to
-                                                Cart</a></div>
-                                        <div class="col-2"><a href="#"
-                                                class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#heart"></use>
-                                                </svg></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-item swiper-slide">
-                            <figure>
-                                <a href="index.html" title="Product Title">
-                                    <img src="images/product-thumb-23.png"
-                                        alt="Product Thumbnail" class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">Sunstar Fresh Melon Juice</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(222)</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>$24.00</del>
-                                    <span class="text-dark fw-semibold">$18.00</span>
-                                    <span
-                                        class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                        OFF</span>
-                                </div>
-                                <div class="button-area p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col-3"><input type="number" name="quantity"
-                                                class="form-control border-dark-subtle input-number quantity"
-                                                value="1"></div>
-                                        <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
-                                                </svg> Add to
-                                                Cart</a></div>
-                                        <div class="col-2"><a href="#"
-                                                class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#heart"></use>
-                                                </svg></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-item swiper-slide">
-                            <figure>
-                                <a href="index.html" title="Product Title">
-                                    <img src="images/product-thumb-10.png"
-                                        alt="Product Thumbnail" class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">Greek Style Plain Yogurt</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(222)</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>$24.00</del>
-                                    <span class="text-dark fw-semibold">$18.00</span>
-                                    <span
-                                        class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                        OFF</span>
-                                </div>
-                                <div class="button-area p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col-3"><input type="number" name="quantity"
-                                                class="form-control border-dark-subtle input-number quantity"
-                                                value="1"></div>
-                                        <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
-                                                </svg> Add to
-                                                Cart</a></div>
-                                        <div class="col-2"><a href="#"
-                                                class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#heart"></use>
-                                                </svg></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-item swiper-slide">
-                            <figure>
-                                <a href="index.html" title="Product Title">
-                                    <img src="images/product-thumb-11.png"
-                                        alt="Product Thumbnail" class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">Pure Squeezed No Pulp Orange
-                                    Juice</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(222)</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>$24.00</del>
-                                    <span class="text-dark fw-semibold">$18.00</span>
-                                    <span
-                                        class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                        OFF</span>
-                                </div>
-                                <div class="button-area p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col-3"><input type="number" name="quantity"
-                                                class="form-control border-dark-subtle input-number quantity"
-                                                value="1"></div>
-                                        <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
-                                                </svg> Add to
-                                                Cart</a></div>
-                                        <div class="col-2"><a href="#"
-                                                class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#heart"></use>
-                                                </svg></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-item swiper-slide">
-                            <figure>
-                                <a href="index.html" title="Product Title">
-                                    <img src="images/product-thumb-12.png"
-                                        alt="Product Thumbnail" class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">Fresh Oranges</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(222)</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>$24.00</del>
-                                    <span class="text-dark fw-semibold">$18.00</span>
-                                    <span
-                                        class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                        OFF</span>
-                                </div>
-                                <div class="button-area p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col-3"><input type="number" name="quantity"
-                                                class="form-control border-dark-subtle input-number quantity"
-                                                value="1"></div>
-                                        <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
-                                                </svg> Add to
-                                                Cart</a></div>
-                                        <div class="col-2"><a href="#"
-                                                class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#heart"></use>
-                                                </svg></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-item swiper-slide">
-                            <figure>
-                                <a href="index.html" title="Product Title">
-                                    <img src="images/product-thumb-13.png"
-                                        alt="Product Thumbnail" class="tab-image">
-                                </a>
-                            </figure>
-                            <div class="d-flex flex-column text-center">
-                                <h3 class="fs-6 fw-normal">Gourmet Dark Chocolate Bars</h3>
-                                <div>
-                                    <span class="rating">
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-full"></use>
-                                        </svg>
-                                        <svg width="18" height="18" class="text-warning">
-                                            <use
-                                                xlink:href="#star-half"></use>
-                                        </svg>
-                                    </span>
-                                    <span>(222)</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-center align-items-center gap-2">
-                                    <del>$24.00</del>
-                                    <span class="text-dark fw-semibold">$18.00</span>
-                                    <span
-                                        class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10%
-                                        OFF</span>
-                                </div>
-                                <div class="button-area p-3 pt-0">
-                                    <div class="row g-1 mt-2">
-                                        <div class="col-3"><input type="number" name="quantity"
-                                                class="form-control border-dark-subtle input-number quantity"
-                                                value="1"></div>
-                                        <div class="col-7"><a href="#"
-                                                class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#cart"></use>
-                                                </svg> Add to
-                                                Cart</a></div>
-                                        <div class="col-2"><a href="#"
-                                                class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg
-                                                    width="18" height="18">
-                                                    <use
-                                                        xlink:href="#heart"></use>
-                                                </svg></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
                     </div>
                 </div>
-                <!-- / products-carousel -->
-
             </div>
         </div>
     </div>
 </section>
+
+
+<?php
+    if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
+        include_once('controller/Whistlist/WhistlistController.php');
+
+        $whistlistController = new WhistlistController();
+
+        $result = $whistlistController->removeFromWhistlistController($_REQUEST['whistlistId']);
+        if ($result === true) {
+            $_SESSION['whistlist_success_message'] = true;
+        }
+    }
+    ?>
+    <!-- notification of whistlist is add product success -->
+    <?php if (isset($_SESSION['whistlist_success_message']) && $_SESSION['whistlist_success_message'] === true): ?>
+
+        <div class="modal fade border-color shadow-sm" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title font-monospace text-black" id="staticBackdropLabel">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#198753" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                            </svg>
+                            <small>
+                                Xoá sản phẩm khỏi danh sách yêu thích thành công!
+                            </small>
+                        </p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const modalElement = document.getElementById('staticBackdrop');
+                const modalInstance = new bootstrap.Modal(modalElement);
+
+                modalInstance.show();
+
+                setTimeout(() => {
+                    modalInstance.hide();
+                    window.location.href = "index.php?page=home";
+                }, 2000);
+            });
+        </script>
+
+        <?php
+        unset($_SESSION['whistlist_success_message']);
+        ?>
+
+    <?php endif; ?>
