@@ -12,7 +12,12 @@ class Product extends ConnectDatabase
     //get all product
     public function getAllProduct()
     {
-        $query = "SELECT * FROM products AND quantity >= 1";
+        $query = "SELECT *, w.status AS wstatus FROM products AS p 
+                    LEFT JOIN whistlists AS w ON p.product_id = w.product_id 
+                    LEFT JOIN reviews AS r ON p.product_id = r.product_id 
+                    LEFT JOIN ( SELECT product_id, image_name FROM images GROUP BY product_id ) AS i 
+                        ON i.product_id = p.product_id 
+                    WHERE p.quantity >= 1";
         $result = $this->conn->query($query);
 
         if ($result === false) {
@@ -182,5 +187,39 @@ class Product extends ConnectDatabase
             die("Query failed: ". $this->conn->error);
         }
         return $result;
+    }
+
+    //find product by price
+    public function findProductByPrice($priceFrom, $priceTo){
+        $stmt = $this->conn->prepare("SELECT 
+                                                p.*, 
+                                                w.status AS wstatus, 
+                                                i.image_name, 
+                                                r.content, 
+                                                r.rating_star, 
+                                                COUNT(r.review_id) AS total_reviews 
+                                            FROM 
+                                                products AS p
+                                            LEFT JOIN 
+                                                whistlists AS w ON p.product_id = w.product_id
+                                            LEFT JOIN 
+                                                reviews AS r ON p.product_id = r.product_id
+                                            LEFT JOIN 
+                                                (SELECT product_id, MIN(image_name) AS image_name FROM images GROUP BY product_id) AS i 
+                                                ON i.product_id = p.product_id
+                                            WHERE 
+                                                p.quantity >= 1 AND p.price BETWEEN ? AND ?
+                                            GROUP BY 
+                                                p.product_id, w.status, i.image_name");
+
+        $stmt->bind_param("ii", $priceFrom, $priceTo);
+        if ($stmt->execute()) {
+            $stmt->get_result();
+            $stmt->close();
+            return true;
+        } else {
+            echo "Error: " . $stmt->error;
+            return false;
+        }
     }
 }

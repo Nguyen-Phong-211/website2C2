@@ -77,4 +77,15 @@ class UserController
             return $result;
         }
     }
+    //check role of user
+    public function checkRoleController($userId)
+    {
+        $result = $this->user->checkRole($userId);
+        if (!$result) {
+            die("Failed to check role: " . $this->user->getConnection()->error);
+        }
+        else{
+            return $result;
+        }
+    }
 }

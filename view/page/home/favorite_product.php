@@ -190,7 +190,7 @@
                                         <span class="text-dark fw-semibold">'. number_format($dataFavorite['price'], 0, ',', '.') .' đồng</span>
                                         <span class="badge rounded fw-bold px-1 fs-7 lh-1 bg-warning text-black ms-2">';
                                         if($dataFavorite['discount'] != 0){
-                                            echo $dataFavorite['discount'] .'% OFF';
+                                            echo $dataFavorite['discount'] * 100 .'% OFF';
                                         }else{
                                             echo '<img src="asset/image/general/promotional.png" alt="" height="20" width="20" class="rounded-circle">';
                                         }

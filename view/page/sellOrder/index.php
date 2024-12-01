@@ -1,3 +1,10 @@
+<?php
+if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!isset($_SESSION['emailUserLoginGoogle']) && !isset($_SESSION['success_message']))) {
+    header('Location: index.php?page=login');
+    $_SESSION['info_login'] = "Thông báo đăng nhập.";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +42,10 @@
         <div class="container mt-5">
             <ul class="nav nav-tabs">
                 <li class="nav-item nav-tabs-item col-lg-2 text-center fw-bold">
-                    <a class="nav-link active" href="#" data-target="all-sell">Chờ xác nhận</a>
+                    <a class="nav-link active" href="#" data-target="all-sell">Tất cả</a>
+                </li>
+                <li class="nav-item nav-tabs-item col-lg-2 text-center fw-bold">
+                    <a class="nav-link" href="#" data-target="acepting">Chờ xác nhận</a>
                 </li>
                 <li class="nav-item nav-tabs-item col-lg-2 text-center fw-bold">
                     <a class="nav-link" href="#" data-target="processing">Đang xử lý</a>
@@ -52,6 +62,14 @@
             </ul>
 
             <div class="tab-content mt-5" id="all-sell">
+                <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
+                    <div class="text-center border border-3 rounded-circle">
+                        <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
+                        <label for="">Chưa có sản phẩm nào</label>
+                    </div>
+                </section>
+            </div>
+            <div class="tab-content mt-5" id="acepting">
                 <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
                     <div class="text-center border border-3 rounded-circle">
                         <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>

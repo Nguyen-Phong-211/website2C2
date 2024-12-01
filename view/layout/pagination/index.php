@@ -49,10 +49,14 @@
                             echo 'Chi tiết sản phẩm';
                             break;  
                         case 'product':
-                            echo '<a href="index.php?page=' . $page . '&idc='. $_REQUEST['idc'] .'" class="text-decoration-none"> Sản phẩm </a>';
+                            if (isset($_REQUEST['s_interface']) && $_REQUEST['s_interface'] == 1) {
+                                echo '<a href="index.php?page=' . $page . '&s_interface=1" class="text-decoration-none"> Khám phá danh mục </a>';
+                            } else {
+                                echo '<a href="index.php?page=' . $page . '&idc=' . $_REQUEST['idc'] . '" class="text-decoration-none"> Sản phẩm </a>';
+                            }
                             break; 
                         default:
-                            # code...
+                            echo '<a href="" class="text-decoration-none"> Khám phá </a>';
                             break;
                     }
                 ?>

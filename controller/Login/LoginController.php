@@ -17,8 +17,7 @@ class LoginController
         if ($result) {
 
             $_SESSION['email'] = $result['email'];
-            $_SESSION['role'] = $result['role'];
-            // $_SESSION['login'] = 1;
+            $_SESSION['role'] = "buyer";
 
             $_SESSION['success_message'] = "Đăng nhập thành công!";
 

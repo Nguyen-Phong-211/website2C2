@@ -30,28 +30,31 @@
 
                 <h5>Tìm theo giá</h5>
 
-                <form action method="post">
+                <?php 
+                    if(isset($_POST['btnSubmitPrice'])){
+                        $fromPrice = $_POST['fromPrice'];
+                        $toPrice = $_POST['toPrice'];
+                        if(empty($fromPrice) && empty($toPrice)){
+                            echo '<div class="alert alert-danger mt-3" role="alert">
+                                    <small class="font-monospace">Vui lòng nhập đủ cả hai trường From và To</small>
+                                </div>';
+                        }
+                    } 
+                ?>
+
+                <form action="" method="post">
 
                     <div class="input-group mb-3">
-                        <input type="text"
-                            class="form-control border-1 border-color"
-                            placeholder="From"
-                            aria-label="Username">
+                        <input type="text" name="fromPrice" class="form-control border-1 border-color"  placeholder="From" aria-label="price">
                         <span class="input-group-text border-color bg-light">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16"
-                                fill="currentColor"
-                                class="bi bi-arrow-right-circle"
-                                viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#6bb252" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
                             </svg>
                         </span>
-                        <input type="text" class="form-control border-color" placeholder="To" aria-label="Server">
+                        <input type="text" name="toPrice" class="form-control border-color" placeholder="To" aria-label="Server">
                     </div>
 
-                    <button type="button" value="" class="btn btn-primary w-100">
+                    <button type="submit" name="btnSubmitPrice" value="btnSubmitPrice" class="btn btn-primary w-100">
                         Áp dụng
                     </button>
                 </form>
@@ -63,55 +66,25 @@
 
                 <h5>Tìm theo đánh giá</h5>
 
-                <form action method="post">
+                <form action="" method="post">
 
                     <div class="form-check">
                         <input class="form-check-input border-color" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
                         <label class="form-check-label" for="flexRadioDefault5">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16"
-                                fill="#ffd700"
-                                class="bi bi-star-fill"
-                                viewBox="0 0 16 16">
-                                <path
-                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                             </svg>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16"
-                                fill="#ffd700"
-                                class="bi bi-star-fill"
-                                viewBox="0 0 16 16">
-                                <path
-                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                             </svg>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16"
-                                fill="#ffd700"
-                                class="bi bi-star-fill"
-                                viewBox="0 0 16 16">
-                                <path
-                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                             </svg>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16"
-                                fill="#ffd700"
-                                class="bi bi-star-fill"
-                                viewBox="0 0 16 16">
-                                <path
-                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                             </svg>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16"
-                                fill="#ffd700"
-                                class="bi bi-star-fill"
-                                viewBox="0 0 16 16">
-                                <path
-                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700"  viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                             </svg>
                         </label>
                     </div>
@@ -119,14 +92,8 @@
                     <div class="form-check">
                         <input class="form-check-input border-color" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
                         <label class="form-check-label" for="flexRadioDefault4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16"
-                                fill="#ffd700"
-                                class="bi bi-star-fill"
-                                viewBox="0 0 16 16">
-                                <path
-                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                             </svg>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

@@ -17,7 +17,7 @@
             foreach ($categories as $category) {
                 echo '
                     <li class="nav-item border-dashed active">
-                        <a href="index.php?page=category&idc=' . $category['category_id'] . '"
+                        <a href="index.php?page=product&idc=' . $category['category_id'] . '"
                             class="nav-link d-flex align-items-center gap-3 text-dark p-2">';
                 if ($category['category_id'] == 1) {
                     echo '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-car-front" viewBox="0 0 16 16">

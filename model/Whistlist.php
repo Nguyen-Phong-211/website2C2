@@ -96,4 +96,21 @@ class Whistlist extends ConnectDatabase
         $stmt->close();
         return $result;
     }
+    //check product in whistlist by user_id at page detailProduct
+    public function checkProductInWhistlist($productId, $userId){
+        $query = "SELECT w.*
+                    FROM whistlists AS w
+                    WHERE w.product_id = ? AND w.user_id = ?
+                    ";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Prepare failed: " . $this->conn->error);
+        }
+        $stmt->bind_param("ii", $productId, $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $exists = $result->num_rows > 0;
+        $stmt->close();
+        return $exists;
+    }
 }

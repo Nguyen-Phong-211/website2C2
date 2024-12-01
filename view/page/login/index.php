@@ -1,3 +1,41 @@
+<!-- notification of login must be login -->
+<?php if (isset($_SESSION['info_login']))?>
+
+<div class="modal fade border-color shadow-sm" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title font-monospace text-black" id="staticBackdropLabel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#dc3444" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg>
+                    <small>
+                        Cần đăng nhập để sử dụng các chức năng của chúng tôi!
+                    </small>
+                </p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modalElement = document.getElementById('staticBackdrop');
+        const modalInstance = new bootstrap.Modal(modalElement);
+
+        modalInstance.show();
+
+        setTimeout(() => {
+            modalInstance.hide();
+        }, 2000);
+    });
+</script>
+
+<?php
+unset($_SESSION['info_login']);
+?>
+
 
 <?php
 

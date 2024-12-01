@@ -128,6 +128,20 @@ class User extends ConnectDatabase
         $stmt->close();
         return true;
     }
-    
-
+    //check role of user
+    public function checkRole($userId){
+        $query = "SELECT role_seller_id FROM users AS u JOIN roles AS r ON u.role_seller_id = r.role_id WHERE user_id = ?";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Prepare statement failed: " . $this->conn->error);
+        }
+        $stmt->bind_param("i", $userId);
+        if (!$stmt->execute()) {
+            die("Execution failed: " . $stmt->error);
+        }
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        return $row;
+    }
 }

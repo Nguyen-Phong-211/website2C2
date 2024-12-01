@@ -183,7 +183,7 @@
 
                                             <span class="badge rounded fw-bold px-1 fs-7 lh-1 bg-warning text-black ms-2">';
                         if ($data['discount'] != 0) {
-                            echo $data['discount'] . '% OFF';
+                            echo $data['discount'] * 100 . '% OFF';
                         } else {
                             echo '<img src="asset/image/general/promotional.png" alt="" height="20" width="20" class="rounded-circle">';
                         }

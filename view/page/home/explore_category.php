@@ -8,7 +8,19 @@
                     <h2 class="section-title">Khám phá danh mục</h2>
 
                     <div class="d-flex align-items-center">
-                        <a href="#" class="btn btn-primary me-2">Xem tất cả</a>
+
+                        <form action="" method="post">
+                            <button type="submit" name="btnViewAllCategory" value="btnViewAllCategory" class="btn btn-primary me-2">Xem tất cả</button>
+                            <?php 
+                            if(isset($_POST['btnViewAllCategory']) && $_POST['btnViewAllCategory'] === "btnViewAllCategory"){
+                                $_SESSION['viewCategory'] = "btnViewAllCategory";
+                                echo '<script>
+                                        window.location.href = "index.php?page=product&s_interface=1"
+                                    </script>';
+                            }
+                            ?>
+                        </form>
+                        
                         <div class="swiper-buttons">
                             <button
                                 class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>

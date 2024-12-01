@@ -98,4 +98,13 @@ class ProductController
         }
         return $result;
     }
+    //find product by price
+    public function findProductByPriceController($priceFrom, $priceTo){
+        $result = $this->product->findProductByPrice($priceFrom, $priceTo);
+
+        if (!$result) {
+            die("Failed to retrieve product list: " . $this->product->getConnection()->error);
+        }
+        return $result;
+    }
 }
