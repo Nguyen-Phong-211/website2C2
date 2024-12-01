@@ -14,7 +14,7 @@ class Login extends ConnectDatabase
     //Login
     public function loginUser($email, $password)
     {
-        $stmt = $this->conn->prepare("SELECT s.email, s.password FROM signup AS s
+        $stmt = $this->conn->prepare("SELECT s.email, s.password ,s.user_id FROM signup AS s
                                                 JOIN users AS u ON s.user_id = u.user_id
                                                 JOIN roles AS r ON u.role_id = r.role_id
                                             WHERE s.email = ? AND s.password = ?");

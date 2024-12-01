@@ -46,7 +46,11 @@
                     <hr class="flex-grow-1">
                 </div>
                 <button type="button" class="btn btn-outline-secondary w-100">
+<<<<<<< Updated upstream
                     <img src="asset/image/logo/logo-google.png"/> Đăng nhập bằng Google
+=======
+                    <img src="asset/image/logo/logo-google.png" /> Đăng ký bằng Google
+>>>>>>> Stashed changes
                 </button>
             </form>
         </div>

@@ -238,7 +238,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?page=cart" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Giỏ hàng">
+                    <a href="index.php?page=cart" class="p-2 mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Giỏ hàng"
+                     onclick="checkLogin(event)">
                         <?php  
                             include_once('controller/Cart/CartController.php');
                             $cartController = new CartController();
@@ -282,4 +283,7 @@
             </ul>
         </div>
     </div>
+    <?php
+        include_once('script.php');
+    ?>
 </div>

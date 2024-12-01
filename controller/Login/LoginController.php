@@ -15,7 +15,7 @@ class LoginController
         $result = $this->loginModel->loginUser($email, $password);
 
         if ($result) {
-
+            $_SESSION['user_id'] = $result['user_id'];
             $_SESSION['email'] = $result['email'];
             $_SESSION['role'] = $result['role'];
             // $_SESSION['login'] = 1;

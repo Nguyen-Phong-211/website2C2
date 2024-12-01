@@ -6,6 +6,10 @@
 
     <?php
     include_once('view/layout/header/lib_cdn.php');
+    if (!isset($_SESSION['user_id'])) { 
+        header("Location: index.php?page=home");
+        exit;
+    }
     ?>
 
 </head>
@@ -234,40 +238,69 @@
             <label for="">Chưa có sản phẩm nào</label>
         </div>
     </section> -->
-
-
-
+    <?php
+    include_once('controller/Cart/CartController.php');
+    // Khởi tạo controller và gọi hàm index
+    $cartController = new CartController();
+    $totalProducts = $cartController->getProductCount(); 
+   
+    if ($totalProducts > 0) {
+        $cartItems = $cartController->getProductofCartList();
+    ?>
 
     <section class="container pb-4 my-4">
-        <div class="container mt-5">
+        <div class="container mt-2">
             <table class="table text-black">
                 <thead>
                     <tr class="">
-                        <th scope="col">Sản phẩm</th>
+                        <th scope="col" class="text-center">Sản phẩm</th>
+                        <th scope="col" class="text-center">Tên sản phẩm</th>
                         <th scope="col">Giá</th>
                         <th scope="col">Số lượng</th>
-                        <th scope="col">Thành tiền</th>
-                        <th scope="col">Tình trạng</th>
-                        <th scope="col">Thao tác</th>
+                        <th scope="col" class="text-center">Thành tiền</th>
+                        <th scope="col" class="text-center">Tình trạng</th>
+                        <th scope="col" class="text-center">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php 
+                    foreach ($cartItems as $item): 
+                        $productImage = $item['image'];
+                        $productPrice = $item['price'];  // Lấy giá sản phẩm
+                        $quantity = $item['quantity'];   // Lấy số lượng
+                        $totalPrice = $productPrice * $quantity; // Tính thành tiền
+                        $productStatus = $item['status']; // Lấy tình trạng sản phẩm
+                ?>
                     <tr>
-                        <td>
-                            <img src="images/product-thumb-1.png" alt="Hình ảnh sản phẩm" class="img-fluid tab-image">
-                        </td>
-                        <td>45.000 đồng</td>
-                        <td>
-                            <input type="number" class="form-control" value="1" min="1" style="width: 80px;">
+                        <td class="text-center">
+                        <img src="asset/image/product/<?= htmlspecialchars($productImage); ?>" alt="Hình ảnh sản phẩm"
+                        style="width: 100px; height: 100px;">
                         </td>
                         <td class="text-center">
-                            45.000 đồng
-                        </td>
-                        <td>
-                            <span class="badge bg-primary">Còn hàng</span>
+                        <?= $item['product_name'] ?> 
+                        </td class="text-center">
+                        <td><?= number_format($productPrice, 0, ',', '.') ?> đồng</td>
+                        <td class="text-center">
+                            <input type="number" class="form-control" value="<?= $quantity ?>" min="1" style="width: 80px;"
+                            onchange="updateCartQuantity(<?= $item['product_id'] ?>, this.value)">
                         </td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-danger active" style="background-color: rgb(255, 87, 87); color: white;">
+                        <span id="total-price-<?= $item['product_id'] ?>">
+                            <?= number_format($totalPrice, 0, ',', '.') ?> đồng
+                            </span>
+                        </td>
+                        <td class="text-center">
+                        <?php
+                            if ($productStatus == 1) {
+                                echo '<span class="badge bg-primary">Còn hàng</span>';
+                            } else {
+                                echo '<span class="badge bg-secondary">Hết hàng</span>';
+                            }
+                            ?>
+                        </td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-danger active" style="background-color: rgb(255, 87, 87); color: white;"
+                            onclick="confirmDelete(<?= $item['product_id'] ?>)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
                                 </svg>
@@ -275,60 +308,28 @@
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <img src="images/product-thumb-1.png" alt="Hình ảnh sản phẩm" class="img-fluid tab-image">
-                        </td>
-                        <td>45.000 đồng</td>
-                        <td>
-                            <input type="number" class="form-control" value="1" min="1" style="width: 80px;">
-                        </td>
-                        <td class="text-center">
-                            45.000 đồng
-                        </td>
-                        <td>
-                            <span class="badge bg-primary">Còn hàng</span>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-danger active" style="background-color: rgb(255, 87, 87); color: white;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                                </svg>
-                                Xóa
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="images/product-thumb-1.png" alt="Hình ảnh sản phẩm" class="img-fluid tab-image">
-                        </td>
-                        <td>45.000 đồng</td>
-                        <td>
-                            <input type="number" class="form-control" value="1" min="1" style="width: 80px;">
-                        </td>
-                        <td class="text-center">
-                            45.000 đồng
-                        </td>
-                        <td>
-                            <span class="badge bg-primary">Còn hàng</span>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-danger active" style="background-color: rgb(255, 87, 87); color: white;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                                </svg>
-                                Xóa
-                            </button>
-                        </td>
-                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </section>
+    <?php
+} else {
+    echo '<div class="container mt-5">
+    <div class="alert alert-warning alert-dismissible fade show mx-auto text-center" style="max-width: 600px;" role="alert">
+        <strong  style="font-size: 20px; font-weight: bold;">Không có sản phẩm nào trong giỏ hàng.</strong>
+    </div>
+    <div class="text-center">
+        <a href="index.php" class="btn btn-lg btn-primary">Quay lại trang chủ</a>
+    </div>
+  </div>';
+}
+?>
 
 
-
-
+    <?php
+        include_once('script.php');
+    ?>
     <?php
     include_once('view/layout/footer/footer.php');
     ?>

@@ -1,4 +1,4 @@
-<section style="background-image: url('images/banner-1.jpg');background-repeat: no-repeat;background-size: cover;">
+<section style="background-image: url(''); background-repeat: no-repeat; background-size: 100;">
     <div class="container-lg">
         <div class="row">
             <div class="col-lg-6 pt-5 mt-5">
