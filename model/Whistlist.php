@@ -10,16 +10,49 @@ class Whistlist extends ConnectDatabase
         $this->conn = $this->getConnection();
     }
     //count product in whistlist
-    public function countProductInWhistlist()
+    public function countProductInWhistlistRole($userId)
     {
-        $query = "SELECT COUNT(*) as total FROM whistlists";
-        $result = $this->conn->query($query);
+        $query = "SELECT COUNT(*) as total FROM whistlists AS w WHERE w.user_id = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Prepare failed: " . $this->conn->error);
+        }
+        $stmt->bind_param("i", $userId);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
 
         if ($result === false) {
             die("Query failed: " . $this->conn->error);
         }
 
-        return $result->fetch_assoc()['total'];
+        $data = $result->fetch_assoc();
+        $stmt->close(); 
+
+        return $data['total'] ?? 0; 
+    }
+    public function countProductInWhistlist()
+    {
+        $query = "SELECT COUNT(*) as total FROM whistlists";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Prepare failed: " . $this->conn->error);
+        }
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result === false) {
+            die("Query failed: " . $this->conn->error);
+        }
+
+        $data = $result->fetch_assoc();
+        $stmt->close(); 
+
+        return $data['total'] ?? 0; 
     }
     //add product to whistlist
     public function addToWhistlist($productId, $userId)

@@ -38,13 +38,6 @@
     include_once('view/layout/pagination/index.php');
     ?>
 
-    <!-- <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
-        <div class="text-center border border-3 rounded-circle">
-            <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
-            <label for="">Chưa có sản phẩm nào</label>
-        </div>
-    </section> -->
-
     <section class="container pb-4 my-4 text-black">
 
         <div class="profile-header text-center">

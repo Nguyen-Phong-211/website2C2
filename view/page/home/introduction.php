@@ -57,12 +57,7 @@
                         <div class="row text-dark">
                             <div class="col-auto">
                                 <p class="fs-1 fw-bold lh-sm mb-0">
-                                    <?php
-                                    include_once('controller/User/UserController.php');
-                                    $userController = new UserController();
-
-                                    echo $userController->countRoleSellerController();
-                                    ?>K+
+                                    24K+
                                 </p>
                             </div>
                             <div class="col">

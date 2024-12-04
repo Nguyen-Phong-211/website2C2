@@ -26,7 +26,7 @@ class User extends ConnectDatabase
     //count role seller
     public function countRoleSeller()
     {
-        $query = "SELECT COUNT(role_seller_id) as count_seller FROM users";
+        $query = "SELECT COUNT(role_seller_id) AS count_seller FROM users AS u JOIN roles AS r ON r.role_id = u.role_seller_id";
         $result = $this->conn->query($query);
 
         if ($result === false) {

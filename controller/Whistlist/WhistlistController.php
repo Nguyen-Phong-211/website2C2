@@ -10,6 +10,10 @@ class WhistlistController
         $this->whistlist = new Whistlist();
     }
     //count product in whistlist
+    public function countProductInWhistlistControllerRole($userId)
+    {
+        return $this->whistlist->countProductInWhistlistRole($userId);
+    }
     public function countProductInWhistlistController()
     {
         return $this->whistlist->countProductInWhistlist();

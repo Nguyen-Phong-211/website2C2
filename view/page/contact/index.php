@@ -59,16 +59,16 @@
                         echo '
                         <div class="mb-4">
                             <label for="first_name" class="form-label">Họ và tên<span class="text-danger">*</span></label>
-                            <input type="text" class="text-black form-control input-form-contact border-color" id="first_name" name="userName" placeholder="Nhập họ và tên của bạn" value="' . $user["user_name"] . '">
+                            <input readonly type="text" class="text-black form-control input-form-contact border-color" id="first_name" name="userName" placeholder="Nhập họ và tên của bạn" value="' . $user["user_name"] . '">
                         </div>
                         <div class="mb-4 row">
                             <div class="col">
                                 <label for="email_addr" class="form-label">Địa chỉ Email<span class="text-danger">*</span></label>
-                                <input type="email" class="text-black form-control input-form-contact border-color" id="email_addr" name="email" placeholder="name@example.com" value="' . $user["email"] . '">
+                                <input readonly type="email" class="text-black form-control input-form-contact border-color" id="email_addr" name="email" placeholder="name@example.com" value="' . $user["email"] . '">
                             </div>
                             <div class="col">
                                 <label for="phone_input" class="form-label">Số điện thoại<span class="text-danger">*</span></label>
-                                <input type="tel" class="text-black form-control input-form-contact border-color" id="phone_input" name="phone" placeholder="Số điện thoại" value="' . $user["number_phone"] . '">
+                                <input readonly type="tel" class="text-black form-control input-form-contact border-color" id="phone_input" name="phone" placeholder="Số điện thoại" value="' . $user["number_phone"] . '">
                             </div>
                         </div>
                         ';
@@ -80,16 +80,16 @@
                         echo '
                         <div class="mb-4">
                             <label for="first_name" class="form-label">Họ và tên<span class="text-danger">*</span></label>
-                            <input type="text" class="text-black form-control input-form-contact border-color" id="first_name" name="userName" placeholder="Nhập họ và tên của bạn" value="' . $user["user_name"] . '">
+                            <input readonly type="text" class="text-black form-control input-form-contact border-color" id="first_name" name="userName" placeholder="Nhập họ và tên của bạn" value="' . $user["user_name"] . '">
                         </div>
                         <div class="mb-4 row">
                             <div class="col">
                                 <label for="email_addr" class="form-label">Địa chỉ Email<span class="text-danger">*</span></label>
-                                <input type="email" class="text-black form-control input-form-contact border-color" id="email_addr" name="email" placeholder="name@example.com" value="' . $user["email"] . '">
+                                <input readonly type="email" class="text-black form-control input-form-contact border-color" id="email_addr" name="email" placeholder="name@example.com" value="' . $user["email"] . '">
                             </div>
                             <div class="col">
                                 <label for="phone_input" class="form-label">Số điện thoại<span class="text-danger">*</span></label>
-                                <input type="tel" class="text-black form-control input-form-contact border-color" id="phone_input" name="phone" placeholder="Số điện thoại" value="' . $user["number_phone"] . '">
+                                <input readonly type="tel" class="text-black form-control input-form-contact border-color" id="phone_input" name="phone" placeholder="Số điện thoại" value="' . $user["number_phone"] . '">
                             </div>
                         </div>
                         ';

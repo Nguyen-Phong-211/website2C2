@@ -85,32 +85,11 @@ if (isset($_REQUEST['productId']) && isset($_SESSION['email']) && isset($_SESSIO
     include_once('view/layout/pagination/index.php');
     ?>
 
-
-    <!-- <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
-        <div class="text-center border border-3 rounded-circle">
-            <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
-            <label for="">Chưa có sản phẩm nào</label>
-        </div>
-    </section> -->
-
-
-    <?php
-
-
-    ?>
     <section class="container pb-4 my-4 text-black">
         <div class="container mt-5">
-            <table class="table table-borderless">
-                <tr class="text-black text-uppercase fw-bold">
-                    <td>Sản phẩm</td>
-                    <td></td>
-                    <td>Số lượng</td>
-                    <td>Giá</td>
-                    <td>Thành tiền</td>
-                    <td>Trạng thái</td>
-                    <td>Thao tác</td>
-                </tr>
 
+            <table class="table table-borderless">
+                
                 <?php
                 include_once('controller/Whistlist/WhistlistController.php');
                 include_once('controller/User/UserController.php');
@@ -120,61 +99,104 @@ if (isset($_REQUEST['productId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                 if (isset($_SESSION['email'])) {
                     $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
+                    $countWhistlistRole = $whistlistController->countProductInWhistlistControllerRole($getUserId);
 
-                    $dataWhistlistUsers = $whistlistController->getAllWhistlistByUserIdController($getUserId);
+                    if($countWhistlistRole != 0){
+                        $dataWhistlistUsers = $whistlistController->getAllWhistlistByUserIdController($getUserId);
 
-                    foreach ($dataWhistlistUsers as $dataWhistlistUser) {
+                        echo '<tr class="text-black text-uppercase fw-bold">
+                                <td>Sản phẩm</td>
+                                <td></td>
+                                <td>Số lượng</td>
+                                <td>Giá</td>
+                                <td>Thành tiền</td>
+                                <td>Trạng thái</td>
+                                <td>Thao tác</td>
+                            </tr>';
+
+                        foreach ($dataWhistlistUsers as $dataWhistlistUser) {
+                            echo '
+                            <tr class="text-black">
+                                <td><img src="asset/image/product/' . $dataWhistlistUser['image_name'] . '" alt="' . $dataWhistlistUser['product_name'] . '" height="50" width="50" class="img-fluid"></td>
+                                <td>' . $dataWhistlistUser['product_name'] . '</td>
+                                <td>1</td>
+                                <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
+                                <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
+                                <td>
+                                    <span class="badge bg-primary">Còn hàng</span>
+                                </td>
+                                <td>
+                                    <form method="POST" action="index.php?page=whistlist">
+                                        <input type="hidden" name="whistListInput" value="' . $dataWhistlistUser['whistlist_id'] . '"> 
+                                        <button name="btnDeleteWhistlist" type="submit" class="btn btn-danger text-white" style="background-color: #dc3444">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                            </svg>&nbsp;Xoá
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            ';
+                        }
+                    }else{
                         echo '
-                        <tr class="text-black">
-                            <td><img src="asset/image/product/' . $dataWhistlistUser['image_name'] . '" alt="' . $dataWhistlistUser['product_name'] . '" height="50" width="50" class="img-fluid"></td>
-                            <td>' . $dataWhistlistUser['product_name'] . '</td>
-                            <td>1</td>
-                            <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
-                            <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
-                            <td>
-                                <span class="badge bg-primary">Còn hàng</span>
-                            </td>
-                            <td>
-                                <form method="POST" action="index.php?page=whistlist">
-                                    <input type="hidden" name="whistListInput" value="' . $dataWhistlistUser['whistlist_id'] . '"> 
-                                    <button name="btnDeleteWhistlist" type="submit" class="btn btn-danger text-white" style="background-color: #dc3444">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                                        </svg>&nbsp;Xoá
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        ';
+                        <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
+                            <div class="text-center border border-2 rounded border-color p-4">
+                                <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
+                                <label class="text-black" for="">Chưa có sản phẩm nào!</label>
+                            </div>
+                        </section>';
                     }
                 } else {
                     $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
 
-                    $dataWhistlistUsers = $whistlistController->getAllWhistlistByUserIdController($getUserId);
+                    $countWhistlistRole = $whistlistController->countProductInWhistlistControllerRole($getUserId);
 
-                    foreach ($dataWhistlistUsers as $dataWhistlistUser) {
+                    if($countWhistlistRole != 0){
+                        $dataWhistlistUsers = $whistlistController->getAllWhistlistByUserIdController($getUserId);
+
+                        echo '<tr class="text-black text-uppercase fw-bold">
+                                <td>Sản phẩm</td>
+                                <td></td>
+                                <td>Số lượng</td>
+                                <td>Giá</td>
+                                <td>Thành tiền</td>
+                                <td>Trạng thái</td>
+                                <td>Thao tác</td>
+                            </tr>';
+
+                        foreach ($dataWhistlistUsers as $dataWhistlistUser) {
+                            echo '
+                            <tr class="text-black">
+                                <td><img src="asset/image/product/' . $dataWhistlistUser['image_name'] . '" alt="' . $dataWhistlistUser['product_name'] . '" height="50" width="50" class="img-fluid"></td>
+                                <td>' . $dataWhistlistUser['product_name'] . '</td>
+                                <td>1</td>
+                                <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
+                                <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
+                                <td>
+                                    <span class="badge bg-primary">Còn hàng</span>
+                                </td>
+                                <td>
+                                    <form method="POST" action="index.php?page=whistlist">
+                                        <input type="hidden" name="whistListInput" value="' . $dataWhistlistUser['whistlist_id'] . '"> 
+                                        <button name="btnDeleteWhistlist" type="submit" class="btn btn-danger text-white" style="background-color: #dc3444">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                            </svg>&nbsp;Xoá
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            ';
+                        }
+                    }else{
                         echo '
-                        <tr class="text-black">
-                            <td><img src="asset/image/product/' . $dataWhistlistUser['image_name'] . '" alt="' . $dataWhistlistUser['product_name'] . '" height="50" width="50" class="img-fluid"></td>
-                            <td>' . $dataWhistlistUser['product_name'] . '</td>
-                            <td>1</td>
-                            <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
-                            <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
-                            <td>
-                                <span class="badge bg-primary">Còn hàng</span>
-                            </td>
-                            <td>
-                                <form method="POST" action="index.php?page=whistlist">
-                                    <input type="hidden" name="whistListInput" value="' . $dataWhistlistUser['whistlist_id'] . '"> 
-                                    <button name="btnDeleteWhistlist" type="submit" class="btn btn-danger text-white" style="background-color: #dc3444">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                                        </svg>&nbsp;Xoá
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        ';
+                        <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
+                            <div class="text-center border border-2 rounded border-color p-4">
+                                <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
+                                <label class="text-black" for="">Chưa có sản phẩm nào!</label>
+                            </div>
+                        </section>';
                     }
                 }
                 ?>

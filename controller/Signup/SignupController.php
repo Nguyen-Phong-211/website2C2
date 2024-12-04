@@ -28,6 +28,8 @@ class SignupController
 
                 $_SESSION['email'] = $email;
 
+                echo '<script>alert("Đăng ký thành công")</script>';
+
                 sleep(4);
                 header("Location: index.php?page=home");
                 exit;

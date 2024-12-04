@@ -888,3 +888,13 @@ html {
   height: 50px;
   object-fit: contain;
 }
+.btn-cancel{
+  background-color: #dc3444;
+  color: white;
+}
+
+.btn-cancel:hover{
+  background-color: white;
+  color: #dc3444;
+  border-color: #dc3444;
+}

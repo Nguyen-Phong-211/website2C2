@@ -18,10 +18,10 @@
 
 <body>
 
-    <!-- <div class="preloader-wrapper">
+    <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div> -->
+    </div>
 
     <?php 
     include_once('view/layout/slidebar/slidebar.php');
@@ -43,31 +43,12 @@
     ?>
 
     <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
-        <div class="text-center" id="circle-notification">
-            <img src="asset/image/general/list.png" alt="Thông báo" class="img-fluid notification-icon">
-            <label class="notification-label">Chưa có thông báo nào</label>
+        <div class="text-center border border-2 rounded border-color p-4">
+            <img src="asset/image/general/list.png" alt="Thông báo" class="img-fluid w-25 h-25"> <br>
+            <label class="text-black" for="">Chưa có thông báo nào!</label>
         </div>
     </section>
 
-    <style>
-        #circle-notification {
-            border: 1px solid #cacaca;
-            height: 300px;
-            width: 320px;
-            border-radius: calc(40% + 30px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .notification-icon {
-            width: 80px;
-            height: 80px;
-            opacity: 0.6;
-        }
-    </style>
     <?php 
     include_once('view/layout/header/button_backtotop.php');
     ?>

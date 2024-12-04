@@ -16,12 +16,27 @@
             return $result;
         }
         //count order detail by user id
-        public function countOrderDetailByUserId($userId) {
+        public function countOrderDetailByUserIdController($userId)
+        {
             $result = $this->orderDetailModel->countOrderDetailByUserId($userId);
-            if (!$result) {
-                die("Failed to retrieve category list: " . $this->orderDetailModel->getConnection()->error);
+            if ($result === false) {
+                die("Không thể lấy dữ liệu đơn hàng: " . $this->orderDetailModel->getConnection()->error);
             }
             return $result;
         }
+
+        //get all order detail by role seller
+        public function getAllOrderDetailByRoleSeller($userId) {
+            $result = $this->orderDetailModel->getAllOrderDetailByRoleSeller($userId);
+            if (!$result) {
+                try {
+                    $result = $this->orderDetailModel->getAllOrderDetailByRoleSeller($userId);
+                } catch (Exception $e) {
+                    die("Error: " . $e->getMessage());
+                }                
+            }
+            return $result;
+        }
+        
     }
 ?>

@@ -32,10 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
-    <!-- <div class="preloader-wrapper">
+    <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div> -->
+    </div>
 
     <?php
     include_once('view/layout/slidebar/slidebar.php');
