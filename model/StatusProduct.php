@@ -20,5 +20,15 @@
             }
             return $result;
         }
+        public function getAllStatusProduct(){
+
+            $sql = "SELECT * FROM status_products";
+
+            $result = $this->conn->query($sql);
+            if ($result === false) {
+                die("Query failed: ". $this->conn->error);
+            }
+            return $result;
+        }
     }
 ?>

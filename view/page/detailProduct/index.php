@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +11,11 @@
 </head>
 
 <body>
-
+    <!-- 
     <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div>
+    </div> -->
 
     <?php
     include_once('view/layout/slidebar/slidebar.php');
@@ -309,7 +308,7 @@
                             </button>
 
                             <form action="" method="post">
-                                <input type="hidden" name="productId" value=""> 
+                                <input type="hidden" name="productId" value="">
                                 <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
                                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
@@ -363,14 +362,36 @@
                         ?>
                     </div>
                 </div>
+                <div class="col-12 col-md-12 mb-3">
+                    <div class="title-describe-product">
+                        <p class="fs-4 bg-light p-3 fw-bold rounded">
+                            Đánh giá sản phẩm
+                        </p>
+                    </div>
+                    <div class="describe-product p-3 bg-white rounded shadow-sm">
+                        <?php
+                    
+                        
+
+                        if (isset($_SESSION['user_id'])) {
+                            include_once("./view/page/review/form_danhgia.php");
+                        } else {
+                            echo "<p class='text-center text-muted'>Bạn cần <a href='index.php?page=login'>đăng nhập</a> để thực hiện đánh giá.</p>";
+                        }
+                        include_once("./view/page/review/danhgia.php");
+                        ?>
+                    </div>
+
+
+                </div>
             </div>
 
         </div>
     </section>
-    <?php 
+    <?php
     include_once('view/layout/header/button_backtotop.php');
     ?>
-    
+
     <?php
     include_once('view/layout/footer/footer.php');
     ?>

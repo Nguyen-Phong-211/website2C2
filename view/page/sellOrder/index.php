@@ -1548,7 +1548,7 @@ if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!is
     ?>
 
     <?php
-    include_once('script.php');
+    //include_once('script.php');
     ?>
     <?php
     include_once('view/layout/footer/footer.php');

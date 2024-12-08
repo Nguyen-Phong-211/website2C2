@@ -17,5 +17,14 @@
             }
             return $result;
         }
+        public function getAllStatusProductController(){
+
+            $result = $this->statusProductModel->getAllStatusProduct();
+            
+            if (!$result) {
+                die("Failed to retrieve product list: " . $this->statusProductModel->getConnection()->error);
+            }
+            return $result;
+        }
     }
 ?>

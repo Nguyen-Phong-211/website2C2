@@ -15,16 +15,18 @@ class Login extends ConnectDatabase
     //Login
     public function loginUser($email, $password)
     {
-        $stmt = $this->conn->prepare("SELECT s.email, s.password FROM signup AS s
+        $stmt = $this->conn->prepare("SELECT s.user_id, s.email, s.password FROM signup AS s
                                                 JOIN users AS u ON s.user_id = u.user_id
                                                 JOIN roles AS r ON u.role_id = r.role_id
                                             WHERE s.email = ? AND s.password = ? AND (r.role_id = u.role_id OR r.role_id = u.role_seller_id)");
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
         $result = $stmt->get_result();
-
+        
         if ($result->num_rows > 0) {
+            
             return $result->fetch_assoc();
+            
         } else {
             return null;
         }
@@ -46,6 +48,7 @@ class Login extends ConnectDatabase
         }
         
     }
+    
   
 
 }

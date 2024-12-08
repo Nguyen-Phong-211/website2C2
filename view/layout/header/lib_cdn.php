@@ -7,7 +7,7 @@
 <meta name="author" content>
 <meta name="keywords" content>
 <meta name="description" content>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
@@ -18,7 +18,7 @@
     crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="vendor/css/vendor.css">
-<link rel="stylesheet" type="text/css" href="asset/css/style.css?v=2">
+<link rel="stylesheet" type="text/css" href="asset/css/style.css?v=1">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

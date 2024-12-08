@@ -1,11 +1,7 @@
-<?php 
-    if((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!isset($_SESSION['emailUserLoginGoogle']) && !isset($_SESSION['success_message']))){
-        header('Location: index.php?page=login');
-        $_SESSION['info_login'] = "Thông báo đăng nhập.";
-    }
-?>
-
 <?php
+
+use GuzzleHttp\Psr7\Request;
+
 $selectedCategory = isset($_POST['category']) ? $_POST['category'] : '';
 $selectedSubCategory = isset($_POST['subcategory']) ? $_POST['subcategory'] : '';
 $showError = false;
@@ -16,7 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
+<?php
+if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!isset($_SESSION['emailUserLoginGoogle']) && !isset($_SESSION['success_message']))) {
+    header('Location: index.php?page=login');
+    $_SESSION['info_login'] = "Thông báo đăng nhập.";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
-    <div class="preloader-wrapper">
+    <!-- <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div>
+    </div> -->
 
     <?php
     include_once('view/layout/slidebar/slidebar.php');
@@ -48,37 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </header>
 
     <?php
-    include_once('view/layout/slider/slider.php');
-    ?>
-
-    <?php
     include_once('view/layout/pagination/index.php');
     ?>
-
-
     <section class="container pb-4 my-4 text-black">
         <div class="container mt-5 shadow-sm rounded p-4">
-
-            <!-- Processing to registrate -->
-            <!-- <div class="position-relative m-4 mb-5">
-                <div class="progress" style="height: 3px;">
-                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <button type="button" class="active position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
-                <button type="button" class="active position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
-                <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
-            </div> -->
-
-            <!-- Alert notification -->
-            <!-- <div class="alert alert-danger d-flex align-items-center" role="alert">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-exclamation-triangle-fill me-2" viewBox="0 0 16 16" role="image">
-                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                </svg>
-                <div>
-                    Thông tin còn thiếu. Vui lòng nhập đầy đủ thông tin!
-                </div>
-            </div> -->
-
             <header>
                 <h1 class="text-center">Đăng tin bán sản phẩm</h1>
             </header>
@@ -88,32 +62,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col">
-
-
                             <div class="mb-3">
+                                <?php
+                                include_once("controller/Category/CategoryController.php");
+                                $p = new CategoryController();
+                                $tbl = $p->getCategoryList();
+                                ?>
                                 <label for="category" class="form-label">Danh mục cấp 1 <span class="text-danger">*</span></label>
-                                <select class="form-select border-color" id="category" name="category" required onchange="this.form.submit()" onchange="fetchSubcategories(this.value)">
+                                <select class="form-select border-color" id="category" name="category" required onchange="this.form.submit()">
                                     <option value="">Chọn danh mục</option>
                                     <?php
-                                    // include_once('controller/Category/CategoryController.php');
-                                    // $categoryController = new CategoryController();
-                                    // $categories = $categoryController->getCategoryList();
-
-                                    // foreach($categories as $category){
-                                    //     echo '<option value="'. $category['category_id'] .'">'. $category['category_name'] .'</option>';
-                                    // }
+                                    if ($tbl) {
+                                        while ($r = mysqli_fetch_assoc($tbl)) {
+                                            $selected = isset($selectedCategory) && $selectedCategory == $r["category_id"] ? 'selected' : '';
+                                            echo "<option value='" . $r["category_id"] . "' $selected>" . $r["category_name"] . "</option>";
+                                        }
+                                    }
                                     ?>
                                 </select>
+
                             </div>
 
-                            <div class="mb-3" id="subcategoryContainer" style="display: none;">
-                                <label for="subcategory" class="form-label">Danh mục cấp 2 <span class="text-danger">*</span></label>
-                                <select class="form-select border-color" id="subcategory" name="subcategory" required>
-                                    <option value="">Chọn danh mục cấp 2</option>
-                                </select>
+                            <div class="mb-3" id="subcategoryContainer" style="display: <?php echo $selectedCategory ? 'block' : 'none'; ?>">
+
+                                <?php if (!empty($selectedCategory)) : ?>
+                                    <div>
+                                        <?php
+                                        include_once("controller/CategoryItem/CategoryItemController.php");
+                                        $categoryItemController = new CategoryItemController();
+                                        $subcategories = $categoryItemController->getAllListCategoryItemByCategoryController($selectedCategory);
+
+                                        if ($subcategories) {
+                                            echo '<label for="subcategory" class="form-label">Danh mục cấp 2 <span class="text-danger">*</span></label>';
+                                            echo '<select class="form-select border-color" id="subcategory" name="subcategory" onchange="this.form.submit()">';
+                                            echo '<option value="">Chọn danh mục cấp 2</option>';
+
+                                            while ($subcategory = mysqli_fetch_assoc($subcategories)) {
+                                                if ($subcategory['category_id'] == $selectedCategory) {
+                                                    $selected = ($subcategory['category_item_id'] == $selectedSubCategory) ? 'selected' : '';
+                                                    echo "<option value='{$subcategory['category_item_id']}' $selected>{$subcategory['category_item_name']}</option>";
+                                                }
+                                            }
+                                            echo '</select>';
+                                        } else {
+                                            echo '<p>Không có danh mục cấp 2 nào.</p>';
+                                        }
+                                        ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
-
-
                             <div class="mb-3">
                                 <label class="form-label">Hình ảnh và Video sản phẩm <span class="text-danger">*</span></label>
 
@@ -175,94 +172,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     }
                                 </script>
                             </div>
+                            <?php
+                            include_once('script.php');
+                            ?>
                         </div>
-
-                        <?php 
-                        include_once('script.php');
-                        ?>
-
                         <div class="col" id="productFields" style="display: 
                             <?php
                             echo !empty($selectedSubCategory) ? 'block' : 'none';
                             ?>">
+                            <?php
+                            if ($selectedCategory == 1) {
+                                if ($selectedSubCategory == 6) {
+                                    $_SESSION["name"] = 'Loại xe';
+                                } elseif ($selectedSubCategory == 8) {
+                                    $_SESSION["name"] = 'Phụ kiện và thiết bị';
+                                } else {
+                                    $_SESSION["name"] = 'Hãng xe';
+                                }
+                            } elseif ($selectedCategory == 4) {
+                                if ($selectedSubCategory == 33) {
+                                    $_SESSION["name"] = 'Loại dụng cụ';
+                                } elseif ($selectedSubCategory == 35) {
+                                    $_SESSION["name"] = 'Loại thiết bị';
+                                }
+                            } elseif ($selectedCategory == 5) {
+                                if ($selectedSubCategory == 36) {
+                                    $_SESSION["name"] = 'Loại quần áo';
+                                } elseif ($selectedSubCategory == 37) {
+                                    $_SESSION["name"] = 'Loại giày dép';
+                                } else {
+                                    $_SESSION["name"] = 'Loại phụ kiện';
+                                }
+                            } elseif ($selectedCategory == 6) {
+                                $_SESSION["name"] = 'Loại dụng cụ';
+                            } elseif ($selectedCategory == 7) {
+                                $_SESSION["name"] = 'Loại sách';
+                            } elseif ($selectedCategory == 8) {
+                                $_SESSION["name"] = 'Loại nội thất';
+                            } else {
+                                $_SESSION["name"] = 'Thương hiệu';
+                            }
+                            include_once("company.php");
+                            include_once("attribute.php");
+                            include_once("status.php");
+                            include_once("WarrantyPolicies.php");
+                            include_once("thongtin.php");
 
-                            <?php
-                            if ($selectedCategory == 'do-dien-tu'):
-                            ?>
-                                <h4>Thông tin sản phẩm</h4>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control border-color" name="status" placeholder="Tình trạng">
-                                </div>
-                                <select class="form-select mb-3 mt-4 border-color">
-                                    <option selected>Chọn hãng</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="color" placeholder="Màu sắc">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="capacity" placeholder="Dung lượng">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="warranty" placeholder="Chính sách bảo hành">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <input type="number" class="form-control border-color" name="price" placeholder="Giá">
-                                </div>
-                                <h4>Tiêu đề đăng tin và Mô tả chi tiết</h4>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="title" placeholder="Tiêu đề đăng tin">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
-                                    <textarea class="form-control border-color" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                </div>
-                                <h4>Thông tin người bán</h4>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="address" placeholder="Địa chỉ">
-                                </div>
-                            <?php
-                            elseif ($selectedCategory == 'sach'):
-                            ?>
-                                <h4>Thông tin sản phẩm</h4>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control border-color" name="status" placeholder="Tình trạng">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="author" placeholder="Tác giả">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="publisher" placeholder="Nhà xuất bản">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="isbn" placeholder="Mã ISBN">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="language" placeholder="Ngôn ngữ">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <input type="number" class="form-control border-color" name="price" placeholder="Giá">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <label for="exampleFormControlTextarea2" class="form-label">Mô tả</label>
-                                    <textarea class="form-control border-color" id="exampleFormControlTextarea2" rows="5"></textarea>
-                                </div>
-                                <h4>Tiêu đề đăng tin và Mô tả chi tiết</h4>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="title" placeholder="Tiêu đề đăng tin">
-                                </div>
-                                <div class="mb-3 mt-4">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
-                                    <textarea class="form-control border-color" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                </div>
-                                <h4>Thông tin người bán</h4>
-                                <div class="mb-3 mt-4">
-                                    <input type="text" class="form-control border-color" name="address" placeholder="Địa chỉ">
-                                </div>
-                            <?php
-                            endif;
                             ?>
                         </div>
                     </div>
@@ -272,18 +227,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <button type="reset" class="btn btn-outline-danger w-100">Huỷ bỏ</button>
                         </div>
                         <div class="col">
-                            <button type="submit" class="btn btn-primary w-100 active">Đăng tin</button>
+                            <button type="submit" class="btn btn-primary w-100 active" name="btn-upload">Đăng tin</button>
                         </div>
                     </div>
                 </form>
             </main>
         </div>
     </section>
-
     <?php
-    include_once('view/layout/header/button_backtotop.php');
+    if (isset($_POST['btn-upload'])) {
+        include_once("controller/RegistrationProduct/RegistrationProductController.php");
+        $controller = new RegistrationProductController();
+        $result = $controller->addRegistrationProduct();
+    }
     ?>
-
     <?php
     include_once('view/layout/footer/footer.php');
     ?>
@@ -291,6 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
     include_once('view/layout/footer/lib-cdn-js.php');
     ?>
+
 </body>
 
 </html>

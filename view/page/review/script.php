@@ -19,4 +19,32 @@
             });
         });
     });
+    document.addEventListener('DOMContentLoaded', () => {
+        const stars = document.querySelectorAll('.star-rating i');
+        const ratingInput = document.getElementById('rating-input');
+        const form = document.querySelector('form'); // Tham chiếu đến form
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = star.getAttribute('data-value');
+                ratingInput.value = rating;
+
+                // Làm sáng các ngôi sao từ 1 đến giá trị chọn
+                stars.forEach(s => {
+                    s.classList.remove('selected');
+                    if (s.getAttribute('data-value') <= rating) {
+                        s.classList.add('selected');
+                    }
+                });
+            });
+        });
+
+        // Xử lý sự kiện gửi form
+        form.addEventListener('submit', (event) => {
+            if (!ratingInput.value) {
+                alert('Vui lòng chọn sao!');
+                event.preventDefault(); // Ngừng gửi form nếu chưa chọn sao
+            }
+        });
+    });
 </script>

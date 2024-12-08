@@ -1,14 +1,14 @@
 <?php
-    include_once('controller/Login/GoogleLoginController.php');
-    $googleLogin = new GoogleLoginController();
-    if ($googleLogin->handleCallBack() === true) {
-        echo '<script>
-                    alert("Đăng nhập thành công!");
-                    setTimeout(function() {
-                        window.location.href = "http://localhost/php/projectfinal";
-                    }, 0);
-                </script>';
-    }
+    // include_once('controller/Login/GoogleLoginController.php');
+    // $googleLogin = new GoogleLoginController();
+    // if ($googleLogin->handleCallBack() === true) {
+    //     echo '<script>
+    //                 alert("Đăng nhập thành công!");
+    //                 setTimeout(function() {
+    //                     window.location.href = "http://localhost/php/projectfinal";
+    //                 }, 0);
+    //             </script>';
+    // }
 ?>
 <div class="container-fluid">
     <div class="row py-3 border-bottom">

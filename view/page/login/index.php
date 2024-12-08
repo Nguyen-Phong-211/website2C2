@@ -64,10 +64,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnLogin'])) {
 
 <body>
     
-    <div class="preloader-wrapper">
+    <!-- <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div>
+    </div> -->
 
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow" style="width: 100%; max-width: 40%;">
