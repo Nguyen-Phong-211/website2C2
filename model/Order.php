@@ -118,4 +118,5 @@ class Order extends ConnectDatabase
         $row = $result->fetch_assoc();
         return $row['count_status '];
     }
+    
 }

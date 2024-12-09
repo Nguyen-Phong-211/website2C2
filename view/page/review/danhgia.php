@@ -1,33 +1,3 @@
-<style>
-    .star-rating {
-        color: #ffc107;
-    }
-
-    .star-rating .bi {
-        font-size: 1.5rem;
-    }
-
-    #danhgia ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    #danhgia ul li {
-        border: 1px solid #ddd;
-        margin: 10px 0;
-        padding: 15px;
-        border-radius: 5px;
-    }
-
-    #danhgia ul li p {
-        margin: 10px 0;
-    }
-
-    #danhgia ul li .text-muted {
-        font-size: 0.875rem;
-    }
-</style>
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">

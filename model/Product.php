@@ -59,7 +59,7 @@ class Product extends ConnectDatabase
     //count product
     public function countProduct()
     {
-        $query = "SELECT COUNT(*) as total FROM products WHERE quantity >= 1" ;
+        $query = "SELECT COUNT(*) as total FROM products WHERE quantity >= 1";
         $result = $this->conn->query($query);
 
         if ($result === false) {
@@ -184,13 +184,14 @@ class Product extends ConnectDatabase
         $result = $this->conn->query($query);
 
         if ($result === false) {
-            die("Query failed: ". $this->conn->error);
+            die("Query failed: " . $this->conn->error);
         }
         return $result;
     }
 
     //find product by price
-    public function findProductByPrice($priceFrom, $priceTo){
+    public function findProductByPrice($priceFrom, $priceTo)
+    {
         $stmt = $this->conn->prepare("SELECT 
                                                 p.*, 
                                                 w.status AS wstatus, 
@@ -221,5 +222,18 @@ class Product extends ConnectDatabase
             echo "Error: " . $stmt->error;
             return false;
         }
+    }
+    public function getOwnerByProductId($product_id)
+    {
+        $query = "SELECT user_id FROM products WHERE product_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($row = $result->fetch_assoc()) {
+            return $row['user_id'];
+        }
+        return null; // Trường hợp không tìm thấy
     }
 }

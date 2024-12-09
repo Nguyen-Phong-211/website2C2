@@ -151,26 +151,6 @@ if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!is
                                         }
                                     }
                                 </script>
-
-                                <input type="file" class="form-control mt-3 border-color" name="videoUpload" accept="video/*" onchange="previewVideo(this)">
-                                <small class="form-text text-muted">Chọn 1 video.</small>
-                                <div class="video-preview" id="videoPreview"></div>
-
-                                <script>
-                                    function previewVideo(input) {
-                                        const videoPreview = document.getElementById('videoPreview');
-                                        videoPreview.innerHTML = '';
-                                        const file = input.files[0];
-
-                                        if (file) {
-                                            const video = document.createElement('video');
-                                            video.src = URL.createObjectURL(file);
-                                            video.controls = true;
-                                            video.style.width = '300px';
-                                            videoPreview.appendChild(video);
-                                        }
-                                    }
-                                </script>
                             </div>
                             <?php
                             include_once('script.php');

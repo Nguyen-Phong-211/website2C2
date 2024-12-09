@@ -898,3 +898,98 @@ html {
   color: #dc3444;
   border-color: #dc3444;
 }
+
+.chat-box {
+  height: 400px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.chat-message {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.chat-message .message-content {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.chat-message.sender .message-content {
+  background-color: #007bff;
+  color: white;
+  text-align: right;
+  margin-left: auto;
+}
+
+.chat-message.receiver .message-content {
+  background-color: #e9ecef;
+  text-align: left;
+  margin-right: auto;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.sender .avatar {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+.receiver .avatar {
+  margin-right: 10px;
+}
+
+/* Ẩn input file */
+#imageInput {
+  display: none;
+}
+
+/* Kiểu cho biểu tượng */
+.image-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #007bff;
+  margin-left: 10px;
+}
+
+.carousel-indicators {
+  display: none;
+}
+
+.star-rating {
+  color: #ffc107;
+}
+
+.star-rating .bi {
+  font-size: 1.5rem;
+}
+
+#danhgia ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#danhgia ul li {
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#danhgia ul li p {
+  margin: 10px 0;
+}
+
+#danhgia ul li .text-muted {
+  font-size: 0.875rem;
+}
