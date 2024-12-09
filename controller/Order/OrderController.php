@@ -11,10 +11,12 @@
         public function updateOrderStatusController($orderId, $status) {
             $result = $this->orderModel->updateStatusOrder($orderId, $status);
 
-            if (!$result) {
-                echo "<script>alert('Lỗi hệ thống! Hãy liên hệ với chúng tôi!')</script>";
-            } else {
+            if ($result) {
                 echo "<script>alert('Cập nhật trạng thái đơn hàng thành công.')</script>";
+            } else{
+                echo "<script>
+                window.location.href='index.php?page=sellOrder'
+                </script>";
             }
         }
     }

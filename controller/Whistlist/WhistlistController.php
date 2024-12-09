@@ -64,4 +64,14 @@ class WhistlistController
         return $result;
 
     }
+    public function removeFromWhistlistByProductIdController($productId, $userId)
+    {
+        $result = $this->whistlist->removeFromWhistlistByProductId($productId, $userId);
+
+        if (!$result) {
+            die("Failed to delete product in wishlist: " . $this->whistlist->getConnection()->error);
+        }
+        return $result;
+
+    }
 }

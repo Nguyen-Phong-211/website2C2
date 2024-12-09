@@ -28,6 +28,15 @@ class ProductController
         }
         return $result;
     }
+    public function getAllFavoriteProductController()
+    {
+        $result = $this->product->getAllFavoriteProduct();
+
+        if (!$result) {
+            die("Failed to retrieve product list: " . $this->product->getConnection()->error);
+        }
+        return $result;
+    }
     //get product by hight view
     public function getProductByHightViewController()
     {
@@ -101,6 +110,15 @@ class ProductController
     //find product by price
     public function findProductByPriceController($priceFrom, $priceTo){
         $result = $this->product->findProductByPrice($priceFrom, $priceTo);
+
+        if (!$result) {
+            die("Failed to retrieve product list: " . $this->product->getConnection()->error);
+        }
+        return $result;
+    }
+    //get product by category_item_id
+    public function getProductByCategoryItemController($categoryId, $categoryItemId){
+        $result = $this->product->getProductByCategoryItem($categoryId, $categoryItemId);
 
         if (!$result) {
             die("Failed to retrieve product list: " . $this->product->getConnection()->error);

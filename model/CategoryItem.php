@@ -29,4 +29,27 @@ class CategoryItem extends ConnectDatabase
         }
         return $result;
     }
+    //get category_name by category_id and category_item_id
+    public function getCategoryNameByCategoryItemId($categoryId, $categoryItemId)
+    {
+        $query = "SELECT category_item_name FROM category_items WHERE category_id = ? AND category_item_id = ?";
+        
+        if ($stmt = $this->conn->prepare($query)) {
+            $stmt->bind_param("ii", $categoryId, $categoryItemId); 
+            $stmt->execute();
+            
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                return $row['category_item_name'];
+            } else {
+                return false;
+            }
+        } else {
+            echo "Có lỗi xảy ra khi chuẩn bị câu lệnh.";
+            return false;
+        }
+    }
+
 }

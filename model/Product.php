@@ -34,9 +34,26 @@ class Product extends ConnectDatabase
             LEFT JOIN reviews AS r ON p.product_id = r.product_id 
             LEFT JOIN ( SELECT product_id, image_name FROM images GROUP BY product_id ) AS i 
                 ON i.product_id = p.product_id 
-            WHERE p.quantity >= 1 
-            ORDER BY RAND() 
+            WHERE p.quantity >= 1
             LIMIT 10;
+        ";
+        $result = $this->conn->query($query);
+
+        if ($result === false) {
+            die("Query failed: " . $this->conn->error);
+        }
+        return $result;
+    }
+    //join hightly appreciated
+    public function getAllFavoriteProduct()
+    {
+        $query = "
+        SELECT *, w.status AS wstatus FROM products AS p 
+            LEFT JOIN whistlists AS w ON p.product_id = w.product_id 
+            LEFT JOIN reviews AS r ON p.product_id = r.product_id 
+            LEFT JOIN ( SELECT product_id, image_name FROM images GROUP BY product_id ) AS i 
+                ON i.product_id = p.product_id 
+            WHERE p.quantity >= 1 
         ";
         $result = $this->conn->query($query);
 
@@ -217,6 +234,63 @@ class Product extends ConnectDatabase
             $stmt->get_result();
             $stmt->close();
             return true;
+        } else {
+            echo "Error: " . $stmt->error;
+            return false;
+        }
+    }
+    //get product by category_item_id
+    public function getProductByCategoryItem($categoryId, $categoryItemId)
+    {
+        $stmt = $this->conn->prepare("
+        SELECT 
+                p.product_id,
+                p.product_name,
+                p.quantity,
+                p.price,
+                p.status,
+                p.discount,
+                p.description,
+                p.address,
+                c.category_name,
+                c.category_id,
+                i.image_name,
+                r.content,
+                r.rating_star,
+                r.status AS review_status,
+                w.status AS wstatus,
+                w.whistlist_id,
+                ci.category_item_name,
+                COUNT(r.review_id) AS total_reviews,
+                MAX(i.image_id) AS total_image_by_product_id
+            FROM 
+                products AS p
+            LEFT JOIN 
+                category_items AS ci ON p.category_item_id = ci.category_item_id
+            LEFT JOIN 
+                categories AS c ON c.category_id = ci.category_id
+            LEFT JOIN 
+                images AS i ON p.product_id = i.product_id
+            LEFT JOIN 
+                reviews AS r ON r.product_id = p.product_id
+            LEFT JOIN 
+                whistlists AS w ON p.product_id = w.product_id
+            WHERE 
+                c.category_id = ? AND p.quantity >= 1 AND p.category_item_id = ?
+            GROUP BY 
+                p.product_id, 
+                p.product_name, 
+                c.category_name, 
+                ci.category_item_name, 
+                w.status, 
+                w.whistlist_id;
+        ");
+
+        $stmt->bind_param("ii", $categoryId, $categoryItemId);
+        if ($stmt->execute()) {
+            $result =  $stmt->get_result();
+            $stmt->close();
+            return $result;
         } else {
             echo "Error: " . $stmt->error;
             return false;

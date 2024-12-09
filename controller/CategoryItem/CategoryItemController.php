@@ -29,4 +29,14 @@ class CategoryItemController
         }
         return $result;
     }
+    //get category_name by category_id and category_item_id
+
+    public function getCategoryNameController($category_id, $category_item_id)
+    {
+        $result = $this->categoryItem->getCategoryNameByCategoryItemId($category_id, $category_item_id);
+        if (!$result) {
+            die("Failed to retrieve category list: " . $this->categoryItem->getConnection()->error);
+        }
+        return $result;
+    }
 }

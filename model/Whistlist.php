@@ -129,6 +129,27 @@ class Whistlist extends ConnectDatabase
         $stmt->close();
         return $result;
     }
+    public function removeFromWhistlistByProductId($productId, $userId)
+    {
+        $query = "DELETE FROM whistlists WHERE product_id = ? AND user_id = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if ($stmt === false) {
+            error_log("Prepare failed: " . $this->conn->error);
+            return false;
+        }
+
+        $stmt->bind_param("ii", $productId, $userId); 
+        $result = $stmt->execute();
+        if ($result === false) {
+            error_log("Execution failed: " . $stmt->error);
+            return false;
+        }
+        $stmt->close();
+
+        return $result; 
+    }
+
     //check product in whistlist by user_id at page detailProduct
     public function checkProductInWhistlist($productId, $userId){
         $query = "SELECT w.*

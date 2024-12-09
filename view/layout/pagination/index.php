@@ -46,7 +46,7 @@
                             echo '<a href="index.php?page=' . $page . '" class="text-decoration-none"> Chính sách điều khoản và bảo mật </a>';
                             break;  
                         case 'detailProduct':
-                            echo 'Chi tiết sản phẩm';
+                            echo '<a class="text-decoration-none" href="index.php?page=detailProduct&idp='. $_REQUEST['idp'] .'">Chi tiết sản phẩm</a>';
                             break;  
                         case 'product':
                             if (isset($_REQUEST['s_interface']) && $_REQUEST['s_interface'] == 1) {
@@ -62,23 +62,29 @@
                 ?>
             </li>
             <?php 
+                include_once('controller/Product/ProductController.php');
+                include_once('controller/Category/CategoryController.php');
+                include_once('controller/CategoryItem/CategoryItemController.php');
+
+                $productController = new ProductController();
+                $categoryController = new CategoryController(); 
+                $categoryItemController = new CategoryItemController();
+
                 if($_REQUEST['page'] == 'detailProduct'){
-
                     $idp = $_REQUEST['idp'];
-                    include_once('controller/Product/ProductController.php');
-                    $productController = new ProductController();
+                    echo '<li class="breadcrumb-item"><a>'. $productController->getNameProductByIdController($idp). '</a></li>';
 
-                    echo '<li class="breadcrumb-item">'. $productController->getNameProductByIdController($idp). '</li>';
-
-                }elseif($_REQUEST['page'] == 'product' && isset($_REQUEST['idc'])){
+                }elseif($_REQUEST['page'] == 'product' && isset($_REQUEST['idc']) && !isset($_REQUEST['fdh_op'])){
                     $idc = $_REQUEST['idc'];
-                    include_once('controller/Category/CategoryController.php');
-                    $productController = new CategoryController();
-
-                    $categoryName = $productController->getCategoryNameController($idc);
-                    
+                    $categoryName = $categoryController->getCategoryNameController($idc);
                     echo '<li class="breadcrumb-item">' . htmlspecialchars($categoryName) . '</li>';
 
+                }elseif($_REQUEST['page'] == 'product' && isset($_REQUEST['idc']) && isset($_REQUEST['idci']) && isset($_REQUEST['fdh_op'])){
+                    $categoryItemName = $categoryItemController->getCategoryNameController($_REQUEST['idc'], $_REQUEST['idci']);
+                    $categoryName = $categoryController->getCategoryNameController($_REQUEST['idc']);
+
+                    echo '<li class="breadcrumb-item"><a class="text-decoration-none" href="index.php?page=product&idc='. $_REQUEST['idc'] .'&idci='. $_REQUEST['idci'] .'&fdh_op=oikHk5tRF">' . $categoryName . '</a></li>';
+                    echo '<li class="breadcrumb-item">' . $categoryItemName . '</li>';
                 }
             ?>
         </ol>

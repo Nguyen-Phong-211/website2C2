@@ -249,7 +249,7 @@
             $_SESSION['whistlist_success_message'] = true;
         }
     }
-    ?>
+?>
     <!-- notification of whistlist is add product success -->
     <?php if (isset($_SESSION['whistlist_success_message']) && $_SESSION['whistlist_success_message'] === true): ?>
 

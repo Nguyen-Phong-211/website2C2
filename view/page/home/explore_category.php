@@ -44,7 +44,7 @@
 
                         foreach ($datas as $data) {
                             echo '
-                                <a href="index.php?page=product&idc=' . $data['category_id'] . '"
+                                <a href="index.php?page=product&idc=' . $data['category_id'] . '&df_sw=UHhgPl0k9"
                                     class="nav-link swiper-slide text-center">
                                     <img src="asset/image/category/' . $data['image'] . '" height="120" width="120" class="rounded" alt="' . $data['category_name'] . '">
                                     <h4 class="fs-6 mt-3 fw-normal category-title">' . $data['category_name'] . '</h4>

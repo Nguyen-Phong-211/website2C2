@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -308,17 +307,110 @@
                                 Thêm vào giỏ hàng
                             </button>
 
-                            <form action="" method="post">
-                                <input type="hidden" name="productId" value=""> 
-                                <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
-                                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                    </svg>
-                                    Thêm vào danh sách yêu thích
-                                </button>
-                            </form>
-                        </div>
+                            <?php 
+                                include_once('controller/User/UserController.php');
+                                include_once('controller/Whistlist/WhistlistController.php');
 
+                                $userController = new UserController();
+                                $whistlistController = new WhistlistController();
+
+                                if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
+                                    $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
+                                    $addWhistlist = $whistlistController->checkIfExistWhistlistController($_REQUEST['idp'], $getUserId);
+                                    if($addWhistlist === true){
+                                        echo '
+                                        <form action="" method="post">
+                                            <input type="hidden" name="deleteProductOutWhistlist" value="">
+                                            <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill me-1" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                                                </svg>
+                                                Thêm vào danh sách yêu thích
+                                            </button>
+                                        </form>
+                                        ';
+                                    }else{
+                                        echo '
+                                        <form action="" method="post">
+                                            <input type="hidden" name="addProductToWhistlist" value=""> 
+                                            <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
+                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                                </svg>
+                                                Thêm vào danh sách yêu thích
+                                            </button>
+                                        </form>
+                                        ';
+                                    }
+                                }else{
+                                    $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
+                                    $addWhistlist = $whistlistController->checkIfExistWhistlistController($_REQUEST['idp'], $getUserId);
+                                    if($addWhistlist === true){
+                                        echo '
+                                        <form action="" method="post">
+                                            <input type="hidden" name="deleteProductOutWhistlist" value="">
+                                            <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill me-1" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                                                </svg>
+                                                Thêm vào danh sách yêu thích
+                                            </button>
+                                        </form>
+                                        ';
+                                    }else{
+                                        echo '
+                                        <form action="" method="post">
+                                            <input type="hidden" name="addProductToWhistlist" value=""> 
+                                            <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
+                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                                </svg>
+                                                Thêm vào danh sách yêu thích
+                                            </button>
+                                        </form>
+                                        ';
+                                    }
+                                }
+                            ?>
+                            <?php 
+                                include_once('controller/User/UserController.php');
+                                include_once('controller/Whistlist/WhistlistController.php');
+
+                                $userController = new UserController();
+                                $whistlistController = new WhistlistController();
+
+                                if(isset($_REQUEST['addProductToWhistlist'])){
+                                    if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
+                                        $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
+                                        $addWhistlist = $whistlistController->addToWhistlistController($_REQUEST['idp'], $getUserId);
+                                        if($addWhistlist === true){
+                                            echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
+                                        }
+                                    }else{
+                                        $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
+                                        $addWhistlist = $whistlistController->addToWhistlistController($_REQUEST['idp'], $getUserId);
+                                        if($addWhistlist === true){
+                                            echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
+                                        }
+                                    }
+                                }elseif(isset($_REQUEST['deleteProductOutWhistlist'])){
+                                    if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
+                                        $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
+                                        $addWhistlist = $whistlistController->removeFromWhistlistByProductIdController($_REQUEST['idp'], $getUserId);
+                                        if($addWhistlist === true){
+                                            echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
+                                        }
+                                    }else{
+                                        $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
+                                        $addWhistlist = $whistlistController->removeFromWhistlistByProductIdController($_REQUEST['idp'], $getUserId);
+                                        if($addWhistlist === true){
+                                            echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
+                                        }
+                                    }
+                                }
+                            ?>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -381,3 +473,4 @@
 </body>
 
 </html>
+

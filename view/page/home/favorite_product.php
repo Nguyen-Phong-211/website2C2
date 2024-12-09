@@ -28,7 +28,7 @@
                     <?php 
                         include_once('controller/Product/ProductController.php');
                         $productController = new ProductController();
-                        $dataFavorites = $productController->getAllProductWithReviewsController();
+                        $dataFavorites = $productController->getAllFavoriteProductController();
 
                         foreach($dataFavorites as $dataFavorite){
                             echo '
