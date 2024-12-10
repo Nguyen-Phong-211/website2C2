@@ -89,16 +89,16 @@
                             <img src="asset/image/product/<?= htmlspecialchars($productImage); ?>" alt="Hình ảnh sản phẩm" style="width: 80px; height: 80px;">
                         </td>
                         <td class="text-center">
-                            <?= $item['product_name'] ?> 
+                            <a href="index.php?page=detailProduct&idp=<?= $item['product_id'] ?>" class="text-primary text-decoration-none"><?= $item['product_name'] ?></a> 
                         </td class="text-center">
                         <td>
                             <?= number_format($productPrice, 0, ',', '.') ?> đồng
                         </td>
                         <td class="text-center">
-                            <input type="number" class="form-control border-color text-black" value="<?= $quantity ?>" min="1" style="width: 80px;" onchange="updateCartQuantity(<?= $item['product_id'] ?>, this.value)">
+                            <input type="number" class="form-control border-color text-black quantity" value="<?= $quantity ?>" min="1" style="width: 80px;" onchange="updateCartQuantity(<?= $item['product_id'] ?>, this.value)">
                         </td>
                         <td class="text-center">
-                            <span id="total-price-<?= $item['product_id'] ?> total-price-product">
+                            <span id="total-price-<?= $item['product_id'] ?>">
                                 <?= number_format($totalPrice, 0, ',', '.') ?> đồng
                             </span>
                         </td>

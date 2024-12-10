@@ -19,11 +19,9 @@ class LoginController
 
         if ($result) {
 
-            // $userId = $this->userModel->getUserIdByEmail($email);
-
             $_SESSION['email'] = $result['email'];
-            $_SESSION['role'] = "buyer";
             $_SESSION['user_id'] = $result['user_id'];
+            $_SESSION['role_id'] = $result['role_id'];
 
             $_SESSION['success_message'] = "Đăng nhập thành công!";
 

@@ -14,6 +14,17 @@
                 </script>';
     }
 ?>
+
+<?php 
+    if(isset($_SESSION['role_id'])){
+        if($_SESSION['role_id'] == 3){
+            echo '<script>
+                    window.location.href = "index.php?page=manage";
+                </script>';
+        }
+    }
+?>
+
 <div class="container-fluid">
     <div class="row py-3 border-bottom">
         <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
@@ -28,6 +39,13 @@
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </button>
+
+            <?php
+            // if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 3) {
+            //     echo '<button  class="btn btn-outline-primary" style="font-weight: bold; font-size: 1rem;" 
+            //      onclick="location.href=\'index.php?page=managerCategory\'">Quản lý danh mục</button>';
+            // }
+            ?>
 
         </div>
 
