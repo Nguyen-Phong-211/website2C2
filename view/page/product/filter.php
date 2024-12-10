@@ -42,22 +42,44 @@
                     } 
                 ?>
 
-                <form action="" method="post">
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="fromPrice" class="form-control border-1 border-color"  placeholder="From" aria-label="price">
-                        <span class="input-group-text border-color bg-light">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#6bb252" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
-                            </svg>
-                        </span>
-                        <input type="text" name="toPrice" class="form-control border-color" placeholder="To" aria-label="Server">
-                    </div>
-
-                    <button type="submit" name="btnSubmitPrice" value="btnSubmitPrice" class="btn btn-primary w-100">
-                        Áp dụng
-                    </button>
-                </form>
+                <?php 
+                if(isset($_REQUEST['idc'])){
+                    echo '
+                    <form action="index.php?page=product&idc='. $_REQUEST['idc'] .'&df_sw=UHhgPl0k9&htj=khdhoanOJ99gh8gg7c&u_i=iiihYGFTVv" method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" name="fromPrice" class="form-control border-1 border-color"  placeholder="From" aria-label="price">
+                            <span class="input-group-text border-color bg-light">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#6bb252" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+                                </svg>
+                            </span>
+                            <input type="text" name="toPrice" class="form-control border-color" placeholder="To" aria-label="Server">
+                        </div>
+                        <button type="submit" name="btnSubmitPrice" value="btnSubmitPrice" class="btn btn-primary w-100">
+                            Áp dụng
+                        </button>
+                    </form>
+                    ';
+                }elseif(isset($_REQUEST['s_interface'])){
+                    echo '
+                    <form action="index.php?page=product&s_interface=1&df_sw=UHhgPl0k9&htj=khdhoanOJ99gh8gg7c&u_i=iiihYGFTVv" method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" name="fromPrice" class="form-control border-1 border-color"  placeholder="From" aria-label="price">
+                            <span class="input-group-text border-color bg-light">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#6bb252" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+                                </svg>
+                            </span>
+                            <input type="text" name="toPrice" class="form-control border-color" placeholder="To" aria-label="Server">
+                        </div>
+                        <button type="submit" name="btnSubmitPrice" value="btnSubmitPrice" class="btn btn-primary w-100">
+                            Áp dụng
+                        </button>
+                    </form>
+                    ';
+                }
+                ?>
+                
             </div>
         </div>
 

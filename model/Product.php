@@ -209,12 +209,20 @@ class Product extends ConnectDatabase
     //find product by price
     public function findProductByPrice($priceFrom, $priceTo){
         $stmt = $this->conn->prepare("SELECT 
-                                                p.*, 
+                                                p.product_id, 
+                                                p.product_name, 
+                                                p.quantity, 
+                                                p.price, 
+                                                p.status, 
+                                                p.discount, 
+                                                p.description, 
+                                                p.address, 
                                                 w.status AS wstatus, 
-                                                i.image_name, 
+                                                w.whistlist_id,
                                                 r.content, 
                                                 r.rating_star, 
-                                                COUNT(r.review_id) AS total_reviews 
+                                                COUNT(r.review_id) AS total_reviews, 
+                                                i.image_name
                                             FROM 
                                                 products AS p
                                             LEFT JOIN 
@@ -227,16 +235,17 @@ class Product extends ConnectDatabase
                                             WHERE 
                                                 p.quantity >= 1 AND p.price BETWEEN ? AND ?
                                             GROUP BY 
-                                                p.product_id, w.status, i.image_name");
-
+                                                p.product_id, w.status, w.whistlist_id, i.image_name, r.content, r.rating_star");
+    
         $stmt->bind_param("ii", $priceFrom, $priceTo);
+    
         if ($stmt->execute()) {
-            $stmt->get_result();
+            $result = $stmt->get_result();
             $stmt->close();
-            return true;
+            return $result;
         } else {
             echo "Error: " . $stmt->error;
-            return false;
+            return false; 
         }
     }
     //get product by category_item_id
@@ -296,4 +305,100 @@ class Product extends ConnectDatabase
             return false;
         }
     }
+    //search by product name
+    public function searchProduct($keyword)
+    {
+        $query = "SELECT 
+                    COUNT(*) AS total, 
+                    p.product_id, 
+                    p.product_name, 
+                    p.quantity, 
+                    p.price, 
+                    p.status, 
+                    p.discount, 
+                    p.description, 
+                    p.address, 
+                    w.status AS wstatus, 
+                    w.whistlist_id,
+                    r.content, 
+                    r.rating_star, 
+                    r.status AS review_status, 
+                    i.image_name
+                FROM 
+                    products AS p
+                LEFT JOIN 
+                    whistlists AS w ON p.product_id = w.product_id 
+                LEFT JOIN 
+                    reviews AS r ON p.product_id = r.product_id  
+                LEFT JOIN 
+                    (SELECT product_id, MAX(image_name) AS image_name FROM images GROUP BY product_id) AS i 
+                    ON i.product_id = p.product_id
+                WHERE 
+                    p.product_name LIKE ?
+                    AND p.quantity >= 1
+                GROUP BY 
+                    p.product_id, 
+                    p.product_name, 
+                    p.quantity, 
+                    p.price, 
+                    p.status, 
+                    p.discount, 
+                    p.description, 
+                    p.address, 
+                    w.status, 
+                    r.content, 
+                    r.rating_star, 
+                    r.status, 
+                    i.image_name; ";
+        $stmt = $this->conn->prepare($query);
+        
+        if ($stmt === false) {
+            error_log("Prepare failed: " . $this->conn->error);
+            return false;
+        }
+        $searchTerm = "%$keyword%";
+        $stmt->bind_param("s", $searchTerm);
+        
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        
+        if ($result === false) {
+            error_log("Query failed: " . $stmt->error);
+            return false;
+        }
+        return $result;
+    }
+    //count result of finding product
+    // public function countProducts($keyword)
+    // {
+    //     $query = "SELECT COUNT(*) AS total FROM products WHERE product_name LIKE ?";
+    //     $stmt = $this->conn->prepare($query);
+
+    //     if ($stmt === false) {
+    //         error_log("Prepare failed: " . $this->conn->error);
+    //         return false;
+    //     }
+
+    //     $searchTerm = "%$keyword%";
+    //     $stmt->bind_param("s", $searchTerm);
+
+    //     $executeResult = $stmt->execute();
+
+    //     if ($executeResult === false) {
+    //         error_log("Execution failed: " . $stmt->error);
+    //         return false;
+    //     }
+
+    //     $result = $stmt->get_result();
+    //     if ($result === false) {
+    //         error_log("Query failed: " . $stmt->error);
+    //         return false;
+    //     }
+    //     $row = $result->fetch_assoc();
+    //     return $row['total']; 
+    // }
+
+
+
 }

@@ -31,10 +31,8 @@
             <div class="search-bar row bg-light p-2 rounded-4">
                 <div class="col-11 col-md-11">
 
-                <form id="search-form" class="text-center" action="" method="post">
-                    <input type="text"
-                        class="form-control border-0 bg-transparent"
-                        placeholder="Tìm kiếm...">
+                <form id="search-form" class="text-center" action="index.php?page=product&s_interface=1" method="post" onsubmit="addKeywordToAction()">
+                    <input type="text" name="keyword" id="search-input" class="form-control border-0 bg-transparent text-black" placeholder="Tìm kiếm...">
                 </div>
                     <div class="col-1">
                         <button type="submit" name="btnFindProduct" value="btnFindProduct" class="btn btn-primary">
@@ -44,6 +42,19 @@
                         </button>
                     </div>
                 </form>
+                <script>
+                    function addKeywordToAction() {
+                        const keyword = document.getElementById("search-input").value;
+                        let actionUrl = document.getElementById("search-form").action;
+
+                        if (actionUrl.indexOf('keyword=') === -1) {
+                            actionUrl += (actionUrl.includes('?') ? '&' : '?') + 'keyword=' + encodeURIComponent(keyword);
+                        } else {
+                            actionUrl = actionUrl.replace(/([?&])keyword=[^&]*/, '$1keyword=' + encodeURIComponent(keyword));
+                        }
+                        document.getElementById("search-form").action = actionUrl;
+                    }
+                </script>
             </div>
         </div>
 

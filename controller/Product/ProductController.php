@@ -108,7 +108,8 @@ class ProductController
         return $result;
     }
     //find product by price
-    public function findProductByPriceController($priceFrom, $priceTo){
+    public function findProductByPriceController($priceFrom, $priceTo)
+    {
         $result = $this->product->findProductByPrice($priceFrom, $priceTo);
 
         if (!$result) {
@@ -117,7 +118,8 @@ class ProductController
         return $result;
     }
     //get product by category_item_id
-    public function getProductByCategoryItemController($categoryId, $categoryItemId){
+    public function getProductByCategoryItemController($categoryId, $categoryItemId)
+    {
         $result = $this->product->getProductByCategoryItem($categoryId, $categoryItemId);
 
         if (!$result) {
@@ -125,4 +127,19 @@ class ProductController
         }
         return $result;
     }
+    //Search
+    public function searchProductController($keyword)
+    {
+        $result = $this->product->searchProduct($keyword);
+
+        if (!$result) {
+            die("Failed to retrieve search results: " . $this->product->getConnection()->error);
+        }
+        return $result;
+    }
+    // count search
+    // public function countProductsController($keyword)
+    // {
+    //     return $this->product->countProducts($keyword);
+    // }
 }
