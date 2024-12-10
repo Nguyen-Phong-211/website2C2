@@ -15,7 +15,7 @@
                             if(isset($_POST['btnViewAllCategory']) && $_POST['btnViewAllCategory'] === "btnViewAllCategory"){
                                 $_SESSION['viewCategory'] = "btnViewAllCategory";
                                 echo '<script>
-                                        window.location.href = "index.php?page=product&s_interface=1"
+                                        window.location.href = "index.php?page=product&s_interface=1&u_i=POHFbvrdguu8765ftHU"
                                     </script>';
                             }
                             ?>

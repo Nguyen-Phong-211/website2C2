@@ -1,47 +1,47 @@
-<?php 
-    if((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!isset($_SESSION['emailUserLoginGoogle']) && !isset($_SESSION['success_message']))){
-        header('Location: index.php?page=login');
-        $_SESSION['info_login'] = "Thông báo đăng nhập.";
-    }
+<?php
+if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!isset($_SESSION['emailUserLoginGoogle']) && !isset($_SESSION['success_message']))) {
+    header('Location: index.php?page=login');
+    $_SESSION['info_login'] = "Thông báo đăng nhập.";
+}
 ?>
 <?php
-    if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
-        include_once('controller/Whistlist/WhistlistController.php');
+if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
+    include_once('controller/Whistlist/WhistlistController.php');
 
-        $whistlistController = new WhistlistController();
+    $whistlistController = new WhistlistController();
 
-        $result = $whistlistController->removeFromWhistlistController($_REQUEST['whistlistId']);
-        if ($result === true) {
-            $_SESSION['whistlist_success_message'] = true;
-        }
+    $result = $whistlistController->removeFromWhistlistController($_REQUEST['whistlistId']);
+    if ($result === true) {
+        $_SESSION['whistlist_success_message'] = true;
     }
-    ?>
-    <!-- notification of whistlist is add product success -->
-    <?php if (isset($_SESSION['whistlist_success_message']) && $_SESSION['whistlist_success_message'] === true): ?>
+}
+?>
+<!-- notification of whistlist is add product success -->
+<?php if (isset($_SESSION['whistlist_success_message']) && $_SESSION['whistlist_success_message'] === true): ?>
 
-        <div class="modal fade border-color shadow-sm" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <p class="modal-title font-monospace text-black" id="staticBackdropLabel">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#198753" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                            </svg>
-                            <small>
-                                Xoá sản phẩm khỏi danh sách yêu thích thành công!
-                            </small>
-                        </p>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+    <div class="modal fade border-color shadow-sm" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title font-monospace text-black" id="staticBackdropLabel">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#198753" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </svg>
+                        <small>
+                            Xoá sản phẩm khỏi danh sách yêu thích thành công!
+                        </small>
+                    </p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <?php 
-            $page = $_REQUEST['page'] ?? 'default_page';
-            $idc = $_REQUEST['idc'] ?? 'default_idc';
+    <?php
+    $page = $_REQUEST['page'] ?? 'default_page';
+    $idc = $_REQUEST['idc'] ?? 'default_idc';
 
-            echo "
+    echo "
             <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const modalElement = document.getElementById('staticBackdrop');
@@ -56,14 +56,14 @@
             });
             </script>
             ";
-        ?>
+    ?>
 
 
-        <?php
-        unset($_SESSION['whistlist_success_message']);
-        ?>
+    <?php
+    unset($_SESSION['whistlist_success_message']);
+    ?>
 
-    <?php endif; ?>
+<?php endif; ?>
 
 
 <!DOCTYPE html>
@@ -72,7 +72,7 @@
 <head>
     <title>
         <?php
-        if(isset($_REQUEST['idc'])){
+        if (isset($_REQUEST['idc'])) {
             include_once('controller/Category/CategoryController.php');
             $categoryController = new CategoryController();
             $datas = $categoryController->getCategoryList();
@@ -86,7 +86,7 @@
                     break;
                 }
             }
-        }else{
+        } else {
             echo 'Khám phá danh mục';
         }
         ?>
@@ -135,8 +135,8 @@
                                 class="section-header d-flex flex-wrap justify-content-between mb-5">
                                 <h2 class="section-title">Khám phá danh mục
                                     <?php
-                                
-                                    if(isset($_REQUEST['idc'])){
+
+                                    if (isset($_REQUEST['idc'])) {
                                         include_once('controller/Category/CategoryController.php');
                                         $categoryController = new CategoryController();
                                         $datas = $categoryController->getCategoryList();
@@ -156,7 +156,7 @@
 
                                 <div class="d-flex align-items-center">
                                     <a href="#" class="btn btn-primary me-2">Xem tất cả</a>
-                                
+
                                     <div class="swiper-buttons">
                                         <button
                                             class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
@@ -174,7 +174,7 @@
                             <div class="category-carousel swiper">
                                 <div class="swiper-wrapper">
                                     <?php
-                                    if(isset($_REQUEST['idc'])){
+                                    if (isset($_REQUEST['idc'])) {
                                         include_once('controller/CategoryItem/CategoryItemController.php');
                                         $categoryItemController = new CategoryItemController();
 
@@ -184,14 +184,14 @@
 
                                         foreach ($datas as $data) {
                                             echo '
-                                            <a href="index.php?page=product&idc='. $data['category_id'] .'&idci=' . $data['category_item_id'] . '&fdh_op=oikHk5tRF"
+                                            <a href="index.php?page=product&idc=' . $data['category_id'] . '&idci=' . $data['category_item_id'] . '&fdh_op=oikHk5tRF"
                                                 class="nav-link swiper-slide text-center">
                                                 <img src="asset/image/category_item/' . $data['image'] . '" height="120" width="120" class="rounded" alt="' . $data['category_item_name'] . '">
                                                 <h4 class="fs-6 mt-3 fw-normal category-title">' . $data['category_item_name'] . '</h4>
                                             </a>
                                             ';
                                         }
-                                    }else{
+                                    } else {
                                         include_once('controller/Category/CategoryController.php');
                                         $getCategory = new CategoryController();
                                         $datas = $getCategory->getCategoryList();
@@ -243,15 +243,15 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="row">
+                                <div class="row" id="productList">
 
                                     <?php
-                                   
+
                                     include_once('controller/Product/ProductController.php');
                                     $productController = new ProductController();
 
-                                    if(isset($_REQUEST['idc']) && isset($_REQUEST['df_sw']) && !isset($_REQUEST['htj'])){
-                
+                                    if (isset($_REQUEST['idc']) && isset($_REQUEST['df_sw']) && !isset($_REQUEST['htj'])) {
+
                                         $idc = $_GET['idc'];
                                         $count = 0;
 
@@ -434,8 +434,8 @@
                                                                     </div>
 
                                                                     <div class="col-3">';
-                                                                    if($dataProduct['wstatus'] === NULL){
-                                                                        echo '
+                                            if ($dataProduct['wstatus'] === NULL) {
+                                                echo '
                                                                         <form action="index.php?page=whistlist" method="post">
                                                                             <input type="hidden" name="productId" value="' . $dataProduct['product_id'] . '"> 
                                                                             <button type="submit" name="action" value="add_to_wishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
@@ -445,10 +445,10 @@
                                                                             </button>
                                                                         </form>
                                                                         ';
-                                                                    }else{
-                                                                        echo '
+                                            } else {
+                                                echo '
                                                                         <form action="" method="post">
-                                                                            <input type="hidden" name="whistlistId" value="'. $dataProduct['whistlist_id'] .'">
+                                                                            <input type="hidden" name="whistlistId" value="' . $dataProduct['whistlist_id'] . '">
                                                                             <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                                                                                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
@@ -456,8 +456,8 @@
                                                                             </button>
                                                                         </form>
                                                                         ';
-                                                                    }  
-                                                echo '              </div>
+                                            }
+                                            echo '              </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -465,11 +465,11 @@
                                                 </div>
                                                 ';
                                         }
-                                    }elseif(isset($_REQUEST['idci']) && isset($_REQUEST['fdh_op'])){
+                                    } elseif (isset($_REQUEST['idci']) && isset($_REQUEST['fdh_op'])) {
                                         $count = 0;
 
                                         $getProductByCateoryItems = $productController->getProductByCategoryItemController($_REQUEST['idc'], $_REQUEST['idci']);
-                                        if($getProductByCateoryItems->num_rows > 0){
+                                        if ($getProductByCateoryItems->num_rows > 0) {
                                             foreach ($getProductByCateoryItems as $getProductByCateoryItem) {
 
                                                 if ($count % 4 == 0 && $count != 0) {
@@ -486,7 +486,7 @@
                                                                 <a class="fs-6 fw-normal text-truncate text-decoration-none" href="index.php?page=detailProduct&idp=' . $getProductByCateoryItem['product_id'] . '">' . $getProductByCateoryItem['product_name'] . '</a>
                                                                 <div>
                                                                     <span class="rating">';
-    
+
                                                 if ($getProductByCateoryItem['rating_star'] >= 4.6 && $getProductByCateoryItem['rating_star'] <= 5) {
                                                     echo '
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -620,7 +620,7 @@
                                                                             </svg>
                                                                         ';
                                                 }
-    
+
                                                 echo                '</span>
                                                                     <span>
                                                                         (' . $getProductByCateoryItem['quantity'] . ')
@@ -647,8 +647,8 @@
                                                                         </div>
     
                                                                         <div class="col-3">';
-                                                                        if($getProductByCateoryItem['wstatus'] === NULL){
-                                                                            echo '
+                                                if ($getProductByCateoryItem['wstatus'] === NULL) {
+                                                    echo '
                                                                             <form action="index.php?page=whistlist" method="post">
                                                                                 <input type="hidden" name="productId" value="' . $getProductByCateoryItem['product_id'] . '"> 
                                                                                 <button type="submit" name="action" value="add_to_wishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
@@ -658,10 +658,10 @@
                                                                                 </button>
                                                                             </form>
                                                                             ';
-                                                                        }else{
-                                                                            echo '
+                                                } else {
+                                                    echo '
                                                                             <form action="" method="post">
-                                                                                <input type="hidden" name="whistlistId" value="'. $getProductByCateoryItem['whistlist_id'] .'">
+                                                                                <input type="hidden" name="whistlistId" value="' . $getProductByCateoryItem['whistlist_id'] . '">
                                                                                 <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                                                                                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
@@ -669,8 +669,8 @@
                                                                                 </button>
                                                                             </form>
                                                                             ';
-                                                                        }  
-                                                    echo '              </div>
+                                                }
+                                                echo '              </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -678,7 +678,7 @@
                                                     </div>
                                                     ';
                                             }
-                                        }else{
+                                        } else {
                                             echo '
                                             <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
                                                 <div class="text-center border border-2 rounded border-color p-4">
@@ -687,10 +687,10 @@
                                                 </div>
                                             </section>';
                                         }
-                                    }elseif(isset($_REQUEST['keyword']) && isset($_REQUEST['btnFindProduct'])){
+                                    } elseif (isset($_REQUEST['keyword']) && isset($_REQUEST['btnFindProduct'])) {
                                         $count = 0;
                                         $getSearchProducts = $productController->searchProductController($_REQUEST['keyword']);
-                                        if($getSearchProducts->num_rows > 0){
+                                        if ($getSearchProducts->num_rows > 0) {
                                             foreach ($getSearchProducts as $getSearchProduct) {
 
                                                 if ($count % 4 == 0 && $count != 0) {
@@ -707,7 +707,7 @@
                                                                 <a class="fs-6 fw-normal text-truncate text-decoration-none" href="index.php?page=detailProduct&idp=' . $getSearchProduct['product_id'] . '">' . $getSearchProduct['product_name'] . '</a>
                                                                 <div>
                                                                     <span class="rating">';
-    
+
                                                 if ($getSearchProduct['rating_star'] >= 4.6 && $getSearchProduct['rating_star'] <= 5) {
                                                     echo '
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -841,7 +841,7 @@
                                                                             </svg>
                                                                         ';
                                                 }
-    
+
                                                 echo                '</span>
                                                                     <span>
                                                                         (' . $getSearchProduct['quantity'] . ')
@@ -868,8 +868,8 @@
                                                                         </div>
     
                                                                         <div class="col-3">';
-                                                                        if($getSearchProduct['wstatus'] === NULL){
-                                                                            echo '
+                                                if ($getSearchProduct['wstatus'] === NULL) {
+                                                    echo '
                                                                             <form action="index.php?page=whistlist" method="post">
                                                                                 <input type="hidden" name="productId" value="' . $getSearchProduct['product_id'] . '"> 
                                                                                 <button type="submit" name="action" value="add_to_wishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
@@ -879,10 +879,10 @@
                                                                                 </button>
                                                                             </form>
                                                                             ';
-                                                                        }else{
-                                                                            echo '
+                                                } else {
+                                                    echo '
                                                                             <form action="" method="post">
-                                                                                <input type="hidden" name="whistlistId" value="'. $getSearchProduct['whistlist_id'] .'">
+                                                                                <input type="hidden" name="whistlistId" value="' . $getSearchProduct['whistlist_id'] . '">
                                                                                 <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                                                                                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
@@ -890,8 +890,8 @@
                                                                                 </button>
                                                                             </form>
                                                                             ';
-                                                                        }  
-                                                    echo '              </div>
+                                                }
+                                                echo '              </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -899,7 +899,7 @@
                                                     </div>
                                                     ';
                                             }
-                                        }else{
+                                        } else {
                                             echo '
                                             <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 20vh;">
                                                 <div class="text-center border border-2 rounded p-4">
@@ -909,11 +909,12 @@
                                             </section>
                                             ';
                                         }
-                                    } elseif(isset($_REQUEST["htj"]) && isset($_REQUEST['u_i'])){
+                                    } elseif (isset($_REQUEST["htj"]) && isset($_REQUEST['u_i'])) {
+                                        // | (isset($_REQUEST['s_interface']) && isset($_REQUEST['u_i']))
                                         $count = 0;
                                         $findPriceProducts = $productController->findProductByPriceController($_REQUEST['fromPrice'], $_REQUEST['toPrice']);
 
-                                        if($findPriceProducts->num_rows > 0){
+                                        if ($findPriceProducts->num_rows > 0) {
                                             foreach ($findPriceProducts as $findPriceProduct) {
 
                                                 if ($count % 4 == 0 && $count != 0) {
@@ -927,10 +928,10 @@
                                                                 </a>
                                                             </figure>
                                                             <div class="d-flex flex-column text-center">
-                                                                <a class="fs-6 fw-normal text-truncate text-decoration-none" href="index.php?page=detailProduct&idp=' . $findPriceProduct['product_id'] . '">' .$findPriceProduct['product_name'] . '</a>
+                                                                <a class="fs-6 fw-normal text-truncate text-decoration-none" href="index.php?page=detailProduct&idp=' . $findPriceProduct['product_id'] . '">' . $findPriceProduct['product_name'] . '</a>
                                                                 <div>
                                                                     <span class="rating">';
-    
+
                                                 if ($findPriceProduct['rating_star'] >= 4.6 && $findPriceProduct['rating_star'] <= 5) {
                                                     echo '
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -1064,7 +1065,7 @@
                                                                             </svg>
                                                                         ';
                                                 }
-    
+
                                                 echo                '</span>
                                                                     <span>
                                                                         (' . $findPriceProduct['quantity'] . ')
@@ -1091,8 +1092,8 @@
                                                                         </div>
     
                                                                         <div class="col-3">';
-                                                                        if($findPriceProduct['wstatus'] === NULL){
-                                                                            echo '
+                                                if ($findPriceProduct['wstatus'] === NULL) {
+                                                    echo '
                                                                             <form action="index.php?page=whistlist" method="post">
                                                                                 <input type="hidden" name="productId" value="' . $findPriceProduct['product_id'] . '"> 
                                                                                 <button type="submit" name="action" value="add_to_wishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
@@ -1102,10 +1103,10 @@
                                                                                 </button>
                                                                             </form>
                                                                             ';
-                                                                        }else{
-                                                                            echo '
+                                                } else {
+                                                    echo '
                                                                             <form action="" method="post">
-                                                                                <input type="hidden" name="whistlistId" value="'. $findPriceProduct['whistlist_id'] .'">
+                                                                                <input type="hidden" name="whistlistId" value="' . $findPriceProduct['whistlist_id'] . '">
                                                                                 <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                                                                                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
@@ -1113,8 +1114,8 @@
                                                                                 </button>
                                                                             </form>
                                                                             ';
-                                                                        }  
-                                                    echo '              </div>
+                                                }
+                                                echo '              </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1122,9 +1123,9 @@
                                                     </div>
                                                     ';
                                             }
-                                        }else {
+                                        } else {
                                             echo '
-                                            <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 20vh;">
+                                            <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 40vh;">
                                                 <div class="text-center border border-2 rounded p-4">
                                                     <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
                                                     <label class="text-black" for="">Không tìm thấy sản phẩm nào!</label>
@@ -1132,8 +1133,7 @@
                                             </section>
                                             ';
                                         }
-                                    }
-                                    else{
+                                    } else {
                                         $getAllProducts = $productController->getAllProductController();
                                         $count = 0;
 
@@ -1314,8 +1314,8 @@
                                                                     </div>
 
                                                                     <div class="col-3">';
-                                                                    if($getAllProduct['wstatus'] === NULL){
-                                                                        echo '
+                                            if ($getAllProduct['wstatus'] === NULL) {
+                                                echo '
                                                                         <form action="index.php?page=whistlist" method="post">
                                                                             <input type="hidden" name="productId" value="' . $getAllProduct['product_id'] . '"> 
                                                                             <button type="submit" name="action" value="add_to_wishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
@@ -1325,10 +1325,10 @@
                                                                             </button>
                                                                         </form>
                                                                         ';
-                                                                    }else{
-                                                                        echo '
+                                            } else {
+                                                echo '
                                                                         <form action="" method="post">
-                                                                            <input type="hidden" name="whistlistId" value="'. $getAllProduct['whistlist_id'] .'">
+                                                                            <input type="hidden" name="whistlistId" value="' . $getAllProduct['whistlist_id'] . '">
                                                                             <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 fs-6">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                                                                                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
@@ -1336,8 +1336,8 @@
                                                                             </button>
                                                                         </form>
                                                                         ';
-                                                                    }  
-                                                echo '              </div>
+                                            }
+                                            echo '              </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1347,6 +1347,52 @@
                                         }
                                     }
                                     ?>
+
+                                    <script>
+                                        // document.addEventListener('DOMContentLoaded', function() {
+                                        //     const ratingRadioButtons = document.querySelectorAll('input[name="flexRadioDefault"]');
+
+                                        //     ratingRadioButtons.forEach(function(radio) {
+                                        //         radio.addEventListener('change', function() {
+                                        //             const ratingStar = document.querySelector('input[name="flexRadioDefault"]:checked')?.value;
+
+                                        //             if (ratingStar) {
+
+                                        //                 fetch(`controller/Product/ProductController.php?ratingStar=${ratingStar}`)
+                                        //                     .then(response => response.json())
+                                        //                     .then(data => {
+                                        //                         if (data.status === 'success') {
+                                        //                             const products = data.data;
+                                        //                             let htmlContent = '';
+
+                                        //                             products.forEach(function(product) {
+                                        //                                 htmlContent += `
+                                        //                                     <div class="product">
+                                        //                                         <h3>${product.product_name}</h3>
+                                        //                                         <p>${product.description}</p>
+                                        //                                         <img src="path_to_images/${product.image_name}" alt="${product.product_name}">
+                                        //                                         <p>Price: ${product.price}</p>
+                                        //                                     </div>
+                                        //                                 `;
+                                        //                             });
+
+
+                                        //                             document.getElementById('productList').innerHTML = htmlContent;
+                                        //                         } else {
+                                        //                             document.getElementById('productList').innerHTML = '<p>Không có sản phẩm nào phù hợp.</p>';
+                                        //                         }
+                                        //                     })
+                                        //                     .catch(error => {
+                                        //                         console.error('Có lỗi xảy ra:', error);
+                                        //                         document.getElementById('productList').innerHTML = '<p>Không thể tải sản phẩm, vui lòng thử lại sau.</p>';
+                                        //                     });
+                                        //             }
+                                        //         });
+                                        //     });
+                                        // });
+                                    </script>
+
+
                                 </div>
                             </div>
                         </div>

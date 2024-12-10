@@ -142,4 +142,42 @@ class ProductController
     // {
     //     return $this->product->countProducts($keyword);
     // }
+
+    //get product by rating_star
+    // public function getProductByRatingStarController($ratingStar)
+    // {
+    //     $result = $this->product->getProductByRating($ratingStar);
+
+    //     if (!$result) {
+    //         echo json_encode(['status' => 'error', 'message' => 'Không có sản phẩm']);
+    //         die("Failed to retrieve product list: ". $this->product->getConnection()->error);
+    //     }
+    //     $products = [];
+    //     while ($row = $result->fetch_assoc()) {
+    //         $products[] = $row;
+    //     }
+    //     echo json_encode(['status' => 'success', 'data' => $products]);
+    //     exit;
+    // }
+    public function getProductByRatingStarController() {
+        $ratingStar = isset($_GET['ratingStar']) ? (int)$_GET['ratingStar'] : 0;
+    
+        if ($ratingStar < 1 || $ratingStar > 5) {
+            echo json_encode(['status' => 'error', 'message' => 'Số sao không hợp lệ']);
+            die();
+        }
+        $result = $this->product->getProductByRating($ratingStar);
+    
+        if (!$result) {
+            echo json_encode(['status' => 'error', 'message' => 'Không có sản phẩm']);
+            die();
+        }
+        $products = [];
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row;
+        }
+        echo json_encode(['status' => 'success', 'data' => $products]);
+        exit;
+    }    
+
 }

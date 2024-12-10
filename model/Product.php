@@ -217,25 +217,50 @@ class Product extends ConnectDatabase
                                                 p.discount, 
                                                 p.description, 
                                                 p.address, 
+                                                c.category_name, 
+                                                ci.category_item_name, 
                                                 w.status AS wstatus, 
                                                 w.whistlist_id,
                                                 r.content, 
                                                 r.rating_star, 
                                                 COUNT(r.review_id) AS total_reviews, 
-                                                i.image_name
+                                                i.image_name  
                                             FROM 
                                                 products AS p
                                             LEFT JOIN 
+                                                category_items AS ci ON p.category_item_id = ci.category_item_id
+                                            LEFT JOIN 
+                                                categories AS c ON c.category_id = ci.category_id
+                                            LEFT JOIN 
+                                                (
+                                                    SELECT product_id, image_name
+                                                    FROM images
+                                                    WHERE image_id IN (SELECT MIN(image_id) FROM images GROUP BY product_id)
+                                                ) AS i ON p.product_id = i.product_id
+                                            LEFT JOIN 
+                                                reviews AS r ON r.product_id = p.product_id
+                                            LEFT JOIN 
                                                 whistlists AS w ON p.product_id = w.product_id
-                                            LEFT JOIN 
-                                                reviews AS r ON p.product_id = r.product_id
-                                            LEFT JOIN 
-                                                (SELECT product_id, MIN(image_name) AS image_name FROM images GROUP BY product_id) AS i 
-                                                ON i.product_id = p.product_id
                                             WHERE 
-                                                p.quantity >= 1 AND p.price BETWEEN ? AND ?
+                                            
+                                                p.quantity >= 1  
+                                                AND p.price BETWEEN ? AND ?
                                             GROUP BY 
-                                                p.product_id, w.status, w.whistlist_id, i.image_name, r.content, r.rating_star");
+                                                p.product_id, 
+                                                p.product_name, 
+                                                p.quantity, 
+                                                p.price, 
+                                                p.status, 
+                                                p.discount, 
+                                                p.description, 
+                                                p.address, 
+                                                c.category_name, 
+                                                ci.category_item_name, 
+                                                w.status, 
+                                                w.whistlist_id, 
+                                                r.rating_star, 
+                                                i.image_name;
+                                            ");
     
         $stmt->bind_param("ii", $priceFrom, $priceTo);
     
@@ -399,6 +424,67 @@ class Product extends ConnectDatabase
     //     return $row['total']; 
     // }
 
+    //get product by rating_star
+    public function getProductByRating($ratingStar)
+    {
+        $query = "SELECT 
+                    COUNT(*) AS total, 
+                    p.product_id, 
+                    p.product_name, 
+                    p.quantity, 
+                    p.price, 
+                    p.status, 
+                    p.discount, 
+                    p.description, 
+                    p.address, 
+                    w.status AS wstatus, 
+                    w.whistlist_id,
+                    r.content, 
+                    r.rating_star, 
+                    r.status AS review_status, 
+                    i.image_name
+                FROM 
+                    products AS p
+                LEFT JOIN 
+                    whistlists AS w ON p.product_id = w.product_id 
+                LEFT JOIN 
+                    reviews AS r ON p.product_id = r.product_id  
+                LEFT JOIN 
+                    (SELECT product_id, MAX(image_name) AS image_name FROM images GROUP BY product_id) AS i 
+                    ON i.product_id = p.product_id
+                WHERE 
+                    r.rating_star =?
+                    AND p.quantity >= 1
+                GROUP BY
+                p.product_id, 
+                    p.product_name, 
+                    p.quantity, 
+                    p.price, 
+                    p.status,
+                    p.discount, 
+                    p.description, 
+                    p.address, 
+                    w.status, 
+
+                    r.rating_star, 
+                    r.status, 
+                    i.image_name";
+        $stmt = $this->conn->prepare($query);
+
+        if ($stmt === false) {
+            error_log("Prepare failed: ". $this->conn->error);
+            return false;
+        }
+        $stmt->bind_param("i", $ratingStar);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result === false) {
+            error_log("Query failed: ". $stmt->error);
+            return false;
+        }
+        return $result;
+    }
 
 
 }
