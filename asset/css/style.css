@@ -898,3 +898,12 @@ html {
   color: #dc3444;
   border-color: #dc3444;
 }
+.btn-information{
+  background-color: #10caf0;
+  color: white
+}
+.btn-information:hover{
+  background-color: white;
+  color: #10caf0;
+  border-color: #10caf0;
+}

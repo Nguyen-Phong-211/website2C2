@@ -236,4 +236,39 @@ class EmailController
             echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
         }
     }
+    function sendEmailInfoLoginGoogleSuccess($emailAuthu)
+    {
+        $mail = new PHPMailer(true);
+
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $dateInfoSuccess = date("d/m/Y H:i:s");
+
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'phongnguyen.050503@gmail.com';
+            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->CharSet = 'UTF-8';
+            $mail->Encoding = 'base64';
+
+            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->addAddress($emailAuthu);
+
+            $template = file_get_contents('view/page/email/success_login_google.html');
+            $template = str_replace('{{ dateInfoSuccess }}', $dateInfoSuccess, $template);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Thông báo từ hệ thống';
+            $mail->Body = $template;
+
+            $mail->send();
+
+        } catch (Exception $e) {
+            echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
+        }
+    }
 }

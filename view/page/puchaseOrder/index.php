@@ -58,6 +58,15 @@
                 </li>
             </ul>
 
+            <?php 
+                include_once('controller/Order/OrderController.php');
+                $orderController = new OrderController();
+
+                if(isset($_POST['btnUpdateStatusOrder']) && $_POST['btnUpdateStatusOrder'] == "btnUpdateStatusOrder"){
+                    $orderController->updateOrderStatusBuyerController($_POST['orderId'], $_POST['status']);
+                }
+            ?>
+
             <div class="tab-content mt-5" id="all-puchase">
                 <section class="mt-4">
                     <table class="table text-black">
@@ -88,6 +97,7 @@
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -126,6 +136,80 @@
                                                     </p>
                                                     
                                                 </td>
+                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal' . $order['order_id'] . '">
+                                                    <a class="btn btn-primary active" data-bs-toggle="tooltip" data-bs-placement="top" title="Cập nhật">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                                                        </svg>
+                                                    </a>
+                                                </td>
+
+
+                                                <div class="modal fade" id="exampleModal' . $order['order_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông tin đơn hàng</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body text-black">
+                                                                <small>Mã đơn hàng: ' . $order['order_id'] . '</small> <br>
+                                                                <small>Tên sản phẩm: ' . $order['product_name'] . '</small> <br>
+                                                                <small>Ngày đặt hàng: ' . date('d/m/Y H:i:m', strtotime($order['o_create_at'])) . '</small> <br>
+                                                                <small>Số lượng: ' . $order['quantity'] . '</small> <br>
+                                                                <small>Giảm giá: ' . $order['discount'] . '%</small> <br>
+                                                                <p class="fs-5 fw-bold">Thành tiền: '. number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . ' đồng</p>
+                                                                <small>Cập nhật trạng thái đơn hàng</small>
+                                                                <form action="index.php?page=puchaseOrder" method="post">
+                                                                    <input type="hidden" name="orderId" value="' . $order['order_id'] . '"> ';
+                                                                    if($order['order_status'] == 0){
+                                                                        echo '
+                                                                        <select class="form-select border-color" disabled>
+                                                                            <option value="0" selected>Huỷ hàng</option>
+                                                                            <option value="1">Hoàn tất</option>
+                                                                            <option value="2">Chờ xác nhận</option>
+                                                                            <option value="3">Chờ xác nhận</option>
+                                                                        </select>';
+                                                                    }elseif ($order['order_status'] == 1) {
+                                                                        echo '
+                                                                        <select class="form-select border-color" disabled>
+                                                                            <option value="0">Huỷ hàng</option>
+                                                                            <option value="1" selected>Hoàn tất</option>
+                                                                            <option value="2">Chờ xác nhận</option>
+                                                                            <option value="3">Chờ nhận hàng</option>
+                                                                        </select>';
+                                                                    } elseif ($order['order_status'] == 2) {
+                                                                        echo '
+                                                                        <select class="form-select border-color" name="status">
+                                                                            <option value="0">Huỷ hàng</option>
+                                                                            <option value="1">Hoàn tất</option>
+                                                                            <option value="2" selected>Chờ xác nhận</option>
+                                                                            <option value="3">Chờ nhận hàng</option>
+                                                                        </select>';
+                                                                    } else {
+                                                                        echo '
+                                                                        <select class="form-select border-color" name="status">
+                                                                            <option value="0">Huỷ hàng</option>
+                                                                            <option value="1">Hoàn tất</option>
+                                                                            <option value="2">Chờ xác nhận</option>
+                                                                            <option value="3" selected>Chờ nhận hàng</option>
+                                                                        </select>';
+                                                                    } 
+                                            echo            '</div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger btn-cancel" data-bs-dismiss="modal">Đóng</button>';
+                                                                if($order['order_status'] == 0 || $order['order_status'] == 1){
+                                                                    echo '<button type="submit" name="btnUpdateStatusOrder" value="btnUpdateStatusOrder" class="btn btn-primary" disabled>Lưu thay đổi</button>';
+                                                                }else{
+                                                                    echo '<button type="submit" name="btnUpdateStatusOrder" value="btnUpdateStatusOrder" class="btn btn-primary">Lưu thay đổi</button>';
+                                                                }
+                                            echo            '</div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
                                             </tr>
                                             <tr>
                                                 <td colspan="9" class="p-0">
@@ -220,6 +304,7 @@
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -248,13 +333,92 @@
                                                     }
                                             echo '</td>
                                                 <td>
-                                                    <p>
+                                                    <p data-bs-toggle="tooltip" data-bs-placement="left" title="Chi tiết">
                                                         <a class="btn btn-primary active" data-bs-toggle="collapse" href="#collapseOrder' . $order['order_id'] . '" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                            Xem chi tiết
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                                            </svg>
                                                         </a>
                                                     </p>
                                                     
                                                 </td>
+                                                <td data-bs-toggle="modal" data-bs-target="#exampleModal' . $order['order_id'] . '">
+                                                    <a class="btn btn-primary active" data-bs-toggle="tooltip" data-bs-placement="top" title="Cập nhật">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                                                        </svg>
+                                                    </a>
+                                                </td>
+
+
+
+                                                <div class="modal fade" id="exampleModal' . $order['order_id'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông tin đơn hàng</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body text-black">
+                                                                <small>Mã đơn hàng: ' . $order['order_id'] . '</small> <br>
+                                                                <small>Tên sản phẩm: ' . $order['product_name'] . '</small> <br>
+                                                                <small>Ngày đặt hàng: ' . date('d/m/Y H:i:m', strtotime($order['o_create_at'])) . '</small> <br>
+                                                                <small>Số lượng: ' . $order['quantity'] . '</small> <br>
+                                                                <small>Giảm giá: ' . $order['discount'] . '%</small> <br>
+                                                                <p class="fs-5 fw-bold">Thành tiền: '. number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . ' đồng</p>
+                                                                <small>Cập nhật trạng thái đơn hàng</small>
+                                                                <form action="index.php?page=puchaseOrder" method="post">
+                                                                    <input type="hidden" name="orderId" value="' . $order['order_id'] . '"> ';
+                                                                    if($order['order_status'] == 0){
+                                                                        echo '
+                                                                        <select class="form-select border-color" disabled>
+                                                                            <option value="0" selected>Huỷ hàng</option>
+                                                                            <option value="1">Hoàn tất</option>
+                                                                            <option value="2">Chờ xác nhận</option>
+                                                                            <option value="3">Chờ xác nhận</option>
+                                                                        </select>';
+                                                                    }elseif ($order['order_status'] == 1) {
+                                                                        echo '
+                                                                        <select class="form-select border-color" disabled>
+                                                                            <option value="0">Huỷ hàng</option>
+                                                                            <option value="1" selected>Hoàn tất</option>
+                                                                            <option value="2">Chờ xác nhận</option>
+                                                                            <option value="3">Chờ nhận hàng</option>
+                                                                        </select>';
+                                                                    } elseif ($order['order_status'] == 2) {
+                                                                        echo '
+                                                                        <select class="form-select border-color" name="status">
+                                                                            <option value="0">Huỷ hàng</option>
+                                                                            <option value="1">Hoàn tất</option>
+                                                                            <option value="2" selected>Chờ xác nhận</option>
+                                                                            <option value="3">Chờ nhận hàng</option>
+                                                                        </select>';
+                                                                    } else {
+                                                                        echo '
+                                                                        <select class="form-select border-color" name="status">
+                                                                            <option value="0">Huỷ hàng</option>
+                                                                            <option value="1">Hoàn tất</option>
+                                                                            <option value="2">Chờ xác nhận</option>
+                                                                            <option value="3" selected>Chờ nhận hàng</option>
+                                                                        </select>';
+                                                                    } 
+                                            echo            '</div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger btn-cancel" data-bs-dismiss="modal">Đóng</button>';
+                                                                if($order['order_status'] == 0 || $order['order_status'] == 1){
+                                                                    echo '<button type="submit" name="btnUpdateStatusOrder" value="btnUpdateStatusOrder" class="btn btn-primary" disabled>Lưu thay đổi</button>';
+                                                                }else{
+                                                                    echo '<button type="submit" name="btnUpdateStatusOrder" value="btnUpdateStatusOrder" class="btn btn-primary">Lưu thay đổi</button>';
+                                                                }
+                                            echo            '</div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
                                             </tr>
                                             <tr>
                                                 <td colspan="9" class="p-0">

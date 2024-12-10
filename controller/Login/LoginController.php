@@ -1,13 +1,16 @@
 <?php
 include_once('model/Login.php');
+include_once('model/User.php');
 
 class LoginController
 {
     private $loginModel;
+    private $userModel;
 
     public function __construct()
     {
         $this->loginModel = new Login();
+        $this->userModel = new User();
     }
 
     public function loginUserController($email, $password)
@@ -16,12 +19,15 @@ class LoginController
 
         if ($result) {
 
+            // $userId = $this->userModel->getUserIdByEmail($email);
+
             $_SESSION['email'] = $result['email'];
             $_SESSION['role'] = "buyer";
+            $_SESSION['user_id'] = $result['user_id'];
 
             $_SESSION['success_message'] = "Đăng nhập thành công!";
 
-            sleep(4);
+            sleep(3);
             header("Location: index.php?page=home");
             
             exit;

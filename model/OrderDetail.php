@@ -17,6 +17,7 @@
                 o.create_at AS o_create_at, 
                 o.update_at AS o_update_at,
                 o.status, 
+                o.order_status,
                 od.*, 
                 p.product_name, 
                 i.image_name,

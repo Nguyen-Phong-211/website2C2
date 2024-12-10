@@ -485,6 +485,22 @@ class Product extends ConnectDatabase
         }
         return $result;
     }
+    //update view product_id
+    public function updateViewCount($productId)
+    {
+        $query = "UPDATE products SET view = view + 1 WHERE product_id =?";
+        $stmt = $this->conn->prepare($query);
+
+        if ($stmt === false) {
+            error_log("Prepare failed: ". $this->conn->error);
+            return false;
+        }
+        $stmt->bind_param("i", $productId);
+
+        $stmt->execute();
+        $stmt->close();
+        return true;
+    }
 
 
 }

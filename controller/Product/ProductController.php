@@ -160,24 +160,42 @@ class ProductController
     //     exit;
     // }
     public function getProductByRatingStarController() {
-        $ratingStar = isset($_GET['ratingStar']) ? (int)$_GET['ratingStar'] : 0;
+        if (isset($_GET['action']) && $_GET['action'] === 'getProductByRatingStar') {
+            $ratingStar = isset($_GET['ratingStar']) ? (int)$_GET['ratingStar'] : 0;
+        
+            if ($ratingStar < 1 || $ratingStar > 5) {
+                echo json_encode(['status' => 'error', 'message' => 'Số sao không hợp lệ']);
+                exit;
+            }
     
-        if ($ratingStar < 1 || $ratingStar > 5) {
-            echo json_encode(['status' => 'error', 'message' => 'Số sao không hợp lệ']);
-            die();
-        }
-        $result = $this->product->getProductByRating($ratingStar);
-    
+            $result = $this->product->getProductByRating($ratingStar);
+        
+            if (!$result) {
+                echo json_encode(['status' => 'error', 'message' => 'Không có sản phẩm']);
+                exit;
+            }
+        
+            $products = [];
+            while ($row = $result->fetch_assoc()) {
+                $products[] = $row;
+            }
+        
+            echo json_encode(['status' => 'success', 'data' => $products]);
+            exit;
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Hành động không hợp lệ']);
+            exit;
+        } 
+    }   
+    //update view product_id
+    public function updateViewProductController($productId)
+    {
+        $result = $this->product->updateViewCount($productId);
+
         if (!$result) {
-            echo json_encode(['status' => 'error', 'message' => 'Không có sản phẩm']);
-            die();
+            die("Failed to retrieve search results: " . $this->product->getConnection()->error);
         }
-        $products = [];
-        while ($row = $result->fetch_assoc()) {
-            $products[] = $row;
-        }
-        echo json_encode(['status' => 'success', 'data' => $products]);
-        exit;
-    }    
+        return true;
+    }
 
 }

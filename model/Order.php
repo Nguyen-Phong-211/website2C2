@@ -10,10 +10,33 @@ class Order extends ConnectDatabase
         parent::__construct();
         $this->conn = $this->getConnection();
     }
-    //update status order
+    //update status order by role seller
     public function updateStatusOrder($orderId, $status)
     {
         $stmt = $this->conn->prepare("UPDATE orders SET order_status = ? WHERE order_id = ?");
+        if ($stmt === false) {
+            die("Error preparing the statement: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("ii", $status, $orderId);
+
+        $executeResult = $stmt->execute();
+
+        if ($executeResult) {
+            if ($stmt->affected_rows > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            echo "Failed to update order status: " . $stmt->error;
+            return false;
+        }
+    }
+    //update status order by role buyer
+    public function updateStatusOrderBuyer($orderId, $status)
+    {
+        $stmt = $this->conn->prepare("UPDATE orders SET status = ? WHERE order_id = ?");
         if ($stmt === false) {
             die("Error preparing the statement: " . $this->conn->error);
         }
