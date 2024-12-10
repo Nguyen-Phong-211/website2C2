@@ -1,51 +1,3 @@
-<?php 
-    if((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!isset($_SESSION['emailUserLoginGoogle']) && !isset($_SESSION['success_message']))){
-        header('Location: index.php?page=login');
-        $_SESSION['info_login'] = "Thông báo đăng nhập.";
-    }
-?>
-
-<?php
-include_once('controller/User/UserController.php');
-include_once('controller/Whistlist/WhistlistController.php');
-
-$whistlistController = new WhistlistController();
-$userController = new UserController();
-
-if (isset($_REQUEST['productId']) && isset($_SESSION['email']) && isset($_SESSION['success_message'])) {
-
-    $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
-
-    $checkProduct = $whistlistController->checkIfExistWhistlistController($_REQUEST['productId'], $getUserId);
-
-    if ($checkProduct === false) {
-        $result = $whistlistController->addToWhistlistController($_REQUEST['productId'], $getUserId);
-        if ($result === true) {
-            $_SESSION['whistlist_success_message'] = true;
-        }
-    }
-    echo '<script>window.location.href = "index.php?page=home";</script>';
-    exit;
-} else {
-
-    if (isset($_REQUEST['productId']) && !empty($_REQUEST['productId'])) {
-        $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
-
-        $checkProduct = $whistlistController->checkIfExistWhistlistController($_REQUEST['productId'], $getUserId);
-
-        if ($checkProduct === false) {
-            $result = $whistlistController->addToWhistlistController($_REQUEST['productId'], $getUserId);
-            if ($result === true) {
-                $_SESSION['whistlist_success_message'] = true;
-            }
-        }
-        echo '<script>window.location.href = "index.php?page=home";</script>';
-        exit;
-    }
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,214 +12,279 @@ if (isset($_REQUEST['productId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 <body>
 
+    <!-- Svg -->
+    <?php
+    include_once('view/layout/body/svg.php');
+    ?>
 
     <div class="preloader-wrapper">
         <div class="preloader">
         </div>
     </div>
 
-    <?php
-    include_once('view/layout/slidebar/slidebar.php');
-    ?>
+    <div class="offcanvas offcanvas-start" tabindex="-1"
+        id="offcanvasNavbar">
+
+        <div class="offcanvas-header justify-content-between">
+            <h4 class="fw-normal text-uppercase fs-6">Menu</h4>
+            <button type="button" class="btn-close"
+                data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+
+            <ul
+                class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
+                <li class="nav-item border-dashed active">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#fruits"></use>
+                        </svg>
+                        <span>Fruits and vegetables</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#dairy"></use>
+                        </svg>
+                        <span>Dairy and Eggs</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#meat"></use>
+                        </svg>
+                        <span>Meat and Poultry</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#seafood"></use>
+                        </svg>
+                        <span>Seafood</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#bakery"></use>
+                        </svg>
+                        <span>Bakery and Bread</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#canned"></use>
+                        </svg>
+                        <span>Canned Goods</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#frozen"></use>
+                        </svg>
+                        <span>Frozen Foods</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#pasta"></use>
+                        </svg>
+                        <span>Pasta and Rice</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#breakfast"></use>
+                        </svg>
+                        <span>Breakfast Foods</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#snacks"></use>
+                        </svg>
+                        <span>Snacks and Chips</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <button
+                        class="btn btn-toggle dropdown-toggle position-relative w-100 d-flex justify-content-between align-items-center text-dark p-2"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#beverages-collapse"
+                        aria-expanded="false">
+                        <div class="d-flex gap-3">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <use xlink:href="#beverages"></use>
+                            </svg>
+                            <span>Beverages</span>
+                        </div>
+                    </button>
+                    <div class="collapse" id="beverages-collapse">
+                        <ul
+                            class="btn-toggle-nav list-unstyled fw-normal ps-5 pb-1">
+                            <li class="border-bottom py-2"><a
+                                    href="index.html"
+                                    class="dropdown-item">Water</a></li>
+                            <li class="border-bottom py-2"><a
+                                    href="index.html"
+                                    class="dropdown-item">Juice</a></li>
+                            <li class="border-bottom py-2"><a
+                                    href="index.html"
+                                    class="dropdown-item">Soda</a></li>
+                            <li class="border-bottom py-2"><a
+                                    href="index.html"
+                                    class="dropdown-item">Tea</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#spices"></use>
+                        </svg>
+                        <span>Spices and Seasonings</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#baby"></use>
+                        </svg>
+                        <span>Baby Food and Formula</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#health"></use>
+                        </svg>
+                        <span>Health and Wellness</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#household"></use>
+                        </svg>
+                        <span>Household Supplies</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#personal"></use>
+                        </svg>
+                        <span>Personal Care</span>
+                    </a>
+                </li>
+                <li class="nav-item border-dashed">
+                    <a href="index.html"
+                        class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <use xlink:href="#pet"></use>
+                        </svg>
+                        <span>Pet Food and Supplies</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
 
     <header>
         <?php
-        include_once('view/layout/header/menu.php');
+            include_once('view/layout/header/menu.php');
         ?>
     </header>
 
     <?php
-    include_once('view/layout/slider/slider.php');
+        include_once('view/layout/pagination/index.php');
     ?>
 
 
-    <?php
-    include_once('view/layout/pagination/index.php');
-    ?>
+    <!-- <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
+        <div class="text-center border border-3 rounded-circle">
+            <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
+            <label for="">Chưa có sản phẩm nào</label>
+        </div>
+    </section> -->
+
+
+    
 
     <section class="container pb-4 my-4 text-black">
         <div class="container mt-5">
-
-            <table class="table table-borderless">
-                
-                <?php
-                include_once('controller/Whistlist/WhistlistController.php');
-                include_once('controller/User/UserController.php');
-
-                $whistlistController = new WhistlistController();
-                $userController = new UserController();
-
-                if (isset($_SESSION['email'])) {
-                    $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
-                    $countWhistlistRole = $whistlistController->countProductInWhistlistControllerRole($getUserId);
-
-                    if($countWhistlistRole != 0){
-                        $dataWhistlistUsers = $whistlistController->getAllWhistlistByUserIdController($getUserId);
-
-                        echo '<tr class="text-black text-uppercase fw-bold">
-                                <td>Sản phẩm</td>
-                                <td></td>
-                                <td>Số lượng</td>
-                                <td>Giá</td>
-                                <td>Thành tiền</td>
-                                <td>Trạng thái</td>
-                                <td>Thao tác</td>
-                            </tr>';
-
-                        foreach ($dataWhistlistUsers as $dataWhistlistUser) {
-                            echo '
-                            <tr class="text-black">
-                                <td><img src="asset/image/product/' . $dataWhistlistUser['image_name'] . '" alt="' . $dataWhistlistUser['product_name'] . '" height="50" width="50" class="img-fluid"></td>
-                                <td>' . $dataWhistlistUser['product_name'] . '</td>
-                                <td>1</td>
-                                <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
-                                <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
-                                <td>
-                                    <span class="badge bg-primary">Còn hàng</span>
-                                </td>
-                                <td>
-                                    <form method="POST" action="index.php?page=whistlist">
-                                        <input type="hidden" name="whistListInput" value="' . $dataWhistlistUser['whistlist_id'] . '"> 
-                                        <button name="btnDeleteWhistlist" type="submit" class="btn btn-danger text-white" style="background-color: #dc3444">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                                            </svg>&nbsp;Xoá
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            ';
-                        }
-                    }else{
-                        echo '
-                        <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
-                            <div class="text-center border border-2 rounded border-color p-4">
-                                <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
-                                <label class="text-black" for="">Chưa có sản phẩm nào!</label>
-                            </div>
-                        </section>';
-                    }
-                } else {
-                    $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
-
-                    $countWhistlistRole = $whistlistController->countProductInWhistlistControllerRole($getUserId);
-
-                    if($countWhistlistRole != 0){
-                        $dataWhistlistUsers = $whistlistController->getAllWhistlistByUserIdController($getUserId);
-
-                        echo '<tr class="text-black text-uppercase fw-bold">
-                                <td>Sản phẩm</td>
-                                <td></td>
-                                <td>Số lượng</td>
-                                <td>Giá</td>
-                                <td>Thành tiền</td>
-                                <td>Trạng thái</td>
-                                <td>Thao tác</td>
-                            </tr>';
-
-                        foreach ($dataWhistlistUsers as $dataWhistlistUser) {
-                            echo '
-                            <tr class="text-black">
-                                <td><img src="asset/image/product/' . $dataWhistlistUser['image_name'] . '" alt="' . $dataWhistlistUser['product_name'] . '" height="50" width="50" class="img-fluid"></td>
-                                <td>' . $dataWhistlistUser['product_name'] . '</td>
-                                <td>1</td>
-                                <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
-                                <td>' . number_format($dataWhistlistUser['price'], 0, ',', '.') . '</td>
-                                <td>
-                                    <span class="badge bg-primary">Còn hàng</span>
-                                </td>
-                                <td>
-                                    <form method="POST" action="index.php?page=whistlist">
-                                        <input type="hidden" name="whistListInput" value="' . $dataWhistlistUser['whistlist_id'] . '"> 
-                                        <button name="btnDeleteWhistlist" type="submit" class="btn btn-danger text-white" style="background-color: #dc3444">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                                            </svg>&nbsp;Xoá
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            ';
-                        }
-                    }else{
-                        echo '
-                        <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
-                            <div class="text-center border border-2 rounded border-color p-4">
-                                <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25"> <br>
-                                <label class="text-black" for="">Chưa có sản phẩm nào!</label>
-                            </div>
-                        </section>';
-                    }
-                }
-                ?>
-            </table>
-        </div>
-    </section>
-
-    <?php
-    if (isset($_REQUEST['btnDeleteWhistlist']) && isset($_REQUEST['whistListInput'])) {
-        include_once('controller/Whistlist/WhistlistController.php');
-
-        $whistlistController = new WhistlistController();
-
-        $result = $whistlistController->removeFromWhistlistController($_REQUEST['whistListInput']);
-        if ($result === true) {
-            $_SESSION['whistlist_success_message'] = true;
-        }
-    }
-    ?>
-    <!-- notification of whistlist is add product success -->
-    <?php if (isset($_SESSION['whistlist_success_message']) && $_SESSION['whistlist_success_message'] === true): ?>
-
-        <div class="modal fade border-color shadow-sm" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <p class="modal-title font-monospace text-black" id="staticBackdropLabel">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#198753" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                            </svg>
-                            <small>
-                                Xoá sản phẩm khỏi danh sách yêu thích thành công!
-                            </small>
-                        </p>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+            <div class="row">
+                <div class="col-2">Sản phẩm</div>
+                <div class="col-2">Giá</div>
+                <div class="col-1">Số lượng</div>
+                <div class="col-2">Tình trạng</div>
+                <div class="col-2"></div>
+                <div class="col-2"></div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <img src="images/product-thumb-1.png" alt="Hình ảnh sản phẩm" class="img-fluid tab-image">
+                </div>
+                <div class="col-2">45.000 đồng</div>
+                <div class="col-1">1</div>
+                <div class="col-2">
+                    <span class="badge bg-primary">Còn hàng</span>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary active">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-basket3-fill" viewBox="0 0 16 16">
+                            <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"/>
+                        </svg>
+                        </svg>
+                            Thêm vào giỏ hàng
+                    </button>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-danger active" style="background-color: rgb(255, 87, 87); color: white;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                        </svg>
+                        Xóa
+                    </button>
                 </div>
             </div>
         </div>
+    </section>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const modalElement = document.getElementById('staticBackdrop');
-                const modalInstance = new bootstrap.Modal(modalElement);
-
-                modalInstance.show();
-
-                setTimeout(() => {
-                    modalInstance.hide();
-                    window.location.href = "index.php?page=whistlist";
-                }, 2000);
-            });
-        </script>
-
-        <?php
-        unset($_SESSION['whistlist_success_message']);
-        ?>
-
-    <?php endif; ?>
-
+    
 
     <?php
-    include_once('view/layout/header/button_backtotop.php');
+        include_once('view/layout/footer/footer.php');
     ?>
 
     <?php
-    include_once('view/layout/footer/footer.php');
-    ?>
-
-    <?php
-    include_once('view/layout/footer/lib-cdn-js.php');
+        include_once('view/layout/footer/lib-cdn-js.php');
     ?>
 </body>
 

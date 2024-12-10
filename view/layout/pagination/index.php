@@ -4,6 +4,11 @@
             <li class="breadcrumb-item">
                 <a href="index.php?page=home" class="text-decoration-underline">Trang chủ</a>
             </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6bb252" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+                </svg>
+            </li>
             <li class="breadcrumb-item">
                 <?php 
                     $pageName = $page;
@@ -45,48 +50,14 @@
                         case 'clause':
                             echo '<a href="index.php?page=' . $page . '" class="text-decoration-none"> Chính sách điều khoản và bảo mật </a>';
                             break;  
-                        case 'detailProduct':
-                            echo '<a class="text-decoration-none" href="index.php?page=detailProduct&idp='. $_REQUEST['idp'] .'">Chi tiết sản phẩm</a>';
-                            break;  
-                        case 'product':
-                            if (isset($_REQUEST['s_interface']) && $_REQUEST['s_interface'] == 1) {
-                                echo '<a href="index.php?page=' . $page . '&s_interface=1" class="text-decoration-none"> Khám phá danh mục </a>';
-                            } else {
-                                echo '<a href="index.php?page=' . $page . '&idc=' . $_REQUEST['idc'] . '" class="text-decoration-none"> Sản phẩm </a>';
-                            }
-                            break; 
+
+
                         default:
-                            echo '<a href="" class="text-decoration-none"> Khám phá </a>';
+                            # code...
                             break;
                     }
                 ?>
             </li>
-            <?php 
-                include_once('controller/Product/ProductController.php');
-                include_once('controller/Category/CategoryController.php');
-                include_once('controller/CategoryItem/CategoryItemController.php');
-
-                $productController = new ProductController();
-                $categoryController = new CategoryController(); 
-                $categoryItemController = new CategoryItemController();
-
-                if($_REQUEST['page'] == 'detailProduct'){
-                    $idp = $_REQUEST['idp'];
-                    echo '<li class="breadcrumb-item"><a>'. $productController->getNameProductByIdController($idp). '</a></li>';
-
-                }elseif($_REQUEST['page'] == 'product' && isset($_REQUEST['idc']) && !isset($_REQUEST['fdh_op'])){
-                    $idc = $_REQUEST['idc'];
-                    $categoryName = $categoryController->getCategoryNameController($idc);
-                    echo '<li class="breadcrumb-item">' . htmlspecialchars($categoryName) . '</li>';
-
-                }elseif($_REQUEST['page'] == 'product' && isset($_REQUEST['idc']) && isset($_REQUEST['idci']) && isset($_REQUEST['fdh_op'])){
-                    $categoryItemName = $categoryItemController->getCategoryNameController($_REQUEST['idc'], $_REQUEST['idci']);
-                    $categoryName = $categoryController->getCategoryNameController($_REQUEST['idc']);
-
-                    echo '<li class="breadcrumb-item"><a class="text-decoration-none" href="index.php?page=product&idc='. $_REQUEST['idc'] .'&idci='. $_REQUEST['idci'] .'&fdh_op=oikHk5tRF">' . $categoryName . '</a></li>';
-                    echo '<li class="breadcrumb-item">' . $categoryItemName . '</li>';
-                }
-            ?>
         </ol>
     </nav>
 </section>

@@ -8,19 +8,7 @@
                     <h2 class="section-title">Khám phá danh mục</h2>
 
                     <div class="d-flex align-items-center">
-
-                        <form action="" method="post">
-                            <button type="submit" name="btnViewAllCategory" value="btnViewAllCategory" class="btn btn-primary me-2">Xem tất cả</button>
-                            <?php 
-                            if(isset($_POST['btnViewAllCategory']) && $_POST['btnViewAllCategory'] === "btnViewAllCategory"){
-                                $_SESSION['viewCategory'] = "btnViewAllCategory";
-                                echo '<script>
-                                        window.location.href = "index.php?page=product&s_interface=1&u_i=POHFbvrdguu8765ftHU"
-                                    </script>';
-                            }
-                            ?>
-                        </form>
-                        
+                        <a href="#" class="btn btn-primary me-2">Xem tất cả</a>
                         <div class="swiper-buttons">
                             <button
                                 class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
@@ -44,7 +32,7 @@
 
                         foreach ($datas as $data) {
                             echo '
-                                <a href="index.php?page=product&idc=' . $data['category_id'] . '&df_sw=UHhgPl0k9"
+                                <a href="index.php?page=category&idc=' . $data['category_id'] . '"
                                     class="nav-link swiper-slide text-center">
                                     <img src="asset/image/category/' . $data['image'] . '" height="120" width="120" class="rounded" alt="' . $data['category_name'] . '">
                                     <h4 class="fs-6 mt-3 fw-normal category-title">' . $data['category_name'] . '</h4>

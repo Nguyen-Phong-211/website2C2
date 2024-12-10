@@ -1,10 +1,3 @@
-<?php 
-    if((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!isset($_SESSION['emailUserLoginGoogle']) && !isset($_SESSION['success_message']))){
-        header('Location: index.php?page=login');
-        $_SESSION['info_login'] = "Thông báo đăng nhập.";
-    }
-?>
-
 <?php
 $selectedCategory = isset($_POST['category']) ? $_POST['category'] : '';
 $selectedSubCategory = isset($_POST['subcategory']) ? $_POST['subcategory'] : '';
@@ -32,6 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
+    <!-- Svg -->
+    <?php
+    include_once('view/layout/body/svg.php');
+    ?>
+
     <div class="preloader-wrapper">
         <div class="preloader">
         </div>
@@ -46,10 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include_once('view/layout/header/menu.php');
         ?>
     </header>
-
-    <?php
-    include_once('view/layout/slider/slider.php');
-    ?>
 
     <?php
     include_once('view/layout/pagination/index.php');
@@ -88,98 +82,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col">
-
-
                             <div class="mb-3">
                                 <label for="category" class="form-label">Danh mục cấp 1 <span class="text-danger">*</span></label>
-                                <select class="form-select border-color" id="category" name="category" required onchange="this.form.submit()" onchange="fetchSubcategories(this.value)">
+                                <select class="form-select border-color" id="category" name="category" required onchange="this.form.submit()">
                                     <option value="">Chọn danh mục</option>
-                                    <?php
-                                    // include_once('controller/Category/CategoryController.php');
-                                    // $categoryController = new CategoryController();
-                                    // $categories = $categoryController->getCategoryList();
+                                    <?php 
+                                    include_once('controller/Category/CategoryController.php');
+                                    $categoryController = new CategoryController();
+                                    $categories = $categoryController->getCategoryList();
 
-                                    // foreach($categories as $category){
-                                    //     echo '<option value="'. $category['category_id'] .'">'. $category['category_name'] .'</option>';
-                                    // }
+                                    foreach($categories as $category){
+                                        echo '<option value="'. $category['category_id'] .'" selected>'. $category['category_name'] .'</option>';
+                                    }
                                     ?>
+                                    <!-- <option value="do-dien-tu" <?php //if ($selectedCategory == 'do-dien-tu') echo 'selected'; ?>>Đồ điện tử</option>
+                                    <option value="sach" <?php //if ($selectedCategory == 'sach') echo 'selected'; ?>>Sách</option> -->
                                 </select>
                             </div>
 
-                            <div class="mb-3" id="subcategoryContainer" style="display: none;">
+                            <div class="mb-3" id="subcategoryContainer" style="display: <?php echo $selectedCategory ? 'block' : 'none'; ?>">
+
                                 <label for="subcategory" class="form-label">Danh mục cấp 2 <span class="text-danger">*</span></label>
-                                <select class="form-select border-color" id="subcategory" name="subcategory" required>
+                                
+                                <select class="form-select border-color" id="subcategory" name="subcategory" required onchange="toggleFields()">
                                     <option value="">Chọn danh mục cấp 2</option>
+                                    <?php if ($selectedCategory == 'do-dien-tu'): ?>
+                                        <option value="smartphone" <?php if ($selectedSubCategory == 'smartphone') echo 'selected'; ?>>Smartphone</option>
+                                        <option value="tablet" <?php if ($selectedSubCategory == 'tablet') echo 'selected'; ?>>Tablet</option>
+                                    <?php elseif ($selectedCategory == 'sach'): ?>
+                                        <option value="fiction" <?php if ($selectedSubCategory == 'fiction') echo 'selected'; ?>>Tiểu thuyết</option>
+                                        <option value="non-fiction" <?php if ($selectedSubCategory == 'non-fiction') echo 'selected'; ?>>Phi hư cấu</option>
+                                    <?php endif; ?>
+
                                 </select>
                             </div>
-
 
                             <div class="mb-3">
                                 <label class="form-label">Hình ảnh và Video sản phẩm <span class="text-danger">*</span></label>
 
-                                <input type="file" class="form-control border-color" name="imageUpload[]" accept="image/*" multiple onchange="previewImagesProduct(this)">
+                                <input type="file" class="form-control border-color" name="imageUpload[]" accept="image/*" multiple onchange="previewImages(this)">
                                 <small class="form-text text-muted">Chọn từ 1 đến 6 hình ảnh.</small>
                                 <div class="image-preview" id="imagePreview"></div>
-
-                                <script>
-                                    function previewImagesProduct(input) {
-                                        const imagePreview = document.getElementById('imagePreview');
-                                        imagePreview.innerHTML = '';
-                                        const files = input.files;
-
-                                        if (files.length > 6) {
-                                            alert('Bạn chỉ có thể chọn tối đa 6 hình ảnh.');
-                                            input.value = '';
-                                            return;
-                                        }
-
-                                        for (let i = 0; i < files.length; i++) {
-                                            const file = files[i];
-
-                                            if (!file.type.startsWith('image/')) {
-                                                alert('Chỉ được phép tải lên tệp hình ảnh.');
-                                                continue;
-                                            }
-
-                                            const reader = new FileReader();
-                                            reader.onload = function(e) {
-                                                const img = document.createElement('img');
-                                                img.src = e.target.result;
-                                                img.classList.add('img-thumbnail', 'me-2');
-                                                img.style.width = '100px';
-                                                img.style.height = 'auto';
-                                                imagePreview.appendChild(img);
-                                            };
-                                            reader.readAsDataURL(file);
-                                        }
-                                    }
-                                </script>
 
                                 <input type="file" class="form-control mt-3 border-color" name="videoUpload" accept="video/*" onchange="previewVideo(this)">
                                 <small class="form-text text-muted">Chọn 1 video.</small>
                                 <div class="video-preview" id="videoPreview"></div>
-
-                                <script>
-                                    function previewVideo(input) {
-                                        const videoPreview = document.getElementById('videoPreview');
-                                        videoPreview.innerHTML = '';
-                                        const file = input.files[0];
-
-                                        if (file) {
-                                            const video = document.createElement('video');
-                                            video.src = URL.createObjectURL(file);
-                                            video.controls = true;
-                                            video.style.width = '300px';
-                                            videoPreview.appendChild(video);
-                                        }
-                                    }
-                                </script>
                             </div>
-                        </div>
 
-                        <?php 
-                        include_once('script.php');
-                        ?>
+                            <?php
+                            include_once('script.php');
+                            ?>
+
+                        </div>
 
                         <div class="col" id="productFields" style="display: 
                             <?php
@@ -279,10 +233,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </main>
         </div>
     </section>
-
-    <?php
-    include_once('view/layout/header/button_backtotop.php');
-    ?>
 
     <?php
     include_once('view/layout/footer/footer.php');
