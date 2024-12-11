@@ -144,4 +144,20 @@ class User extends ConnectDatabase
         $stmt->close();
         return $row;
     }
+    //get infomation user by user_id
+    public function getUserById($user_id){
+        $query = "SELECT * FROM users WHERE user_id =?";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Prepare statement failed: ". $this->conn->error);
+        }
+        $stmt->bind_param("i", $user_id);
+        if (!$stmt->execute()) {
+            die("Execution failed: ". $stmt->error);
+        }
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        return $row;
+    }
 }

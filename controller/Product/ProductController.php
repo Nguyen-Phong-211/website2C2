@@ -197,5 +197,14 @@ class ProductController
         }
         return true;
     }
+    //get discount by product_id
+    public function getDiscountByProductIdController($productId)
+    {
+        $result = $this->product->getDiscountByProductId($productId);
 
+        if (!$result) {
+            die("Failed to retrieve product list: ". $this->product->getConnection()->error);
+        }
+        return $result;
+    }
 }

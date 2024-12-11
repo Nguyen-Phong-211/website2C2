@@ -96,6 +96,21 @@
             $stmt->execute();
             $result = $stmt->get_result();
             return $result->fetch_all(MYSQLI_ASSOC);
+        }
+        //add order_detail
+        public function addOrderDetail($orderId, $productId, $quantity, $price, $discount, $linetotal)
+        {
+            $stmt = $this->conn->prepare("
+                INSERT INTO order_details (order_id, product_id, quantity, price, discount, linetotal)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ");
+            $stmt->bind_param("iiiidd", $orderId, $productId, $quantity, $price, $discount, $linetotal);
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                error_log("Error: " . $stmt->error);
+                return false;
+            }
         }        
     }
 ?>

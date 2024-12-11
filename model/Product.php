@@ -501,6 +501,25 @@ class Product extends ConnectDatabase
         $stmt->close();
         return true;
     }
+    //get discount by product_id
+    public function getDiscountByProductId($productId)
+    {
+        $query = "SELECT discount FROM products WHERE product_id =?";
+        $stmt = $this->conn->prepare($query);
 
+        if ($stmt === false) {
+            error_log("Prepare failed: ". $this->conn->error);
+            return false;
+        }
+        $stmt->bind_param("i", $productId);
 
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result === false) {
+            error_log("Query failed: ". $stmt->error);
+            return false;
+        }
+        $row = $result->fetch_assoc();
+        return $row['discount'];
+    }
 }

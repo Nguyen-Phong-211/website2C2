@@ -31,5 +31,28 @@
                 </script>";
             }
         }
+        //add order
+        public function addOrderController($userId, $orderDate, $totalAmount, $status, $statusOrder) {
+            $result = $this->orderModel->addOrder($userId, $orderDate, $totalAmount, $status, $statusOrder);
+            if ($result) {
+                echo "
+                <script>
+                    alert('Đặt hàng thành công');
+                    window.location.href='index.php?page=message';
+                </script>";
+            } else{
+                echo "
+                <script>
+                    alert('Đặt hàng thất bại! Vui lòng thử lại!');
+                    window.location.href='index.php?page=order';
+                </script>";
+            }
+        }
+        //get the last order_id
+        public function getLastOrderIdController()
+        {
+            $result = $this->orderModel->getLastOrderId();
+            return $result;
+        }
     }
 ?>

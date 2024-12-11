@@ -37,6 +37,23 @@
             }
             return $result;
         }
+        //add order_detail
+        public function addOrderDetailController($orderId, $productId, $quantity, $price, $discount, $linetotal) {
+            $result = $this->orderDetailModel->addOrderDetail($orderId, $productId, $quantity, $price, $discount, $linetotal);
+            if ($result) {
+                echo "
+                <script>
+                    alert('Thêm đơn hàng thành công');
+                    window.location.href='index.php?page=message';
+                </script>";
+            } else{
+                echo "
+                <script>
+                    alert('Thêm đơn hàng thất bại! Vui lòng thử lagi!');
+                    window.location.href='index.php?page=order';
+                </script>";
+            }
+        }
         
     }
 ?>

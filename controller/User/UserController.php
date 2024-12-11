@@ -88,4 +88,13 @@ class UserController
             return $result;
         }
     }
+    //get infomation user by user_id
+    public function getUserByIdController($user_id)
+    {
+        $result = $this->user->getUserById($user_id);
+        if (!$result) {
+            die("Failed to retrieve product list: ". $this->user->getConnection()->error);
+        }
+        return $result;
+    }
 }

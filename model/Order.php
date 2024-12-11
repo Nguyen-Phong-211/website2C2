@@ -56,4 +56,27 @@ class Order extends ConnectDatabase
             return false;
         }
     }
+    //add order
+    public function addOrder($userId, $orderDate, $totalAmount, $status, $statusOrder)
+    {
+        $stmt = $this->conn->prepare("INSERT INTO orders (user_id, order_date, total_amount, status, order_status) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("isdss", $userId, $orderDate, $totalAmount, $status, $statusOrder);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            error_log("Error: " . $stmt->error);
+            return false;
+        }
+    }
+    //get the last order_id
+    public function getLastOrderId()
+    {
+        $stmt = $this->conn->prepare("SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1");
+        $stmt->execute();
+        $stmt->bind_result($order_id);
+        $stmt->fetch();
+        $stmt->close();
+        return $order_id;
+    }
 }
