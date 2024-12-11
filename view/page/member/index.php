@@ -97,11 +97,11 @@
                             </ul>
                         </td>
                         <td>100%</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>90%</td>
+                        <td>100%</td>
+                        <td>95%</td>
+                        <td>100%</td>
+                        <td>100%</td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>
@@ -178,10 +178,16 @@
                             <ul>
                                 <li>Nhập liệu vào CSDL</li>
                                 <li>Quản lý giỏ hàng</li>
-                                <li>Quản lý danh mục sản phẩm</li>
+                                <li>Quản lý danh mục cấp 1, 2, 3</li>
+                                <li>Quản lý danh mục thuộc tính</li>
                             </ul>
                         </td>
-                        <td>80%</td>
+                        <td>90%</td>
+                        <td>87%</td>
+                        <td>95%</td>
+                        <td>95%</td>
+                        <td>100%</td>
+                        <td>100%</td>
                     </tr>
                 </tbody>
             </table>

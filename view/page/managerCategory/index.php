@@ -75,8 +75,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                     <!-- End Logo Header -->
                 </div>
                 <!-- Navbar Header -->
-                <nav
-                    class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                     <div class="container-fluid">
                         <nav
                             class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
@@ -125,7 +124,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                                     aria-expanded="false">
                                     <i class="fa fa-envelope"></i>
                                 </a>
-                                <ul
+                                <!-- <ul
                                     class="dropdown-menu messages-notif-box animated fadeIn"
                                     aria-labelledby="messageDropdown">
                                     <li>
@@ -195,14 +194,14 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                                         <a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="nav-item topbar-icon dropdown hidden-caret">
                                 <a class="nav-link dropdown-togg" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-bell"></i>
-                                    <span class="notification">4</span>
+                                    <span class="notification">0</span>
                                 </a>
-                                <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
+                                <!-- <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
                                     <li>
                                         <div class="dropdown-title">
                                             You have 4 new notification
@@ -258,7 +257,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                                         <a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="nav-item topbar-icon dropdown hidden-caret">
                                 <a
@@ -268,7 +267,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                                     aria-expanded="false">
                                     <i class="fas fa-layer-group"></i>
                                 </a>
-                                <div class="dropdown-menu quick-actions animated fadeIn">
+                                <!-- <div class="dropdown-menu quick-actions animated fadeIn">
                                     <div class="quick-actions-header">
                                         <span class="title mb-1">Quick Actions</span>
                                         <span class="subtitle op-7">Shortcuts</span>
@@ -331,7 +330,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </li>
 
                             <li class="nav-item topbar-user dropdown hidden-caret">
@@ -354,7 +353,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                                                 <div class="u-text">
                                                     <h4>Hizrian</h4>
                                                     <p class="text-muted">hello@example.com</p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                                    <a href="" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                                 </div>
                                             </div>
                                         </li>

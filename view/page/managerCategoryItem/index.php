@@ -84,8 +84,7 @@ if (isset($_SESSION['message'])) {
                     <!-- End Logo Header -->
                 </div>
                 <!-- Navbar Header -->
-                <nav
-                    class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                     <div class="container-fluid">
                         <nav
                             class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
@@ -134,7 +133,7 @@ if (isset($_SESSION['message'])) {
                                     aria-expanded="false">
                                     <i class="fa fa-envelope"></i>
                                 </a>
-                                <ul
+                                <!-- <ul
                                     class="dropdown-menu messages-notif-box animated fadeIn"
                                     aria-labelledby="messageDropdown">
                                     <li>
@@ -204,14 +203,14 @@ if (isset($_SESSION['message'])) {
                                         <a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="nav-item topbar-icon dropdown hidden-caret">
                                 <a class="nav-link dropdown-togg" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-bell"></i>
-                                    <span class="notification">4</span>
+                                    <span class="notification">0</span>
                                 </a>
-                                <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
+                                <!-- <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
                                     <li>
                                         <div class="dropdown-title">
                                             You have 4 new notification
@@ -267,7 +266,7 @@ if (isset($_SESSION['message'])) {
                                         <a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="nav-item topbar-icon dropdown hidden-caret">
                                 <a
@@ -277,7 +276,7 @@ if (isset($_SESSION['message'])) {
                                     aria-expanded="false">
                                     <i class="fas fa-layer-group"></i>
                                 </a>
-                                <div class="dropdown-menu quick-actions animated fadeIn">
+                                <!-- <div class="dropdown-menu quick-actions animated fadeIn">
                                     <div class="quick-actions-header">
                                         <span class="title mb-1">Quick Actions</span>
                                         <span class="subtitle op-7">Shortcuts</span>
@@ -340,7 +339,7 @@ if (isset($_SESSION['message'])) {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </li>
 
                             <li class="nav-item topbar-user dropdown hidden-caret">
@@ -363,7 +362,7 @@ if (isset($_SESSION['message'])) {
                                                 <div class="u-text">
                                                     <h4>Hizrian</h4>
                                                     <p class="text-muted">hello@example.com</p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                                    <a href="" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -494,10 +493,23 @@ if (isset($_SESSION['message'])) {
                     <div class="row">
                         <div class="container mt-4">
                             <h3 class="mb-4">Quản lý cấp 2</h3>
-                            <a href="index.php?page=managerCategory" class="btn btn-secondary mx-2">Quay lại</a>
-                            <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addCategoryItemModal">
+                            <a href="index.php?page=managerCategory" class="btn btn-secondary mx-1"><i class="icon-arrow-left"></i>&nbsp; Quay lại</a>
+                            <!-- <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addCategoryItemModal">
                                 Thêm danh mục con
-                            </button>
+                            </button> -->
+                            <?php 
+                            if(isset($_GET['category_id'])){
+                                echo '
+                                <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addCategoryItemModal">
+                                    Thêm danh mục con
+                                </button>';
+                            }else{
+                                echo '
+                                <div class="alert alert-warning mt-3 w-50" role="alert">
+                                    <i class="icon-ban"></i> Chưa chọn danh mục cha. Vui lòng bấm <a href="index.php?page=managerCategory">Quay lại</a> để tiếp tục!
+                                </div>';
+                            }
+                            ?>
                             <!-- Modal -->
                             <div class="modal fade" id="addCategoryItemModal" tabindex="-1" aria-labelledby="addCategoryItemModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">

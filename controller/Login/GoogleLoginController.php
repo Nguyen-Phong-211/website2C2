@@ -1,11 +1,13 @@
 <?php
 require_once('vendor/autoload.php');
 include_once('model/LoginGoogle.php');
+include_once('model/User.php');
 
 ob_start();
 class GoogleLoginController
 {
     private $client;
+    private $userModel;
 
     public function __construct()
     {
@@ -16,6 +18,8 @@ class GoogleLoginController
         $this->client->setRedirectUri('http://localhost/php/projectfinal');
         $this->client->addScope("email");
         $this->client->addScope("profile");
+
+        $this->userModel = new User();
     }
 
     public function getAuthUrl()
@@ -55,7 +59,7 @@ class GoogleLoginController
                 if ($addUserLogin == true && $updateAvatar == true) {
                     $_SESSION['success_message'] = "Đăng nhập thành công!";
                     $_SESSION['emailUserLoginGoogle'] = $email;
-                    $_SESSION['role'] = "buyer";
+                    $_SESSION['user_id'] = $this->userModel->getUserIdByEmail($email);
                     return true;
                 } else {
                     header("Location: index.php?page=login");
@@ -65,7 +69,8 @@ class GoogleLoginController
             }else{
                 $_SESSION['success_message'] = "Đăng nhập thành công!";
                 $_SESSION['emailUserLoginGoogle'] = $email;
-                $_SESSION['role'] = "buyer";
+                // $_SESSION['role'] = "buyer";
+                $_SESSION['user_id'] = $this->userModel->getUserIdByEmail($email);
                 return true;
             }
         } else {

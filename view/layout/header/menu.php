@@ -24,7 +24,6 @@
         }
     }
 ?>
-
 <div class="container-fluid">
     <div class="row py-3 border-bottom">
         <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">

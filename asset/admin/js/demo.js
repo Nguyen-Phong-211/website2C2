@@ -192,8 +192,8 @@ Circles.create({
 //Notify
 $.notify({
 	icon: 'icon-bell',
-	title: 'Kaiadmin',
-	message: 'Premium Bootstrap 5 Admin Dashboard',
+	title: 'Chào mừng bạn',
+	message: 'Đây là trang quản trị!',
 },{
 	type: 'secondary',
 	placement: {
