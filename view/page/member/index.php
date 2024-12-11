@@ -168,6 +168,11 @@
                             </ul>
                         </td>
                         <td>100%</td>
+                        <td>100%</td>
+                        <td>100%</td>
+                        <td>60%</td>
+                        <td>50%</td>
+                        <td>65%</td>
                     </tr>
                     <tr>
                         <th scope="row">6</th>

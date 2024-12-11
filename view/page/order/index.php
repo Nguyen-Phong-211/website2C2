@@ -19,34 +19,40 @@ $productController = new ProductController();
 
 if (isset($_POST['btndh'])) {
 
-    $cartItems = $cartController->getProductofCartList();
+    if(!empty($_POST['name']) || !empty($_POST['email']) || !empty($_POST['phone']) || !empty($_POST['address'])){
+        $cartItems = $cartController->getProductofCartList();
 
-    $totalOrderPrice = 0;
-    foreach ($cartItems as $item) {
-        $totalOrderPrice += $item['price'] * $item['quantity'];
+        $totalOrderPrice = 0;
+        foreach ($cartItems as $item) {
+            $totalOrderPrice += $item['price'] * $item['quantity'];
+        }
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $orderDate = date('Y-m-d H:i:s');
+        $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+
+        $orderController->addOrderController($userId, $orderDate, $totalOrderPrice, 1, 1);
+        sleep(2);
+
+        foreach ($cartItems as $item) {
+            $product_id = $item['product_id'];
+            $quantity = $item['quantity'];
+            $price = $item['price'];
+            $linetotal = $price * $quantity;
+            $discount = $productController->getDiscountByProductIdController($product_id);
+            $orderId = $orderController->getLastOrderIdController();
+            $orderDetailController->addOrderDetailController($orderId, $product_id, $quantity, $price, $discount, $linetotal);
+        }
+        echo "
+            <script>
+                alert('Đặt hàng thành công');
+                window.location.href='index.php?page=message';
+            </script>";
+        exit();
+    }else{
+        echo '
+        <script>alert("Vui lòng cập nhật thông tin trước khi đặt hàng!")</script>
+        ';
     }
-    date_default_timezone_set('Asia/Ho_Chi_Minh');
-    $orderDate = date('Y-m-d H:i:s');
-    $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
-
-    $orderController->addOrderController($userId, $orderDate, $totalOrderPrice, 1, 1);
-    sleep(2);
-
-    foreach ($cartItems as $item) {
-        $product_id = $item['product_id'];
-        $quantity = $item['quantity'];
-        $price = $item['price'];
-        $linetotal = $price * $quantity;
-        $discount = $productController->getDiscountByProductIdController($product_id);
-        $orderId = $orderController->getLastOrderIdController();
-        $orderDetailController->addOrderDetailController($orderId, $product_id, $quantity, $price, $discount, $linetotal);
-    }
-    echo "
-        <script>
-            alert('Đặt hàng thành công');
-            window.location.href='index.php?page=message';
-        </script>";
-    exit();
 }
 ?>
 
@@ -68,25 +74,30 @@ if (isset($_POST['btndh'])) {
                         <h2>Thông Tin Người Mua</h2>
                     </div>
                     <div class="card-body">
+                        <div class="alert alert-warning" role="alert">
+                            Nếu thông tin bị thiếu. Vui lòng nhấn <a href="index.php?page=setting">Cập nhật thông tin</a> để có thể đặt hàng!
+                        </div>
                         <?php
                         $infoUserOrder = $userController->getUserByIdController($_SESSION['user_id']);
                         echo '
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Họ và Tên</label>
-                                <input type="text" disabled class="form-control" id="name" value="' . $infoUserOrder['user_name'] . '">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" disabled class="form-control" id="email" value="' . $infoUserOrder['email'] . '">
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="tel" disabled class="form-control" id="phone" value="' . $infoUserOrder['number_phone'] . '">
-                            </div>
-                            <div class="mb-3">
-                                <label for="address"  class="form-label">Địa chỉ</label>
-                                <textarea class="form-control" disabled id="address" rows="3">' . $infoUserOrder['address'] . '</textarea>
-                            </div>
+                            <form method="POST">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Họ và Tên</label>
+                                    <input type="text" disabled class="form-control" name="name" value="' . $infoUserOrder['user_name'] . '">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" disabled class="form-control" name="email" value="' . $infoUserOrder['email'] . '">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Số điện thoại</label>
+                                    <input type="tel" disabled class="form-control" name="phone" value="' . $infoUserOrder['number_phone'] . '">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address"  class="form-label">Địa chỉ</label>
+                                    <textarea class="form-control" disabled name="address" rows="3">' . $infoUserOrder['address'] . '</textarea>
+                                </div>
+                            </form>
                             ';
                         ?>
                         <a href="index.php?page=setting" class="btn btn-primary w-100">Cập nhật thông tin</a>

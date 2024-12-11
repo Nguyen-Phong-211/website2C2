@@ -10,5 +10,32 @@
         public function countNotificationByUserId($userId){
             return $this->notification->countNotificationByUserId($userId);
         }
+         //add notifications
+         public function addNotificationsByUserIdController($userId, $notification_name, $content){
+            $result = $this ->notification->addNotificationByUserId($userId, $notification_name, $content);
+            if(!$result ){
+                die('that bai'. $this ->notification->getConnection()->error);
+            }else{
+                return $result;
+            }
+        }
+        //get all notification by user_id
+        public function getAllNotificationByUserIdController($userId){
+            $result = $this->notification->getAllNotificationByUserId($userId);
+            if(!$result ){
+                die('Thất bại: '. $this->notification->getConnection()->error);
+            }else{
+                return $result;
+            }
+        }
+        //update status notification
+        public function updateStatusNotificationController($notification_id, $status, $userId){
+            $result = $this->notification->updateStatusNotification($notification_id, $status, $userId);
+            if(!$result ){
+                die('Thất bại: '. $this ->notification->getConnection()->error);
+            } else{
+                return $result;
+            }
+        }
     }
 ?>

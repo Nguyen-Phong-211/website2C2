@@ -38,14 +38,6 @@
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </button>
-
-            <?php
-            // if (isset($_SESSION['role_id']) && $_SESSION['role_id'] == 3) {
-            //     echo '<button  class="btn btn-outline-primary" style="font-weight: bold; font-size: 1rem;" 
-            //      onclick="location.href=\'index.php?page=managerCategory\'">Quản lý danh mục</button>';
-            // }
-            ?>
-
         </div>
 
         <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-4">

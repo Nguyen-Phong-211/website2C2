@@ -60,10 +60,7 @@
                         </nav>
                         <h5 class="text-primary fw-bold mb-3">Phương thức thanh toán</h5>
                         <nav class="nav nav-pills flex-column">
-                            <a class="nav-link text-dark" href="#item-17">Thẻ ngân hàng</a>
-                            <a class="nav-link text-dark" href="#item-18">Ví MoMo</a>
-                            <a class="nav-link text-dark" href="#item-19">Ví ZaloPay</a>
-                            <a class="nav-link text-dark" href="#item-21">Chuyển khoản ngân hàng</a>
+                            <a class="nav-link text-dark" href="#item-17">Người bán và người mua sẽ trao đổi với nhau.</a>
                         </nav>
                     </nav>
                 </div>

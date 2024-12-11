@@ -59,12 +59,84 @@
                             echo '<a href="index.php?page=' . $page . '" class="text-decoration-none"> Hỗ trợ người bán và người mua </a>';
                             break;  
                         case 'helpSeller':
-                            echo '<a href="index.php?page='. $page. '" class="text-decoration-none"> Hỗ trợ người bán </a>';
+                            echo '
+                            <a href="index.php?page=help" class="text-decoration-none"> Hỗ trợ người bán và người mua </a> - 
+                            <a href="index.php?page='. $page. '" class="text-decoration-none"> Hỗ trợ người bán </a>';
                             break;  
                         case 'helpSellerAll/cacbuocraoban1monhang':
                             echo '
                             <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
                             <a href="index.php?page=' . $page . '" class="text-decoration-none">Các bước rao bán 1 món hàng</a>';
+                            break;
+                        case 'helpSellerAll/dangtin':
+                            echo '
+                            <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
+                            <a href="index.php?page=' . $page . '" class="text-decoration-none">Đăng tin sản phẩm</a>';
+                            break;
+                        case 'helpSellerAll/taisao':
+                            echo '
+                            <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
+                            <a href="index.php?page=' . $page . '" class="text-decoration-none">Tại sao chúng tôi phải kiểm duyệt?</a>';
+                            break;
+                        case 'helpSellerAll/tuchoi':
+                            echo '
+                            <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
+                            <a href="index.php?page=' . $page . '" class="text-decoration-none">Tại sao tin của tôi bị từ chối?</a>';
+                            break;
+                        case 'helpSellerAll/lamsao':
+                            echo '
+                            <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
+                            <a href="index.php?page=' . $page . '" class="text-decoration-none">Làm sao đăng ký tài khoản?</a>';
+                            break;
+                        case 'helpSellerAll/lamgi':
+                            echo '
+                            <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
+                            <a href="index.php?page=' . $page . '" class="text-decoration-none">Làm sao đăng ký tài khoản?</a>';
+                            break;
+                        case 'helpSellerAll/chat':
+                            echo '
+                            <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
+                            <a href="index.php?page=' . $page . '" class="text-decoration-none">Chat với người bán là gì?</a>';
+                            break;
+                        case 'helpSellerAll/antoan':
+                            echo '
+                            <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
+                            <a href="index.php?page=' . $page . '" class="text-decoration-none">An toàn khi sử dụng tính năng Chat Với Người Bán</a>';
+                            break;
+                        case 'helpBuyer':
+                            echo '
+                            <a href="index.php?page=help" class="text-decoration-none"> Hỗ trợ người bán và người mua -</a>
+                            <a href="index.php?page='. $page. '" class="text-decoration-none"> Hỗ trợ người mua </a>';
+                            break;  
+                        case 'helpBuyerAll/timkiem':
+                            echo '
+                            <a href="index.php?page=helpBuyer" class="text-decoration-none"> Hỗ trợ người mua -</a>
+                            <a href="index.php?page='. $page. '" class="text-decoration-none"> Các bước tìm kiếm một sản phẩm </a>';
+                            break; 
+                        case 'helpBuyerAll/meo':
+                            echo '
+                            <a href="index.php?page=helpBuyer" class="text-decoration-none"> Hỗ trợ người mua -</a>
+                            <a href="index.php?page='. $page. '" class="text-decoration-none"> Mẹo tìm kiếm hiệu quả </a>';
+                            break; 
+                        case 'helpBuyerAll/meomuahang':
+                            echo '
+                            <a href="index.php?page=helpBuyer" class="text-decoration-none"> Hỗ trợ người mua -</a>
+                            <a href="index.php?page='. $page. '" class="text-decoration-none"> Mẹo mua hàng an toàn </a>';
+                            break; 
+                        case 'helpBuyerAll/muaxe':
+                            echo '
+                            <a href="index.php?page=helpBuyer" class="text-decoration-none"> Hỗ trợ người mua -</a>
+                            <a href="index.php?page='. $page. '" class="text-decoration-none"> Cách mua xe an toàn ở ORANIC </a>';
+                            break; 
+                        case 'helpBuyerAll/gioithieu':
+                            echo '
+                            <a href="index.php?page=helpBuyer" class="text-decoration-none"> Hỗ trợ người mua -</a>
+                            <a href="index.php?page='. $page. '" class="text-decoration-none"> Giới thiệu website ORANIC </a>';
+                            break;
+                        case 'helpBuyerAll/quyche':
+                            echo '
+                            <a href="index.php?page=helpBuyer" class="text-decoration-none"> Hỗ trợ người mua -</a>
+                            <a href="index.php?page='. $page. '" class="text-decoration-none"> Quy chế tài khoản </a>';
                             break;
                         default:
                             echo '<a href="" class="text-decoration-none"> Khám phá </a>';

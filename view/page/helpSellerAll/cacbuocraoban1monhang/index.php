@@ -34,64 +34,99 @@
     <section class="pb-4 my-4">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 d-flex flex-column">
-                    <nav id="navbar-example3"
-                        class="navbar navbar-light bg-light flex-column align-items-stretch p-3 position-sticky">
-                        <a class="navbar-brand text-primary" href="#"><b>Bán hàng trên ORANIC như thế nào ?</b></a>
-                        <nav class="nav nav-pills flex-column">
-                        <a class="nav-link ms-3 my-1" href="#item-1" ><a href="index.php?page=helpSellerAll/cacbuocraoban1monhang" style = "text-decoration: none; margin-left: 30px;">Các bước rao bán 1 món hàng</a></a>
-                        <a class="nav-link ms-3 my-1" href="#item-1"><a href="index.php?page=helpSellerAll/dangtin" style = "text-decoration: none; margin-left: 30px; padding-bottom: 20px;">Đăng tin với ứng dụng ORANIC</a></a>
-                        </nav>
-                        <a class="navbar-brand text-primary" href="#"><b>ORANIC kiểm duyệt tin rao của tôi như thế nào ?</b></a>
-                        <nav class="nav nav-pills flex-column">
-                        <a class="nav-link ms-3 my-1" href="#item-2"><a href="index.php?page=helpSellerAll/taisao" style = "text-decoration: none; margin-left: 30px;">Tại sao ORANIC duyệt tin trước khi đăng?</a></a>
-                        <a class="nav-link ms-3 my-1" href="#item-2"><a href="index.php?page=helpSellerAll/tuchoi" style = "text-decoration: none; margin-left: 30px; padding-bottom: 20px;">Tại sao tin của tôi bị từ chối?</a></a>
-                        </nav>
-                        <a class="navbar-brand text-primary" href="#"><b>Hỗ trợ tài khoản</b></a>
-                        <nav class="nav nav-pills flex-column">
-                        <a class="nav-link ms-3 my-1" href="#item-3"><a href="index.php?page=helpSellerAll/lamsao" style = "text-decoration: none; margin-left: 30px;">Làm sao đăng ký tài khoản?</a></a>
-                        <a class="nav-link ms-3 my-1" href="#item-3"><a href="index.php?page=helpSellerAll/lamgi" style = "text-decoration: none; margin-left: 30px; padding-bottom: 20px;">Tôi cần làm gì để thay đổi thông tin cá nhân (Số điện thoại, Email, …)?</a></a>
-                        </nav>
-                        <a class="navbar-brand text-primary" href="#"><b>Chat với người bán</b></a>
-                        <nav class="nav nav-pills flex-column">
-                        <a class="nav-link ms-3 my-1" href="#item-4"><a href="index.php?page=helpSellerAll/chat" style = "text-decoration: none; margin-left: 30px;">Chat Với Người Bán là gì?</a></a>
-                        <a class="nav-link ms-3 my-1" href="#item-4"><a href="index.php?page=helpSellerAll/antoan" style = "text-decoration: none; margin-left: 30px; padding-bottom: 20px;" >An toàn khi sử dụng tính năng Chat Với Người Bán</a></a>
-                        </nav>
+                <!-- Sidebar Menu -->
+                <div class="col-md-4 ">
+                    <nav id="navbar-example3" class="content-card navbar navbar-light-sidebar bg-white shadow-sm rounded p-3 position-sticky">
+                        <h5 class="text-primary mb-3"><b>Bán hàng trên website chúng tôi như thế nào?</b></h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item my-1">
+                                <a href="index.php?page=helpSellerAll/cacbuocraoban1monhang" class="nav-link-title text-secondary text-decoration-none">
+                                    Các bước rao bán 1 món hàng
+                                </a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a href="index.php?page=helpSellerAll/dangtin" class="nav-link-title text-secondary text-decoration-none">
+                                    Đăng tin trên website
+                                </a>
+                            </li>
+                        </ul>
+
+                        <h5 class="text-primary mt-4 mb-3"><b>Chúng tôi kiểm duyệt tin rao của tôi như thế nào?</b></h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item my-1">
+                                <a href="index.php?page=helpSellerAll/taisao" class="nav-link-title text-secondary text-decoration-none">
+                                    Tại sao chúng tôi phải duyệt tin trước khi đăng?
+                                </a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a href="index.php?page=helpSellerAll/tuchoi" class="nav-link-title text-secondary text-decoration-none">
+                                    Tại sao tin của tôi bị từ chối?
+                                </a>
+                            </li>
+                        </ul>
+
+                        <h5 class="text-primary mt-4 mb-3"><b>Hỗ trợ tài khoản</b></h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item my-1">
+                                <a href="index.php?page=helpSellerAll/lamsao" class="nav-link-title text-secondary text-decoration-none">
+                                    Làm sao đăng ký tài khoản?
+                                </a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a href="index.php?page=helpSellerAll/lamgi" class="nav-link-title text-secondary text-decoration-none">
+                                    Thay đổi thông tin cá nhân
+                                </a>
+                            </li>
+                        </ul>
+
+                        <h5 class="text-primary mt-4 mb-3"><b>Chat với người bán</b></h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item my-1">
+                                <a href="index.php?page=helpSellerAll/chat" class="nav-link-title text-secondary text-decoration-none">
+                                    Chat Với Người Bán là gì?
+                                </a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a href="index.php?page=helpSellerAll/antoan" class="nav-link-title text-secondary text-decoration-none">
+                                    An toàn khi sử dụng tính năng Chat Với Người Bán
+                                </a>
+                            </li>
+                        </ul>
                     </nav>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-6" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0"
-                    tabindex="0">
-                    <h4>Các bước rao bán một món hàng</h4>
-                    <p>Để đăng bán một món hàng, bạn chỉ cần thực hiện các bước đơn giản sau:</p>
-                    <div class="cacbuoc" style="display: flex;">
-                        <div class="cacbuoc1" style="width: 50%;">
-                            <img src="asset/image/banner/baner.jpg" alt="">
+
+                <!-- Content -->
+                <div class="col-md-8">
+                    <div class="content-section bg-white shadow-sm rounded p-4 content-card">
+                        <h4 class="text-primary">Các bước rao bán một món hàng</h4>
+                        <p>Để đăng bán một món hàng, bạn chỉ cần thực hiện các bước đơn giản sau:</p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <img src="asset/image/banner/baner.jpg" alt="Hướng dẫn bán hàng" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-6">
+                                <img src="asset/image/banner/baner1.jpg" alt="Hướng dẫn bán hàng" class="img-fluid rounded">
+                            </div>
                         </div>
-                        <div class="cácbuoc2" style="width: 50%;">
-                            <img src="asset/image/banner/baner1.jpg" alt="">
-                        </div>
+                        <ul class="mt-4">
+                            <li>
+                                <b>Lưu ý:</b> Nếu bạn chưa đăng ký tài khoản trước đó, Chúng tôi sẽ yêu cầu xác nhận qua email. Tin rao chỉ được duyệt nếu tài khoản của bạn đã xác thực.
+                            </li>
+                            <li>
+                                Tất cả tin đăng sẽ qua quy trình kiểm duyệt. Thông báo duyệt tin hoặc từ chối sẽ được gửi qua email và ứng dụng.
+                            </li>
+                            <li>
+                                <a href="#" class="text-primary">Tham khảo Mẹo rao bán nhanh</a> để biết cách bán hàng hiệu quả hơn.
+                            </li>
+                            <li>
+                                <a href="#" class="text-primary">Tham khảo Sao tin tôi bị từ chối</a> để tránh các lỗi phổ biến.
+                            </li>
+                        </ul>
                     </div>
-                    <ul>
-                        <li>Lưu ý:</br>
-                            Ví dụ như, nếu bạn chưa đăng ký tài khoản trước đó, Chợ Tốt sẽ yêu cầu bạn xác nhận số điện
-                            thoại. Tin rao vặt chỉ được kiểm duyệt nếu tài khoản của bạn đã xác nhận số điện thoại nhằm
-                            đảm bảo tính xác thực của tài khoản.</li>
-                        <li>Tất cả tin đăng trên Chợ Tốt đều sẽ qua quy trình kiểm duyệt, nằm ở mục Đợi duyệt tại trang
-                            Quản lý tin. Hệ thống Chợ Tốt sẽ gửi thông báo qua email đăng tin và qua ứng dụng Chợ Tốt
-                            ngay khi tin đăng của bạn được duyệt hay bị từ chối.</li>
-                        <li>Tham khảo Meo rao bán nhanh để biết cách bán hàng hiệu quả hơn.</li>
-                        <li>Tham khảo Sao tin tôi bị từ chối để tránh các trường hợp khiến tin của bạn không được phép
-                            đăng.</li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
-
-
-
-
 
     <?php
     include_once('view/layout/header/button_backtotop.php');
