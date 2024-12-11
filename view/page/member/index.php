@@ -115,12 +115,12 @@
                                 <li>Đặt hàng</li>
                             </ul>
                         </td>
+                        <td>90%</td>
+                        <td>100%</td>
+                        <td>95%</td>
                         <td>87%</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>96%</td>
+                        <td>96%</td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>

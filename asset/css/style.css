@@ -907,3 +907,29 @@ html {
   color: #10caf0;
   border-color: #10caf0;
 }
+/* page help */
+.card-link-seller-buyer {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+}
+.card-link-seller-buyer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  border-color: #6bb252;
+  text-decoration: none;
+}
+.card-link-seller-buyer:hover .card-title-seller-buyer {
+  color: #6bb252;
+}
+.card-icon-seller-buyer{
+  border-radius: 50%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin: 5px;
+}
+.content-card{
+  border: 1px solid #ddd;
+}

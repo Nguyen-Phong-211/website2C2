@@ -1,3 +1,7 @@
+<?php 
+    include_once('controller/General/GeneralController.php');
+    $generalController = new GeneralController();
+?>
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo Header -->
@@ -45,17 +49,17 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="index.php?page=managerCategory">
+                                <a href="index.php?page=managerCategory&hsu_poij=<?= $generalController->generateRandomString() ?>">
                                     <span class="sub-item">Danh mục cấp 1</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="index.php?page=managerCategoryItem">
+                                <a href="index.php?page=managerCategoryItem&hsu_poij=<?= $generalController->generateRandomString() ?>">
                                     <span class="sub-item">Danh mục cấp 2</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="index.php?page=managerCompany">
+                                <a href="index.php?page=managerCompany&hsu_poij=<?= $generalController->generateRandomString() ?>">
                                     <span class="sub-item">Danh mục cấp 3</span>
                                 </a>
                             </li>
@@ -72,7 +76,7 @@
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="index.php?page=managerCategoryAttribute">
+                                <a href="index.php?page=managerCategoryAttribute&hsu_poij=<?= $generalController->generateRandomString() ?>">
                                     <span class="sub-item">Danh mục thuộc tính</span>
                                 </a>
                             </li>
@@ -90,7 +94,7 @@
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="">
+                                <a href="index.php?page=managerProduct&hsu_poij=<?= $generalController->generateRandomString() ?>">
                                     <span class="sub-item">Duyệt sản phẩm</span>
                                 </a>
                             </li>

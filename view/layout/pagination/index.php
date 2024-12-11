@@ -55,6 +55,17 @@
                                 echo '<a href="index.php?page=' . $page . '&idc=' . $_REQUEST['idc'] . '" class="text-decoration-none"> Sản phẩm </a>';
                             }
                             break; 
+                        case 'help':
+                            echo '<a href="index.php?page=' . $page . '" class="text-decoration-none"> Hỗ trợ người bán và người mua </a>';
+                            break;  
+                        case 'helpSeller':
+                            echo '<a href="index.php?page='. $page. '" class="text-decoration-none"> Hỗ trợ người bán </a>';
+                            break;  
+                        case 'helpSellerAll/cacbuocraoban1monhang':
+                            echo '
+                            <a href="index.php?page=helpSeller" class="text-decoration-none"> Hỗ trợ người bán - </a>
+                            <a href="index.php?page=' . $page . '" class="text-decoration-none">Các bước rao bán 1 món hàng</a>';
+                            break;
                         default:
                             echo '<a href="" class="text-decoration-none"> Khám phá </a>';
                             break;

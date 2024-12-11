@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hỗ trợ người bán - Các bước rao bán một đơn hàng</title>
+
+    <?php
+    include_once('view/layout/header/lib_cdn.php');
+    ?>
+
+</head>
+
+<body>
+
+    <div class="preloader-wrapper">
+        <div class="preloader">
+        </div>
+    </div>
+
+    <?php
+    include_once('view/layout/slidebar/slidebar.php');
+    ?>
+
+    <header>
+        <?php
+        include_once('view/layout/header/menu.php');
+        ?>
+    </header>
+
+    <?php
+    include_once('view/layout/pagination/index.php');
+    ?>
+
+    <section class="pb-4 my-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 d-flex flex-column">
+                    <nav id="navbar-example3"
+                        class="navbar navbar-light bg-light flex-column align-items-stretch p-3 position-sticky">
+                        <a class="navbar-brand text-primary" href="#"><b>Bán hàng trên ORANIC như thế nào ?</b></a>
+                        <nav class="nav nav-pills flex-column">
+                        <a class="nav-link ms-3 my-1" href="#item-1" ><a href="index.php?page=helpSellerAll/cacbuocraoban1monhang" style = "text-decoration: none; margin-left: 30px;">Các bước rao bán 1 món hàng</a></a>
+                        <a class="nav-link ms-3 my-1" href="#item-1"><a href="index.php?page=helpSellerAll/dangtin" style = "text-decoration: none; margin-left: 30px; padding-bottom: 20px;">Đăng tin với ứng dụng ORANIC</a></a>
+                        </nav>
+                        <a class="navbar-brand text-primary" href="#"><b>ORANIC kiểm duyệt tin rao của tôi như thế nào ?</b></a>
+                        <nav class="nav nav-pills flex-column">
+                        <a class="nav-link ms-3 my-1" href="#item-2"><a href="index.php?page=helpSellerAll/taisao" style = "text-decoration: none; margin-left: 30px;">Tại sao ORANIC duyệt tin trước khi đăng?</a></a>
+                        <a class="nav-link ms-3 my-1" href="#item-2"><a href="index.php?page=helpSellerAll/tuchoi" style = "text-decoration: none; margin-left: 30px; padding-bottom: 20px;">Tại sao tin của tôi bị từ chối?</a></a>
+                        </nav>
+                        <a class="navbar-brand text-primary" href="#"><b>Hỗ trợ tài khoản</b></a>
+                        <nav class="nav nav-pills flex-column">
+                        <a class="nav-link ms-3 my-1" href="#item-3"><a href="index.php?page=helpSellerAll/lamsao" style = "text-decoration: none; margin-left: 30px;">Làm sao đăng ký tài khoản?</a></a>
+                        <a class="nav-link ms-3 my-1" href="#item-3"><a href="index.php?page=helpSellerAll/lamgi" style = "text-decoration: none; margin-left: 30px; padding-bottom: 20px;">Tôi cần làm gì để thay đổi thông tin cá nhân (Số điện thoại, Email, …)?</a></a>
+                        </nav>
+                        <a class="navbar-brand text-primary" href="#"><b>Chat với người bán</b></a>
+                        <nav class="nav nav-pills flex-column">
+                        <a class="nav-link ms-3 my-1" href="#item-4"><a href="index.php?page=helpSellerAll/chat" style = "text-decoration: none; margin-left: 30px;">Chat Với Người Bán là gì?</a></a>
+                        <a class="nav-link ms-3 my-1" href="#item-4"><a href="index.php?page=helpSellerAll/antoan" style = "text-decoration: none; margin-left: 30px; padding-bottom: 20px;" >An toàn khi sử dụng tính năng Chat Với Người Bán</a></a>
+                        </nav>
+                    </nav>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-6" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0"
+                    tabindex="0">
+                    <h4>Các bước rao bán một món hàng</h4>
+                    <p>Để đăng bán một món hàng, bạn chỉ cần thực hiện các bước đơn giản sau:</p>
+                    <div class="cacbuoc" style="display: flex;">
+                        <div class="cacbuoc1" style="width: 50%;">
+                            <img src="asset/image/banner/baner.jpg" alt="">
+                        </div>
+                        <div class="cácbuoc2" style="width: 50%;">
+                            <img src="asset/image/banner/baner1.jpg" alt="">
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Lưu ý:</br>
+                            Ví dụ như, nếu bạn chưa đăng ký tài khoản trước đó, Chợ Tốt sẽ yêu cầu bạn xác nhận số điện
+                            thoại. Tin rao vặt chỉ được kiểm duyệt nếu tài khoản của bạn đã xác nhận số điện thoại nhằm
+                            đảm bảo tính xác thực của tài khoản.</li>
+                        <li>Tất cả tin đăng trên Chợ Tốt đều sẽ qua quy trình kiểm duyệt, nằm ở mục Đợi duyệt tại trang
+                            Quản lý tin. Hệ thống Chợ Tốt sẽ gửi thông báo qua email đăng tin và qua ứng dụng Chợ Tốt
+                            ngay khi tin đăng của bạn được duyệt hay bị từ chối.</li>
+                        <li>Tham khảo Meo rao bán nhanh để biết cách bán hàng hiệu quả hơn.</li>
+                        <li>Tham khảo Sao tin tôi bị từ chối để tránh các trường hợp khiến tin của bạn không được phép
+                            đăng.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <?php
+    include_once('view/layout/header/button_backtotop.php');
+    ?>
+
+    <?php
+    include_once('view/layout/footer/footer.php');
+    ?>
+
+    <?php
+    include_once('view/layout/footer/lib-cdn-js.php');
+    ?>
+</body>
+
+</html>
