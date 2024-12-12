@@ -1,29 +1,66 @@
 <?php
 
-require_once 'model/Product.php';
+include_once(__DIR__.'/../../model/Product.php');
 
 class FilterRSController
 {
-    public function filterByRating()
+    private $product;
+    public function __construct()
     {
-        if (isset($_POST['rating'])) {
-            $ratingStar = $_POST['rating'];  // Lấy giá trị số sao từ Ajax
-
-            // Tạo đối tượng Product và gọi hàm lấy sản phẩm theo số sao
-            $productModel = new Product();
-            $result = $productModel->getProductByRating($ratingStar);
-            
-            if ($result) {
-                $products = [];
-                while ($row = $result->fetch_assoc()) {
-                    $products[] = $row;
-                }
-                echo json_encode($products); // Trả về kết quả dưới dạng JSON
-            } else {
-                echo json_encode(['message' => 'Không có sản phẩm nào với đánh giá này.']);
-            }
-        }
+        $this->product = new Product();
     }
+    public function filterByRating()
+{
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ratingStar'])) {
+
+        $ratingStar = intval($_POST['ratingStar']);
+        
+        if ($ratingStar < 1 || $ratingStar > 5) {
+            echo json_encode(['error' => 'Giá trị rating sao không hợp lệ']);
+            exit;
+        }
+
+        $products = $this->product->getProductByRating($ratingStar);
+
+
+        if ($products !== false) {
+            $productData = [];
+            while ($row = $products->fetch_assoc()) {
+                $productData[] = [
+                    'product_id' => $row['product_id'],
+                    'product_name' => $row['product_name'],
+                    'quantity' => $row['quantity'],
+                    'price' => $row['price'],
+                    'status' => $row['status'],
+                    'discount' => $row['discount'],
+                    'description' => $row['description'],
+                    'address' => $row['address'],
+                    'whistlist_id' => $row['whistlist_id'],
+                    'image_name' => $row['image_name'],
+                    'rating_star' => $row['rating_star'],
+                    'review_status' => $row['review_status'],
+                ];
+            }
+
+            if (empty($productData)) {
+                error_log('Không tìm thấy sản phẩm nào với rating sao: ' . $ratingStar); // Ghi log nếu không có sản phẩm
+                echo json_encode(['error' => 'Không có sản phẩm nào']);
+            } else {
+                // Trả về dữ liệu sản phẩm dưới dạng JSON
+                echo json_encode($productData);
+            }
+        } else {
+            // Nếu truy vấn không thành công (sản phẩm không tìm thấy)
+            echo json_encode(['error' => 'Không có sản phẩm nào']);
+        }
+
+    } else {
+        // Nếu không có 'ratingStar' trong POST request
+        echo json_encode(['error' => 'Thiếu thông tin ratingStar']);
+    }
+
+    exit;
 }
 
-?>
+}

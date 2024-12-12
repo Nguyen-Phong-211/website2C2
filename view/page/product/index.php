@@ -99,10 +99,10 @@ if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
 
 <body>
 
-    <div class="preloader-wrapper">
+    <!-- <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div>
+    </div> -->
 
     <?php
     include_once('view/layout/slidebar/slidebar.php');
@@ -234,16 +234,14 @@ if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
                                     </h2>
                                 </div>
                             </div>
-
                             <?php
                             include_once('select_filter.php')
                             ?>
-
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="row" id="product-list product-container">
+                                <div class="row" id="product-list">
 
                                     <?php
 
@@ -427,7 +425,7 @@ if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
 
                                                                     <div class="col-9">
                                                                         <a href="javascript:void(0);" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" 
-                                                                        onclick="addToCart('. $dataProduct['product_id'] .')">
+                                                                        onclick="addToCart(' . $dataProduct['product_id'] . ')">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
                                                                                 <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
                                                                                 <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
@@ -641,7 +639,7 @@ if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
                                                                     <div class="row g-1 mt-2">
                                                                         <div class="col-9">
                                                                             <a href="javascript:void(0);" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" 
-                                                                            onclick="addToCart('. $getProductByCateoryItem['product_id'] .')">
+                                                                            onclick="addToCart(' . $getProductByCateoryItem['product_id'] . ')">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
                                                                                     <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
                                                                                     <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
@@ -864,7 +862,7 @@ if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
 
                                                                         <div class="col-9">
                                                                             <a href="javascript:void(0);" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" 
-                                                                            onclick="addToCart('. $getSearchProduct['product_id'] .')">
+                                                                            onclick="addToCart(' . $getSearchProduct['product_id'] . ')">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
                                                                                     <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
                                                                                     <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
@@ -1089,7 +1087,7 @@ if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
                                                                     <div class="row g-1 mt-2">
                                                                         <div class="col-9">
                                                                             <a href="javascript:void(0);" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" 
-                                                                            onclick="addToCart('. $findPriceProduct['product_id'] .')">
+                                                                            onclick="addToCart(' . $findPriceProduct['product_id'] . ')">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
                                                                                     <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
                                                                                     <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
@@ -1142,6 +1140,8 @@ if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
                                     } else {
                                         $getAllProducts = $productController->getAllProductController();
                                         $count = 0;
+
+                                        // echo 'kkádfg';
 
                                         foreach ($getAllProducts as $getAllProduct) {
 
@@ -1312,7 +1312,7 @@ if (isset($_REQUEST['deleteWishlist']) && isset($_REQUEST['whistlistId'])) {
                                                                 <div class="row g-1 mt-2">
                                                                     <div class="col-9">
                                                                         <a href="javascript:void(0);" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" 
-                                                                        onclick="addToCart('. $getAllProduct['product_id'] .')">
+                                                                        onclick="addToCart(' . $getAllProduct['product_id'] . ')">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
                                                                                 <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
                                                                                 <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />

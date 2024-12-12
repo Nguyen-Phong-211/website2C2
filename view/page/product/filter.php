@@ -83,15 +83,15 @@
             </div>
         </div>
 
-        <!-- <div class="row mt-3">
+        <div class="row mt-3">
             <div class="col-md-12">
 
                 <h5 id="p">Tìm theo đánh giá</h5>
 
-                <form action="" method="get" id="filter-form">
+                <form action="" method="post" id="filter-rating-form">
 
                     <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" id="flexRadioDefault5" value="5">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="ratingStar" id="rating-5" value="5">
                         <label class="form-check-label" for="flexRadioDefault5">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -112,7 +112,7 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="4">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="ratingStar" id="rating-4" value="4">
                         <label class="form-check-label" for="flexRadioDefault4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="3">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="ratingStar" id="rating-3" value="3">
                         <label class="form-check-label" for="flexRadioDefault3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -156,7 +156,7 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="2">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="ratingStar" id="rating-2" value="2">
                         <label class="form-check-label" for="flexRadioDefault2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -178,7 +178,7 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="1">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="ratingStar" id="rating-1" value="1">
                         <label class="form-check-label" for="flexRadioDefault1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -199,62 +199,12 @@
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter"  type="radio" name="flexRadioDefault" id="flexRadioDefault">
+                        <input class="form-check-input border-color rating-star-filter"  type="radio" name="ratingStar" id="flexRadioDefault">
                         <label class="form-check-label" for="flexRadioDefault">
                             Tất cả
                         </label>
                     </div>
                 </form>
-            </div>
-        </div> -->
-        <div class="container">
-            <h3>Danh sách sản phẩm</h3>
-
-            <!-- Form lọc theo đánh giá -->
-            <div id="filter-form">
-                <h5 id="p">Tìm theo đánh giá</h5>
-
-                <form action="" method="post" id="filter-form">
-                    <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="5">
-                        <label class="form-check-label">
-                            5 sao
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="4">
-                        <label class="form-check-label">
-                            4 sao
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="3">
-                        <label class="form-check-label">
-                            3 sao
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="2">
-                        <label class="form-check-label">
-                            2 sao
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="1">
-                        <label class="form-check-label">
-                            1 sao
-                        </label>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Vùng chứa danh sách sản phẩm -->
-            <div class="row" id="product-list">
-                <!-- Sản phẩm sẽ được hiển thị ở đây sau khi Ajax trả về dữ liệu -->
             </div>
         </div>
 

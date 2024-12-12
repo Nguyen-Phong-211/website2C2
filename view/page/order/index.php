@@ -32,7 +32,11 @@ if (isset($_POST['btndh'])) {
         $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 
         $orderController->addOrderController($userId, $orderDate, $totalOrderPrice, 2, 2);
-        sleep(2);
+        sleep(1);
+
+        include_once('controller/Notification/NotificationController.php');
+        $notificationController = new NotificationController();
+        $notificationController->addNotificationsByUserIdController($_SESSION['user_id'], 'Gửi liên hệ thành công', 'Bạn đã gửi liên hệ thành công. Chúng tôi sẽ phản hồi sớm nhất cho bạn.');
 
         foreach ($cartItems as $item) {
             $product_id = $item['product_id'];
@@ -43,10 +47,13 @@ if (isset($_POST['btndh'])) {
             $orderId = $orderController->getLastOrderIdController();
             $orderDetailController->addOrderDetailController($orderId, $product_id, $quantity, $price, $discount, $linetotal);
         }
+        include_once('controller/Notification/NotificationController.php');
+        $notificationController = new NotificationController();
+        $notificationController->addNotificationsByUserIdController($_SESSION['user_id'], 'Đặt hàng thành công', 'Bạn đã đặt hàng thành công. Vui lòng liên hệ với người bán qua số điện thoại để được hỗ trợ nhanh chóng.');
         echo "
             <script>
                 alert('Đặt hàng thành công');
-                window.location.href='index.php?page=message';
+                window.location.href='index.php?page=message&idp=". $product_id ."';
             </script>";
         exit();
     }else{

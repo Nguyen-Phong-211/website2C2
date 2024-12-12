@@ -34,118 +34,57 @@
                 console.error('Error:', error);
             });
     }
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     // Lắng nghe sự kiện khi người dùng chọn một số sao
-    //     const ratingStars = document.querySelectorAll('.rating-star-filter');
+    // JavaScript AJAX request to filter products by rating
+    function filterByRating() {
+        var selectedRating = document.querySelector('input[name="ratingStar"]:checked')?.value;
 
-    //     ratingStars.forEach(function(star) {
-    //         star.addEventListener('change', function() {
-    //             const ratingStar = this.value; // Lấy giá trị số sao từ radio button
+        if (!selectedRating) {
+            alert("Vui lòng chọn số sao để lọc sản phẩm.");
+            return;
+        }
 
-    //             // Gửi yêu cầu Ajax
-    //             const xhr = new XMLHttpRequest();
-    //             xhr.open('POST', 'controller/Product/FilterRSProductController.php', true);
-    //             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'controller/Product/FilterRSProductController.php', true); // Thay '/controller/filterByRating' bằng URL đúng của controller
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    //             xhr.onload = function() {
-    //                 if (xhr.status === 200) {
-    //                     const response = JSON.parse(xhr.responseText);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
 
-    //                     // Xử lý kết quả trả về và hiển thị danh sách sản phẩm
-    //                     const productList = document.getElementById('product-list');
-    //                     if (response.length > 0) {
-    //                         let productHtml = '';
-    //                         response.forEach(function(product) {
-    //                             productHtml += `
-    //                             <div class="col-md-4">
-    //                                 <div class="product-card">
-    //                                     <img src="images/${product.image_name}" alt="${product.product_name}" class="product-img">
-    //                                     <h5>${product.product_name}</h5>
-    //                                     <p>Giá: ${product.price}</p>
-    //                                     <p>Số lượng: ${product.quantity}</p>
-    //                                     <p>Đánh giá: ${product.rating_star} sao</p>
-    //                                 </div>
-    //                             </div>
-    //                         `;
-    //                         });
-    //                         productList.innerHTML = productHtml; // Cập nhật lại danh sách sản phẩm
-    //                     } else {
-    //                         productList.innerHTML = '<p>Không có sản phẩm nào phù hợp.</p>';
-    //                     }
-    //                 } else {
-    //                     alert('Có lỗi xảy ra khi lọc sản phẩm!');
-    //                 }
-    //             };
-
-    //             xhr.onerror = function() {
-    //                 alert('Có lỗi xảy ra khi gửi yêu cầu!');
-    //             };
-
-    //             xhr.send('rating=' + encodeURIComponent(ratingStar)); 
-    //         });
-    //     });
-    // });
-    document.addEventListener('DOMContentLoaded', function() {
-    // Lắng nghe sự kiện khi người dùng chọn một số sao
-    const ratingStars = document.querySelectorAll('.rating-star-filter');
-    
-    ratingStars.forEach(function(star) {
-        star.addEventListener('change', function() {
-            const ratingStar = this.value; // Lấy giá trị số sao từ radio button
-
-            // Kiểm tra xem ratingStar có hợp lệ không
-            if (!ratingStar) {
-                console.error('Không có giá trị rating sao!');
-                return;
-            }
-
-            console.log('Giá trị ratingStar:', ratingStar); // Debug log để kiểm tra giá trị
-            
-            // Gửi yêu cầu Ajax
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'controller/Product/FilterRSProductController.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    
-                    // Xử lý kết quả trả về và hiển thị danh sách sản phẩm
-                    const productList = document.getElementById('product-list');
-                    if (response.length > 0) {
-                        let productHtml = '';
-                        response.forEach(function(product) {
-                            productHtml += `
-                                <div class="col-md-4">
-                                    <div class="product-card">
-                                        <img src="images/${product.image_name}" alt="${product.product_name}" class="product-img">
-                                        <h5>${product.product_name}</h5>
-                                        <p>Giá: ${product.price}</p>
-                                        <p>Số lượng: ${product.quantity}</p>
-                                        <p>Đánh giá: ${product.rating_star} sao</p>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                        productList.innerHTML = productHtml; // Cập nhật lại danh sách sản phẩm
-                    } else {
-                        productList.innerHTML = '<p>Không có sản phẩm nào phù hợp.</p>';
-                    }
+                if (response.error) {
+                    alert(response.error); // Hiển thị thông báo lỗi nếu có
                 } else {
-                    console.error('Lỗi khi phản hồi từ server:', xhr.status);
-                    alert('Có lỗi xảy ra khi lọc sản phẩm!');
+                    // Cập nhật giao diện với các sản phẩm lọc được
+                    var productList = document.getElementById('product-list');
+                    productList.innerHTML = ''; // Xóa các sản phẩm cũ
+                    response.forEach(function(product) {
+                        var productHTML = `<div class="product-item">
+                        <h3>${product.product_name}</h3>
+                        <p>Price: ${product.price}</p>
+                        <p>Rating: ${product.rating_star} stars</p>
+                    </div>`;
+                        productList.innerHTML += productHTML;
+                    });
                 }
-            };
+            } else {
+                alert('Có lỗi khi tải dữ liệu sản phẩm.');
+            }
+        };
 
-            xhr.onerror = function() {
-                console.error('Lỗi khi gửi yêu cầu Ajax.');
-                alert('Có lỗi xảy ra khi gửi yêu cầu!');
-            };
+        xhr.onerror = function() {
+            alert('Lỗi khi thực hiện yêu cầu.');
+        };
 
-            // Kiểm tra và gửi yêu cầu Ajax với giá trị rating sao
-            xhr.send('rating=' + encodeURIComponent(ratingStar)); 
-        });
+        xhr.send('ratingStar=' + selectedRating);
+    }
+
+    // Lắng nghe sự kiện thay đổi rating
+    document.querySelectorAll('input[name="ratingStar"]').forEach(function(input) {
+        input.addEventListener('change', filterByRating);
     });
-});
 
-</script>
+
+
+    <?php
+    // include_once('controller/Product/FilterRSProductController.php');
+    ?>

@@ -285,28 +285,53 @@
                 </section>
             </div>
 
+            <?php
+            include_once('controller/OrderDetail/OrderDetailController.php');
+            include_once('controller/User/UserController.php');
+            $orderDetailController = new OrderDetailController();
+            $userController = new UserController();
+            if (isset($_SESSION["success_message"]) && isset($_SESSION["emailUserLoginGoogle"])):
+                $userId = $userController->getUserIdByEmailController($_SESSION["emailUserLoginGoogle"]);
+                $countOrder = $orderDetailController->countOrderDetailByUserIdController($userId);
+            ?>
+
             <div class="tab-content mt-5" id="order">
-                <section class="container pb-4 my-4 d-flex justify-content-center align-items-start" style="height: auto;">
-                    <div class="card w-100">
-                        <div class="card-body d-flex">
-                            <img src="https://via.placeholder.com/250" class="img-fluid me-3" alt="Áo sơ mi">
-                            <div class="text-black">
-                                <h5 class="card-title">Tên người bán</h5>
-                                <p class="mt-2">Tên sản phẩm</p>
-                                <div class="mb-2">
-                                    <p class="mb-1">Phân loại hàng: <span class="fw-bold">Danh mục thuộc tính: - Thuộc tính: </span></p>
-                                    <p class="mb-1">Số lượng: <span class="fw-bold">x1</span></p>
-                                </div>
-                                <p class="text-danger fw-bold">Giá bán: <span>₫110.000</span></p>
-                                <p class="fw-bold">Thành tiền: <span>₫99.000</span></p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="#" class="btn btn-primary active">Mua Lại</a>
-                                    <a href="#" class="btn btn-link">Chat với người bán</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <section class="container pb-4 my-4" style="height: auto;">  
+                        <?php if($countOrder > 0): 
+                                $allPuchaseOrder = $orderDetailController->getAllOrderDetailByUserId($userId);
+                                $count = 0;?>
+                            <?php foreach($allPuchaseOrder as $order): ?>
+                                <?php if($order['status'] == 1): ?>
+                              
+                                        <div class="col-lg-12 card w-100 mt-3">
+                                            <div class="card-body d-flex">
+                                                <img src="asset/image/product/<?= $order['image_name'] ?>" class="img-fluid me-4" height="200" width="200" alt="<?= $order['product_name'] ?>">
+                                                <div class="text-black">
+                                                    <h5 class="card-title"><?= $order['product_name'] ?></h5>
+                                                    <p class="mt-2">Đặt hàng thành công: <?= $order['create_at'] ?></p>
+                                                    <p class="text-danger fw-bold">Giá bán: <span><?= number_format($order['price'], 0, ',', '.') ?></span></p>
+                                                    <p class="fw-bold">Thành tiền: <span><?= number_format($order['linetotal'], 0, ',', '.') ?></span></p>
+                                                    <div class="d-flex justify-content-between">
+                                                        <a href="index.php?page=message&idp=<?= $order['product_id'] ?>" class="btn btn-link">Chat với người bán</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endif ?>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    <?php endif ?>
                 </section>
+                    <?php if($countOrder == 0): ?>
+                    <section class="container pb-4 my-4 d-flex justify-content-center align-items-center" style="height: 50vh;">
+                        <div class="text-center border border-2 rounded border-color p-4">
+                            <img src="asset/image/general/list.png" alt="" class="img-fluid w-25 h-25 mb-2"> <br>
+                            <label class="text-black" for="">Chưa có đơn hàng nào! Vui lòng tiếp tục mua sắm <a href="index.php?page=product&s_interface=1" class="text-primary mt-2">tại đây</a></label>
+                        </div>
+                    </section>
+                    <?php endif ?>
+                    
+                    </section>
             </div>
 
 

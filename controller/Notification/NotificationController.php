@@ -12,7 +12,7 @@
         }
          //add notifications
          public function addNotificationsByUserIdController($userId, $notification_name, $content){
-            $result = $this ->notification->addNotificationByUserId($userId, $notification_name, $content);
+            $result = $this->notification->addNotificationByUserId($userId, $notification_name, $content);
             if(!$result ){
                 die('that bai'. $this ->notification->getConnection()->error);
             }else{

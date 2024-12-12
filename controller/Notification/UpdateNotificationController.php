@@ -14,13 +14,12 @@ class UpdateNotificationController
     {
         header('Content-Type: application/json; charset=utf-8');
 
-        // Nhận dữ liệu JSON từ client
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
 
         // Kiểm tra dữ liệu
         if (!isset($data['userId'], $data['notification_id'], $data['status'])) {
-            http_response_code(400); // Bad Request
+            http_response_code(400); 
             echo json_encode(['success' => false, 'message' => 'Dữ liệu không đầy đủ']);
             exit;
         }
@@ -38,7 +37,6 @@ class UpdateNotificationController
             }
         } catch (Exception $e) {
             http_response_code(500);
-            // Log lỗi và trả về phản hồi
             error_log("Error: " . $e->getMessage()); // Ghi vào log server
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }

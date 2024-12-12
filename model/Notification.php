@@ -21,12 +21,24 @@ class Notification extends ConnectDatabase
     //add notications 
     public function addNotificationByUserId($userId, $notification_name, $content)
     {
+        $query = "INSERT INTO notifications (user_id, notification_name, content) VALUES (?, ?, ?)";
 
-        $query = "insert into notifications values (?, ?, ?)";
-        $result = $this->conn->query($query);
-        $row = $result->fetch_assoc();
-        return $row;
+        if ($stmt = $this->conn->prepare($query)) {
+
+            $stmt->bind_param("iss", $userId, $notification_name, $content);
+
+            if ($stmt->execute()) {
+                $stmt->close();
+                return true;
+            } else {
+                $stmt->close();
+                return false; 
+            }
+        } else {
+            return false; 
+        }
     }
+
     //get all notification by user_id
     public function getAllNotificationByUserId($userId)
     {

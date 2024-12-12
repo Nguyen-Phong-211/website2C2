@@ -1,11 +1,15 @@
 <?php
     include_once('controller/Login/GoogleLoginController.php');
     include_once('controller/Email/EmailController.php');
+    include_once('controller/Notification/NotificationController.php');
 
     $googleLogin = new GoogleLoginController();
     $emailController = new EmailController();
+    $notificationController = new NotificationController();
+
     if ($googleLogin->handleCallBack() === true) {
         $emailController->sendEmailInfoLoginGoogleSuccess($_SESSION['emailUserLoginGoogle']);
+        $notificationController->addNotificationsByUserIdController($_SESSION['user_id'], 'Đăng nhập bằng tài khoản Google thành công', 'Chào mừng bạn đến với website chúng tôi');
         echo '<script>
                     alert("Đăng nhập thành công!");
                     setTimeout(function() {

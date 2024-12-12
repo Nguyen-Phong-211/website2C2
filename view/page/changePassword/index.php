@@ -50,9 +50,10 @@
                             $emailController = new EmailController();
 
                             if (isset($_SESSION['passwordUpdate']) && isset($_SESSION['passwordConfirm'])) {
-
+                                include_once('controller/Notification/NotificationController.php');
+                                $notificationController = new NotificationController();
                                 $updatePassword = $userController->updatePasswordController($user_id, $_SESSION['passwordUpdate']);
-            
+                                $notificationController->addNotificationsByUserIdController($_SESSION['user_id'], 'Đổi mật khẩu thành công', 'Bạn đã đổi mật khẩu thành công. Vui lòng không tiết lộ mật khẩu với bất kì ai.');
                                 $emailController->sendEmailUpdateInfoPasswordSuccess($_SESSION['emailUserLoginGoogle']);
                                 echo "
                                 <script>
@@ -74,6 +75,9 @@
                             $emailController = new EmailController();
 
                             if (isset($_SESSION['passwordUpdate']) && isset($_SESSION['passwordConfirm'])) {
+                                include_once('controller/Notification/NotificationController.php');
+                                $notificationController = new NotificationController();
+                                $notificationController->addNotificationsByUserIdController($_SESSION['user_id'], 'Đổi mật khẩu thành công', 'Bạn đã đổi mật khẩu thành công. Vui lòng không tiết lộ mật khẩu với bất kì ai.');
 
                                 $updatePassword = $userController->updatePasswordController($user_id, $_SESSION['passwordUpdate']);
             

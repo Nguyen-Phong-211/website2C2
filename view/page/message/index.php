@@ -2,12 +2,14 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tin nhắn</title>
 
     <?php include_once('view/layout/header/lib_cdn.php'); ?>
 </head>
 
-<body>
+<body class="bg-light">
     <?php include_once('view/layout/slidebar/slidebar.php'); ?>
 
     <header>
@@ -17,10 +19,11 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card mb-4">
+                <!-- Card for Product -->
+                <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <div class="row">
-                            <!-- Phần hình ảnh sản phẩm -->
+                            <!-- Product Image -->
                             <div class="col-md-4">
                                 <?php
                                 include_once('controller/Image/ImageController.php');
@@ -51,7 +54,7 @@
                                 ?>
                             </div>
 
-                            <!-- Thông tin sản phẩm -->
+                            <!-- Product Info -->
                             <div class="col-md-8">
                                 <?php
                                 include_once('controller/Product/ProductController.php');
@@ -60,11 +63,9 @@
                                 $datas = $productController->getProductByIdController($idp);
 
                                 foreach ($datas as $data) {
-                                    echo '<h3>' . htmlspecialchars($data['product_name']) . '</h3>';
+                                    echo '<h3 class="text-primary">' . htmlspecialchars($data['product_name']) . '</h3>';
                                     echo '<p class="text-danger fw-bold fs-4">' . number_format($data['price'], 0, ',', '.') . ' đồng</p>';
-                                    echo '<p>
-                                            <i class="bi bi-clock"></i>&nbsp;' . htmlspecialchars($data['update_at']) . '
-                                          </p>';
+                                    echo '<p><i class="bi bi-clock"></i>&nbsp;' . htmlspecialchars($data['update_at']) . '</p>';
                                 }
 
                                 include_once('controller/User/UserController.php');
@@ -72,10 +73,10 @@
                                 $dataUsers = $userController->getUserByProductIdController($idp);
 
                                 foreach ($dataUsers as $dataUser) {
-                                    echo '<div class="d-flex align-items-center mt-2">
+                                    echo '<div class="d-flex align-items-center mt-3">
                                             <img src="asset/image/user/' . htmlspecialchars($dataUser['image']) . '" class="rounded-circle" width="50" height="50" alt="' . htmlspecialchars($dataUser['user_name']) . '">
                                             <div class="ms-3">
-                                                <p>' . htmlspecialchars($dataUser['user_name']) . '</p>
+                                                <p class="mb-0"><strong>' . htmlspecialchars($dataUser['user_name']) . '</strong></p>
                                             </div>
                                           </div>';
                                 }
@@ -85,10 +86,12 @@
                     </div>
                 </div>
 
-                <!-- Phần chat -->
-                <div class="card">
-                    <div class="card-header bg-primary text-white">Tin nhắn</div>
-                    <div class="card-body chat-box" id="chatBox" style="max-height: 400px; overflow-y: auto;">
+                <!-- Chat Section -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Tin nhắn</h5>
+                    </div>
+                    <div class="card-body p-3 chat-box" id="chatBox" style="max-height: 400px; overflow-y: auto;">
                         <?php
                         include_once('controller/Message/MessageController.php');
                         $messageController = new MessageController();
@@ -97,12 +100,11 @@
 
                         $messages = $messageController->getMessages($sender_id, $receiver_id, $idp);
 
-
                         if (!empty($messages)) {
                             foreach ($messages as $message) {
                                 $isSender = $message['sender_id'] == $sender_id;
                                 echo '<div class="d-flex ' . ($isSender ? 'justify-content-end' : 'justify-content-start') . ' mb-3">
-                                        <div class="' . ($isSender ? 'bg-success text-white' : 'bg-light') . ' p-2 rounded" style="max-width: 70%;">
+                                        <div class="' . ($isSender ? 'bg-success text-white' : 'bg-light') . ' p-2 rounded-3" style="max-width: 70%;">
                                             <p class="mb-0">' . htmlspecialchars($message['content']) . '</p>
                                         </div>
                                       </div>';

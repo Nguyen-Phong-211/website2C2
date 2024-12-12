@@ -12,12 +12,32 @@ class Product extends ConnectDatabase
     //get all product
     public function getAllProduct()
     {
-        $query = "SELECT *, w.status AS wstatus FROM products AS p 
-                    LEFT JOIN whistlists AS w ON p.product_id = w.product_id 
-                    LEFT JOIN reviews AS r ON p.product_id = r.product_id 
-                    LEFT JOIN ( SELECT product_id, image_name FROM images GROUP BY product_id ) AS i 
-                        ON i.product_id = p.product_id 
-                    WHERE p.quantity >= 1";
+        $query = "SELECT 
+                    p.*,
+                    w.whistlist_id, w.status AS wstatus, 
+                    r.rating_star, i.image_name
+                FROM 
+                    products AS p
+                LEFT JOIN 
+                    (
+                        SELECT product_id, MIN(whistlist_id) AS whistlist_id, status
+                        FROM whistlists
+                        GROUP BY product_id, status
+                    ) AS w ON p.product_id = w.product_id 
+                LEFT JOIN 
+                    (
+                        SELECT product_id, AVG(rating_star) AS rating_star
+                        FROM reviews
+                        GROUP BY product_id
+                    ) AS r ON p.product_id = r.product_id
+                LEFT JOIN 
+                    ( 
+                        SELECT product_id, MIN(image_name) AS image_name
+                        FROM images
+                        GROUP BY product_id
+                    ) AS i ON i.product_id = p.product_id
+                WHERE 
+                    p.quantity >= 1;";
         $result = $this->conn->query($query);
 
         if ($result === false) {
@@ -228,57 +248,44 @@ class Product extends ConnectDatabase
     public function findProductByPrice($priceFrom, $priceTo)
     {
         $stmt = $this->conn->prepare("SELECT 
-                                                p.product_id, 
-                                                p.product_name, 
-                                                p.quantity, 
-                                                p.price, 
-                                                p.status, 
-                                                p.discount, 
-                                                p.description, 
-                                                p.address, 
-                                                c.category_name, 
-                                                ci.category_item_name, 
-                                                w.status AS wstatus, 
-                                                w.whistlist_id,
-                                                r.content, 
-                                                r.rating_star, 
-                                                COUNT(r.review_id) AS total_reviews, 
-                                                i.image_name  
-                                            FROM 
-                                                products AS p
-                                            LEFT JOIN 
-                                                category_items AS ci ON p.category_item_id = ci.category_item_id
-                                            LEFT JOIN 
-                                                categories AS c ON c.category_id = ci.category_id
-                                            LEFT JOIN 
-                                                (
-                                                    SELECT product_id, image_name
-                                                    FROM images
-                                                    WHERE image_id IN (SELECT MIN(image_id) FROM images GROUP BY product_id)
-                                                ) AS i ON p.product_id = i.product_id
-                                            LEFT JOIN 
-                                                reviews AS r ON r.product_id = p.product_id
-                                            LEFT JOIN 
-                                                whistlists AS w ON p.product_id = w.product_id
-                                            WHERE 
-                                            
-                                                p.quantity >= 1  
-                                                AND p.price BETWEEN ? AND ?
-                                            GROUP BY 
-                                                p.product_id, 
-                                                p.product_name, 
-                                                p.quantity, 
-                                                p.price, 
-                                                p.status, 
-                                                p.discount, 
-                                                p.description, 
-                                                p.address, 
-                                                c.category_name, 
-                                                ci.category_item_name, 
-                                                w.status, 
-                                                w.whistlist_id, 
-                                                r.rating_star, 
-                                                i.image_name;
+        p.product_id, 
+        p.product_name, 
+        p.quantity, 
+        p.price, 
+        p.status, 
+        p.discount, 
+        p.description, 
+        p.address, 
+        c.category_name, 
+        ci.category_item_name, 
+        w.status AS wstatus, 
+        COUNT(DISTINCT w.whistlist_id) AS total_whistlists,
+        COUNT(DISTINCT r.rating_star) AS total_reviews,
+        i.image_name,
+        w.whistlist_id,
+        r.rating_star
+    FROM 
+        products AS p
+    LEFT JOIN 
+        reviews AS r ON r.product_id = p.product_id
+    LEFT JOIN
+        whistlists AS w ON p.product_id = w.product_id
+    LEFT JOIN 
+        category_items AS ci ON p.category_item_id = ci.category_item_id
+    LEFT JOIN 
+        categories AS c ON c.category_id = ci.category_id
+    LEFT JOIN 
+        (
+            SELECT product_id, image_name
+            FROM images
+            WHERE image_id IN (SELECT MIN(image_id) FROM images GROUP BY product_id)
+        ) AS i ON p.product_id = i.product_id
+    WHERE 
+        p.quantity >= 1  
+        AND p.price BETWEEN ? AND ?
+    GROUP BY 
+        p.product_id, p.product_name, p.quantity, p.price, p.status, p.discount, p.description, p.address, c.category_name, ci.category_item_name, i.image_name;
+    
                                             ");
 
         $stmt->bind_param("ii", $priceFrom, $priceTo);

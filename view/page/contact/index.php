@@ -120,12 +120,18 @@
                 if(isset($_SESSION['email'])){
                     $userId = $userController->getUserIdByEmailController($_SESSION['email']);
                     $addFeedback = $feedbackController->addFeedbackController($userId, $message);
+                    include_once('controller/Notification/NotificationController.php');
+                    $notificationController = new NotificationController();
+                    $notificationController->addNotificationsByUserIdController($_SESSION['user_id'], 'Gửi liên hệ thành công', 'Bạn đã gửi liên hệ thành công. Chúng tôi sẽ phản hồi sớm nhất cho bạn.');
                     if($addFeedback){
                         $emailController->sendEmailContactSuccess($_SESSION['email'], $userName, $message);
                     }
                 } else {
                     $userId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
                     $addFeedback = $feedbackController->addFeedbackController($userId, $message);
+                    include_once('controller/Notification/NotificationController.php');
+                    $notificationController = new NotificationController();
+                    $notificationController->addNotificationsByUserIdController($_SESSION['user_id'], 'Gửi liên hệ thành công', 'Bạn đã gửi liên hệ thành công. Chúng tôi sẽ phản hồi sớm nhất cho bạn.');
                     if($addFeedback){
                         $emailController->sendEmailContactSuccess($_SESSION['emailUserLoginGoogle'], $userName, $message);
                     }
