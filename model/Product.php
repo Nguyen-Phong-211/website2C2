@@ -522,4 +522,17 @@ class Product extends ConnectDatabase
         $row = $result->fetch_assoc();
         return $row['discount'];
     }
+    public function getOwnerByProductId($product_id)
+    {
+        $query = "SELECT user_id FROM products WHERE product_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($row = $result->fetch_assoc()) {
+            return $row['user_id'];
+        }
+        return null; // Trường hợp không tìm thấy
+    }
 }

@@ -56,48 +56,47 @@
     //         });
     // }
     function updateStatusNotification(status, notificationId) {
-    // Lấy userId từ session PHP (PHP có thể nhúng vào JavaScript)
-    const userId = <?= json_encode($_SESSION['user_id']); ?>;
+        // Lấy userId từ session PHP (PHP có thể nhúng vào JavaScript)
+        const userId = <?= json_encode($_SESSION['user_id']); ?>;
 
-    // Gửi yêu cầu AJAX tới controller
-    fetch('controller/Notification/UpdateNotificationController.php', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            notification_id: notificationId,
-            status: status,
-            userId: userId
-        }),
-    })
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
-        return response.json();
-    })
-    .then((data) => {
-        if (data.success) {
-            // Cập nhật trạng thái thông báo trực quan sau khi update
-            document.querySelector(`#notification-${notificationId}`).classList.add('text-muted'); // Chuyển sang trạng thái đã đọc
-            console.log(data.message);
-        } else {
-            console.error(data.message);
-        }
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-    });
-}
+        // Gửi yêu cầu AJAX tới controller
+        fetch('controller/Notification/UpdateNotificationController.php', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    notification_id: notificationId,
+                    status: status,
+                    userId: userId
+                }),
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.success) {
+                    // Cập nhật trạng thái thông báo trực quan sau khi update
+                    document.querySelector(`#notification-${notificationId}`).classList.add('text-muted'); // Chuyển sang trạng thái đã đọc
+                    console.log(data.message);
+                } else {
+                    console.error(data.message);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }
 
-function showDetail(title, content, timeCreate) {
-    const detailContainer = document.getElementById('notification-detail');
-    detailContainer.innerHTML = `
+    function showDetail(title, content, timeCreate) {
+        const detailContainer = document.getElementById('notification-detail');
+        detailContainer.innerHTML = `
         <h5>${title}</h5>
         <p>${content}</p>
         <small>${timeCreate}</small>
     `;
-}
-
+    }
 </script>
