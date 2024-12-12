@@ -271,4 +271,41 @@ class EmailController
             echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
         }
     }
+    function sendReasonRefuse($emailAuthu, $content, $product_name)
+    {
+
+        $mail = new PHPMailer(true);
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $dateApproval = date("d/m/Y H:i:s");
+
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'phongnguyen.050503@gmail.com';
+            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->CharSet = 'UTF-8';
+            $mail->Encoding = 'base64';
+
+            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->addAddress($emailAuthu);
+
+            $template = file_get_contents('view/page/email/send_reason_refuse.html');
+            $template = str_replace('{{ product_name }}', $product_name, $template);
+            $template = str_replace('{{ content }}', $content, $template);
+            $template = str_replace('{{ dateApproval }}', $dateApproval, $template);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Thông báo từ hệ thống';
+            $mail->Body = $template;
+
+            $mail->send();
+
+        } catch (Exception $e) {
+            echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
+        }
+    }
 }

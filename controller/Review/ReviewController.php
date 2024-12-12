@@ -89,4 +89,19 @@ class ReviewController
     {
         return $this->reviewModel->countAllReview();
     }
+    public function getAVGReviewByProductIdController($productId)
+    {
+        try {
+            $averageRating = $this->reviewModel->getAVGReviewByProductId($productId);
+        } catch (Exception $e) {
+            die("Error: " . $e->getMessage());
+        }
+
+        // Kiểm tra xem có đánh giá không
+        if ($averageRating > 0) {
+            return $averageRating; // Trả về giá trị đánh giá nếu có
+        } else {
+            return 'Chưa có bài đánh giá cho sản phẩm.'; // Nếu không có đánh giá
+        }
+    }
 }

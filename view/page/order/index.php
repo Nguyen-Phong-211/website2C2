@@ -19,7 +19,8 @@ $productController = new ProductController();
 
 if (isset($_POST['btndh'])) {
 
-    if(!empty($_POST['name']) || !empty($_POST['email']) || !empty($_POST['phone']) || !empty($_POST['address'])){
+    if(empty($_POST['name'])){
+        //|| !empty($_POST['email']) || !empty($_POST['phone']) || !empty($_POST['address'])
         $cartItems = $cartController->getProductofCartList();
 
         $totalOrderPrice = 0;
@@ -30,7 +31,7 @@ if (isset($_POST['btndh'])) {
         $orderDate = date('Y-m-d H:i:s');
         $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 
-        $orderController->addOrderController($userId, $orderDate, $totalOrderPrice, 1, 1);
+        $orderController->addOrderController($userId, $orderDate, $totalOrderPrice, 2, 2);
         sleep(2);
 
         foreach ($cartItems as $item) {

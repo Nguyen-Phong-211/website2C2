@@ -19,4 +19,14 @@ class Image extends ConnectDatabase
         }
         return $result;
     }
+    //get all images by registration_product_id
+    public function getAllImagesByRegistrationProductId($registration_product_id)
+    {
+        $query = "SELECT image_name FROM images WHERE registration_product_id = '$registration_product_id'";
+        $result = $this->conn->query($query);
+        if ($result === false) {
+            die("Query failed: ". $this->conn->error);
+        }
+        return $result;
+    }
 }

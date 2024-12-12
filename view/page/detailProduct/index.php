@@ -105,141 +105,38 @@
                             $reviewController = new ReviewController();
 
                             $idp = $_REQUEST['idp'];
-                            $resultData = $reviewController->getReviewByProductIdController($idp);
+                            $resultData = $reviewController->getAVGReviewByProductIdController($idp);
 
-                            foreach ($resultData as $data) {
-                                if ($data['rating_star'] >= 4.6 && $data['rating_star'] <= 5) {
-                                    echo '5
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                ';
-                                } elseif ($data['rating_star'] == 4.5) {
-                                    echo '4.5
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-half" viewBox="0 0 16 16">
-                                        <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"/>
-                                    </svg>
-                                ';
-                                } elseif ($data['rating_star'] >= 4 && $data['rating_star'] <= 4.4) {
-                                    echo '4
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                ';
-                                } elseif ($data['rating_star'] >= 3.5 && $data['rating_star'] <= 3.9) {
-                                    echo '3.5
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-half" viewBox="0 0 16 16">
-                                        <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"/>
-                                    </svg>
-                                ';
-                                } elseif ($data['rating_star'] == 3) {
-                                    echo '3
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                ';
-                                } elseif ($data['rating_star'] >= 2.5 && $data['rating_star'] <= 2.9) {
-                                    echo '2.5
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-half" viewBox="0 0 16 16">
-                                        <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"/>
-                                    </svg>
-                                ';
-                                } elseif ($data['rating_star'] == 2) {
-                                    echo '2
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                ';
-                                } elseif ($data['rating_star'] >= 1.5 && $data['rating_star'] <= 1.9) {
-                                    echo '1.5
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-half" viewBox="0 0 16 16">
-                                        <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"/>
-                                    </svg>
-                                ';
-                                } elseif ($data['rating_star'] == 1) {
-                                    echo '1
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                ';
-                                } else {
-                                    echo '4.5 
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-half" viewBox="0 0 16 16">
-                                        <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"/>
-                                    </svg>';
+                            if (is_numeric($resultData)) {
+                                // Đánh giá hợp lệ, hiển thị sao
+                                $ratingStar = round($resultData); // Làm tròn giá trị trung bình sao
+                                $fullStars = floor($ratingStar); // Số sao đầy đủ
+                                $halfStar = ($ratingStar - $fullStars) >= 0.5 ? true : false; // Kiểm tra có sao nửa không
+                                $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0); // Tính số sao trống
+
+                                // Hiển thị sao đầy đủ
+                                for ($i = 0; $i < $fullStars; $i++) {
+                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-fill" viewBox="0 0 16 16">
+                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+              </svg>';
                                 }
+
+                                // Hiển thị sao nửa
+                                if ($halfStar) {
+                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#ffd700" class="bi bi-star-half" viewBox="0 0 16 16">
+                <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z"/>
+              </svg>';
+                                }
+
+                                // Hiển thị sao trống
+                                for ($i = 0; $i < $emptyStars; $i++) {
+                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#e0e0e0" class="bi bi-star" viewBox="0 0 16 16">
+                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+              </svg>';
+                                }
+                            } else {
+                                // Nếu không có đánh giá
+                                echo 'Chưa có bài đánh giá cho sản phẩm';
                             }
                             ?>
                         </div>
@@ -276,7 +173,7 @@
                             </div>
                             <div class="d-flex align-items-center justify-content-evenly mt-4">
                                 <!-- Liên kết Chat với người bán -->
-                                <a href="index.php?page=message&idp='. $_REQUEST['idp'] .'" class="text-decoration-none btn-link p-2 d-flex align-items-center">
+                                <a href="index.php?page=message&idp=' . $_REQUEST['idp'] . '" class="text-decoration-none btn-link p-2 d-flex align-items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chat-right-dots me-2" viewBox="0 0 16 16">
                                         <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
                                         <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
@@ -300,7 +197,7 @@
 
                         <div class="d-flex justify-content-start align-items-center mt-3">
                             <button class="btn btn-primary rounded-1 p-2 d-flex align-items-center active"
-                            onclick="addToCart(<?php echo $idp; ?>)">
+                                onclick="addToCart(<?php echo $idp; ?>)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart-plus me-1" viewBox="0 0 16 16">
                                     <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z" />
                                     <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
@@ -308,18 +205,18 @@
                                 Thêm vào giỏ hàng
                             </button>
 
-                            <?php 
-                                include_once('controller/User/UserController.php');
-                                include_once('controller/Whistlist/WhistlistController.php');
+                            <?php
+                            include_once('controller/User/UserController.php');
+                            include_once('controller/Whistlist/WhistlistController.php');
 
-                                $userController = new UserController();
-                                $whistlistController = new WhistlistController();
+                            $userController = new UserController();
+                            $whistlistController = new WhistlistController();
 
-                                if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
-                                    $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
-                                    $addWhistlist = $whistlistController->checkIfExistWhistlistController($_REQUEST['idp'], $getUserId);
-                                    if($addWhistlist === true){
-                                        echo '
+                            if (isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])) {
+                                $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
+                                $addWhistlist = $whistlistController->checkIfExistWhistlistController($_REQUEST['idp'], $getUserId);
+                                if ($addWhistlist === true) {
+                                    echo '
                                         <form action="" method="post">
                                             <input type="hidden" name="deleteProductOutWhistlist" value="">
                                             <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
@@ -330,48 +227,7 @@
                                             </button>
                                         </form>
                                         ';
-                                    }else{
-                                        echo '
-                                        <form action="" method="post">
-                                            <input type="hidden" name="addProductToWhistlist" value=""> 
-                                            <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
-                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                </svg>
-                                                Thêm vào danh sách yêu thích
-                                            </button>
-                                        </form>
-                                        ';
-                                    }
-                                }elseif(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
-                                    $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
-                                    $addWhistlist = $whistlistController->checkIfExistWhistlistController($_REQUEST['idp'], $getUserId);
-                                    if($addWhistlist === true){
-                                        echo '
-                                        <form action="" method="post">
-                                            <input type="hidden" name="deleteProductOutWhistlist" value="">
-                                            <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill me-1" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-                                                </svg>
-                                                Thêm vào danh sách yêu thích
-                                            </button>
-                                        </form>
-                                        ';
-                                    }else{
-                                        echo '
-                                        <form action="" method="post">
-                                            <input type="hidden" name="addProductToWhistlist" value=""> 
-                                            <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
-                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                </svg>
-                                                Thêm vào danh sách yêu thích
-                                            </button>
-                                        </form>
-                                        ';
-                                    }
-                                }else{
+                                } else {
                                     echo '
                                         <form action="" method="post">
                                             <input type="hidden" name="addProductToWhistlist" value=""> 
@@ -384,47 +240,88 @@
                                         </form>
                                         ';
                                 }
-                            ?>
-                            <?php 
-                                include_once('controller/User/UserController.php');
-                                include_once('controller/Whistlist/WhistlistController.php');
-
-                                $userController = new UserController();
-                                $whistlistController = new WhistlistController();
-
-                                if(isset($_REQUEST['addProductToWhistlist'])){
-                                    if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
-                                        $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
-                                        $addWhistlist = $whistlistController->addToWhistlistController($_REQUEST['idp'], $getUserId);
-                                        if($addWhistlist === true){
-                                            echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
-                                        }
-                                    }elseif(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
-                                        $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
-                                        $addWhistlist = $whistlistController->addToWhistlistController($_REQUEST['idp'], $getUserId);
-                                        if($addWhistlist === true){
-                                            echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
-                                        }
-                                    }else{
-                                        echo '<script>location.href = "index.php?page=login";</script>';
-                                    }
-                                }elseif(isset($_REQUEST['deleteProductOutWhistlist'])){
-                                    if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
-                                        $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
-                                        $addWhistlist = $whistlistController->removeFromWhistlistByProductIdController($_REQUEST['idp'], $getUserId);
-                                        if($addWhistlist === true){
-                                            echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
-                                        }
-                                    }elseif(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
-                                        $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
-                                        $addWhistlist = $whistlistController->removeFromWhistlistByProductIdController($_REQUEST['idp'], $getUserId);
-                                        if($addWhistlist === true){
-                                            echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
-                                        }
-                                    }else{
-                                        echo '<script>location.href = "index.php?page=login";</script>';
-                                    }
+                            } elseif (isset($_SESSION['email']) && isset($_SESSION['success_message'])) {
+                                $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
+                                $addWhistlist = $whistlistController->checkIfExistWhistlistController($_REQUEST['idp'], $getUserId);
+                                if ($addWhistlist === true) {
+                                    echo '
+                                        <form action="" method="post">
+                                            <input type="hidden" name="deleteProductOutWhistlist" value="">
+                                            <button type="submit" name="deleteWishlist" value="deleteWishlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill me-1" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                                                </svg>
+                                                Thêm vào danh sách yêu thích
+                                            </button>
+                                        </form>
+                                        ';
+                                } else {
+                                    echo '
+                                        <form action="" method="post">
+                                            <input type="hidden" name="addProductToWhistlist" value=""> 
+                                            <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
+                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                                </svg>
+                                                Thêm vào danh sách yêu thích
+                                            </button>
+                                        </form>
+                                        ';
                                 }
+                            } else {
+                                echo '
+                                        <form action="" method="post">
+                                            <input type="hidden" name="addProductToWhistlist" value=""> 
+                                            <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
+                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                                </svg>
+                                                Thêm vào danh sách yêu thích
+                                            </button>
+                                        </form>
+                                        ';
+                            }
+                            ?>
+                            <?php
+                            include_once('controller/User/UserController.php');
+                            include_once('controller/Whistlist/WhistlistController.php');
+
+                            $userController = new UserController();
+                            $whistlistController = new WhistlistController();
+
+                            if (isset($_REQUEST['addProductToWhistlist'])) {
+                                if (isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])) {
+                                    $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
+                                    $addWhistlist = $whistlistController->addToWhistlistController($_REQUEST['idp'], $getUserId);
+                                    if ($addWhistlist === true) {
+                                        echo '<script>location.href = "index.php?page=detailProduct&idp=' . $_REQUEST['idp'] . '";</script>';
+                                    }
+                                } elseif (isset($_SESSION['email']) && isset($_SESSION['success_message'])) {
+                                    $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
+                                    $addWhistlist = $whistlistController->addToWhistlistController($_REQUEST['idp'], $getUserId);
+                                    if ($addWhistlist === true) {
+                                        echo '<script>location.href = "index.php?page=detailProduct&idp=' . $_REQUEST['idp'] . '";</script>';
+                                    }
+                                } else {
+                                    echo '<script>location.href = "index.php?page=login";</script>';
+                                }
+                            } elseif (isset($_REQUEST['deleteProductOutWhistlist'])) {
+                                if (isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])) {
+                                    $getUserId = $userController->getUserIdByEmailController($_SESSION['emailUserLoginGoogle']);
+                                    $addWhistlist = $whistlistController->removeFromWhistlistByProductIdController($_REQUEST['idp'], $getUserId);
+                                    if ($addWhistlist === true) {
+                                        echo '<script>location.href = "index.php?page=detailProduct&idp=' . $_REQUEST['idp'] . '";</script>';
+                                    }
+                                } elseif (isset($_SESSION['email']) && isset($_SESSION['success_message'])) {
+                                    $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
+                                    $addWhistlist = $whistlistController->removeFromWhistlistByProductIdController($_REQUEST['idp'], $getUserId);
+                                    if ($addWhistlist === true) {
+                                        echo '<script>location.href = "index.php?page=detailProduct&idp=' . $_REQUEST['idp'] . '";</script>';
+                                    }
+                                } else {
+                                    echo '<script>location.href = "index.php?page=login";</script>';
+                                }
+                            }
                             ?>
 
                         </div>
@@ -504,12 +401,12 @@
         </div>
     </section>
     <?php
-        include_once('script.php');
+    include_once('script.php');
     ?>
-    <?php 
+    <?php
     include_once('view/layout/header/button_backtotop.php');
     ?>
-    
+
     <?php
     include_once('view/layout/footer/footer.php');
     ?>
@@ -520,4 +417,3 @@
 </body>
 
 </html>
-

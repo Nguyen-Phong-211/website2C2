@@ -29,13 +29,20 @@ class Product extends ConnectDatabase
     public function getAllProductWithReviews()
     {
         $query = "
-        SELECT *, w.status AS wstatus FROM products AS p 
-            LEFT JOIN whistlists AS w ON p.product_id = w.product_id 
-            LEFT JOIN reviews AS r ON p.product_id = r.product_id 
-            LEFT JOIN ( SELECT product_id, image_name FROM images GROUP BY product_id ) AS i 
-                ON i.product_id = p.product_id 
-            WHERE p.quantity >= 1
-            LIMIT 10;
+        SELECT 
+            p.*, 
+            w.whistlist_id,
+            GROUP_CONCAT(DISTINCT w.status) AS wstatus, 
+            GROUP_CONCAT(DISTINCT r.product_id) AS reviews, 
+            GROUP_CONCAT(DISTINCT r.rating_star) AS rating_star, 
+            i.image_name AS image_name
+        FROM products AS p
+        LEFT JOIN whistlists AS w ON p.product_id = w.product_id 
+        LEFT JOIN reviews AS r ON p.product_id = r.product_id 
+        LEFT JOIN images AS i ON i.product_id = p.product_id
+        WHERE p.quantity >= 1
+        GROUP BY p.product_id
+        LIMIT 10;
         ";
         $result = $this->conn->query($query);
 
@@ -48,12 +55,23 @@ class Product extends ConnectDatabase
     public function getAllFavoriteProduct()
     {
         $query = "
-        SELECT *, w.status AS wstatus FROM products AS p 
-            LEFT JOIN whistlists AS w ON p.product_id = w.product_id 
-            LEFT JOIN reviews AS r ON p.product_id = r.product_id 
-            LEFT JOIN ( SELECT product_id, image_name FROM images GROUP BY product_id ) AS i 
-                ON i.product_id = p.product_id 
-            WHERE p.quantity >= 1 
+            SELECT 
+            p.*, w.whistlist_id,
+            GROUP_CONCAT(DISTINCT w.status) AS wstatus, 
+            GROUP_CONCAT(DISTINCT r.product_id) AS reviews, 
+            GROUP_CONCAT(DISTINCT r.rating_star) AS rating_star, 
+            COALESCE(i.image_name, 'default_image.jpg') AS image_name  
+        FROM products AS p
+        LEFT JOIN whistlists AS w ON p.product_id = w.product_id 
+        LEFT JOIN reviews AS r ON p.product_id = r.product_id 
+        LEFT JOIN (
+            SELECT product_id, image_name
+            FROM images
+            ORDER BY image_name  
+        ) AS i ON i.product_id = p.product_id 
+        WHERE p.quantity >= 1
+        GROUP BY p.product_id
+        ORDER BY p.product_id DESC
         ";
         $result = $this->conn->query($query);
 
@@ -76,7 +94,7 @@ class Product extends ConnectDatabase
     //count product
     public function countProduct()
     {
-        $query = "SELECT COUNT(*) as total FROM products WHERE quantity >= 1" ;
+        $query = "SELECT COUNT(*) as total FROM products WHERE quantity >= 1";
         $result = $this->conn->query($query);
 
         if ($result === false) {
@@ -201,13 +219,14 @@ class Product extends ConnectDatabase
         $result = $this->conn->query($query);
 
         if ($result === false) {
-            die("Query failed: ". $this->conn->error);
+            die("Query failed: " . $this->conn->error);
         }
         return $result;
     }
 
     //find product by price
-    public function findProductByPrice($priceFrom, $priceTo){
+    public function findProductByPrice($priceFrom, $priceTo)
+    {
         $stmt = $this->conn->prepare("SELECT 
                                                 p.product_id, 
                                                 p.product_name, 
@@ -261,16 +280,16 @@ class Product extends ConnectDatabase
                                                 r.rating_star, 
                                                 i.image_name;
                                             ");
-    
+
         $stmt->bind_param("ii", $priceFrom, $priceTo);
-    
+
         if ($stmt->execute()) {
             $result = $stmt->get_result();
             $stmt->close();
             return $result;
         } else {
             echo "Error: " . $stmt->error;
-            return false; 
+            return false;
         }
     }
     //get product by category_item_id
@@ -376,53 +395,24 @@ class Product extends ConnectDatabase
                     r.status, 
                     i.image_name; ";
         $stmt = $this->conn->prepare($query);
-        
+
         if ($stmt === false) {
             error_log("Prepare failed: " . $this->conn->error);
             return false;
         }
         $searchTerm = "%$keyword%";
         $stmt->bind_param("s", $searchTerm);
-        
+
         $stmt->execute();
 
         $result = $stmt->get_result();
-        
+
         if ($result === false) {
             error_log("Query failed: " . $stmt->error);
             return false;
         }
         return $result;
     }
-    //count result of finding product
-    // public function countProducts($keyword)
-    // {
-    //     $query = "SELECT COUNT(*) AS total FROM products WHERE product_name LIKE ?";
-    //     $stmt = $this->conn->prepare($query);
-
-    //     if ($stmt === false) {
-    //         error_log("Prepare failed: " . $this->conn->error);
-    //         return false;
-    //     }
-
-    //     $searchTerm = "%$keyword%";
-    //     $stmt->bind_param("s", $searchTerm);
-
-    //     $executeResult = $stmt->execute();
-
-    //     if ($executeResult === false) {
-    //         error_log("Execution failed: " . $stmt->error);
-    //         return false;
-    //     }
-
-    //     $result = $stmt->get_result();
-    //     if ($result === false) {
-    //         error_log("Query failed: " . $stmt->error);
-    //         return false;
-    //     }
-    //     $row = $result->fetch_assoc();
-    //     return $row['total']; 
-    // }
 
     //get product by rating_star
     public function getProductByRating($ratingStar)
@@ -472,7 +462,7 @@ class Product extends ConnectDatabase
         $stmt = $this->conn->prepare($query);
 
         if ($stmt === false) {
-            error_log("Prepare failed: ". $this->conn->error);
+            error_log("Prepare failed: " . $this->conn->error);
             return false;
         }
         $stmt->bind_param("i", $ratingStar);
@@ -480,7 +470,7 @@ class Product extends ConnectDatabase
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result === false) {
-            error_log("Query failed: ". $stmt->error);
+            error_log("Query failed: " . $stmt->error);
             return false;
         }
         return $result;
@@ -492,7 +482,7 @@ class Product extends ConnectDatabase
         $stmt = $this->conn->prepare($query);
 
         if ($stmt === false) {
-            error_log("Prepare failed: ". $this->conn->error);
+            error_log("Prepare failed: " . $this->conn->error);
             return false;
         }
         $stmt->bind_param("i", $productId);
@@ -508,7 +498,7 @@ class Product extends ConnectDatabase
         $stmt = $this->conn->prepare($query);
 
         if ($stmt === false) {
-            error_log("Prepare failed: ". $this->conn->error);
+            error_log("Prepare failed: " . $this->conn->error);
             return false;
         }
         $stmt->bind_param("i", $productId);
@@ -516,7 +506,7 @@ class Product extends ConnectDatabase
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result === false) {
-            error_log("Query failed: ". $stmt->error);
+            error_log("Query failed: " . $stmt->error);
             return false;
         }
         $row = $result->fetch_assoc();
@@ -534,5 +524,80 @@ class Product extends ConnectDatabase
             return $row['user_id'];
         }
         return null; // Trường hợp không tìm thấy
+    }
+    //get all product by user_id
+    public function getAllProductByUserId($userId)
+    {
+        $query = "SELECT p.*, GROUP_CONCAT(i.image_name) AS image_name
+                        FROM products AS p
+                        LEFT JOIN users AS u ON p.user_id = u.user_id
+                        LEFT JOIN roles AS rl ON rl.role_id = u.role_seller_id
+                        LEFT JOIN images AS i ON i.product_id = p.product_id
+                        WHERE u.role_seller_id = 1 AND p.user_id = ?
+                        GROUP BY p.product_id;
+                        ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
+    //update product by user_id
+    public function updateProduct($product_id, $product_name, $product_price, $product_description, $address, $quantity, $imagePaths = [])
+    {
+        // Bắt đầu transaction
+        $this->conn->begin_transaction();
+
+        try {
+            // Cập nhật thông tin sản phẩm
+            $updateProductQuery = "
+            UPDATE products 
+            SET product_name = ?, price = ?, description = ?, address = ?, quantity = ? 
+            WHERE product_id = ?
+        ";
+
+            $stmt = $this->conn->prepare($updateProductQuery);
+            $stmt->bind_param("sdssii", $product_name, $product_price, $product_description, $address, $quantity, $product_id);
+
+            if (!$stmt->execute()) {
+                throw new Exception("Error updating product: " . $stmt->error);
+            }
+
+            // Kiểm tra xem có thay đổi không
+            if ($stmt->affected_rows == 0) {
+                // Không có thay đổi nào
+                return "Không có thay đổi!";
+            }
+
+            // Nếu có hình ảnh mới, xóa các hình ảnh cũ và thêm mới
+            if (!empty($imagePaths)) {
+                // Xóa các hình ảnh cũ chỉ khi có hình ảnh mới được upload
+                $deleteImagesQuery = "DELETE FROM images WHERE product_id = ?";
+                $stmt = $this->conn->prepare($deleteImagesQuery);
+                $stmt->bind_param("i", $product_id);
+                if (!$stmt->execute()) {
+                    throw new Exception("Error deleting images: " . $stmt->error);
+                }
+
+                // Thêm các hình ảnh mới
+                $insertImageQuery = "INSERT INTO images (product_id, image_name, create_at, update_at) VALUES (?, ?, NOW(), NOW())";
+                foreach ($imagePaths as $image) {
+                    $stmt = $this->conn->prepare($insertImageQuery);
+                    $stmt->bind_param("is", $product_id, $image);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Error inserting image: " . $stmt->error);
+                    }
+                }
+            }
+
+            // Commit transaction
+            $this->conn->commit();
+            return "Cập nhật sản phẩm thành công!";
+        } catch (Exception $e) {
+            // Rollback transaction nếu có lỗi
+            $this->conn->rollback();
+            return "Lỗi: " . $e->getMessage();
+        }
     }
 }

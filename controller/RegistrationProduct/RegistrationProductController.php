@@ -1,5 +1,6 @@
 <?php
 include_once('model/RegistrationProduct.php');
+include_once('controller/Email/EmailController.php');
 
 class RegistrationProductController
 {
@@ -59,6 +60,56 @@ class RegistrationProductController
         $result = $this->registrationProductModel->getNameLevelCategory($regisId);
         if (!$result) {
             die("Failed to retrieve category list: " . $this->registrationProductModel->getConnection()->error);
+        }
+        return $result;
+    }
+    //get info regis by registration_id
+    public function getInfoRegisByIdController($regisId){
+        $result = $this->registrationProductModel->getInfoRegisById($regisId);
+        if (!$result) {
+            die("Failed to retrieve category list: " . $this->registrationProductModel->getConnection()->error);
+        }
+        return $result;
+    }
+    //
+    public function insertProductDataController($regisId){
+        if (isset($_POST['btnApprovalProduct'])) {
+            $result = $this->registrationProductModel->insertProductData($regisId); 
+
+            $_SESSION['message'] = $result;  
+            echo '<script>
+                alert("Duyệt sản phẩm thành công!");
+                window.location.href = "index.php?page=productApproval";
+            </script>';
+            exit();
+        }
+    }
+    //updateReasonRefusal
+    public function updateReasonRefusalController($regisId, $reasonRefusal){
+        if(isset($_POST['btnRefuseProduct'])){
+            $result = $this->registrationProductModel->updateReasonRefusal($regisId, $reasonRefusal); 
+            if($result){
+                $emailController = new EmailController();
+                $emailController->sendReasonRefuse($_SESSION['email_seller'], $reasonRefusal, $_REQUEST['title']);
+                echo '<script>
+                        alert("Từ chối sản phẩm thành công!");
+                        window.location.href = "index.php?page=productApproval";
+                    </script>';
+                    exit();
+            }else{
+                echo '<script>
+                        alert("Từ chối sản phẩm thất bại! Vui lòng thử lại.");
+                        window.location.href = "index.php?page=productApproval";
+                    </script>';
+                exit();
+            }
+        }
+    }
+    //get status registration_product
+    public function getStatusRegistrationProductController($regisId){
+        $result = $this->registrationProductModel->getStatusRegis($regisId);
+        if (!$result) {
+            die("Failed to retrieve status: ". $this->registrationProductModel->getConnection()->error);
         }
         return $result;
     }

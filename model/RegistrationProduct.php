@@ -246,7 +246,8 @@ class RegistrationProduct extends ConnectDatabase
         return $productName;
     }
     //get all registration by role_seller_id = 1 and status = '0'
-    public function getAllProductApproval(){
+    public function getAllProductApproval()
+    {
         $stmt = $this->conn->prepare("
                                         SELECT DISTINCT rp.registration_product_id, 
                                                         ci.category_item_id, 
@@ -269,7 +270,7 @@ class RegistrationProduct extends ConnectDatabase
                                         JOIN categories AS c ON rp.category_id = c.category_id
                                         JOIN category_items AS ci ON ci.category_item_id = rp.category_item_id
                                         JOIN companies AS cp ON cp.company_id = rp.company_id
-                                        WHERE u.role_seller_id = 1 AND rp.status = '0'
+                                        WHERE u.role_seller_id = 1
                                         ORDER BY rp.create_at DESC;
         ");
         $stmt->execute();
@@ -277,16 +278,125 @@ class RegistrationProduct extends ConnectDatabase
         return $result;
     }
     //get name of level category
-    public function getNameLevelCategory($regisId){
+    public function getNameLevelCategory($regisId)
+    {
         $stmt = $this->conn->prepare("SELECT c.category_name, ci.category_item_name, cp.company_name FROM registration_products AS rp 
                                                 JOIN categories AS c ON c.category_id = rp.category_id
                                                 JOIN category_items AS ci ON rp.category_item_id = ci.category_item_id
                                                 JOIN companies AS cp ON rp.company_id = cp.company_id
                                             WHERE rp.registration_product_id = ?");
-        
+
         $stmt->bind_param("i", $regisId);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result;
+    }
+    //get info regis by registration_id
+    public function getInfoRegisById($regisId)
+    {
+        $stmt = $this->conn->prepare("
+        SELECT rp.*, wp.warranty_policy_name, st.status_product_name
+        FROM registration_products AS rp
+            JOIN warranty_policies AS wp ON wp.warranty_policy_id = rp.warranty_policy_id
+            JOIN status_products AS st ON st.status_product_id = rp.status_product_id
+            JOIN users AS u ON rp.user_id = u.user_id
+            LEFT JOIN roles AS rl ON u.role_seller_id = rl.role_id
+            JOIN categories AS c ON rp.category_id = c.category_id
+            JOIN category_items AS ci ON ci.category_item_id = rp.category_item_id
+            JOIN companies AS cp ON cp.company_id = rp.company_id
+        WHERE rp.registration_product_id = ?
+        ");
+        $stmt->bind_param("i", $regisId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
+    }
+
+    //insert into product, images, registration_products
+    public function insertProductData($regisId)
+    {
+        // Bắt đầu transaction
+        $this->conn->begin_transaction();
+
+        try {
+            $stmt = $this->conn->prepare(
+                "INSERT INTO products (
+                product_name, quantity, price, description, category_item_id, 
+                company_id, status_product_id, warranty_policy_id, user_id, 
+                category_attribute_id, attribute_id, address
+            )
+            SELECT rp.title, rp.quantity, rp.price, rp.description, rp.category_item_id, 
+                   rp.company_id, rp.status_product_id, rp.warranty_policy_id, rp.user_id, 
+                   NULL, NULL, rp.address 
+            FROM registration_products AS rp 
+            WHERE rp.registration_product_id = ?"
+            );
+
+            $stmt->bind_param("i", $regisId); 
+            if (!$stmt->execute()) {
+                throw new Exception("Error inserting into products: " . $stmt->error);
+            }
+
+            $newProductId = $this->conn->insert_id;
+
+            $imageStmt = $this->conn->prepare(
+                "INSERT INTO images (product_id, image_name, create_at, update_at)
+            SELECT ?, i.image_name, NOW(), NOW()
+            FROM images i
+            JOIN registration_products rp ON i.registration_product_id = rp.registration_product_id
+            WHERE rp.registration_product_id = ?"
+            );
+
+            $imageStmt->bind_param("ii", $newProductId, $regisId);
+            if (!$imageStmt->execute()) {
+                throw new Exception("Error inserting into images: " . $imageStmt->error);
+            }
+
+            $attrStmt = $this->conn->prepare(
+                "INSERT INTO product_attributes (product_id, category_attribute_id, attribute_id)
+            SELECT ?, rpa.category_attribute_id, rpa.attribute_id
+            FROM registration_product_attributes rpa
+            JOIN registration_products rp ON rp.registration_product_id = rpa.registration_product_id
+            WHERE rp.registration_product_id = ?"
+            );
+
+            $attrStmt->bind_param("ii", $newProductId, $regisId);
+            if (!$attrStmt->execute()) {
+                throw new Exception("Error inserting into product_attributes: " . $attrStmt->error);
+            }
+
+            //update status registration_product
+            $statusRegis = $this->conn->prepare("UPDATE registration_products SET status = '1' WHERE  registration_product_id = ?");
+            $statusRegis->bind_param("i", $regisId);
+            if (!$statusRegis->execute()) {
+                throw new Exception("Error updating registration_products: " . $statusRegis->error);
+            }
+
+            $this->conn->commit();
+            return "Data inserted successfully!";
+        } catch (Exception $e) {
+            $this->conn->rollback();
+            return "Error: " . $e->getMessage();
+        }
+    }
+    //reason for refusal
+    public function updateReasonRefusal($regisId, $content){
+        $stmt = $this->conn->prepare("UPDATE registration_products  SET reason_for_refusal = ?, status = '2' WHERE registration_product_id = ?");
+        $stmt->bind_param("si", $content, $regisId);
+        if ($stmt === false) {
+            error_log("Prepare failed: ". $this->conn->error);
+            return false;
+        }
+        $stmt->execute();
+        return true;
+    }
+    //get status registration_product
+    public function getStatusRegis($regisId)
+    {
+        $stmt = $this->conn->prepare("SELECT status, reason_for_refusal FROM registration_products WHERE registration_product_id = ?");
+        $stmt->bind_param("i", $regisId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 }

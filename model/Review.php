@@ -167,4 +167,21 @@ class Review extends ConnectDatabase
         $stmt->close();
         return $count;
     }
+    public function getAVGReviewByProductId($productId)
+    {
+        $query = "SELECT AVG(rating_star) as average_rating FROM reviews WHERE product_id = '$productId'";
+        $result = $this->conn->query($query);
+    
+        if ($result === false) {
+            die("Failed to retrieve review list: " . $this->conn->error);
+        }
+    
+        // Lấy kết quả và kiểm tra nếu không có đánh giá
+        $data = $result->fetch_assoc();
+        if ($data && isset($data['average_rating']) && $data['average_rating'] !== null) {
+            return $data['average_rating'];
+        } else {
+            return 0; // Trả về 0 nếu không có đánh giá
+        }
+    }
 }

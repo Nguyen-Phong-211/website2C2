@@ -69,7 +69,7 @@ include_once('view/layout/header/lib_cdn.php');
                     <input type="hidden" name="rating" id="rating-input" required>
                 </div>
                 <div class="mb-3">
-                    <textarea class="form-control form-input-n-blur" id="exampleFormControlTextarea1" rows="3" required placeholder="Nhập nội dung đánh giá"></textarea>
+                    <textarea class="form-control form-input-n-blur" name="review" id="exampleFormControlTextarea1" rows="3" required placeholder="Nhập nội dung đánh giá"></textarea>
                 </div>
                 <input type="hidden" name="idp" value="<?= htmlspecialchars($_REQUEST['idp']); ?>">
                 <button type="submit" name="btn-up" class="btn btn-primary">Gửi đánh giá</button>

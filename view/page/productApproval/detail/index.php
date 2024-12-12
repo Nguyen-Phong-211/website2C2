@@ -419,24 +419,25 @@ if (isset($_SESSION['message'])) {
                                     include_once('controller/User/UserController.php');
                                     $userController = new UserController();
                                     $dataUserRegis = $userController->getInfoUserSellerRegisController();
+                                    $_SESSION['email_seller'] = $dataUserRegis['email'];
                                     echo '
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
                                             <div class="d-flex align-items-center">
                                                 <label for="" class="form-label mb-0 me-2">Họ và tên người bán: </label>
-                                                <p class="fw-bold mb-0">'. $dataUserRegis['user_name'] .'</p>
+                                                <p class="fw-bold mb-0">' . $dataUserRegis['user_name'] . '</p>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <div class="d-flex align-items-center">
                                                 <label for="" class="form-label mb-0 me-2">Số điện thoại: </label>
-                                                <p class="fw-bold mb-0">'. $dataUserRegis['number_phone'] .'</p>
+                                                <p class="fw-bold mb-0">' . $dataUserRegis['number_phone'] . '</p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <div class="d-flex align-items-center">
                                                 <label for="" class="form-label mb-0 me-2">Email: </label>
-                                                <p class="fw-bold mb-0">'. $dataUserRegis['email'] .'</p>
+                                                <p class="fw-bold mb-0">' . $dataUserRegis['email'] . '</p>
                                             </div>
                                         </div>
                                     </div>
@@ -444,13 +445,13 @@ if (isset($_SESSION['message'])) {
                                         <div class="col-md-6 mb-3">
                                             <div class="d-flex align-items-center">
                                                 <label for="" class="form-label mb-0 me-2">Địa chỉ: </label>
-                                                <p class="fw-bold mb-0">'. $dataUserRegis['address'] .'</p>
+                                                <p class="fw-bold mb-0">' . $dataUserRegis['address'] . '</p>
                                             </div>
                                         </div>
                                         <div class="col-md-5 mb-3">
                                             <div class="d-flex align-items-center">
                                                 <label for="" class="form-label mb-0 me-2">Ngày đăng ký bán: </label>
-                                                <p class="fw-bold mb-0">'. $dataUserRegis['create_at'] .'</p>
+                                                <p class="fw-bold mb-0">' . $dataUserRegis['create_at'] . '</p>
                                             </div>
                                         </div>
                                     </div>
@@ -472,26 +473,26 @@ if (isset($_SESSION['message'])) {
                                         <?php
                                         include_once('controller/RegistrationProduct/RegistrationProductController.php');
                                         $registrationProductController = new RegistrationProductController();
-                                        
+
                                         $dataLevelCategories = $registrationProductController->getNameLevelCategoryController($_REQUEST['idrp']);
-                                        foreach($dataLevelCategories as $dataLevelCategory){
+                                        foreach ($dataLevelCategories as $dataLevelCategory) {
                                             echo '
                                             <div class="col-md-4 mb-3">
                                                 <div class="d-flex align-items-center">
                                                     <label for="" class="form-label mb-0 me-2">Danh mục cấp 1: </label>
-                                                    <p class="fw-bold mb-0">'. $dataLevelCategory['category_name'] .'</p>
+                                                    <p class="fw-bold mb-0">' . $dataLevelCategory['category_name'] . '</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <div class="d-flex align-items-center">
                                                     <label for="" class="form-label mb-0 me-2">Danh mục cấp 2: </label>
-                                                    <p class="fw-bold mb-0">'. $dataLevelCategory['category_item_name'] .'</p>
+                                                    <p class="fw-bold mb-0">' . $dataLevelCategory['category_item_name'] . '</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 mb-3">
                                                 <div class="d-flex align-items-center">
                                                     <label for="" class="form-label mb-0 me-2">Danh mục cấp 3:</label>
-                                                    <p class="fw-bold mb-0">'. $dataLevelCategory['company_name'] .'</p>
+                                                    <p class="fw-bold mb-0">' . $dataLevelCategory['company_name'] . '</p>
                                                 </div>
                                             </div>
                                             ';
@@ -504,6 +505,20 @@ if (isset($_SESSION['message'])) {
                     </div>
 
 
+                    <?php
+                    include_once('controller/RegistrationProduct/RegistrationProductController.php');
+                    include_once('controller/Image/ImageController.php');
+                    include_once('controller/RegistrationProductAttribute/RegistrationProductAttributeController.php');
+                    $registrationProductController = new RegistrationProductController();
+                    $imageController = new ImageController();
+                    $registrationProductAttributeController = new RegistrationProductAttributeController();
+
+                    if (isset($_REQUEST['idrp'])) {
+                        $infoProductRegis = $registrationProductController->getInfoRegisByIdController($_REQUEST['idrp']);
+                        $imageRegis = $imageController->getAllImagesByRegisProductIdController($_REQUEST['idrp']);
+                        $categoryAttributes = $registrationProductAttributeController->getRegistrationProductAttributeController($_REQUEST['idrp']);
+                    }
+                    ?>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -512,95 +527,205 @@ if (isset($_SESSION['message'])) {
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <div class="d-inline-flex align-items-center">
-                                                    <label for="" class="form-label mb-0 me-2">Mã đơn đăng ký: </label>
-                                                    <span class="badge bg-primary mb-0">1</span>
+                                        <?php foreach ($infoProductRegis as $infoProduct): ?>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <div class="d-inline-flex align-items-center">
+                                                        <label for="" class="form-label mb-0 me-2">Mã đơn đăng ký: </label>
+                                                        <span class="badge bg-primary mb-0"><?php echo $infoProduct['registration_product_id'] ?></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Tên sản phẩm: </label>
-                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Tên sản phẩm: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $infoProduct['title'] ?>">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Số lượng: </label>
-                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Số lượng: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $infoProduct['quantity'] ?>">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Giá: </label>
-                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Giá: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $infoProduct['price'] ?>">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Địa chỉ: </label>
-                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Địa chỉ: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $infoProduct['address'] ?>">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Danh mục thuộc tính: </label>
-                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Thuộc tính: </label>
-                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Ngày đăng tin: </label>
-                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Chính sách bảo hành: </label>
-                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
-                                                </div>
-                                            </div>
-                                        </div>
 
-
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Mô tả: </label>
-                                                    <textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Ngày đăng tin: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $infoProduct['create_at'] ?>">
+                                                    </div>
                                                 </div>
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Chính sách bảo hành: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $infoProduct['warranty_policy_name'] ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Tình trạng sản phẩm: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $infoProduct['status_product_name'] ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label mb-0 me-2 mt-0">Mô tả: </label><br>
+                                                    <div class="d-flex align-items-center gap-2 mt-3">
+                                                        <textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="17"><?php echo $infoProduct['description'] ?></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <label for="" class="form-label mb-0">Hình ảnh: </label>
+                                            <div class="row">
+                                                <?php foreach ($imageRegis as $image): ?>
+                                                    <div class="col-6 col-md-3 mb-3">
+                                                        <div class="d-flex justify-content-start">
+                                                            <img src="asset/image/product/<?php echo $image['image_name'] ?>" alt="" class="img-fluid" height="200px" width="200px">
+                                                        </div>
+                                                    </div>
+                                                <?php endforeach; ?>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-success w-100" name="btnApprovalProduct">Duyệt</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-danger w-100 col-md-6" name="btnRefuseProduct">Từ chối</button>
-                                        </div>
+                                        <?php foreach ($categoryAttributes as $valueca): ?>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Danh mục thuộc tính: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $valueca['category_attribute_name'] ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Thuộc tính: </label>
+                                                        <input disabled type="text" class="form-control" style="flex-grow: 1;" value="<?php echo $valueca['attribute_name'] ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
+
+                                    <form action="" method="post" class="row">
+
+                                    <?php if(isset($_REQUEST['idrp'])): ?>
+                                        <?php
+                                        include_once('controller/RegistrationProduct/RegistrationProductController.php');
+                                        $registrationProductController = new RegistrationProductController();
+
+                                        $statusReason = $registrationProductController->getStatusRegistrationProductController($_REQUEST['idrp']);
+                                        ?>
+                              
+                                        <?php if($statusReason['status'] == 2 && $statusReason['reason_for_refusal'] != NULL): ?>
+                                            <div class="row mb-4">
+                                                <div class="form-group has-error has-feedback">
+                                                    <label for="errorInput">Lý do từ chối: </label>
+                                                    <input type="text" disabled value="<?php echo $statusReason['reason_for_refusal'] ?>" class="form-control"/>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if(($statusReason['status'] == 1 && $statusReason['reason_for_refusal'] != NULL)): ?>
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-success w-100" name="btnApprovalProduct">Duyệt</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-danger w-100 col-md-6" data-bs-toggle="modal" data-bs-target="#cancelProduct">Từ chối</button>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if(($statusReason['status'] == 0 && $statusReason['reason_for_refusal'] == NULL)): ?>
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-success w-100" name="btnApprovalProduct">Duyệt</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-danger w-100 col-md-6" data-bs-toggle="modal" data-bs-target="#cancelProduct">Từ chối</button>
+                                            </div>
+                                        <?php endif; ?>
+                                
+
+                                    <?php endif; ?>
+                                    
+
+                                    <?php
+                                    include_once('controller/RegistrationProduct/RegistrationProductController.php');
+
+                                    $registrationProductController = new RegistrationProductController();
+
+                                    if (isset($_POST['btnApprovalProduct'])) {
+                                        $regisId = $_REQUEST['idrp'];
+                                        $registrationProductController->insertProductDataController($regisId);
+                                    } elseif (isset($_POST['btnRefuseProduct'])) {
+                                        if (!empty($_POST['reason'])) {
+                                            $regisId = $_REQUEST['idrp'];
+                                            $reason = $_POST['reason'];
+                                            $registrationProductController->updateReasonRefusalController($regisId, $reason);
+                                        } else {
+                                            echo '<script>
+                                                alert("Vui lòng nhập lý do từ chối!");
+                                                window.loaction.href="page=productApproval"
+                                            </script>';
+                                        }
+                                    }
+                                    ?>
+                                    
+
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="cancelProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="cancelProductLabel">Lý do từ chối sản phẩm</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label mb-0 me-2 mt-0">Mô tả lý do từ chối sản phẩm: </label><br>
+                                                            <div class="d-flex align-items-center gap-2 mt-3">
+                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="reason"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                        <button type="submit" class="btn btn-primary" name="btnRefuseProduct">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
 
-        <!-- Custom template | don't include it in your project! -->
         <div class="custom-template">
             <div class="title">Settings</div>
             <div class="custom-content">
