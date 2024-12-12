@@ -12,10 +12,10 @@
 
 <body>
 
-    <div class="preloader-wrapper">
+    <!-- <div class="preloader-wrapper">
         <div class="preloader">
         </div>
-    </div>
+    </div> -->
 
     <?php
     include_once('view/layout/slidebar/slidebar.php');
@@ -343,7 +343,7 @@
                                         </form>
                                         ';
                                     }
-                                }else{
+                                }elseif(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
                                     $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
                                     $addWhistlist = $whistlistController->checkIfExistWhistlistController($_REQUEST['idp'], $getUserId);
                                     if($addWhistlist === true){
@@ -371,6 +371,18 @@
                                         </form>
                                         ';
                                     }
+                                }else{
+                                    echo '
+                                        <form action="" method="post">
+                                            <input type="hidden" name="addProductToWhistlist" value=""> 
+                                            <button type="submit" name="btnSubmitAddWhistlist" class="btn btn-outline-danger rounded-1 p-2 d-flex align-items-center ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart me-1" viewBox="0 0 16 16">
+                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                                </svg>
+                                                Thêm vào danh sách yêu thích
+                                            </button>
+                                        </form>
+                                        ';
                                 }
                             ?>
                             <?php 
@@ -387,12 +399,14 @@
                                         if($addWhistlist === true){
                                             echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
                                         }
-                                    }else{
+                                    }elseif(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
                                         $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
                                         $addWhistlist = $whistlistController->addToWhistlistController($_REQUEST['idp'], $getUserId);
                                         if($addWhistlist === true){
                                             echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
                                         }
+                                    }else{
+                                        echo '<script>location.href = "index.php?page=login";</script>';
                                     }
                                 }elseif(isset($_REQUEST['deleteProductOutWhistlist'])){
                                     if(isset($_SESSION['emailUserLoginGoogle']) && isset($_SESSION['success_message'])){
@@ -401,12 +415,14 @@
                                         if($addWhistlist === true){
                                             echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
                                         }
-                                    }else{
+                                    }elseif(isset($_SESSION['email']) && isset($_SESSION['success_message'])){
                                         $getUserId = $userController->getUserIdByEmailController($_SESSION['email']);
                                         $addWhistlist = $whistlistController->removeFromWhistlistByProductIdController($_REQUEST['idp'], $getUserId);
                                         if($addWhistlist === true){
                                             echo '<script>location.href = "index.php?page=detailProduct&idp='.$_REQUEST['idp'].'";</script>';
                                         }
+                                    }else{
+                                        echo '<script>location.href = "index.php?page=login";</script>';
                                     }
                                 }
                             ?>
@@ -418,7 +434,7 @@
 
             <div class="row mt-3">
 
-                <div class="col-12 col-md-13 mb-3">
+                <!-- <div class="col-12 col-md-13 mb-3">
                     <div class="title-description-product">
                         <p class="fs-4 bg-light p-3 fw-bold rounded">
                             THÔNG TIN CHI TIẾT
@@ -434,7 +450,7 @@
                             </tr>
                         </table>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-12 col-md-12 mb-3">
                     <div class="title-describe-product">
@@ -455,6 +471,33 @@
                         }
                         ?>
                     </div>
+                </div>
+
+                <div class="col-12 col-md-12 mb-3">
+                    <div class="title-describe-product">
+                        <p class="fs-4 bg-light p-3 fw-bold rounded">
+                            Đánh giá sản phẩm
+                        </p>
+                    </div>
+                    <div class="describe-product p-3 bg-white rounded shadow-sm">
+                        <?php
+
+                        if (isset($_SESSION['user_id'])) {
+                            include_once("./view/page/review/form_danhgia.php");
+                        } else {
+                            echo '
+                            <div class="alert alert-warning" role="alert">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                                </svg>
+                                &nbsp; Bạn cần <a href="index.php?page=login" class="text-primary">đăng nhập</a> để thực hiện đánh giá.
+                            </div>';
+                        }
+                        include_once("./view/page/review/danhgia.php");
+                        ?>
+                    </div>
+
+
                 </div>
             </div>
 

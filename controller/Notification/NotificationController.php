@@ -28,14 +28,5 @@
                 return $result;
             }
         }
-        //update status notification
-        public function updateStatusNotificationController($notification_id, $status, $userId){
-            $result = $this->notification->updateStatusNotification($notification_id, $status, $userId);
-            if(!$result ){
-                die('Thất bại: '. $this ->notification->getConnection()->error);
-            } else{
-                return $result;
-            }
-        }
     }
 ?>

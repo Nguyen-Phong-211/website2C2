@@ -129,4 +129,33 @@ class Review extends ConnectDatabase
         }
         return $result;
     }
+    public function getAllReviewByProductId($productId)
+    {
+        $query = "SELECT * FROM reviews r JOIN users u ON r.user_id=u.user_id  WHERE product_id = '$productId'";
+        $result = $this->conn->query($query);
+        if ($result === false) {
+            die("Failed to retrieve review list: " . $this->conn->error);
+        }
+        return $result;
+    }
+    public function addReview($user_id, $product_id, $content, $rating_star)
+{
+    // Sử dụng prepared statements
+    $query = "INSERT INTO reviews (user_id, product_id, content, rating_star, create_at, update_at)
+              VALUES (?, ?, ?, ?, NOW(), NOW())";
+
+    $stmt = $this->conn->prepare($query);
+    if ($stmt === false) {
+        die("Failed to prepare query: " . $this->conn->error);
+    }
+
+    $stmt->bind_param("iisi", $user_id, $product_id, $content, $rating_star);
+    $result = $stmt->execute();
+    if ($result === false) {
+        die("Failed to add review: " . $stmt->error);
+    }
+
+    $stmt->close();
+    return $result;
+}
 }

@@ -8,7 +8,7 @@ class ReviewController
     {
         $this->reviewModel = new Review();
     }
-     //count review by user_id
+    //count review by user_id
     public function countReviewRoleBuyerController($userId)
     {
         try {
@@ -16,9 +16,9 @@ class ReviewController
         } catch (Exception $e) {
             die("Error: " . $e->getMessage());
         }
-    
+
         return $result;
-    }  
+    }
     //count review by role_seller_id
     public function countReviewRoleSellerController($userId)
     {
@@ -27,9 +27,9 @@ class ReviewController
         } catch (Exception $e) {
             die("Error: " . $e->getMessage());
         }
-    
+
         return $result;
-    }       
+    }
     //get review by product_id
     public function getReviewByProductIdController($productId)
     {
@@ -54,7 +54,7 @@ class ReviewController
         } catch (Exception $e) {
             die("Error: " . $e->getMessage());
         }
-    
+
         return $result;
     }
     //get all review by user_id, role_seller_id and product_id
@@ -66,9 +66,22 @@ class ReviewController
         } catch (Exception $e) {
             die("Error: " . $e->getMessage());
         }
-    
+
         return $result;
     }
-}
-?>
+    //
+    public function getAllReviewByProductIdController($productId)
+    {
+        $result = $this->reviewModel->getAllReviewByProductId($productId);
 
+        if (!$result) {
+            die("Failed to retrieve product list: " . $this->reviewModel->getConnection()->error);
+        }
+        return $result;
+    }
+    public function addReviewController($user_id, $product_id, $content, $rating_star)
+    {
+        // Gọi phương thức từ model
+        return $this->reviewModel->addReview($user_id, $product_id, $content, $rating_star);
+    }
+}
