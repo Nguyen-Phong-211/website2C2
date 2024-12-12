@@ -1,15 +1,22 @@
 <?php
 if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
     echo '<script>alert("Vui lòng đăng nhập để tiếp tục.");
-    window.location.href = "index.php?page=login";</script>';
+        window.location.href = "index.php?page=login";</script>';
 }
 ?>
+<?php
+if (isset($_SESSION['message'])) {
+    echo "<script>alert('" . addslashes($_SESSION['message']) . "');</script>";
+    unset($_SESSION['message']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Quản trị</title>
+    <title>Quản lý danh mục cấp 3</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
@@ -381,93 +388,70 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                     <div
                         class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                         <div>
-                            <h3 class="fw-bold mb-3">MANAGEMENT</h3>
-                            <h6 class="op-7 mb-2">Trang quản lý dành cho nhân viên quản trị hệ thống!</h6>
+                            <h3 class="fw-bold mb-3">THỐNG KÊ</h3>
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="col-sm-6 col-md-3">
                             <div class="card card-stats card-round">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-icon">
-                                            <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                                <i class="fas fa-book"></i>
+                                            <div
+                                                class="icon-big text-center icon-primary bubble-shadow-small">
+                                                <i class="fas fa-users"></i>
                                             </div>
                                         </div>
                                         <div class="col col-stats ms-3 ms-sm-0">
                                             <div class="numbers">
-                                                <p class="card-category">DANH MỤC CẤP 1</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/Category/CategoryController.php');
-                                                        $categoryController = new CategoryController();
-
-                                                        echo $categoryController->countCategoryController();
-                                                    ?>
-                                                </h4>
+                                                <p class="card-category">Visitors</p>
+                                                <h4 class="card-title">1,294</h4>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-6 col-md-3">
                             <div class="card card-stats card-round">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-book-open"></i>
+                                            <div
+                                                class="icon-big text-center icon-info bubble-shadow-small">
+                                                <i class="fas fa-user-check"></i>
                                             </div>
                                         </div>
                                         <div class="col col-stats ms-3 ms-sm-0">
                                             <div class="numbers">
-                                                <p class="card-category">DANH MỤC CẤP 2</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                    include_once('controller/CategoryItem/CategoryItemController.php');
-                                                    $categoryItemController = new CategoryItemController();
-
-                                                    echo $categoryItemController->countAllCategoryItemController();
-                                                    ?>
-                                                </h4>
+                                                <p class="card-category">Subscribers</p>
+                                                <h4 class="card-title">1303</h4>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-6 col-md-3">
                             <div class="card card-stats card-round">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-icon">
-                                            <div class="icon-big text-center icon-success bubble-shadow-small">
-                                                <i class="fas fa-book-reader"></i>
+                                            <div
+                                                class="icon-big text-center icon-success bubble-shadow-small">
+                                                <i class="fas fa-luggage-cart"></i>
                                             </div>
                                         </div>
                                         <div class="col col-stats ms-3 ms-sm-0">
                                             <div class="numbers">
-                                                <p class="card-category">DANH MỤC CẤP 3</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/Company/CompanyController.php');
-                                                        $companyController = new CompanyController();
-
-                                                        echo $companyController->countCompanyController();
-                                                    ?>
-                                                </h4>
+                                                <p class="card-category">Sales</p>
+                                                <h4 class="card-title">$ 1,345</h4>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-6 col-md-3">
                             <div class="card card-stats card-round">
                                 <div class="card-body">
@@ -475,261 +459,123 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                                         <div class="col-icon">
                                             <div
                                                 class="icon-big text-center icon-secondary bubble-shadow-small">
-                                                <i class="fas fa-clipboard-list"></i>
+                                                <i class="far fa-check-circle"></i>
                                             </div>
                                         </div>
                                         <div class="col col-stats ms-3 ms-sm-0">
                                             <div class="numbers">
-                                                <p class="card-category">DANH MỤC TT</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/CategoryAttribute/CategoryAttributeController.php');
-                                                        $categoryAttributeController = new CategoryAttributeController();
-
-                                                        echo $categoryAttributeController->countCategoryAttributes();
-                                                    ?>
-                                                </h4>
+                                                <p class="card-category">Order</p>
+                                                <h4 class="card-title">576</h4>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+
+                    <div class="row">
+                        <h3 class="fw-bold mb-3">DANH SÁCH CÁC SẢN PHẨM</h3>
+                        <ul class="breadcrumbs mb-3">
+                            <li class="nav-home">
+                                <a href="index.php?page=manage">
+                                    <i class="icon-home"></i>
+                                </a>
+                            </li>
+                            <li class="separator">
+                                <i class="icon-arrow-right"></i>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?page=productApproval">Danh sách sản phẩm</a>
+                            </li>
+                        </ul>
                     </div>
 
                     <div class="row">
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">DANH SÁCH SẢN PHẨM</h4>
+                                </div>
                                 <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-light bubble-shadow-small">
-                                                <i class="fas fa-box-open"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">SẢN PHẨM</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/Product/ProductController.php');
-                                                        $productController = new ProductController();
+                                    <div class="table-responsive">
+                                        <table
+                                            id="basic-datatables"
+                                            class="display table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>STT</th>
+                                                    <th>Người bán</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Danh mục cấp 1</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Giá</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>STT</th>
+                                                    <th>Người bán</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Danh mục cấp 1</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Giá</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <?php 
+                                                include_once('controller/RegistrationProduct/RegistrationProductController.php');
+                                                $registrationProductController = new RegistrationProductController();
 
-                                                        echo $productController->countProductController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
+                                                $dataRegistes = $registrationProductController->getAllProductApprovalController();
+                                                if(!empty($dataRegistes)){
+                                                    $stt = 1;
+                                                    foreach($dataRegistes as $dataRegiste){
+                                                        echo '
+                                                        <tr>
+                                                            <td>'. $stt++ .'</td>
+                                                            <td>'. $dataRegiste['user_name'] .'</td>
+                                                            <td>'. $dataRegiste['title'] .'</td>
+                                                            <td>'. $dataRegiste['category_name'] .'</td>
+                                                            <td>'. $dataRegiste['quantity'] .'</td>
+                                                            <td>'. number_format($dataRegiste['price'], 0, ',', '.') .'</td>';
+                                                            if($dataRegiste['rpstatus'] == 1){
+                                                                echo '<td><span class="badge rounded-pill bg-secondary">Đã duyệt</span></td>';
+                                                            }else{
+                                                                echo '<td><span class="badge rounded-pill bg-primary">Chưa duyệt</span></td>';
+                                                            }
+                                                        echo '
+                                                            <td>
+                                                                <a class="icon-note" href="index.php?page=productApproval/detail&idrp='. $dataRegiste['registration_product_id'] .'"></a>
+                                                            </td>
+                                                        </tr>
+                                                        ';
+                                                    }
+                                                }else{
+                                                    echo '
+                                                    <div class="alert alert-warning" role="alert">
+                                                        Không có dữ liệu.
+                                                    </div>
+                                                    ';
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-warning bubble-shadow-small">
-                                                <i class="fab fa-buysellads"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">NGƯỜI MUA</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/User/UserController.php');
-                                                        $userController = new UserController();
-
-                                                        echo $userController->countUserController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-user-check"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">NGƯỜI BÁN</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/User/UserController.php');
-                                                        $userController = new UserController();
-
-                                                        echo $userController->countRoleSellerController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-success bubble-shadow-small">
-                                                <i class="fas fa-grin-stars"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">ĐÁNH GIÁ</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/Review/ReviewController.php');
-                                                        $reviewController = new ReviewController();
-
-                                                        echo $reviewController->countAllReviewController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="page-inner">
-                    <div
-                        class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                        <div>
-                            <h3 class="fw-bold mb-3">CHỨC NĂNG</h3>
-                            <h6 class="op-7 mb-2">Các chức năng trên trang</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=managerCategory">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                                <i class="fas fa-book"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Danh mục cấp 1</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=managerCategoryItem">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-book-open"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Danh mục cấp 2</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=managerCompany">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-danger bubble-shadow-small">
-                                                <i class="fas fa-book-reader"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Danh mục cấp 3</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=managerCategoryAttribute">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div
-                                                class="icon-big text-center icon-warning bubble-shadow-small">
-                                                <i class="fas fa-clipboard-list"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Thuộc tính</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="row">
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=productApproval">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-box-open"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Duyệt sản phẩm</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
                     </div>
                 </div>
             </div>
 
-            
         </div>
+
 
         <!-- Custom template | don't include it in your project! -->
         <div class="custom-template">
@@ -747,7 +593,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                             <button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
                             <button type="button" class="changeLogoHeaderColor" data-color="red"></button>
                             <button type="button" class="changeLogoHeaderColor" data-color="white"></button>
-                            <br/>
+                            <br />
                             <button type="button" class="changeLogoHeaderColor" data-color="dark2"></button>
                             <button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
                             <button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
@@ -768,7 +614,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                             <button type="button" class="changeTopBarColor" data-color="orange"></button>
                             <button type="button" class="changeTopBarColor" data-color="red"></button>
                             <button type="button" class="selected changeTopBarColor" data-color="white"></button>
-                            <br/>
+                            <br />
                             <button type="button" class="changeTopBarColor" data-color="dark2"></button>
                             <button type="button" class="changeTopBarColor" data-color="blue2"></button>
                             <button type="button" class="changeTopBarColor" data-color="purple2"></button>
@@ -794,8 +640,6 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
         </div>
         <!-- End Custom template -->
     </div>
-
-
     <?php
     include_once('view/layout/footer/lib-admin.php');
     ?>

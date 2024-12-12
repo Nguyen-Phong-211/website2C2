@@ -84,4 +84,9 @@ class ReviewController
         // Gọi phương thức từ model
         return $this->reviewModel->addReview($user_id, $product_id, $content, $rating_star);
     }
+    //count all review
+    public function countAllReviewController()
+    {
+        return $this->reviewModel->countAllReview();
+    }
 }

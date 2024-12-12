@@ -47,7 +47,10 @@
                             break;  
                         case 'detailProduct':
                             echo '<a class="text-decoration-none" href="index.php?page=detailProduct&idp='. $_REQUEST['idp'] .'">Chi tiết sản phẩm</a>';
-                            break;  
+                            break; 
+                        case 'managerProduct':
+                            echo '<a class="text-decoration-none" href="index.php?page=' . $page . '">Quản lý đơn bán</a>';
+                            break; 
                         case 'product':
                             if (isset($_REQUEST['s_interface']) && $_REQUEST['s_interface'] == 1) {
                                 echo '<a href="index.php?page=' . $page . '&s_interface=1" class="text-decoration-none"> Khám phá danh mục </a>';

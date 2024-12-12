@@ -8,6 +8,14 @@ class CompanyController
     {
         $this->company = new Company();
     }
+    public function getCompaniesList() {
+        $result = $this->company->getAllCompanies();
+
+        if (!$result) {
+            die("Failed to retrieve category list: " . $this->company->getConnection()->error);
+        }
+        return $result;
+    }
     public function handleRequest() {
         if (isset($_GET['action'])) {
             switch ($_GET['action']) {
@@ -86,6 +94,10 @@ class CompanyController
             header("Location: " . $_SERVER['HTTP_REFERER']);
             exit;
         }
+    }
+    //count all category_items
+    public function countCompanyController(){
+        return $this->company->countCompany();
     }
 }
 $controller = new CompanyController();

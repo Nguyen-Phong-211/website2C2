@@ -154,6 +154,11 @@
                             </ul>
                         </td>
                         <td>95%</td>
+                        <td>90%</td>
+                        <td>95%</td>
+                        <td>75%</td>
+                        <td>80%</td>
+                        <td>80%</td>
                     </tr>
                     <tr>
                         <th scope="row">5</th>

@@ -81,5 +81,14 @@
             $stmt->close();
             return $count > 0; 
         }
+        //count all category_attributes
+        public function countCategoryAttributes() {
+            $stmt = $this->conn->prepare("SELECT COUNT(*) FROM category_attributes");
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+            return $count;
+        }
     }
 ?>

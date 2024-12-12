@@ -226,6 +226,23 @@
                                     &nbsp;Đơn bán
                                 </a>
                             </li>
+                            <?php
+                                if(isset($_SESSION['role_seller_id'])){
+                                    if((int)$_SESSION['role_seller_id'] === 1){
+                                        echo '
+                                        <li>
+                                            <a class="dropdown-item text-black dropdown-menu-user-item" href="index.php?page=managerProduct">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#6bb252" class="bi bi-kanban" viewBox="0 0 16 16">
+                                                    <path d="M13.5 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm-11-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                                    <path d="M6.5 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm-4 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1zm8 0a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1z"/>
+                                                </svg>
+                                                &nbsp;Quản lý đơn bán
+                                            </a>
+                                        </li>
+                                        ';
+                                    }
+                                }
+                            ?>
                             <li>
                                 <a class="dropdown-item text-black dropdown-menu-user-item" href="index.php?page=review">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#6bb252" class="bi bi-send-check-fill" viewBox="0 0 16 16">

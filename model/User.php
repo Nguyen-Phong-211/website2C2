@@ -160,4 +160,23 @@ class User extends ConnectDatabase
         $stmt->close();
         return $row;
     }
+    //get user 
+    public function getInfoUserSellerRegis(){
+        $query = "SELECT DISTINCT u.*, rp.create_at
+                    FROM users AS u 
+                    JOIN roles AS rl ON u.role_seller_id = 1 
+                    JOIN registration_products AS rp ON u.user_id = rp.user_id
+        ";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Prepare statement failed: ". $this->conn->error);
+        }
+        if (!$stmt->execute()) {
+            die("Execution failed: ". $stmt->error);
+        }
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        return $row;
+    }
 }

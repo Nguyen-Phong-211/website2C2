@@ -47,36 +47,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST['btnSignup'])) {
 
                 <div class="mb-3">
                     <label for="fullName" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                    <input type="text" name="fullname" class="form-control border-color text-black" id="fullName" placeholder="Họ tên">
+                    <input type="text" name="fullname" class="form-input-n-blur form-control border-color text-black" id="fullName" placeholder="Họ tên">
                     <small id="fullNameError" class="form-text text-danger fst-italic"></small>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control border-color text-black" id="email" placeholder="Email">
+                    <input type="email" name="email" class="form-input-n-blur form-control border-color text-black" id="email" placeholder="Email">
                     <small id="emailError" class="form-text text-danger fst-italic"></small>
                 </div>
 
                 <div class="mb-3">
                     <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>
-                    <input type="tel" name="number_phone" class="form-control border-color text-black" id="phone" placeholder="Số điện thoại">
+                    <input type="tel" name="number_phone" class="form-input-n-blur form-control border-color text-black" id="phone" placeholder="Số điện thoại">
                     <small id="phoneError" class="form-text text-danger fst-italic"></small>
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label text-black">Mật khẩu<span class="text-danger">*</span></label>
-                    <input type="password" name="password" class="form-control border-color text-black" id="password" placeholder="Nhập mật khẩu">
+                    <input type="password" name="password" class="form-input-n-blur form-control border-color text-black" id="password" placeholder="Nhập mật khẩu">
                     <small id="passwordStrength" class="form-text fst-italic"></small>
                 </div>
 
                 <div class="mb-3">
                     <label for="confirmPassword" class="form-label text-black">Nhập lại mật khẩu<span class="text-danger">*</span></label>
-                    <input type="password" class="form-control border-color text-black" id="confirmPassword" placeholder="Nhập lại mật khẩu">
+                    <input type="password" class="form-input-n-blur form-control border-color text-black" id="confirmPassword" placeholder="Nhập lại mật khẩu">
                     <small id="confirmPasswordError" class="form-text text-danger fst-italic"></small>
                 </div>
 
                 <div class="mb-3 d-flex align-items-center">
-                    <input type="checkbox" class="form-check-input me-2 border-color" id="confirmPassword" checked>
+                    <input type="checkbox" class="form-input-n-blur form-check-input me-2 border-color" id="confirmPassword" checked>
                     <label for="confirmPassword" class="form-check-label">
                         Tôi đồng ý với <a href="#" class="text-primary">Điều khoản</a> và <a href="#" class="text-primary">Bảo mật.</a>
                     </label>

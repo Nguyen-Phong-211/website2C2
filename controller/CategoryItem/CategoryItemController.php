@@ -180,6 +180,10 @@ class CategoryItemController
     public function getCategoryItemId($categoryItemId) {
         return $this->categoryItem->getCategoryItemId($categoryItemId);
     }
+    //count all category_items
+    public function countAllCategoryItemController(){
+        return $this->categoryItem->countCategoryAttributes();
+    }
 }
     $controller = new CategoryItemController();
     $controller->handleRequest();

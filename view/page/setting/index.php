@@ -111,7 +111,7 @@
                                         echo '
                                                 <div class="mb-3">
                                                     <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                                                    <input type="text" name="user_name" value="' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
+                                                    <input type="text" name="user_name" value="' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '" class="form-input-n-blur form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
                                                     <small class="valid-feedback" id="errorFullName"></small>
                                                 </div>
                                                 ';
@@ -119,7 +119,7 @@
                                             echo '
                                                     <div class="mb-3">
                                                         <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
-                                                        <input type="date" name="date" value="' . htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="dateUpdate">
+                                                        <input type="date" name="date" value="' . htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') . '" class="form-input-n-blur form-control text-black border-color" id="dateUpdate">
                                                         <small class="valid-feedback" id="errorDate"></small>
                                                     </div>
                                                     
@@ -128,7 +128,7 @@
                                             echo '
                                                     <div class="mb-3">
                                                         <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
-                                                        <input type="date" name="date" class="form-control text-black border-color" id="dateUpdate">
+                                                        <input type="date" name="date" class="form-input-n-blur form-control text-black border-color" id="dateUpdate">
                                                         <small class="valid-feedback" id="errorDate"></small>
                                                     </div>
                                                     
@@ -136,13 +136,13 @@
                                         }
                                         echo '<div class="mb-3">
                                                     <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                                                    <input type="email" name="email" value="' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
+                                                    <input type="email" name="email" value="' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '" class="form-input-n-blur form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
                                                     <small class="valid-feedback" id="errorEmail"></small>
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>
-                                                    <input type="text" name="number_phone" value="' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">
+                                                    <input type="text" name="number_phone" value="' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '" class="form-input-n-blur form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">
                                                     <small class="valid-feedback" id="errorPhone"></small>
                                                 </div>
                                                 <div class="mb-3">
@@ -151,7 +151,7 @@
                                         $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
 
                                         echo '
-                                                    <input type="text" name="address" value="' . $address . '" class="form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
+                                                    <input type="text" name="address" value="' . $address . '" class="form-input-n-blur form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
                                                     <small class="valid-feedback" id="errorAddress"></small>
                                                 </div>
                                             ';
@@ -163,33 +163,33 @@
                                         echo '
                                                 <div class="mb-3">
                                                     <label for="fullname" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                                                    <input type="text" name="user_name" value="' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
+                                                    <input type="text" name="user_name" value="' . htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8') . '" class="form-input-n-blur form-control text-black border-color" id="fullNameUpdate" placeholder="Nhập họ và tên">
                                                 </div>';
                                         if ($user['date_of_birth'] != NULL) {
                                             echo '
                                                     <div class="mb-3">
                                                         <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
-                                                        <input type="date" name="date" value="' . htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="dateUpdate">
+                                                        <input type="date" name="date" value="' . htmlspecialchars($user['date_of_birth'], ENT_QUOTES, 'UTF-8') . '" class="form-input-n-blur form-control text-black border-color" id="dateUpdate">
                                                     </div>
                                                     ';
                                         } else {
                                             echo '
                                                     <div class="mb-3">
                                                         <label for="date" class="form-label text-black">Ngày sinh<span class="text-danger">*</span></label>
-                                                        <input type="date" name="date" class="form-control text-black border-color" id="dateUpdate">
+                                                        <input type="date" name="date" class="form-control text-black border-colo form-input-n-blurr" id="dateUpdate">
                                                     </div>
                                                     ';
                                         }
                                         echo '<div class="mb-3">
                                                     <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                                                    <input type="email" name="email" value="' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="emailUpdate" placeholder="Nhập địa chỉ email">
+                                                    <input type="email" name="email" value="' . htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color form-input-n-blur" id="emailUpdate" placeholder="Nhập địa chỉ email">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="phone" class="form-label text-black">Số điện thoại<span class="text-danger">*</span></label>';
                                         if ($user['number_phone'] === NULL) {
                                             echo '<input type="text" name="number_phone" value="" class="form-control text-black border-color" id="phone" placeholder="Chưa cập nhật số điện thoại">';
                                         } else {
-                                            echo '<input type="text" name="number_phone" value="' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color" id="phoneUpdate" placeholder="Nhập số điện thoại">';
+                                            echo '<input type="text" name="number_phone" value="' . htmlspecialchars($user['number_phone'], ENT_QUOTES, 'UTF-8') . '" class="form-control text-black border-color form-input-n-blur" id="phoneUpdate" placeholder="Nhập số điện thoại">';
                                         }
                                         echo '</div>
                                                 <div class="mb-3">
@@ -198,7 +198,7 @@
                                         $address = $user['address'] ? htmlspecialchars($user['address'], ENT_QUOTES, 'UTF-8') : 'Chưa cập nhật';
 
                                         echo '
-                                                    <input type="text" name="address" value="' . $address . '" class="form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
+                                                    <input type="text" name="address" value="' . $address . '" class="form-input-n-blur form-control text-black border-color" id="addressUpdate" placeholder="Nhập địa chỉ">
                                                 </div>
                                             ';
                                     }
@@ -209,7 +209,7 @@
                             <div class="col-lg-5">
                                 <div class="update-avatar">
                                     <label class="form-label text-black">Cập nhật hình đại diện</label>
-                                    <input type="file" class="form-control border-color" name="imageUser" accept="image/*" id="imageUploadUser" onchange="previewImagesUser(this)">
+                                    <input type="file" class="form-input-n-blur form-control border-color" name="imageUser" accept="image/*" id="imageUploadUser" onchange="previewImagesUser(this)">
                                     <div class="image-preview mt-2" id="imagePreviewImageUser"></div>
                                 </div>
 
@@ -317,11 +317,11 @@
                         <h3 class="text-center mb-4">Cập nhật mật khẩu</h3>
                         <div class="mb-3">
                             <label for="password" class="form-label text-black">Mật khẩu mới<span class="text-danger">*</span></label>
-                            <input type="password" name="passwordUpdate" class="form-control border-color text-black" id="passwordUpdate" placeholder="Nhập mật khẩu mới">
+                            <input type="password" name="passwordUpdate" class="form-input-n-blur form-control border-color text-black" id="passwordUpdate" placeholder="Nhập mật khẩu mới">
                         </div>
                         <div class="mb-3">
                             <label for="confirmPassword" class="form-label text-black">Xác nhận mật khẩu<span class="text-danger">*</span></label>
-                            <input type="password" name="passwordConfirm" class="form-control border-color text-black" id="confirmPasswordUpdate" placeholder="Xác nhận mật khẩu">
+                            <input type="password" name="passwordConfirm" class="form-input-n-blur form-control border-color text-black" id="confirmPasswordUpdate" placeholder="Xác nhận mật khẩu">
                         </div>
                         <button type="submit" id="btnUpdatePassword" name="btnUpdatePassword" value="btnUpdatePassword" class="btn btn-outline-primary active w-100">Cập nhật mật khẩu</button>
                     </form>

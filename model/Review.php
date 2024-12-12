@@ -139,23 +139,32 @@ class Review extends ConnectDatabase
         return $result;
     }
     public function addReview($user_id, $product_id, $content, $rating_star)
-{
-    // Sử dụng prepared statements
-    $query = "INSERT INTO reviews (user_id, product_id, content, rating_star, create_at, update_at)
+    {
+        // Sử dụng prepared statements
+        $query = "INSERT INTO reviews (user_id, product_id, content, rating_star, create_at, update_at)
               VALUES (?, ?, ?, ?, NOW(), NOW())";
 
-    $stmt = $this->conn->prepare($query);
-    if ($stmt === false) {
-        die("Failed to prepare query: " . $this->conn->error);
-    }
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            die("Failed to prepare query: " . $this->conn->error);
+        }
 
-    $stmt->bind_param("iisi", $user_id, $product_id, $content, $rating_star);
-    $result = $stmt->execute();
-    if ($result === false) {
-        die("Failed to add review: " . $stmt->error);
-    }
+        $stmt->bind_param("iisi", $user_id, $product_id, $content, $rating_star);
+        $result = $stmt->execute();
+        if ($result === false) {
+            die("Failed to add review: " . $stmt->error);
+        }
 
-    $stmt->close();
-    return $result;
-}
+        $stmt->close();
+        return $result;
+    }
+    //count all review
+    public function countAllReview(){
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM reviews");
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+        return $count;
+    }
 }

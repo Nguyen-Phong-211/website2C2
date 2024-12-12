@@ -56,40 +56,41 @@
     //         });
     // }
     function updateStatusNotification(status, notificationId) {
-        // Lấy userId từ session PHP (PHP có thể nhúng vào JavaScript)
-        const userId = <?= json_encode($_SESSION['user_id']); ?>;
+    // Lấy userId từ session PHP
+    const userId = <?= json_encode($_SESSION['user_id']); ?>;
 
-        // Gửi yêu cầu AJAX tới controller
-        fetch('controller/Notification/UpdateNotificationController.php', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    notification_id: notificationId,
-                    status: status,
-                    userId: userId
-                }),
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                if (data.success) {
-                    // Cập nhật trạng thái thông báo trực quan sau khi update
-                    document.querySelector(`#notification-${notificationId}`).classList.add('text-muted'); // Chuyển sang trạng thái đã đọc
-                    console.log(data.message);
-                } else {
-                    console.error(data.message);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }
+    // Gửi yêu cầu AJAX đến server
+    fetch('controller/Notification/UpdateNotificationController.php', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            notification_id: notificationId,
+            status: status,
+            userId: userId
+        }),
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        return response.json(); // Phản hồi từ server sẽ được xử lý ở đây
+    })
+    .then((data) => {
+        if (data.success) {
+            // Nếu cập nhật thành công, thay đổi giao diện
+            document.querySelector(`#notification-${notificationId}`).classList.add('text-muted'); // Chuyển sang trạng thái đã đọc
+            console.log(data.message);
+        } else {
+            console.error(data.message); // Nếu không thành công, in ra thông báo lỗi
+        }
+    })
+    .catch((error) => {
+        console.error("Error:", error); // In lỗi nếu có sự cố trong quá trình gửi request
+    });
+}
+
 
     function showDetail(title, content, timeCreate) {
         const detailContainer = document.getElementById('notification-detail');

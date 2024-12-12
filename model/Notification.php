@@ -34,7 +34,7 @@ class Notification extends ConnectDatabase
         if ($stmt === false) {
             die("Prepare failed: " . $this->conn->error);
         }
-        
+
         $stmt->bind_param("i", $userId);
         $stmt->execute();
 
@@ -42,7 +42,7 @@ class Notification extends ConnectDatabase
         if ($result === false) {
             die("Execution failed: " . $stmt->error);
         }
-        
+
         $stmt->close();
         return $result;
     }
@@ -51,8 +51,8 @@ class Notification extends ConnectDatabase
     public function updateStatusNotification($notification_id, $status, $userId)
     {
         $query = "UPDATE notifications 
-                        SET status = ? 
-                        WHERE notification_id = ? AND user_id = ?;";
+              SET status = ? 
+              WHERE notification_id = ? AND user_id = ?;";
         $stmt = $this->conn->prepare($query);
 
         if (!$stmt) {
@@ -64,7 +64,7 @@ class Notification extends ConnectDatabase
         if ($stmt->execute()) {
             $affectedRows = $stmt->affected_rows;
             $stmt->close();
-            return $affectedRows > 0; 
+            return $affectedRows > 0;
         } else {
             $stmt->close();
             throw new Exception("Lỗi thực thi câu lệnh: " . $stmt->error);

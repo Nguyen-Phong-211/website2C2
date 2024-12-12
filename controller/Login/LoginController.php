@@ -22,6 +22,7 @@ class LoginController
             $_SESSION['email'] = $result['email'];
             $_SESSION['user_id'] = $result['user_id'];
             $_SESSION['role_id'] = $result['role_id'];
+            $_SESSION['role_seller_id'] = $result['role_seller_id'];
 
             $_SESSION['success_message'] = "Đăng nhập thành công!";
 

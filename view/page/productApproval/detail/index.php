@@ -1,15 +1,22 @@
 <?php
 if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
     echo '<script>alert("Vui lòng đăng nhập để tiếp tục.");
-    window.location.href = "index.php?page=login";</script>';
+        window.location.href = "index.php?page=login";</script>';
 }
 ?>
+<?php
+if (isset($_SESSION['message'])) {
+    echo "<script>alert('" . addslashes($_SESSION['message']) . "');</script>";
+    unset($_SESSION['message']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Quản trị</title>
+    <title>Quản lý danh mục cấp 3</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
@@ -378,358 +385,220 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
 
             <div class="container">
                 <div class="page-inner">
-                    <div
-                        class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                        <div>
-                            <h3 class="fw-bold mb-3">MANAGEMENT</h3>
-                            <h6 class="op-7 mb-2">Trang quản lý dành cho nhân viên quản trị hệ thống!</h6>
-                        </div>
-                    </div>
                     <div class="row">
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                                <i class="fas fa-book"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">DANH MỤC CẤP 1</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/Category/CategoryController.php');
-                                                        $categoryController = new CategoryController();
-
-                                                        echo $categoryController->countCategoryController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-book-open"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">DANH MỤC CẤP 2</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                    include_once('controller/CategoryItem/CategoryItemController.php');
-                                                    $categoryItemController = new CategoryItemController();
-
-                                                    echo $categoryItemController->countAllCategoryItemController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-success bubble-shadow-small">
-                                                <i class="fas fa-book-reader"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">DANH MỤC CẤP 3</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/Company/CompanyController.php');
-                                                        $companyController = new CompanyController();
-
-                                                        echo $companyController->countCompanyController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div
-                                                class="icon-big text-center icon-secondary bubble-shadow-small">
-                                                <i class="fas fa-clipboard-list"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">DANH MỤC TT</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/CategoryAttribute/CategoryAttributeController.php');
-                                                        $categoryAttributeController = new CategoryAttributeController();
-
-                                                        echo $categoryAttributeController->countCategoryAttributes();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        <h3 class="fw-bold mb-3">CHI TIẾT SẢN PHẨM</h3>
+                        <ul class="breadcrumbs mb-3">
+                            <li class="nav-home">
+                                <a href="index.php?page=manage">
+                                    <i class="icon-home"></i>
+                                </a>
+                            </li>
+                            <li class="separator">
+                                <i class="icon-arrow-right"></i>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?page=productApproval">Danh sách sản phẩm</a>
+                            </li>
+                            <li class="separator">
+                                <i class="icon-arrow-right"></i>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?page=productApproval/detail&idrp=<?= $_REQUEST['idrp'] ?>">Chi tiết sản phẩm</a>
+                            </li>
+                        </ul>
                     </div>
 
                     <div class="row">
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">THÔNG TIN NGƯỜI BÁN: </h4>
+                                </div>
                                 <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-light bubble-shadow-small">
-                                                <i class="fas fa-box-open"></i>
+                                    <?php
+                                    include_once('controller/User/UserController.php');
+                                    $userController = new UserController();
+                                    $dataUserRegis = $userController->getInfoUserSellerRegisController();
+                                    echo '
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <label for="" class="form-label mb-0 me-2">Họ và tên người bán: </label>
+                                                <p class="fw-bold mb-0">'. $dataUserRegis['user_name'] .'</p>
                                             </div>
                                         </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">SẢN PHẨM</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/Product/ProductController.php');
-                                                        $productController = new ProductController();
-
-                                                        echo $productController->countProductController();
-                                                    ?>
-                                                </h4>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <label for="" class="form-label mb-0 me-2">Số điện thoại: </label>
+                                                <p class="fw-bold mb-0">'. $dataUserRegis['number_phone'] .'</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <label for="" class="form-label mb-0 me-2">Email: </label>
+                                                <p class="fw-bold mb-0">'. $dataUserRegis['email'] .'</p>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <label for="" class="form-label mb-0 me-2">Địa chỉ: </label>
+                                                <p class="fw-bold mb-0">'. $dataUserRegis['address'] .'</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <label for="" class="form-label mb-0 me-2">Ngày đăng ký bán: </label>
+                                                <p class="fw-bold mb-0">'. $dataUserRegis['create_at'] .'</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ';
+                                    ?>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-warning bubble-shadow-small">
-                                                <i class="fab fa-buysellads"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">NGƯỜI MUA</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/User/UserController.php');
-                                                        $userController = new UserController();
-
-                                                        echo $userController->countUserController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-user-check"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">NGƯỜI BÁN</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/User/UserController.php');
-                                                        $userController = new UserController();
-
-                                                        echo $userController->countRoleSellerController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-success bubble-shadow-small">
-                                                <i class="fas fa-grin-stars"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">ĐÁNH GIÁ</p>
-                                                <h4 class="card-title">
-                                                    <?php 
-                                                        include_once('controller/Review/ReviewController.php');
-                                                        $reviewController = new ReviewController();
-
-                                                        echo $reviewController->countAllReviewController();
-                                                    ?>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="page-inner">
-                    <div
-                        class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                        <div>
-                            <h3 class="fw-bold mb-3">CHỨC NĂNG</h3>
-                            <h6 class="op-7 mb-2">Các chức năng trên trang</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=managerCategory">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                                <i class="fas fa-book"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Danh mục cấp 1</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=managerCategoryItem">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-book-open"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Danh mục cấp 2</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=managerCompany">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-danger bubble-shadow-small">
-                                                <i class="fas fa-book-reader"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Danh mục cấp 3</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=managerCategoryAttribute">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div
-                                                class="icon-big text-center icon-warning bubble-shadow-small">
-                                                <i class="fas fa-clipboard-list"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Thuộc tính</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
                     </div>
 
                     <div class="row">
-
-                        <a class="col-sm-6 col-md-3" href="index.php?page=productApproval">
-                            <div class="card card-stats card-round">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">THÔNG TIN DANH MỤC: </h4>
+                                </div>
                                 <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-icon">
-                                            <div class="icon-big text-center icon-info bubble-shadow-small">
-                                                <i class="fas fa-box-open"></i>
+                                    <div class="row">
+                                        <?php
+                                        include_once('controller/RegistrationProduct/RegistrationProductController.php');
+                                        $registrationProductController = new RegistrationProductController();
+                                        
+                                        $dataLevelCategories = $registrationProductController->getNameLevelCategoryController($_REQUEST['idrp']);
+                                        foreach($dataLevelCategories as $dataLevelCategory){
+                                            echo '
+                                            <div class="col-md-4 mb-3">
+                                                <div class="d-flex align-items-center">
+                                                    <label for="" class="form-label mb-0 me-2">Danh mục cấp 1: </label>
+                                                    <p class="fw-bold mb-0">'. $dataLevelCategory['category_name'] .'</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="d-flex align-items-center">
+                                                    <label for="" class="form-label mb-0 me-2">Danh mục cấp 2: </label>
+                                                    <p class="fw-bold mb-0">'. $dataLevelCategory['category_item_name'] .'</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="d-flex align-items-center">
+                                                    <label for="" class="form-label mb-0 me-2">Danh mục cấp 3:</label>
+                                                    <p class="fw-bold mb-0">'. $dataLevelCategory['company_name'] .'</p>
+                                                </div>
+                                            </div>
+                                            ';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">SẢN PHẨM: </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <div class="d-inline-flex align-items-center">
+                                                    <label for="" class="form-label mb-0 me-2">Mã đơn đăng ký: </label>
+                                                    <span class="badge bg-primary mb-0">1</span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Tên sản phẩm: </label>
+                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Số lượng: </label>
+                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Giá: </label>
+                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Địa chỉ: </label>
+                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col col-stats ms-3 ms-sm-0">
-                                            <div class="numbers">
-                                                <p class="card-category">QUẢN LÝ</p>
-                                                <h4 class="card-title">Duyệt sản phẩm</h4>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Danh mục thuộc tính: </label>
+                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                </div>
                                             </div>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Thuộc tính: </label>
+                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Ngày đăng tin: </label>
+                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Chính sách bảo hành: </label>
+                                                    <input disabled type="text" class="form-control" style="flex-grow: 1;">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <label for="" class="form-label mb-0 me-2" style="flex-shrink: 0; width: 150px;">Mô tả: </label>
+                                                    <textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-success w-100" name="btnApprovalProduct">Duyệt</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-danger w-100 col-md-6" name="btnRefuseProduct">Từ chối</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            
         </div>
+
 
         <!-- Custom template | don't include it in your project! -->
         <div class="custom-template">
@@ -747,7 +616,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                             <button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
                             <button type="button" class="changeLogoHeaderColor" data-color="red"></button>
                             <button type="button" class="changeLogoHeaderColor" data-color="white"></button>
-                            <br/>
+                            <br />
                             <button type="button" class="changeLogoHeaderColor" data-color="dark2"></button>
                             <button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
                             <button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
@@ -768,7 +637,7 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
                             <button type="button" class="changeTopBarColor" data-color="orange"></button>
                             <button type="button" class="changeTopBarColor" data-color="red"></button>
                             <button type="button" class="selected changeTopBarColor" data-color="white"></button>
-                            <br/>
+                            <br />
                             <button type="button" class="changeTopBarColor" data-color="dark2"></button>
                             <button type="button" class="changeTopBarColor" data-color="blue2"></button>
                             <button type="button" class="changeTopBarColor" data-color="purple2"></button>
@@ -794,8 +663,6 @@ if (!isset($_SESSION['role_id']) || $_SESSION['role_id'] != 3) {
         </div>
         <!-- End Custom template -->
     </div>
-
-
     <?php
     include_once('view/layout/footer/lib-admin.php');
     ?>

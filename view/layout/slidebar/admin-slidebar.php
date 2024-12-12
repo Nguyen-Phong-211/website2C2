@@ -94,7 +94,7 @@
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="index.php?page=managerProduct&hsu_poij=<?= $generalController->generateRandomString() ?>">
+                                <a href="index.php?page=productApproval&hsu_poij=<?= $generalController->generateRandomString() ?>">
                                     <span class="sub-item">Duyệt sản phẩm</span>
                                 </a>
                             </li>

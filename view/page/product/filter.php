@@ -30,22 +30,22 @@
 
                 <h5>Tìm theo giá</h5>
 
-                <?php 
-                    if(isset($_POST['btnSubmitPrice'])){
-                        $fromPrice = $_POST['fromPrice'];
-                        $toPrice = $_POST['toPrice'];
-                        if(empty($fromPrice) && empty($toPrice)){
-                            echo '<div class="alert alert-danger mt-3" role="alert">
+                <?php
+                if (isset($_POST['btnSubmitPrice'])) {
+                    $fromPrice = $_POST['fromPrice'];
+                    $toPrice = $_POST['toPrice'];
+                    if (empty($fromPrice) && empty($toPrice)) {
+                        echo '<div class="alert alert-danger mt-3" role="alert">
                                     <small class="font-monospace">Vui lòng nhập đủ cả hai trường From và To</small>
                                 </div>';
-                        }
-                    } 
+                    }
+                }
                 ?>
 
-                <?php 
-                if(isset($_REQUEST['idc'])){
+                <?php
+                if (isset($_REQUEST['idc'])) {
                     echo '
-                    <form action="index.php?page=product&idc='. $_REQUEST['idc'] .'&df_sw=UHhgPl0k9&htj=khdhoanOJ99gh8gg7c&u_i=iiihYGFTVv" method="post">
+                    <form action="index.php?page=product&idc=' . $_REQUEST['idc'] . '&df_sw=UHhgPl0k9&htj=khdhoanOJ99gh8gg7c&u_i=iiihYGFTVv" method="post">
                         <div class="input-group mb-3">
                             <input type="text" name="fromPrice" class="form-control border-1 border-color"  placeholder="From" aria-label="price">
                             <span class="input-group-text border-color bg-light">
@@ -60,7 +60,7 @@
                         </button>
                     </form>
                     ';
-                }elseif(isset($_REQUEST['s_interface'])){
+                } elseif (isset($_REQUEST['s_interface'])) {
                     echo '
                     <form action="index.php?page=product&s_interface=1&df_sw=UHhgPl0k9&htj=khdhoanOJ99gh8gg7c&u_i=iiihYGFTVv" method="post">
                         <div class="input-group mb-3">
@@ -79,11 +79,11 @@
                     ';
                 }
                 ?>
-                
+
             </div>
         </div>
 
-        <div class="row mt-3">
+        <!-- <div class="row mt-3">
             <div class="col-md-12">
 
                 <h5 id="p">Tìm theo đánh giá</h5>
@@ -206,6 +206,56 @@
                     </div>
                 </form>
             </div>
+        </div> -->
+        <div class="container">
+            <h3>Danh sách sản phẩm</h3>
+
+            <!-- Form lọc theo đánh giá -->
+            <div id="filter-form">
+                <h5 id="p">Tìm theo đánh giá</h5>
+
+                <form action="" method="post" id="filter-form">
+                    <div class="form-check">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="5">
+                        <label class="form-check-label">
+                            5 sao
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="4">
+                        <label class="form-check-label">
+                            4 sao
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="3">
+                        <label class="form-check-label">
+                            3 sao
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="2">
+                        <label class="form-check-label">
+                            2 sao
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input border-color rating-star-filter" type="radio" name="flexRadioDefault" value="1">
+                        <label class="form-check-label">
+                            1 sao
+                        </label>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Vùng chứa danh sách sản phẩm -->
+            <div class="row" id="product-list">
+                <!-- Sản phẩm sẽ được hiển thị ở đây sau khi Ajax trả về dữ liệu -->
+            </div>
         </div>
 
         <div class="row mt-3">
@@ -215,28 +265,28 @@
 
                 <form action="" method="post">
 
-                    <?php 
-                        include_once('controller/StatusProduct/StatusProductController.php');
+                    <?php
+                    // include_once('controller/StatusProduct/StatusProductController.php');
 
-                        $statusProductController = new StatusProductController();
-                        $result = $statusProductController->getStatusProductController();
+                    // $statusProductController = new StatusProductController();
+                    // $result = $statusProductController->getStatusProductController();
 
-                        $stt = 1;
-                        foreach ($result as $key => $value) {
-                            echo '
-                                <div class="form-check">
-                                    <input class="form-check-input border-color"
-                                        type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault'. $stt++ .'">
-                                    <label class="form-check-label"
-                                        for="flexRadioDefault'. $stt++ .'">
-                                        '.$value['status_product_name'].'
-                                    </label>
-                                </div>
-                            ';
-                        }
+                    // $stt = 1;
+                    // foreach ($result as $key => $value) {
+                    //     echo '
+                    //         <div class="form-check">
+                    //             <input class="form-check-input border-color"
+                    //                 type="radio" name="flexRadioDefault"
+                    //                 id="flexRadioDefault'. $stt++ .'">
+                    //             <label class="form-check-label"
+                    //                 for="flexRadioDefault'. $stt++ .'">
+                    //                 '.$value['status_product_name'].'
+                    //             </label>
+                    //         </div>
+                    //     ';
+                    // }
                     ?>
-                    <div class="form-check">
+                    <!-- <div class="form-check">
                         <input class="form-check-input border-color"
                             type="radio" name="flexRadioDefault"
                             id="flexRadioDefault">
@@ -244,7 +294,7 @@
                             for="flexRadioDefault">
                             Tất cả
                         </label>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>

@@ -95,6 +95,10 @@
                 exit;
             }
         }
+        //count all category_attributes
+        public function countCategoryAttributes() {
+            return $this->categoryAttribute->countCategoryAttributes();
+        }
     }
         $controller = new CategoryAttributeController();
         $controller->handleRequest();

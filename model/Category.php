@@ -151,4 +151,13 @@ class Category extends ConnectDatabase
         $stmt->close();
         return $count > 0; 
     }
+    //count all category
+    public function countCategory() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM categories");
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+        return $count;
+    }
 }

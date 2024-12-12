@@ -97,4 +97,12 @@ class UserController
         }
         return $result;
     }
+    //get user
+    public function getInfoUserSellerRegisController(){
+        $result = $this->user->getInfoUserSellerRegis();
+        if (!$result) {
+            die("Failed to retrieve product list: ". $this->user->getConnection()->error);
+        }
+        return $result;
+    }
 }

@@ -91,12 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnLogin'])) {
 
                 <div class="mb-3">
                     <label for="email" class="form-label text-black">Email<span class="text-danger">*</span></label>
-                    <input type="email" class="form-control text-black border-color" id="email" name="email" placeholder="Nhập email">
+                    <input type="email" class="form-control form-input-n-blur text-black border-color" id="email" name="email" placeholder="Nhập email">
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label text-black">Mật khẩu<span class="text-danger">*</span></label>
-                    <input type="password" class="form-control border-color" id="password" name="password" placeholder="Nhập mật khẩu">
+                    <input type="password" class="form-control form-input-n-blur border-color" id="password" name="password" placeholder="Nhập mật khẩu">
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100 mb-3" name="btnLogin">Đăng nhập</button>

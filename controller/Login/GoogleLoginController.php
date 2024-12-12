@@ -57,9 +57,11 @@ class GoogleLoginController
                 $updateAvatar = $loginGoogle->updateAvatar($email, $fileName);
 
                 if ($addUserLogin == true && $updateAvatar == true) {
+                    $userId = $this->userModel->getUserIdByEmail($email);
                     $_SESSION['success_message'] = "Đăng nhập thành công!";
                     $_SESSION['emailUserLoginGoogle'] = $email;
-                    $_SESSION['user_id'] = $this->userModel->getUserIdByEmail($email);
+                    $_SESSION['user_id'] = $userId;
+                    $_SESSION['role_seller_id'] = $this->userModel->checkRole($userId);
                     return true;
                 } else {
                     header("Location: index.php?page=login");
@@ -67,10 +69,11 @@ class GoogleLoginController
                     return false;
                 }
             }else{
+                $userId = $this->userModel->getUserIdByEmail($email);
                 $_SESSION['success_message'] = "Đăng nhập thành công!";
                 $_SESSION['emailUserLoginGoogle'] = $email;
-                // $_SESSION['role'] = "buyer";
-                $_SESSION['user_id'] = $this->userModel->getUserIdByEmail($email);
+                $_SESSION['user_id'] =  $userId;
+                $_SESSION['role_seller_id'] = $this->userModel->checkRole($userId);
                 return true;
             }
         } else {

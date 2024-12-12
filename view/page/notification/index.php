@@ -4,6 +4,11 @@ if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!is
     $_SESSION['info_login'] = "Thông báo đăng nhập.";
 }
 ?>
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +47,7 @@ if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!is
     include_once('controller/Notification/NotificationController.php');
     $notificationController = new NotificationController();
 
+    // Lấy tất cả thông báo của người dùng
     $dataNotis = $notificationController->getAllNotificationByUserIdController($_SESSION['user_id']);
 
     if ($dataNotis->num_rows > 0): ?>
@@ -71,7 +77,6 @@ if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!is
                                         <?= $dataNoti['notification_name']; ?>
                                     </a>
                                 </li>
-
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -91,6 +96,7 @@ if ((!isset($_SESSION['success_message']) && !isset($_SESSION['email'])) || (!is
             </div>
         </section>
     <?php endif; ?>
+
 
 
 

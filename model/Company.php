@@ -69,4 +69,24 @@ class Company extends ConnectDatabase
         $stmt->close();
         return $count > 0; 
     }
+    public function getAllCompanies()
+    {
+        $query = "SELECT * FROM companies";
+        $result = $this->conn->query($query);
+
+        if ($result === false) {
+            die("Query failed: " . $this->conn->error);
+        }
+
+        return $result;
+    }
+    //count all company
+    public function countCompany() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM companies");
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+        return $count;
+    }
 }
