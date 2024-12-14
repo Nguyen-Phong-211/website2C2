@@ -9,10 +9,10 @@
                 </h2>
                 <p class="fs-4">Cảm Nhận Sự Khác Biệt Từ Đồ Cũ!</p>
                 <div class="d-flex gap-3">
-                    <a href="index.php?page=product" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">
+                    <a href="index.php?page=product&s_interface=1&u_i=POHFbvrdguu8765ftHU" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">
                         Bắt đầu mua sắm
                     </a>
-                    <a href="#" class="btn btn-dark text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">
+                    <a href="index.php?page=login" class="btn btn-dark text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">
                         Đăng ký ngay
                     </a>
                 </div>

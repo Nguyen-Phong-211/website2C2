@@ -53,7 +53,7 @@ if (isset($_POST['btndh'])) {
         echo "
             <script>
                 alert('Đặt hàng thành công');
-                window.location.href='index.php?page=message&idp=". $product_id ."';
+                window.location.href='index.php?page=puchaseOrder';
             </script>";
         exit();
     }else{
@@ -108,7 +108,7 @@ if (isset($_POST['btndh'])) {
                             </form>
                             ';
                         ?>
-                        <a href="index.php?page=setting" class="btn btn-primary w-100">Cập nhật thông tin</a>
+                        <!-- <a href="index.php?page=setting" class="btn btn-primary w-100">Cập nhật thông tin</a> -->
                     </div>
                 </div>
             </div>

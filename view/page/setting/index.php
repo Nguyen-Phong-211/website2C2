@@ -293,6 +293,7 @@
             if (isset($_SESSION["success_message"]) && isset($_SESSION["emailUserLoginGoogle"])):
                 $userId = $userController->getUserIdByEmailController($_SESSION["emailUserLoginGoogle"]);
                 $countOrder = $orderDetailController->countOrderDetailByUserIdController($userId);
+                
             ?>
 
             <div class="tab-content mt-5" id="order">

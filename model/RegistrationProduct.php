@@ -270,7 +270,7 @@ class RegistrationProduct extends ConnectDatabase
                                         JOIN categories AS c ON rp.category_id = c.category_id
                                         JOIN category_items AS ci ON ci.category_item_id = rp.category_item_id
                                         JOIN companies AS cp ON cp.company_id = rp.company_id
-                                        WHERE u.role_seller_id = 1
+                                        
                                         ORDER BY rp.create_at DESC;
         ");
         $stmt->execute();
@@ -398,5 +398,12 @@ class RegistrationProduct extends ConnectDatabase
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc();
+    }
+    //update role_seller_id
+    public function updateRoleSeller($email){
+        $stmt = $this->conn->prepare("UPDATE users SET role_seller_id = '1' WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        return true;
     }
 }

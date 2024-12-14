@@ -443,6 +443,8 @@ if (isset($_SESSION['message'])) {
                                             </tfoot>
                                             <tbody>
                                                 <?php 
+                                                var_dump($dataRegistes);
+                                                // var_dump($_SESSION);
                                                 include_once('controller/RegistrationProduct/RegistrationProductController.php');
                                                 $registrationProductController = new RegistrationProductController();
 

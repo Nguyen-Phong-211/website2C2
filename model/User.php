@@ -164,8 +164,9 @@ class User extends ConnectDatabase
     public function getInfoUserSellerRegis(){
         $query = "SELECT DISTINCT u.*, rp.create_at
                     FROM users AS u 
-                    JOIN roles AS rl ON u.role_seller_id = 1 
+                    JOIN roles AS rl
                     JOIN registration_products AS rp ON u.user_id = rp.user_id
+                    ORDER BY create_at DESC
         ";
         $stmt = $this->conn->prepare($query);
         if ($stmt === false) {

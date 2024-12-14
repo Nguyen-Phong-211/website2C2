@@ -82,7 +82,7 @@
     document.querySelectorAll('input[name="ratingStar"]').forEach(function(input) {
         input.addEventListener('change', filterByRating);
     });
-
+</script>
 
 
     <?php

@@ -419,7 +419,8 @@ if (isset($_SESSION['message'])) {
                                     include_once('controller/User/UserController.php');
                                     $userController = new UserController();
                                     $dataUserRegis = $userController->getInfoUserSellerRegisController();
-                                    $_SESSION['email_seller'] = $dataUserRegis['email'];
+                                    $_SESSION['userId'] = $dataUserRegis['email'];
+                                    // var_dump($_SESSION);
                                     echo '
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
@@ -673,6 +674,7 @@ if (isset($_SESSION['message'])) {
                                     if (isset($_POST['btnApprovalProduct'])) {
                                         $regisId = $_REQUEST['idrp'];
                                         $registrationProductController->insertProductDataController($regisId);
+                                        $registrationProductController->updateRoleSellerController($_SESSION['userId']);
                                     } elseif (isset($_POST['btnRefuseProduct'])) {
                                         if (!empty($_POST['reason'])) {
                                             $regisId = $_REQUEST['idrp'];

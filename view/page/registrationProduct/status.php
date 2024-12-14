@@ -6,7 +6,7 @@
 
     if ($Status) {
         echo '<label for="status" class="form-label">Trạng thái<span class="text-danger">*</span></label>';
-        echo '<select class="form-select border-color" id="status" name="status_product_id">';
+        echo '<select class="form-select border-color" id="status" name="status_product_id" required>';
         echo '<option value="">Chọn trạng thái bảo hành</option>';
 
         while ($statusRow = mysqli_fetch_assoc($Status)) {

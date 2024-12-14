@@ -83,12 +83,12 @@
             </div>
         </div>
 
-        <div class="row mt-3">
+        <!-- <div class="row mt-3">
             <div class="col-md-12">
 
-                <h5 id="p">Tìm theo đánh giá</h5>
+                <h5 id="p">Tìm theo đánh giá</h5> -->
 
-                <form action="" method="post" id="filter-rating-form">
+                <!-- <form action="" method="post" id="filter-rating-form">
 
                     <div class="form-check">
                         <input class="form-check-input border-color rating-star-filter" type="radio" name="ratingStar" id="rating-5" value="5">
@@ -206,12 +206,12 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
 
         <div class="row mt-3">
             <div class="col-md-12">
 
-                <h5>Tìm theo tình trạng</h5>
+                <!-- <h5>Tìm theo tình trạng</h5> -->
 
                 <form action="" method="post">
 
@@ -249,7 +249,7 @@
             </div>
         </div>
 
-        <div class="row mt-5">
+        <!-- <div class="row mt-5">
             <div class="col-md-12">
                 <form action method="post">
 
@@ -259,7 +259,7 @@
 
                 </form>
             </div>
-        </div>
+        </div> -->
 
     </section>
 </div>

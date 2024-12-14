@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST['btnSignup'])) {
 
                 <div class="mb-3">
                     <label for="fullName" class="form-label text-black">Họ tên<span class="text-danger">*</span></label>
-                    <input type="text" name="fullname" class="form-input-n-blur form-control border-color text-black" id="fullName" placeholder="Họ tên">
+                    <input type="text" name="fullname" class="form-input-n-blur form-control border-color text-black" id="fullName" placeholder="Họ tên" required>
                     <small id="fullNameError" class="form-text text-danger fst-italic"></small>
                 </div>
 

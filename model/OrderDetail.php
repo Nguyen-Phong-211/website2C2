@@ -18,6 +18,7 @@
                 o.update_at AS o_update_at,
                 o.status, 
                 o.order_status,
+                o.total_amount,
                 od.*, 
                 p.product_name, 
                 i.image_name,

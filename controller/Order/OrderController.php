@@ -38,7 +38,7 @@
                 echo "
                 <script>
                     alert('Đặt hàng thành công');
-                    window.location.href='index.php?page=message';
+                    window.location.href='index.php?page=puchaseOrder';
                 </script>";
             } else{
                 echo "

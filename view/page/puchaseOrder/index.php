@@ -93,7 +93,6 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -112,8 +111,8 @@
                                                 </td>
                                                 <td>'. $order['quantity'] .'</td>
                                                 <td>' . number_format($order['price'], 0, ',', '.') . '</td>
-                                                <td>' . $order['discount'] . ' </td>
-                                                <td>' . number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . '</td>
+                                      
+                                                <td>' . number_format($order['total_amount'] , 0, ',', '.') . '</td>
                                                 <td>';
                                                     if($order['status'] == 0){
                                                         echo '<span class="badge bg-danger">Huỷ hàng</span>';
@@ -157,7 +156,8 @@
                                                                 <small>Tên sản phẩm: ' . $order['product_name'] . '</small> <br>
                                                                 <small>Ngày đặt hàng: ' . date('d/m/Y H:i:m', strtotime($order['o_create_at'])) . '</small> <br>
                                                                 <small>Số lượng: ' . $order['quantity'] . '</small> <br>
-                                                                <small>Giảm giá: ' . $order['discount'] . '%</small> <br>
+                                                                <small>Người mua: Nguyễn Nguyễn Phong</small> <br>
+                                                                
                                                                 <p class="fs-5 fw-bold">Thành tiền: '. number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . ' đồng</p>
                                                                 <small>Cập nhật trạng thái đơn hàng</small>
                                                                 <form action="index.php?page=puchaseOrder" method="post">
@@ -300,7 +300,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
+                                         
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -319,8 +319,8 @@
                                                 </td>
                                                 <td>'. $order['quantity'] .'</td>
                                                 <td>' . number_format($order['price'], 0, ',', '.') . '</td>
-                                                <td>' . $order['discount'] . ' </td>
-                                                <td>' . number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . '</td>
+                                            
+                                                <td>' . number_format($order['total_amount'], 0, ',', '.') . '</td>
                                                 <td>';
                                                     if($order['status'] == 0){
                                                         echo '<span class="badge bg-danger">Huỷ hàng</span>';
@@ -365,7 +365,7 @@
                                                                 <small>Tên sản phẩm: ' . $order['product_name'] . '</small> <br>
                                                                 <small>Ngày đặt hàng: ' . date('d/m/Y H:i:m', strtotime($order['o_create_at'])) . '</small> <br>
                                                                 <small>Số lượng: ' . $order['quantity'] . '</small> <br>
-                                                                <small>Giảm giá: ' . $order['discount'] . '%</small> <br>
+                                                                <small>Người mua: Nguyễn Nguyễn Phong</small> <br>
                                                                 <p class="fs-5 fw-bold">Thành tiền: '. number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . ' đồng</p>
                                                                 <small>Cập nhật trạng thái đơn hàng</small>
                                                                 <form action="index.php?page=puchaseOrder" method="post">
@@ -582,7 +582,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
+                                                
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -601,8 +601,8 @@
                                                     </td>
                                                     <td>'. $order['quantity'] .'</td>
                                                     <td>' . number_format($order['price'], 0, ',', '.') . '</td>
-                                                    <td>' . $order['discount'] . ' </td>
-                                                    <td>' . number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . '</td>
+                                        
+                                                    <td>' . number_format($order['total_amount'], 0, ',', '.') . '</td>
                                                     <td><span class="badge bg-light text-dark">Chờ xác nhận</span></td>
                                                     <td>
                                                         <p>
@@ -688,7 +688,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
+                                               
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -708,8 +708,8 @@
                                                     </td>
                                                     <td>'. $order['quantity'] .'</td>
                                                     <td>' . number_format($order['price'], 0, ',', '.') . '</td>
-                                                    <td>' . $order['discount'] . ' </td>
-                                                    <td>' . number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . '</td>
+                                             
+                                                    <td>' . number_format($order['total_amount'], 0, ',', '.') . '</td>
                                                     <td><span class="badge bg-primary">Chờ nhận hàng</span></td>
                                                     <td>
                                                         <p>
@@ -776,7 +776,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
+                                           
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -879,7 +879,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
+                                            
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -900,8 +900,8 @@
                                                     </td>
                                                     <td>'. $order['quantity'] .'</td>
                                                     <td>' . number_format($order['price'], 0, ',', '.') . '</td>
-                                                    <td>' . $order['discount'] . ' </td>
-                                                    <td>' . number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . '</td>
+                         
+                                                    <td>' . number_format($order['total_amount'], 0, ',', '.') . '</td>
                                                     <td><span class="badge bg-success">Hoàn tất</span></td>
                                                     <td>
                                                         <p>
@@ -968,7 +968,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
+
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -987,8 +987,8 @@
                                                     </td>
                                                     <td>'. $order['quantity'] .'</td>
                                                     <td>' . number_format($order['price'], 0, ',', '.') . '</td>
-                                                    <td>' . $order['discount'] . ' </td>
-                                                    <td>' . number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . '</td>
+                                     
+                                                    <td>' . number_format($order['total_amount'], 0, ',', '.') . '</td>
                                                     <td><span class="badge bg-success">Hoàn tất</span></td>
                                                     <td>
                                                         <p>
@@ -1071,7 +1071,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
+                  
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -1091,8 +1091,8 @@
                                                     </td>
                                                     <td>'. $order['quantity'] .'</td>
                                                     <td>' . number_format($order['price'], 0, ',', '.') . '</td>
-                                                    <td>' . $order['discount'] . ' </td>
-                                                    <td>' . number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . '</td>
+                                              
+                                                    <td>' . number_format($order['total_amount'], 0, ',', '.') . '</td>
                                                     <td><span class="badge bg-danger">Huỷ hàng</span></td>
                                                     <td>
                                                         <p>
@@ -1159,7 +1159,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Số lượng</th>
                                                 <th scope="col">Giá</th>
-                                                <th scope="col">Giảm giá</th>
+
                                                 <th scope="col">Thành tiền</th>
                                                 <th scope="col">Tình trạng</th>
                                                 <th scope="col">Thao tác</th>
@@ -1178,8 +1178,8 @@
                                                     </td>
                                                     <td>'. $order['quantity'] .'</td>
                                                     <td>' . number_format($order['price'], 0, ',', '.') . '</td>
-                                                    <td>' . $order['discount'] . ' </td>
-                                                    <td>' . number_format($order['price'] - ($order['price'] * $order['discount']), 0, ',', '.') . '</td>
+                                               
+                                                    <td>' . number_format($order['total_amount'], 0, ',', '.') . '</td>
                                                     <td><span class="badge bg-danger">Huỷ hàng</span></td>
                                                     <td>
                                                         <p>

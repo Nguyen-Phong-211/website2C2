@@ -113,4 +113,9 @@ class RegistrationProductController
         }
         return $result;
     }
+    //update role_seller_id
+    public function updateRoleSellerController($userId){
+        $result = $this->registrationProductModel->updateRoleSeller($userId);
+        return $result;
+    }
 }

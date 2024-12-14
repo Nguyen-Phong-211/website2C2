@@ -17,15 +17,15 @@
         document.getElementById('btnSignup').disabled = !isValid;
     }
 
-    document.getElementById('fullName').addEventListener('input', function() {
-        const fullNameInput = this;
-        fullNameInput.value = fullNameInput.value
-            .toLowerCase()
-            .replace(/\b\w/g, char => char.toUpperCase());
+    // document.getElementById('fullName').addEventListener('input', function() {
+    //     const fullNameInput = this;
+    //     fullNameInput.value = fullNameInput.value
+    //         .toLowerCase()
+    //         .replace(/\b\w/g, char => char.toUpperCase());
 
-        document.getElementById('fullNameError').textContent = fullNameInput.value.trim() ? "" : "Họ tên không được để trống";
-        checkFormValidity();
-    });
+    //     document.getElementById('fullNameError').textContent = fullNameInput.value.trim() ? "" : "Họ tên không được để trống";
+    //     checkFormValidity();
+    // });
 
     document.getElementById('email').addEventListener('input', function() {
         const email = this.value.trim();
