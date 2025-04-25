@@ -23,15 +23,15 @@ class EmailController
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'phongnguyen.050503@gmail.com';
-                $mail->Password = 'cdid nsce ywzl wskm';
+                $mail->Username = 'your email';
+                $mail->Password = 'your password';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
                 $mail->CharSet = 'UTF-8';
                 $mail->Encoding = 'base64';
 
-                $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+                $mail->setFrom('your email', 'Hệ Thống');
                 $mail->addAddress($emailAuthu);
 
                 $template = file_get_contents('view/page/email/otp_updateinfo.html');
@@ -60,15 +60,15 @@ class EmailController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'phongnguyen.050503@gmail.com';
-            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->Username = 'your email';
+                $mail->Password = 'your password';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             $mail->CharSet = 'UTF-8';
             $mail->Encoding = 'base64';
 
-            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->setFrom('your email', 'Hệ Thống');
             $mail->addAddress($emailAuthu);
 
             $template = file_get_contents('view/page/email/success_contact.html');
@@ -97,15 +97,15 @@ class EmailController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'phongnguyen.050503@gmail.com';
-            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->Username = 'your email';
+            $mail->Password = 'your password';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             $mail->CharSet = 'UTF-8';
             $mail->Encoding = 'base64';
 
-            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->setFrom('your email', 'Hệ Thống');
             $mail->addAddress($emailAuthu);
 
             $template = file_get_contents('view/page/email/success_updateinfo.html');
@@ -137,15 +137,15 @@ class EmailController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'phongnguyen.050503@gmail.com';
-            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->Username = 'your email';
+            $mail->Password = 'your password';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             $mail->CharSet = 'UTF-8';
             $mail->Encoding = 'base64';
 
-            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->setFrom('your email', 'Hệ Thống');
             $mail->addAddress($emailAuthu);
 
             $template = file_get_contents('view/page/email/success_updateinfo_image.html');
@@ -177,15 +177,15 @@ class EmailController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'phongnguyen.050503@gmail.com';
-            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->Username = 'your email';
+            $mail->Password = 'your password';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             $mail->CharSet = 'UTF-8';
             $mail->Encoding = 'base64';
 
-            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->setFrom('your email', 'Hệ Thống');
             $mail->addAddress($emailAuthu);
 
             $template = file_get_contents('view/page/email/success_update_password.html');
@@ -212,15 +212,15 @@ class EmailController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'phongnguyen.050503@gmail.com';
-            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->Username = 'your email';
+            $mail->Password = 'your password';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             $mail->CharSet = 'UTF-8';
             $mail->Encoding = 'base64';
 
-            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->setFrom('your email', 'Hệ Thống');
             $mail->addAddress($emailAuthu);
 
             $template = file_get_contents('view/page/email/otp_updatepassword.html');
@@ -247,15 +247,15 @@ class EmailController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'phongnguyen.050503@gmail.com';
-            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->Username = 'your email';
+            $mail->Password = 'your password';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             $mail->CharSet = 'UTF-8';
             $mail->Encoding = 'base64';
 
-            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->setFrom('your email', 'Hệ Thống');
             $mail->addAddress($emailAuthu);
 
             $template = file_get_contents('view/page/email/success_login_google.html');
@@ -282,15 +282,15 @@ class EmailController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'phongnguyen.050503@gmail.com';
-            $mail->Password = 'cdid nsce ywzl wskm';
+            $mail->Username = 'your email';
+            $mail->Password = 'your password';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             $mail->CharSet = 'UTF-8';
             $mail->Encoding = 'base64';
 
-            $mail->setFrom('phongnguyen.050503@gmail.com', 'Hệ Thống');
+            $mail->setFrom('your email', 'Hệ Thống');
             $mail->addAddress($emailAuthu);
 
             $template = file_get_contents('view/page/email/send_reason_refuse.html');
